@@ -6,7 +6,7 @@ MONGO_LOCAL = "mongodb://superuser:Viper.2013@192.168.9.66:27017/?authMechanism=
 # GLOBARL DATABASE  (  REMOTE == 1 ,   LOCAL == 2  )
 mongo_db =  2
 # GLOBARL PATH  ( 1 = MAC    2 = WINDOW   3 = HEROKU  )
-global_variables = 2
+global_variables = 1
 
 
 if global_variables == 1:
