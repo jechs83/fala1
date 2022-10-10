@@ -7,9 +7,13 @@ from a_telegram import auto_telegram
 import os
 import json
 import random
+from datetime import date
 from g_var import mongo_db, proxies, path_wong
-date = datetime.today().strftime('%d/%m/%Y')
-date_now = datetime.today().strftime('%d/%m/%Y')
+import time
+from g_var import mongo_db
+current_time= time.strftime("%H:%M")
+date = date.today()
+current_day= date.strftime("%d/%m/%Y")
 web_url = random.choice(proxies)
 client = MongoClient(mongo_db)
 def scrap (web):
@@ -65,7 +69,7 @@ def scrap (web):
         collection = db["market"]
         db2 = client["scrap"]
         collection2 = db2["scrap"]
-
+        market = "wong"
         
 
         y = collection.find_one({"_id":market+str(sku)})
@@ -75,8 +79,8 @@ def scrap (web):
             
             filter = {"_id":market+str(sku), }
             newvalues = { "$set":{ 
-            "_id""_id":market+str(sku),   
-            "sku":int(sku), 
+            "_id":market+str(sku),   
+            "sku":str(sku), 
             "brand":brand,
             "product": product,
             "category":category,
@@ -87,7 +91,9 @@ def scrap (web):
             "link": link,
             "image": img,
             "image2": "=IMAGE("+'"'+img+'"'+")",
-            "date":date_now
+            "date":current_day,
+            "market":market,
+            "time":current_time
             }}
             collection.update_one(filter,newvalues)
                
@@ -97,7 +103,7 @@ def scrap (web):
             
             data =  {
             "_id":market+str(sku),   
-            "sku":int(sku), 
+            "sku":str(sku), 
             "brand":brand,
             "product": product,
             "category":category,
@@ -108,20 +114,23 @@ def scrap (web):
             "link": link,
             "image": img,
             "image2": "=IMAGE("+'"'+img+'"'+")",
-            "date":date_now
+            "date":current_day,
+            "market":market,
+            "time":current_time
+            
             }
 
             collection.insert_one(data)
             
        
-        y = collection.find_one({"_id":market+str(sku)})
+        y = collection2.find_one({"_id":market+str(sku)})
 
         if z :
             
             filter = {"_id":market+str(sku), }
             newvalues = { "$set":{ 
-            "_id""_id":market+str(sku),   
-            "sku":int(sku), 
+            "_id":market+str(sku),   
+            "sku":str(sku), 
             "brand":brand,
             "product": product,
             "category":category,
@@ -132,7 +141,9 @@ def scrap (web):
             "link": link,
             "image": img,
             "image2": "=IMAGE("+'"'+img+'"'+")",
-            "date":date_now
+            "date":current_day,
+            "market":market,
+            "time":current_time
             }}
             collection2.update_one(filter,newvalues)
                
@@ -142,7 +153,7 @@ def scrap (web):
             
             data =  {
             "_id":market+str(sku),   
-            "sku":int(sku), 
+            "sku":str(sku), 
             "brand":brand,
             "product": product,
             "category":category,
@@ -153,7 +164,9 @@ def scrap (web):
             "link": link,
             "image": img,
             "image2": "=IMAGE("+'"'+img+'"'+")",
-            "date":date_now
+             "date":current_day,
+            "market":market,
+            "time":current_time
             }
 
             collection2.insert_one(data)

@@ -10,8 +10,8 @@ from datetime import datetime
 from telegram import ParseMode
 
 
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
+date = datetime.today().strftime('%d/%m/%Y')
+date_now = datetime.today().strftime('%d/%m/%Y')
 
 mensaje = "test message"
 

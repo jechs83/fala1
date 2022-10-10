@@ -1,7 +1,6 @@
 #https://api.telegram.org/
 #https://core.telegram.org/bots/api
 import sys
-sys.path.append('/Users/javier/GIT/fala') 
 import time
 import requests
 from pymongo import MongoClient
@@ -11,8 +10,8 @@ from datetime import datetime
 import re
 from telegram import ParseMode
 from g_var import mongo_db
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
+date = datetime.today().strftime('%d/%m/%Y')
+date_now = datetime.today().strftime('%d/%m/%Y')
 
 mensaje = ""
 
