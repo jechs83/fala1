@@ -20,7 +20,8 @@ mensaje = "test message"
 def send_telegram(message):
     requests.post("https://api.telegram.org/bot5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU/sendMessage",
             
-    data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
+    # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
+    data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
 
 
 client = MongoClient(mongo_db)
@@ -66,7 +67,7 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"bran
     re.compile("nintendo", re.IGNORECASE),re.compile("rolex", re.IGNORECASE),re.compile("nokia", re.IGNORECASE),
     re.compile("lexus", re.IGNORECASE),re.compile("exxon mobil", re.IGNORECASE),re.compile("ralph lauren", re.IGNORECASE),
     re.compile("apple", re.IGNORECASE),re.compile("chicco", re.IGNORECASE),re.compile("safety", re.IGNORECASE),
-    re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("invicta", re.IGNORECASE),
+    re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("invicta22", re.IGNORECASE),
     re.compile("fisher price", re.IGNORECASE),re.compile("Hot wheels", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
     re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
     
