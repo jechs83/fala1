@@ -6,7 +6,7 @@ MONGO_LOCAL_MAC = "localhost"
 # GLOBARL DATABASE  ( MONGO DB :   1 = REMOTE,  2 = LOCAL  )
 mongo_db =  2
 # GLOBARL PATH  ( 1 = MAC,  2 = WINDOW,  3 = HEROKU ))
-global_variables = 2
+global_variables = 1
 
 if global_variables == 1:
     path_proxy='/Users/javier/GIT/fala/ripley/urls/proxies.txt' #   MAC
