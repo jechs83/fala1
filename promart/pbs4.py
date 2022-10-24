@@ -113,6 +113,7 @@ def shop(web):
                 "product": product,
                 "list_price":float(list_price),           
                 "best_price":float(best_price),
+                "card_price":0,
                 "web_dsct":web_dsct,
                 "category":category,
                 "link": str(link),

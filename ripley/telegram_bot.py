@@ -3,9 +3,10 @@ from datetime import datetime
 from telegram import ParseMode
 import telegram
 import logging
+from scrap_no_duplicate import auto_telegram
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram_busca import busqueda , send_telegram
+from telegram_busca import busqueda , brand_search
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
 TOKEN = "5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU"
@@ -16,17 +17,14 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 
-def getBotInfo(update, context):
+def searchDB(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot")
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Hola soy un bot creado para el canal de Enterprice"
-    )
+    logger.info(f"el usuario {userName} ha solicitado una busqueda")
+    auto_telegram()
 
+  
 def welcomeMsg(update, context):
     bot = context.bot
     chatId = update.message.chat_id
@@ -48,9 +46,19 @@ def echo(update, context):
     text = update.message.text
     logger.info(f"El usuario a enviado un nuevo mensaje al grupo {chatId} ")
 
-    if "cod:" in text:
-        codigo = text.replace("cod:","")
+    if "cod:" or "Cod:" in text:
+        
+        codigo = text.replace("cod:","").replace("Cod:","")
+        
         busqueda(codigo)
+
+    if "brand:" or "Brand:" in text:
+        print(chatId)
+        print(chatId)
+        
+        brand = text.replace("brand:","").replace("Brand:","")
+        
+        brand_search(brand)
 
     
 
@@ -65,7 +73,7 @@ updater = Updater(myBot.token, use_context=True)
 
 
 dp= updater.dispatcher
-dp.add_handler(CommandHandler("botInfo", getBotInfo))
+dp.add_handler(CommandHandler("busca", searchDB))
 dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
 dp.add_handler(MessageHandler( Filters.text, echo))
 updater.start_polling()
