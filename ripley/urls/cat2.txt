@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 43c9da5be469cac01e6a48283dfb58004033e29c
 https://simple.ripley.com.pe/electrohogar/refrigeracion/congeladoras?source=menu&page=
 https://simple.ripley.com.pe/electrohogar/refrigeracion/dispensadores-de-agua?source=menu&page=
 https://simple.ripley.com.pe/electrohogar/refrigeracion/frigobares?source=menu&page=
