@@ -36,7 +36,7 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"bran
     re.compile("lg", re.IGNORECASE),re.compile("asus", re.IGNORECASE),re.compile("xiaomi", re.IGNORECASE),
     re.compile("indurama", re.IGNORECASE),re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),
     re.compile("acer", re.IGNORECASE),re.compile("huawei", re.IGNORECASE),re.compile("panasonic", re.IGNORECASE),
-    re.compile("winia", re.IGNORECASE),re.compile("phillips", re.IGNORECASE),re.compile("mabe", re.IGNORECASE),
+    re.compile("winia", re.IGNORECASE),re.compile("philips", re.IGNORECASE),re.compile("mabe", re.IGNORECASE),
     re.compile("nex", re.IGNORECASE), re.compile("hyundai", re.IGNORECASE),re.compile("tcl", re.IGNORECASE), re.compile("monark", re.IGNORECASE), 
     re.compile("goliat", re.IGNORECASE), re.compile("oxford", re.IGNORECASE), re.compile("jafi-bike", re.IGNORECASE), re.compile("besatti", re.IGNORECASE), 
     re.compile("altitude", re.IGNORECASE), re.compile("trek", re.IGNORECASE), re.compile("advantech", re.IGNORECASE), re.compile("ecoride", re.IGNORECASE),
@@ -69,7 +69,7 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"bran
     re.compile("apple", re.IGNORECASE),re.compile("chicco", re.IGNORECASE),re.compile("safety", re.IGNORECASE),
     re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("invicta22", re.IGNORECASE),
     re.compile("fisher price", re.IGNORECASE),re.compile("Hot wheels", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
-    re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
+    re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("imaco", re.IGNORECASE),
     
 
 
@@ -105,6 +105,8 @@ def mongodb_search():
 
 def auto_telegram():
     mongodb_search()
+    send_telegram( "<b>Termino la busqueda automatica desde el 70%</b>\n###################################")
+
     #for i,v in enumerate(products):
      #  send_telegram ("<b>Marca: "+v[1]+"</b>\nModelo: "+v[2]+"\nPrecio Lista :"+str(v[3])+"\n<b>Precio web :"+str(v[4])+"</b>\nPrecio Tarjeta :"+str(v[5])+"\n"+v[0]+"\nLink :"+str(v[6]))
     

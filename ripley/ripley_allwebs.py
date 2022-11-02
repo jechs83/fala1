@@ -173,10 +173,10 @@ def scrap (web):
             }
           
             collection_max.insert_one(data)
+       
             
             
-            
-         
+    time.sleep(5)      
     return True
 
 
@@ -218,6 +218,8 @@ for id, val in enumerate(array_tec):
   web = val
 
   scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+  
+  
 
   
 

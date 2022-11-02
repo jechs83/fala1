@@ -51,6 +51,9 @@ def echo(update, context):
     if "cod:" in text:
         codigo = text.replace("cod:","")
         busqueda(codigo)
+        
+   
+    
 
     
 
