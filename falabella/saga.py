@@ -100,10 +100,10 @@ def scrap (web):
          seller = x[i]["sellerName"]
         except: seller = "None"
         market = "saga"
-        # print()
-        # print( "producto numero "+ str(i+1));
-        # print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
-        # print("descuento "+str(web_dsct)); print("link "+link)
+        print()
+        print( "producto numero "+ str(i+1));
+        print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
+        print("descuento "+str(web_dsct)); print("link "+link)
         
         db = client["saga"]
         collection = db["market"]
