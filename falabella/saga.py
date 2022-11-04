@@ -7,15 +7,17 @@ import pytz
 import random
 import time
 import json
-from g_var import mongo_db, proxies
+
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
 current_date = peru_date.strftime("%d/%m/%Y" )
 current_time =peru_date.strftime("%H:%M" )
-client = MongoClient(mongo_db)
-web_url = random.choice(proxies)
-client = MongoClient(mongo_db)
+
+from decouple import config
+web_url = random.choice(config("PROXY"))
+
+client = MongoClient(config("MONGO_DB"))
 
 
 def scrap (web):

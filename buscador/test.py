@@ -8,8 +8,7 @@ import re
 from datetime import datetime
 from telegram import ParseMode
 import pytz
-from g_var import mongo_db
-
+from decouple import config
 
 
 

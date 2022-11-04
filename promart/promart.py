@@ -1,50 +1,43 @@
-import sys
-sys.path.append('/Users/javier/GIT/fala') 
-import sys
-import time
-from pymongo import MongoClient
 import requests
-import re
-from datetime import date
 from bs4 import BeautifulSoup
-from webs_category import array_tec
-from wong.g_var import mongo_db
-date = date.today()
-
-current_time= time.strftime("%H:%M")
-current_date= date.strftime("%d/%m/%Y")
-
-
-client = MongoClient(mongo_db)
+from pymongo import MongoClient
+import sys
+from datetime import datetime
+import pytz
+import random
+import time
+server_date = datetime.now()
+timezone = pytz.timezone("America/Bogota")
+peru_date = server_date.astimezone(timezone)
+current_date = peru_date.strftime("%d/%m/%Y" )
+current_time =peru_date.strftime("%H:%M" )
+from decouple import config
+web_url = random.choice(config("PROXY"))
+client = MongoClient(config("MONGO_DB"))
 
 db = client["shopstar"]
 collection = db["promart"]
+db_max = client["scrap"]
+collection_max = db_max["scrap"]
 
-first_sku=""
+
 
 def shop(web):
-    global first_sku
-    #headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"}
-    proxies = {"http":"http:218.75.38.154:9091" }
+
+    proxies = {"http":"http://"+web_url }
 
     res=requests.get(web,  proxies= proxies)
-    print("Servidor responde: "+ str(res.status_code))
+    print(res.status_code)
    
     soup = BeautifulSoup(res.text, "html.parser")
 
-    # file = open("/Users/javier/GIT/fala/promart/source.txt", "w+")
-    # file.write(soup.prettify())
-    # file.close
-    
     elements=soup.find_all("div", class_="item-product product-listado")
 
     if not elements:
         return True
     
-    
-    
     for idx, i in enumerate(elements):
-     
+    
         try:
             link=i.find("a", class_="prod-det-enlace").attrs.get("href")
            
@@ -63,16 +56,11 @@ def shop(web):
         try:
             list_price=i.find("div").attrs.get("data-list-price")
             list_price = list_price.replace("S/ ","").replace(",","").replace("S/. ","")
-
-            
         except: list_price = 0
 
         try:
             sku=i.find("div").attrs.get("data-id")
-        
         except: sku = 0
-
-     
 
         try:
             category=i.find("div").attrs.get("data-category")
@@ -101,7 +89,7 @@ def shop(web):
         market = "promart"
         # print()
         # print(brand)
-        #print(sku)
+        # print(sku)
         # print(product) 
         # print(link)
         # print(category)
@@ -109,11 +97,10 @@ def shop(web):
         # print(best_price)
         # print(image)
         # print(market)
-        #print(web_dsct)
+        # print(web_dsct)
 
-  
-    
         x = collection.find_one({"_id":market+sku})
+        y = collection_max.find_one({"_id":market+sku})
 
         if x:
                 filter = {"_id":market+sku}
@@ -126,6 +113,7 @@ def shop(web):
                 "product": product,
                 "list_price":float(list_price),           
                 "best_price":float(best_price),
+                "card_price":0,
                 "web_dsct":web_dsct,
                 "category":category,
                 "link": str(link),
@@ -134,6 +122,7 @@ def shop(web):
                 "time":current_time,
                 }}
                 collection.update_one(filter,newvalues)
+                collection_max.update_one(filter, newvalues)
               
         else:
                 data =  {
@@ -152,6 +141,47 @@ def shop(web):
                 "time":current_time,
                     }
                 collection.insert_one(data)
+                collection_max.insert_one(data)
+        if y:
+                filter = {"_id":market+sku}
+                newvalues = { "$set":{ 
+
+                "_id":market+sku, 
+                "brand":brand,
+                "sku":sku,
+                "market":market,
+                "product": product,
+                "list_price":float(list_price),           
+                "best_price":float(best_price),
+                "web_dsct":web_dsct,
+                "category":category,
+                "link": str(link),
+                "image":str(image),
+                "date":current_date,
+                "time":current_time,
+                }}
+            
+                collection_max.update_one(filter, newvalues)
+              
+        else:
+                data =  {
+                "_id":market+sku, 
+                "brand":brand,
+                "sku":sku,
+                "market":market,
+                "product": product,
+                "list_price":float(list_price),           
+                "best_price":float(best_price),
+                 "web_dsct":web_dsct,
+                "category":category,
+                "link": str(link),
+                "image":str(image),
+                "date":current_date,
+                "time":current_time,
+                    }
+               
+                collection_max.insert_one(data)
+        
 
 
 def scrapero(web):
@@ -164,10 +194,18 @@ def scrapero(web):
             return False
 
         print("pagina "+str(i+1))
-     
+
+array_tec=[]
+arg_ = sys.argv[1]
+f = open(arg_, "r")
+x = f.readlines()
+for i in x:
+    array_tec.append(i.rstrip())
+
 
 for i,v in enumerate(array_tec):
     scrap =  scrapero(v)
+
     if scrap == False:
        continue
  

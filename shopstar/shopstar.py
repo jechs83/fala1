@@ -1,27 +1,28 @@
 import sys
 import time
 from pymongo import MongoClient
-import sys 
+from datetime import date
+import sys
+sys.path.append('/Users/javier/GIT/fala') 
 import requests
 from bs4 import BeautifulSoup
-from wong.g_var import mongo_db, array_tec 
-from proxy_list import proxies
+import re
+import time
 import random
-from datetime import datetime
-import pytz
-server_date = datetime.now()
-timezone = pytz.timezone("America/Bogota")
-peru_date = server_date.astimezone(timezone)
-current_day = peru_date.strftime("%d/%m/%Y" )
-current_time =peru_date.strftime("%H:%M" )
-client = MongoClient(mongo_db)
-web_url = random.choice(proxies)
+current_time= time.strftime("%H:%M")
+date = date.today()
+current_day= date.strftime("%d/%m/%Y")
 
-ar_name= [], ar_product=[] , ar_product=[]
+from decouple import config
+web_url = random.choice(config("PROXY"))
+client = MongoClient(config("MONGO_DB"))
+
+
 
 def shop(web):
 
-    proxies = {"http":"http://"+web_url }
+    #headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"}
+    proxies = {"http":"http://183.111.25.248:8080" }
 
     res=requests.get(web,  proxies= proxies)
     print("Servidor reponde "+str((res.status_code)))
@@ -33,12 +34,14 @@ def shop(web):
     if not elements:
         return True
     
+  
     for idx, i in enumerate(elements):
 
         try:
          sku= i.find("div", class_="buy-button-normal").attrs.get("id")
         except:
             sku = None
+        
 
         #print(i.prettify())
         brand = i.find("h6", class_="x-brand").text
@@ -77,13 +80,18 @@ def shop(web):
         market = "shopstar"
         db = client["shopstar"]
         collection = db["market"]
+        db_max = client["scrap"]
+        collection_max = db_max["scrap"]
         x = collection.find_one({"_id":market+sku})
+        y = collection_max.find_one({"_id":market+sku})
+        
+        
 
-        if x:
+        if x  :
                 filter = {"_id":market+sku}
                 newvalues = { "$set":{ 
 
-                "brand":brand, 
+                "brand":brand,
                 "sku":sku,
                 "market":market,
                 "product": product,
@@ -100,6 +108,7 @@ def shop(web):
             
                 }}
                 collection.update_one(filter,newvalues)
+         
         else:
                 data =  {
                 "_id":market+sku, 
@@ -119,6 +128,51 @@ def shop(web):
                 "time":current_time
                     }
                 collection.insert_one(data)
+           
+                
+        if y :
+                filter = {"_id":market+sku}
+                newvalues = { "$set":{ 
+
+                "brand":brand,
+                "sku":sku,
+                "market":market,
+                "product": product,
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price":float(card_price),
+                "web_dsct":float(web_dsct),
+                "card_dsct":float(card_dsct),
+                "category":category,
+                "link": str(link),
+                "image":str(image),
+                "date":current_day,
+                "time":current_time
+            
+                }}
+               
+                collection_max.update_one(filter,newvalues)
+        else:
+                data =  {
+                "_id":market+sku, 
+                "brand":brand,
+                "sku":sku,
+                "market":market,
+                "product": product,
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price":float(card_price),
+                "web_dsct":float(web_dsct),
+                "card_dsct":float(card_dsct),
+                "category":category,
+                "link": str(link),
+                "image":str(image),
+                 "date":current_day,
+                "time":current_time
+                    }
+               
+                collection_max.insert_one(data)
+                
         # print("product number "+ str(idx+1));print(brand);print(product);print(sku);print(category);print(list_price);print(best_price);print(card_price);
         # print(web_dsct);print(card_dsct);print(link);print("##################");print()
 
@@ -133,7 +187,24 @@ def scrapero(web):
             return False
 
         print("pagina "+str(i+1))
-     
+
+  
+array_tec=[]
+# lista de proxies
+arg_ = sys.argv[1]
+f = open(arg_, "r")
+x = f.readlines()
+for i in x:
+    array_tec.append(i.rstrip())
+
+array_tec=[]
+# lista de proxies
+arg_ = sys.argv[1]
+f = open(arg_, "r")
+x = f.readlines()
+for i in x:
+    array_tec.append(i.rstrip())
+
 
 for i,v in enumerate(array_tec):
     scrap =  scrapero(v)

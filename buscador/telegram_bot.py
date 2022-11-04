@@ -1,6 +1,7 @@
 
 from datetime import datetime
 from telegram import ParseMode
+from decouple import config
 import telegram
 import logging
 import sys
@@ -9,7 +10,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram_busca import busqueda , brand_search, search_brand_dsct, product_search, price_search
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
-TOKEN = "5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU"
+TOKEN = config("TOKEN_CHAT")
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
