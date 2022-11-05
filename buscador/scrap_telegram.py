@@ -31,7 +31,7 @@ db = client["scrap"]
 collection = db["scrap"] 
 
 ## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
-t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"brand":{"$in":[ 
+t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now ,"brand":{"$in":[ 
     re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("sony", re.IGNORECASE),
     re.compile("lg", re.IGNORECASE),re.compile("asus", re.IGNORECASE),re.compile("xiaomi", re.IGNORECASE),
     re.compile("indurama", re.IGNORECASE),re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),

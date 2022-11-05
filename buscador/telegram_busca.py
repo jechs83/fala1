@@ -3,6 +3,7 @@ import time
 import requests
 from pymongo import MongoClient
 import os
+import pymongo
 import ast
 import re
 from decouple import config
@@ -48,7 +49,11 @@ def brand_search(brand):
     t5 = collection5.find({"brand":{"$in":[ re.compile(brand, re.IGNORECASE)]}, "web_dsct":{"$gte":70}, "date": date})
     print( "se realizo busqueda")
     print(brand)
+    count = 0
     for i in t5:
+        count= count+1
+        if count == 100:
+            break
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
@@ -57,12 +62,15 @@ def brand_search(brand):
 def search_brand_dsct(brand,dsct):
       
 
-    t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date})
+    t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
     print( "se realizo busqueda")
     
 
-
+    count = 0
     for i in t5:
+        count = count+1
+        if count == 100:
+            break
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])

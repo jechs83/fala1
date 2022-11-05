@@ -82,6 +82,11 @@ def scrap (web):
         link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
         link= "https://simple.ripley.com.pe"+link
 
+        print()
+        print(brand.text)
+        print(product.text)
+        print(link)
+
 
         market = "ripley"
         db = client["ripley"]
@@ -192,7 +197,7 @@ for i in x:
 f.close
 
 def scrap_category(category_url):
-    for i in range(70):
+    for i in range(200):
         success = scrap(category_url+str(i+1))
         print(category_url+str(i+1))
         #time.sleep(3)
@@ -213,11 +218,21 @@ for i,v in enumerate(array_tec):
     for i in range (3):
         webs.append(v+(str(i+1)))
 
-for id, val in enumerate(array_tec):
-  
-  web = val
+count =(len(array_tec))
 
-  scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+def ripley_scrap():
+    for id, val in enumerate(array_tec):
+    
+        x = scrap_category(val) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+        if x == False:
+                continue
+        if id == count-1:
+            print("se acabo la web y va comenzar a dar vueltas")
+            time.sleep(10)
+            ripley_scrap()
+            
+        
+ripley_scrap()
 
   
 

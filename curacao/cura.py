@@ -47,16 +47,16 @@ def scrap (web):
     
     for i in product:
         product = i.find("a")["title"]
-        #print(product)
+        print(product)
         brand = i.find("div", class_="Manufacturer").text
-        #print(brand)
+        print(brand)
         try:
             sku = i.find("div" ,class_="PartNumber" ).text
             sku = sku.replace("_P","")
         except: sku = None
         
         link = i.find("a")["href"]
-        #print(link)
+        print(link)
 
         try:
             image = i.find("img")["data-src"]
@@ -227,7 +227,8 @@ for id, val in enumerate(data):
     
         count = 12
         web1 = val[0]
-        web2=val[1]
+        #web2=val[1]
+        web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
         
         scrap_category(web1,web2,count) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
         if scrap_category == False:
