@@ -9,8 +9,8 @@ from datetime import datetime
 from telegram import ParseMode
 from g_var import mongo_db
 
-date = datetime.today().strftime('%d/%m/%Y')
-date_now = datetime.today().strftime('%d/%m/%Y')
+date = datetime.today().strftime('%d-%m-%Y')
+date_now = datetime.today().strftime('%d-%m-%Y')
 
 mensaje = "test message"
 
@@ -93,19 +93,5 @@ def busqueda(codigo):
      
      
       
-
-  
-
-def brand(brand):
-    
-## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
-    t5 = collection5.find({"sku":brand, date:date})
-
-
-    for i in t5:
-       if not t5:
-            print("no hay codigo")
-    
-       send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
 
   

@@ -43,8 +43,9 @@ def scrap (web):
 
     #data= soup.find_all("div", class_="jsx-3128226947")
     js = json.loads(data)
-
-    x = js["props"]["pageProps"]["results"]
+    try:
+     x = js["props"]["pageProps"]["results"]
+    except: return False
 
     #print(x[0]["productId"])
 
@@ -74,6 +75,8 @@ def scrap (web):
         try:
          sku = x[i]["skuId"]
         except: sku = 0
+        if sku ==0:
+            continue
         try:
          link = x[i]["url"]
         except: link = "None"

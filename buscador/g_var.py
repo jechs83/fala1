@@ -6,7 +6,7 @@ MONGO_LOCAL = "mongodb://superuser:Viper.2013@192.168.9.66:27017/?authMechanism=
 # GLOBARL DATABASE  ( MONGO DB :   1 = REMOTE,  2 = LOCAL  )
 mongo_db =  2
 # GLOBARL PATH  ( 1 = MAC,  2 = WINDOW,  3 = HEROKU ))
-global_variables = 1
+global_variables = 2
 
 if global_variables == 1:
     path_wong = "/Users/javier/GIT/fala/wong/text/url.txt" # MAC OR LINUX 
@@ -29,6 +29,7 @@ if global_variables == 3:
     path_ripley='ripley/urls/proxies.txt' #   HEROKU
     path_ripley_links='ripley/urls/link.txt'  # HEROKU
     path_promart= "shopstar/urls//bs4_2.txt"  # HEROKU
+    path_proxy="/home/jechs/Documents/GIT/fala/wong/text/proxies.txt"
 
 if mongo_db == 1:
     mongo_db =  MONGO_URI

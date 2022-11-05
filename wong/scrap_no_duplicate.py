@@ -9,13 +9,18 @@ from g_var import mongo_db
 import re
 from datetime import datetime
 from telegram import ParseMode
-
-
 date = datetime.today().strftime('%d/%m/%Y')
 date_now = datetime.today().strftime('%d/%m/%Y')
 print(date_now)
 
-mensaje = "test message"
+client = MongoClient(mongo_db)    
+db = client["scrap"]
+collection = db["scrap"] 
+ 
+db2 = client["Offer"]
+collection2 = db2["offer"] 
+db3 = client["Offer"]
+collection3 = db3["offer2"] 
 
 def send_telegram(message):
     requests.post("https://api.telegram.org/bot5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU/sendMessage",
@@ -24,11 +29,7 @@ def send_telegram(message):
     data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
 
 
-client = MongoClient(mongo_db)
 
-        
-db = client["scrap"]
-collection = db["scrap"] 
 
 ## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
 t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"brand":{"$in":[ 
@@ -36,7 +37,7 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"bran
     re.compile("lg", re.IGNORECASE),re.compile("asus", re.IGNORECASE),re.compile("xiaomi", re.IGNORECASE),
     re.compile("indurama", re.IGNORECASE),re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),
     re.compile("acer", re.IGNORECASE),re.compile("huawei", re.IGNORECASE),re.compile("panasonic", re.IGNORECASE),
-    re.compile("winia", re.IGNORECASE),re.compile("philips", re.IGNORECASE),re.compile("mabe", re.IGNORECASE),
+    re.compile("winia", re.IGNORECASE),re.compile("phillips", re.IGNORECASE),re.compile("mabe", re.IGNORECASE),
     re.compile("nex", re.IGNORECASE), re.compile("hyundai", re.IGNORECASE),re.compile("tcl", re.IGNORECASE), re.compile("monark", re.IGNORECASE), 
     re.compile("goliat", re.IGNORECASE), re.compile("oxford", re.IGNORECASE), re.compile("jafi-bike", re.IGNORECASE), re.compile("besatti", re.IGNORECASE), 
     re.compile("altitude", re.IGNORECASE), re.compile("trek", re.IGNORECASE), re.compile("advantech", re.IGNORECASE), re.compile("ecoride", re.IGNORECASE),
@@ -69,23 +70,14 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"bran
     re.compile("apple", re.IGNORECASE),re.compile("chicco", re.IGNORECASE),re.compile("safety", re.IGNORECASE),
     re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("invicta22", re.IGNORECASE),
     re.compile("fisher price", re.IGNORECASE),re.compile("Hot wheels", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
-<<<<<<< HEAD
-    re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("imaco", re.IGNORECASE),
-    
-
-
-    
-    
-=======
     re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("ticino", re.IGNORECASE),
->>>>>>> ed959b65aa6d519e673e4716dac03081d487ecef
                                    
      ]}})
 
 #t2 =  collection.find( { "date" : date_now, "web_dsct" : { "$gte" : 90} } )
 
 pro = [t1]  ## ARREGLO DE LOS QUERYS DE MONGO PARA MANDAR POR TELEGRAM
-products = []
+#products = []
 
 ## FUNCION QUE COLOCA EN UNA LISTA (products) TODO LOS PRODUCTOS PARA SER MANDADOS A TELEGRAM,
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
@@ -96,19 +88,116 @@ def mongodb_search():
                             i["best_price"], i["card_price"], i["link"] ,i["web_dsct"],i["sku"]
                         ]
             #print(val)
-            products.append(mongo_obj)
+            #products.append(mongo_obj)
             print()
             print(i["sku"])
             print(i["brand"])
             print(i["product"])
             print(i["link"])
-            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+            #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+
+            y = collection2.find_one({"_id":i["market"]+str(i["sku"])})
+            if y:
+                filter = {"_id":i["market"]+str(i["sku"]) }
+                newvalues = { "$set":{ 
+                            "sku":str(i["sku"]), 
+                            "brand":i["brand"],
+                            "product": i["product"],
+                            "list_price":float(i["list_price"]),
+                            "best_price":float(i["best_price"]),
+                            "card_price":float(i["card_price"]),
+                            "web_dsct":float(i["web_dsct"]),
+                            "link": i["link"],
+                            "image": i["image"],
+                            "date":i["date"],
+                            "market":i["market"],
+                            "time":i["time"]
+                             }}
+                collection2.update_one(filter,newvalues)
+            else:
+                data =  {   "_id":i["market"]+str(i["sku"]),
+                            "sku":str(i["sku"]), 
+                            "brand":i["brand"],
+                            "product": i["product"],
+                            "list_price":float(i["list_price"]),
+                            "best_price":float(i["best_price"]),
+                            "card_price":float(i["card_price"]),
+                            "web_dsct":float(i["web_dsct"]),
+                            "link": i["link"],
+                            "image": i["image"],
+                            "date":i["date"],
+                            "market":i["market"],
+                            "time":i["time"]
+                        }
+                collection2.insert_one(data)
+
+
+            z = collection3.find_one({"_id":i["market"]+str(i["sku"])})
+   
+
+            if y != z :
+             send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+
+
+         
+            # print("compara base de datos precios  y envia lo que no envio")
+            # time.sleep(10)
+
+            z = collection3.find_one({"_id":i["market"]+str(i["sku"])})
+            if z:
+                filter = {"_id":i["market"]+str(i["sku"]) }
+                newvalues = { "$set":{ 
+                            "sku":str(i["sku"]), 
+                            "brand":i["brand"],
+                            "product": i["product"],
+                            "list_price":float(i["list_price"]),
+                            "best_price":float(i["best_price"]),
+                            "card_price":float(i["card_price"]),
+                            "web_dsct":float(i["web_dsct"]),
+                            "link": i["link"],
+                            "image": i["image"],
+                            "date":i["date"],
+                            "market":i["market"],
+                            "time":i["time"]
+                             }}
+                collection3.update_one(filter,newvalues)
+            else:
+                data =  {   "_id":i["market"]+str(i["sku"]),
+                            "sku":str(i["sku"]), 
+                            "brand":i["brand"],
+                            "product": i["product"],
+                            "list_price":float(i["list_price"]),
+                            "best_price":float(i["best_price"]),
+                            "card_price":float(i["card_price"]),
+                            "web_dsct":float(i["web_dsct"]),
+                            "link": i["link"],
+                            "image": i["image"],
+                            "date":i["date"],
+                            "market":i["market"],
+                            "time":i["time"]
+                        }
+                collection3.insert_one(data)
+
+
+
+# for i in pro:
+#     #print(i)
+    
+#     y = collection2.find_one({"_id":i["market"]+str(i["sku"])})
+#     if y:
+#         filter = {"_id":i["market"]+str(i["sku"]) }
+#         newvalues = { "$set":{
             
+#          }}
+
+
+     
+      
+
+
 
 def auto_telegram():
     mongodb_search()
-    send_telegram( "<b>Termino la busqueda automatica desde el 70%</b>\n###################################")
-
     #for i,v in enumerate(products):
      #  send_telegram ("<b>Marca: "+v[1]+"</b>\nModelo: "+v[2]+"\nPrecio Lista :"+str(v[3])+"\n<b>Precio web :"+str(v[4])+"</b>\nPrecio Tarjeta :"+str(v[5])+"\n"+v[0]+"\nLink :"+str(v[6]))
     
