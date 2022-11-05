@@ -7,15 +7,17 @@ import pytz
 import random
 import time
 import json
-from g_var import mongo_db, proxies
+
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
 current_date = peru_date.strftime("%d/%m/%Y" )
 current_time =peru_date.strftime("%H:%M" )
-client = MongoClient(mongo_db)
-web_url = random.choice(proxies)
-client = MongoClient(mongo_db)
+
+from decouple import config
+web_url = random.choice(config("PROXY"))
+
+client = MongoClient(config("MONGO_DB"))
 
 
 def scrap (web):
@@ -43,8 +45,9 @@ def scrap (web):
 
     #data= soup.find_all("div", class_="jsx-3128226947")
     js = json.loads(data)
-
-    x = js["props"]["pageProps"]["results"]
+    try:
+     x = js["props"]["pageProps"]["results"]
+    except: return False
 
     #print(x[0]["productId"])
 
@@ -74,6 +77,8 @@ def scrap (web):
         try:
          sku = x[i]["skuId"]
         except: sku = 0
+        if sku ==0:
+            continue
         try:
          link = x[i]["url"]
         except: link = "None"
@@ -97,10 +102,10 @@ def scrap (web):
          seller = x[i]["sellerName"]
         except: seller = "None"
         market = "saga"
-        # print()
-        # print( "producto numero "+ str(i+1));
-        # print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
-        # print("descuento "+str(web_dsct)); print("link "+link)
+        print()
+        print( "producto numero "+ str(i+1));
+        print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
+        print("descuento "+str(web_dsct)); print("link "+link)
         
         db = client["saga"]
         collection = db["market"]

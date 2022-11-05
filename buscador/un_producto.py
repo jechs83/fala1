@@ -7,7 +7,11 @@ import ast
 import re
 from datetime import datetime
 from telegram import ParseMode
+<<<<<<< HEAD
 from g_var import mongo_db
+=======
+from decouple import config
+>>>>>>> 382fe66c735fa3f9ef8837731678ff4c38d7cc1d
 
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
@@ -15,14 +19,22 @@ date_now = datetime.today().strftime('%d-%m-%Y')
 mensaje = "test message"
 
 def send_telegram(message):
+<<<<<<< HEAD
     requests.post("https://api.telegram.org/bot5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU/sendMessage",
+=======
+    requests.post(config("TELEGRAM_KEY"),
+>>>>>>> 382fe66c735fa3f9ef8837731678ff4c38d7cc1d
             
     # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
     data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
     
 def send_telegram2(message): 
+<<<<<<< HEAD
     requests.post("https://api.telegram.org/bot5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU/sendMessage",
+=======
+    requests.post(config("TELEGRAM_KEY"),
+>>>>>>> 382fe66c735fa3f9ef8837731678ff4c38d7cc1d
           
     data= {'chat_id': '-100157689793','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
@@ -32,7 +44,11 @@ def send_telegram2(message):
     
 
 
+<<<<<<< HEAD
 client = MongoClient(mongo_db)
+=======
+client = MongoClient(config("MONGO_DB"))
+>>>>>>> 382fe66c735fa3f9ef8837731678ff4c38d7cc1d
 
 db = client["ripley"]
 collection = db["market"] 
