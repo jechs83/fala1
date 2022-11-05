@@ -5,10 +5,10 @@ import requests
 from pymongo import MongoClient
 import os
 import ast
-from g_var import mongo_db
 import re
 from datetime import datetime
 from telegram import ParseMode
+from decouple import config
 
 
 date = datetime.today().strftime('%d/%m/%Y')
@@ -18,20 +18,20 @@ print(date_now)
 mensaje = "test message"
 
 def send_telegram(message):
-    requests.post("https://api.telegram.org/bot5504401191:AAG8Wuk5AF95qEWn0642ZjhzduE0CbVkBaU/sendMessage",
+    requests.post(config("TELEGRAM_KEY"),
             
     # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
     data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
 
 
-client = MongoClient(mongo_db)
+client = MongoClient(config("MONGO_DB"))
 
         
 db = client["scrap"]
 collection = db["scrap"] 
 
 ## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
-t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now,"brand":{"$in":[ 
+t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now ,"brand":{"$in":[ 
     re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("sony", re.IGNORECASE),
     re.compile("lg", re.IGNORECASE),re.compile("asus", re.IGNORECASE),re.compile("xiaomi", re.IGNORECASE),
     re.compile("indurama", re.IGNORECASE),re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),
