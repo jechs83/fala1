@@ -178,10 +178,10 @@ def scrap (web):
             }
           
             collection_max.insert_one(data)
+       
             
             
-            
-         
+    time.sleep(5)      
     return True
 
 

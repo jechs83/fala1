@@ -98,7 +98,7 @@ def scrap (web):
          list_price = list_price.replace(",","")
          
         except: list_price = 0 
-        try:
+        try:   
          seller = x[i]["sellerName"]
         except: seller = "None"
         market = "saga"
