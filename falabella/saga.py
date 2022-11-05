@@ -234,17 +234,23 @@ for i in x:
 #     for i in range (3):
 #         webs.append(v+(str(i+1)))
 # print(webs)
+count = len(array_tec)
+def saga_scrapper():
+    
+    for id, val in enumerate(array_tec):
+        print(val)
+    
+        web = val
 
-for id, val in enumerate(array_tec):
-    print(val)
-  
-    web = val
-
-    scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-# x= "https://www.falabella.com.pe/falabella-pe/category/cat760702/Telefonia?page="
+        scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+    # x= "https://www.falabella.com.pe/falabella-pe/category/cat760702/Telefonia?page="
+        if id == count-1:
+            print("se acabo la web y va comenzar a dar vueltas")
+            time.sleep(10)
+            saga_scrapper() 
 
 # scrap_category(x)
-
+saga_scrapper()
 
 
 
