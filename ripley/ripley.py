@@ -197,7 +197,7 @@ def scrap_category(category_url):
 array_tec=[]
 arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
+arg_ = config("RIPLEY_TEXT_PATH")+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()

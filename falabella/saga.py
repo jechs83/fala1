@@ -211,7 +211,7 @@ array_tec=[]
 
 #arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = "/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
+arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
