@@ -1,12 +1,12 @@
-start python  C:\GIT\fala\falabella\saga.py C:\Git\fala\falabella\urls\test\url1.txt
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url2.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url3.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url4.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url5.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url6.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url7.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url8.txt 
-start python  C:\GIT\fala\falabella\saga.py C:\GIT\fala\falabella\urls\test\url0.txt 
+start python  C:\GIT\fala\falabella\saga.py 1
+start python  C:\GIT\fala\falabella\saga.py 2 
+start python  C:\GIT\fala\falabella\saga.py 3 
+start python  C:\GIT\fala\falabella\saga.py 4 
+start python  C:\GIT\fala\falabella\saga.py 5 
+start python  C:\GIT\fala\falabella\saga.py 6 
+start python  C:\GIT\fala\falabella\saga.py 7 
+start python  C:\GIT\fala\falabella\saga.py 8 
+start python  C:\GIT\fala\falabella\saga.py 0 
 
 
 
