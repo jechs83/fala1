@@ -185,17 +185,6 @@ def scrap (web):
     return True
 
 
-
-array_tec=[]
-
-arg_=sys.argv[1]
-
-f = open(arg_, "r")
-x = f.readlines()
-for i in x:
-   array_tec.append(i.rstrip()) 
-f.close
-
 def scrap_category(category_url):
     for i in range(200):
         success = scrap(category_url+str(i+1))
@@ -204,21 +193,22 @@ def scrap_category(category_url):
         if success == False:
             return
 
-###########################################################
+
 array_tec=[]
 arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
 
 for i in x:
     array_tec.append(i.rstrip()) 
-webs= []
-for i,v in enumerate(array_tec):
-    for i in range (3):
-        webs.append(v+(str(i+1)))
 
 count =(len(array_tec))
+
+
+
 
 def ripley_scrap():
     for id, val in enumerate(array_tec):
@@ -232,6 +222,7 @@ def ripley_scrap():
             ripley_scrap()
             
         
+
 ripley_scrap()
 
   
