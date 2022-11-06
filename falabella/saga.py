@@ -196,20 +196,6 @@ def scrap (web):
     
             collection_max.insert_one(data)
     
-                
-       
-
-
-# array_tec=[]
-
-# arg_=sys.argv[1]
-
-# f = open(arg_, "r")
-# x = f.readlines()
-# for i in x:
-#    array_tec.append(i.rstrip()) 
-# f.close
-## OBTEGO UNA LISTA DE LAS URLS PARA SCRAPEAR 
 
 def scrap_category(category_url):
     for i in range(500):
@@ -220,21 +206,21 @@ def scrap_category(category_url):
         if success == False:
             return
 
-###########################################################
+
 array_tec=[]
-arg_ = sys.argv[1]
+
+#arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = "/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
 
 for i in x:
     array_tec.append(i.rstrip()) 
-# webs= []
-# for i,v in enumerate(array_tec):
-#     for i in range (3):
-#         webs.append(v+(str(i+1)))
-# print(webs)
+
 count = len(array_tec)
+
 def saga_scrapper():
     
     for id, val in enumerate(array_tec):
@@ -243,13 +229,13 @@ def saga_scrapper():
         web = val
 
         scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-    # x= "https://www.falabella.com.pe/falabella-pe/category/cat760702/Telefonia?page="
+
         if id == count-1:
             print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
             saga_scrapper() 
 
-# scrap_category(x)
+
 saga_scrapper()
 
 
