@@ -79,6 +79,11 @@ def scrap (web):
         except: sku = 0
         if sku ==0:
             continue
+
+        
+
+
+
         try:
          link = x[i]["url"]
         except: link = "None"
@@ -227,13 +232,17 @@ def saga_scrapper():
         print(val)
     
         web = val
-
+        
         scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+       
 
         if id == count-1:
             print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
+            
             saga_scrapper() 
+        
+
 
 
 saga_scrapper()
