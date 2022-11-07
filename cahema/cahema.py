@@ -18,9 +18,10 @@ from decouple import config
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
-#web = "https://www.plazavea.com.pe/tecnologia/televisores?page=2"
-def scrap (web):
 
+first_product = None
+def scrap (web):
+    global first_product
     proxies = {"http":"http://"+web_url }
         
     res=requests.get(web,  proxies= proxies)
@@ -30,79 +31,81 @@ def scrap (web):
     res=requests.get(web,  proxies= proxies)
     soup = BeautifulSoup(res.text, "html.parser")
 
-    soup = str(soup)
-    with open ("/Users/javier/GIT/fala/plazavea/json.txt", "w") as f:
-      f.write(soup)
-      x = f.read()
-    json_data = json.load(x)
+    element = soup.find_all("article", "product-miniature js-product-miniature")
+    count = 0
+    db = client["cahema"]
+    collection = db["market"]
+    db2 = client["scrap"]
+    collection2 = db2["scrap"]
+    market = "cahema"
 
+    for i in element:
+        count= count+1
 
-    try:
-     elements = soup.find_all("div",class_="Showcase__content")
-    except:
-        return False
-
-    for i in elements:
-       
-       
-        print()
-        try:
-            product = i.find("figcaption").text
-        except: product = 0
-        print(product)
-
-        try:
-         brand = i.find("div", class_="Showcase__brand").text
-        except: brand = None
-        print(brand.strip())
-        link = i.find("a", class_="Showcase__link").attrs.get("href")
-        print(link)
-        try:
-            list_price = i.find("div", class_="Showcase__oldPrice").text
-        except: list_price = 0
-        list_price = str(list_price).replace("S/","").replace(",","")
-        list_price = str(list_price).strip()
-        print(list_price)
-
-
-        try:
-            best_price = i.find("div", class_="Showcase__salePrice").text
-        except: best_price = 0
-        best_price = best_price.replace("S/","").replace(",","")
-        best_price = best_price.strip()
-        print(best_price)
-
+        product = i.find("h1", class_="product-title").text
+        product = str(product)
         
+        
+        if product == first_product:
+            print("se repite la pagina")
+            return False
+        if count == 1:
+            first_product = product
+
         try:
-            image = i.find("figure", class_="Showcase__photo").find("img").attrs.get("src")
+         gray = i.find("div", "product-thumbnail graypicture")
+        except: print("existe producto")
+        if gray:
+            continue
+
+        try:
+         best_price = i.find("span", class_="price").text
+        except: best_price = 0
+        best_price=str(best_price)
+        best_price = best_price.replace("S/.","").replace(",","")
+
+        link = i.find("a", class_="product-thumbnail-link").attrs.get("href")
+        try:
+         image = i.find("img").attrs.get("src")
         except: image = None
-        print(image)
-
-        sku = i.find("div", class_="g-producto")
-        print(sku)
         try:
-         dsct = (float(best_price)*100/float(list_price) )
+         list_price = i.find("span", class_="regular-price").text
+        except: list_price  = 0
+        list_price = str(list_price)
+        list_price = list_price.replace("S/.","").replace(",","")
+        try:
+         dsct = i.find("span", class_="discount-percentage discount-product").text
+         dsct = dsct.replace("-","").replace("%","")
         except: dsct = 0
-        print(round(dsct,2))
 
-        db = client["plazavea"]
-        collection = db["market"]
-        db2 = client["scrap1"]
-        collection2 = db2["scrap1"]
-        market = "vea"
-    
+        print()
+        print(link)
+        print(image)
+        print(product)
+        print(list_price)
+        print(best_price)
+        print(dsct)
+     
+        # with open("/Users/javier/GIT/fala/plazavea/source.txt", "w" ) as f:
+        #      f.write(str(i))
+     
+      
         category = None
-        dsct =None
-        dsct= 0
+        brand = "cahema"
+        sku= product.replace(" ","")
+        
 
-        y = collection.find_one({"_id":market+str(sku)})
-        z = collection2.find_one({"_id":market+str(sku)})
+        # y = collection.find_one({"id_": sku})
+        # z = collection2.find_one({"id_": sku})
+
+        y = collection.find_one({"produt": product})
+        z = collection2.find_one({"produt": product})
 
         if y :
             
-            filter = {"_id":market+str(sku), }
-            newvalues = { "$set":{ 
-            "_id":market+str(sku),   
+            filter = {"produt": product}
+            newvalues = { "$set":{  
+            #"id_":str(sku) ,
             "sku":str(sku), 
             "brand":brand,
             "product": product,
@@ -120,11 +123,11 @@ def scrap (web):
             collection.update_one(filter,newvalues)
                
         else:
-            print("ADICIONA NUEVO REGISTRO A BD ")
+            #print("ADICIONA NUEVO REGISTRO A BD ")
             
             
             data =  {
-            "_id":market+str(sku),   
+            "id_":str(sku) ,
             "sku":str(sku), 
             "brand":brand,
             "product": product,
@@ -144,13 +147,13 @@ def scrap (web):
             collection.insert_one(data)
             
        
-        y = collection2.find_one({"_id":market+str(sku)})
+       
 
         if z :
             
-            filter = {"_id":market+str(sku), }
+            filter = {{"id_":sku} }
             newvalues = { "$set":{ 
-            "_id":market+str(sku),   
+            "id_":str(sku) ,
             "sku":str(sku), 
             "brand":brand,
             "product": product,
@@ -168,11 +171,9 @@ def scrap (web):
             collection2.update_one(filter,newvalues)
                
         else:
-            print("ADICIONA NUEVO REGISTRO A BD ")
-            
-            
+            #print("ADICIONA NUEVO REGISTRO A BD ")
             data =  {
-            "_id":market+str(sku),   
+            "id_":str(sku) ,
             "sku":str(sku), 
             "brand":brand,
             "product": product,
@@ -191,37 +192,44 @@ def scrap (web):
             collection2.insert_one(data)
             
 
-web = open(config("VEA_TEXT_PATH"),"r").readlines()
+
+
+arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = config("CAHEMA_TEXT_PATH")+str(num)+".txt"
+
+f = open(arg_, "r")
+x = f.readlines()
+
 links = []
-for url in web:
+for url in x:
   
     links.append(url.rstrip())
 
 
 
-webs = []
-for i,v in enumerate(links):
-    for e in range (200):
+# webs = []
+# for i,v in enumerate(links):
+#     for e in range (60):
 
-        a=v+str(e+1)
- 
-        webs.append(a)
-
+#         a=v+str(e+1)
+#         webs.append(a)
 
 
-# def vea_scrapping ():
 
-#     for id, val  in enumerate (webs):
+def cahema_scrapping ():
 
-#         scrapping = scrap(val)
-#         print(scrapping)
-#         print(val)
-#         if scrapping == False:
-#             continue
+    for id, val  in enumerate (links):
         
-     
-                
+        for i in range(150):
+            a=val+str(i+1)
+         
+            scrapping = scrap(a)
+            print(scrapping)
+            print(a)
+            if scrapping == False:
+                break
             
-# vea_scrapping() 
+          
+cahema_scrapping() 
 
-scrap("https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/683/&_from=1&_to=20&O=OrderByScoreDESC&")
