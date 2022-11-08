@@ -25,7 +25,6 @@ def send_telegram(message):
     
 
 client = MongoClient(config("MONGO_DB"))
-
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
   
@@ -43,47 +42,23 @@ def busqueda(codigo):
 
 
 
-def brand_search(brand):
-      
-
-    t5 = collection5.find({"brand":{"$in":[ re.compile(brand, re.IGNORECASE)]}, "web_dsct":{"$gte":70}, "date": date})
-    print( "se realizo busqueda")
-    print(brand)
-    count = 0
-    for i in t5:
-        count= count+1
-        if count == 100:
-            break
-        print(i)
-        print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-
 
 def search_brand_dsct(brand,dsct):
       
-
+    if dsct <=41:
+        dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
+   
     print( "se realizo busqueda")
     
+
 
     count = 0
     for i in t5:
         count = count+1
         if count == 100:
             break
-        print(i)
-        print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-        time.sleep(1)
 
-def product_search(producto,dsct):
-      
-
-    t5 = collection5.find({"product":{"$regex": re.compile(str(producto), re.IGNORECASE)}, "web_dsct":{"$gte":int(dsct)}, "date": date})
-    print( "se realizo busqueda")
-    
-
-    for i in t5:
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
@@ -91,34 +66,4 @@ def product_search(producto,dsct):
 
 
 
-def price_search(producto,price):
-      
 
-    t5 = collection5.find({"product":{"$regex": re.compile(str(producto), re.IGNORECASE)}, "list_price":{"$lte":price}, "date": date})
-    t6 = collection5.find({"product":{"$regex": re.compile(str(producto), re.IGNORECASE)}, "best_price":{"$lte":price}, "date": date})
-    t7 = collection5.find({"product":{"$regex": re.compile(str(producto), re.IGNORECASE)}, "card_price":{"$lte":price}, "date": date})
-
-
-    print( "se realizo busqueda")
-    
-    pro = [t5,t6,t7]
-
-    for idx, value in enumerate(pro):
-        for i in value:
-            print("se envia a telegram")
-            send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-            time.sleep(1)
-
-    # for i in pro:
-    #     print(i)
-    #     print("se envio a telegram")      
-    #     send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-    #     time.sleep(1)
-
-
-
-
-
-
-search_brand_dsct("cahema", 40)
-  

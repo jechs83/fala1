@@ -52,7 +52,7 @@ def custom_search(update, context):
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
     brand= str(context.args[0])
     dsct=int(context.args[1])
-    if dsct > 41:
+    if dsct <= 41:
        dsct = 40
     search_brand_dsct(brand, dsct)
 
@@ -61,7 +61,7 @@ def custom_search(update, context):
         parse_mode="HTML",
         text= f"Ya no se encontro nada Recon.. ahora si que pase el siguiente gil con su busqueda PTM\n#################################\n CarLitux  deja de buscar tus consoladores y huevadas......."
     )
-    
+
 
 def alert_all(update, context):
     bot = context.bot
@@ -89,6 +89,9 @@ def sku(update, context):
         parse_mode="HTML",
         text= f"Termino la busqueda... si no hay nada no encontre ps"
     )
+
+
+
 
 
 if __name__ == "__main__":
