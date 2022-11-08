@@ -81,6 +81,7 @@ def product_search(producto,dsct):
 
     t5 = collection5.find({"product":{"$regex": re.compile(str(producto), re.IGNORECASE)}, "web_dsct":{"$gte":int(dsct)}, "date": date})
     print( "se realizo busqueda")
+    
 
     for i in t5:
         print(i)
@@ -119,5 +120,5 @@ def price_search(producto,price):
 
 
 
-
+search_brand_dsct("cahema", 40)
   

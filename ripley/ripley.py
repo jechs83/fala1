@@ -17,9 +17,10 @@ from decouple import config
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
+first_sku = None
 
 def scrap (web):
-  
+    global first_sku
     proxies = {"http":"http://"+web_url }
         
     res=requests.get(web,  proxies= proxies)
@@ -38,8 +39,9 @@ def scrap (web):
     productos = soup.find_all( "div", class_="catalog-product-item catalog-product-item__container col-xs-6 col-sm-6 col-md-4 col-lg-4")
     for i in productos:
     
+        
         count +=1
-
+        
         try:
             brand = i.find(class_="brand-logo")
         except:
@@ -52,7 +54,22 @@ def scrap (web):
         
 
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
-        sku = str(sku)        
+        sku = str(sku)      
+      
+        print(str(sku)+" "+ str(first_sku))
+
+        if  sku == first_sku:
+            print("se repite SKU")
+            print(str(sku)+" "+ str(first_sku))
+      
+            return False 
+
+        if count == 1:
+            first_sku = sku
+
+            
+        
+
         
         try:
             dsct= i.find(class_="catalog-product-details__discount-tag")
@@ -82,10 +99,10 @@ def scrap (web):
         link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
         link= "https://simple.ripley.com.pe"+link
 
-        print()
-        print(brand.text)
-        print(product.text)
-        print(link)
+        # print()
+        # print(brand.text)
+        # print(product.text)
+        # print(link)
 
 
         market = "ripley"
@@ -185,17 +202,6 @@ def scrap (web):
     return True
 
 
-
-array_tec=[]
-
-arg_=sys.argv[1]
-
-f = open(arg_, "r")
-x = f.readlines()
-for i in x:
-   array_tec.append(i.rstrip()) 
-f.close
-
 def scrap_category(category_url):
     for i in range(200):
         success = scrap(category_url+str(i+1))
@@ -204,21 +210,22 @@ def scrap_category(category_url):
         if success == False:
             return
 
-###########################################################
+
 array_tec=[]
 arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = config("RIPLEY_TEXT_PATH")+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
 
 for i in x:
     array_tec.append(i.rstrip()) 
-webs= []
-for i,v in enumerate(array_tec):
-    for i in range (3):
-        webs.append(v+(str(i+1)))
 
 count =(len(array_tec))
+
+
+
 
 def ripley_scrap():
     for id, val in enumerate(array_tec):
@@ -232,6 +239,7 @@ def ripley_scrap():
             ripley_scrap()
             
         
+
 ripley_scrap()
 
   

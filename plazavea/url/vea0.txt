@@ -1,0 +1,5 @@
+https://www.plazavea.com.pe/tecnologia/computo?page=
+
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/683/&_from=168&_to=188&O=OrderByScoreDESC&
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/683/&_from=147&_to=167&O=OrderByScoreDESC&
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/683/&_from=21&_to=41&O=OrderByScoreDESC&
