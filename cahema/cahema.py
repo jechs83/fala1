@@ -42,6 +42,8 @@ def scrap (web):
     for i in element:
         count= count+1
 
+    
+
         product = i.find("h1", class_="product-title").text
         product = str(product)
         
@@ -146,7 +148,7 @@ def scrap (web):
 
             collection.insert_one(data)
             
-       
+    
        
 
         if z :
@@ -192,44 +194,34 @@ def scrap (web):
             collection2.insert_one(data)
             
 
+# arg_ = sys.argv[1]
+# num = sys.argv[1]
+# arg_ = config("CAHEMA_TEXT_PATH")+str(num)+".txt"
 
+# f = open(arg_, "r")
+# x = f.readlines()
 
-arg_ = sys.argv[1]
-num = sys.argv[1]
-arg_ = config("CAHEMA_TEXT_PATH")+str(num)+".txt"
+# links = []
+# for url in x:
+#     links.append(url.rstrip())
+# f.close
 
-f = open(arg_, "r")
-x = f.readlines()
-
-links = []
-for url in x:
-  
-    links.append(url.rstrip())
-
-
-
-# webs = []
-# for i,v in enumerate(links):
-#     for e in range (60):
-
-#         a=v+str(e+1)
-#         webs.append(a)
-
-
-
-def cahema_scrapping ():
-
-    for id, val  in enumerate (links):
+# def cahema_scrapping ():
+#     global urls
+#     for id, val  in enumerate (urls):
         
-        for i in range(150):
-            a=val+str(i+1)
+#         for i in range(150):
+#             a=val+str(i+1)
          
-            scrapping = scrap(a)
-            print(scrapping)
-            print(a)
-            if scrapping == False:
-                break
+#             scrapping = scrap(a)
+#             print(scrapping)
+#             print(a)
+#             if scrapping == False:
+#                 break
             
           
-cahema_scrapping() 
+#cahema_scrapping() 
+for i in range (100):
+    url = "https://cahema.pe/43-herramientas-inalambricas?page="+str(i+1)
 
+    scrap(url)

@@ -1,0 +1,231 @@
+<article class="product-miniature js-product-miniature" data-id-product="6113" data-id-product-attribute="0"><div class="product-miniature-container"><div class="product-miniature-thumbnail"><div class="product-thumbnail"> <a class="product-thumbnail-link" href="https://cahema.pe/cepillos-inalambricos/6113-cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.html"><div class="thumbnails-carousel slide gallery"><ol class="carousel-indicators"><li class="active" data-slide-to="0" style="flex: 0 0 calc(100%/3); -webkit-flex: 0 0 calc(100%/3)"> <img alt="Cepillo Inalambrico 20 V Xr..." class="img-fluid" src="https://cahema.pe/23310-small_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></li><li data-slide-to="1" style="flex: 0 0 calc(100%/3); -webkit-flex: 0 0 calc(100%/3)"> <img alt="Cepillo Inalambrico 20 V Xr..." class="img-fluid" src="https://cahema.pe/23308-small_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></li><li data-slide-to="2" style="flex: 0 0 calc(100%/3); -webkit-flex: 0 0 calc(100%/3)"> <img alt="Cepillo Inalambrico 20 V Xr..." class="img-fluid" src="https://cahema.pe/23307-small_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></li></ol><div class="carousel-inner"><div class="carousel-item active"> <img alt="Cepillo Inalambrico 20 V Xr..." data-full-size-image-url="https://cahema.pe/23310-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp" src="https://cahema.pe/23310-home_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></div><div class="carousel-item"> <img alt="Cepillo Inalambrico 20 V Xr..." data-full-size-image-url="https://cahema.pe/23308-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp" src="https://cahema.pe/23308-home_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></div><div class="carousel-item"> <img alt="Cepillo Inalambrico 20 V Xr..." data-full-size-image-url="https://cahema.pe/23307-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp" src="https://cahema.pe/23307-home_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"/></div></div></div> </a> <a class="quick-view btn-link" data-img-cover="https://cahema.pe/23310-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp" data-link-action="quickview" data-loading-text="Cargando Información del Producto..." href="#"> <i class="icon-search"></i> <span class="sr-only">Vista rápida</span> </a></div></div><div class="product-miniature-information"><h1 class="product-title"><a href="https://cahema.pe/cepillos-inalambricos/6113-cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.html">Cepillo Inalambrico 20 V Xr 15000 Rpm 2 mm Baretool (Sin Bateriass/Sin Cargador) Dewalt DCP580B</a></h1><div class="product-description-short"><ul><li>Motor sin escobillas proporciona potencia y tiempo de ejecución</li><li>Profundidad máxima de corte de 5/64 pulg. (2...</li></ul></div><div class="product-prices-md with-discount"> <span class="sr-only">Precio base</span> <span class="regular-price">S/.1,207.10</span> <span class="discount-percentage discount-product">-31.25%</span> <span class="sr-only">Precio</span> <span class="price">S/.829.90</span></div><div class="product-miniature-hover-wrapp"><div class="product-buttons"> <a class="add-to-cart btn-link" data-id-product="6113" data-id-product-attribute="0" data-link-action="add-to-cart" href="https://cahema.pe/carrito?add=1&amp;id_product=6113&amp;id_product_attribute=0" rel="nofollow"> <i aria-hidden="true" class="icon-cart"></i> <span class="sr-only">Añadir al carrito</span> </a></div></div></div></div> <script id="quickview-template-6113-0" type="text/template"><div id="quickview-modal-6113-0" class="quickview modal fade modal-close-inside" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <button type="button" class="close icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></button>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-7">
+                  
+                    <div class="images-container">
+  
+    <div class="product-images products-swiper-container swiper-container">
+      <ul class="swiper-wrapper">
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  selected  "
+                data-image-medium-src="https://cahema.pe/23310-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23310-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23310-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23308-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23308-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23308-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23307-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23307-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23307-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23306-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23306-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23306-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23303-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23303-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23303-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23305-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23305-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23305-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23304-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23304-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23304-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23302-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23302-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23302-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23301-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23301-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23301-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23299-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23299-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23299-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23300-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23300-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23300-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23297-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23297-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23297-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23298-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23298-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23298-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+                  <li class="swiper-slide thumb-container" data-k="1">
+            <img
+                class="img-fluid js-thumb  "
+                data-image-medium-src="https://cahema.pe/23315-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                data-image-large-src="https://cahema.pe/23315-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                src="https://cahema.pe/23315-medium_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp"
+                alt=""
+                title=""
+                width="100"
+                
+                >
+          </li>
+          
+              </ul>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  
+  
+    <div class="product-cover">
+      <img class="img-fluid js-qv-product-cover " src="https://cahema.pe/23310-large_default/cepillo-inalambrico-20-v-xr-15000-rpm-2-mm-baretool-sin-bateriassin-cargador-dewalt-dcp580b.webp" alt="" title="" >
+            <div class="layer"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
+    </div>
+  
+</div>
+
+                  
+                </div>
+                <div class="col-sm-5 d-flex flex-column">
+                  <h1 class="h3 product-name mt-2 mt-sm-0">Cepillo Inalambrico 20 V Xr 15000 Rpm 2 mm Baretool (Sin Bateriass/Sin Cargador) Dewalt DCP580B</h1>
+                  
+                    <div id="product-description-short" ><ul>
+<li>Motor sin escobillas proporciona potencia y tiempo de ejecución</li>
+<li>Profundidad máxima de corte de 5/64 pulg. (2 mm.)</li>
+<li>El mango de diseño ergonómico proporciona mayor comodidad y menos fatiga al usuario</li>
+<li>La ranura mecanizada de precisión en la zapata delantera permite el achaflanado de bordes</li>
+<li>Las Baterias y Cargador se venden por separado</li>
+</ul></div>
+                  
+                  <div id="quickview-product-prices"></div>
+                  
+                    <div id="quickview-product-addToCart" class="product-actions"></div>
+                  
+                </div>
+              </div>
+            </div>
+            <div id="quickview-product-footer"></div>
+          </div>
+        </div>
+      </div></script> </article>

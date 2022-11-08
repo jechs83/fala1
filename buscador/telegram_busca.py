@@ -83,7 +83,6 @@ def product_search(producto,dsct):
     print( "se realizo busqueda")
     
 
-
     for i in t5:
         print(i)
         print("se envio a telegram")      
@@ -121,5 +120,5 @@ def price_search(producto,price):
 
 
 
-
+search_brand_dsct("cahema", 40)
   
