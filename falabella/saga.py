@@ -39,8 +39,12 @@ def scrap (web):
     print()
     if error:
         return False
-   
-    data = soup.find("script", id="__NEXT_DATA__" ).text
+    
+    try:
+        data = soup.find("script", id="__NEXT_DATA__" ).text
+    except: data = None
+    if data == None:
+        return False
 
 
    
