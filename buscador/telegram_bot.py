@@ -53,7 +53,7 @@ def custom_search(update, context):
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
     brand= str(context.args[0])
     dsct=int(context.args[1])
-    if dsct < 41:
+    if dsct > 41:
        dsct = 40
     search_brand_dsct(brand, dsct)
 
@@ -91,62 +91,6 @@ def sku(update, context):
         text= f"Termino la busqueda... si no hay nada no encontre ps"
     )
 
-def producto(update, context):
-    bot = context.bot
-    chatId= update.message.chat_id
-    userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  busca poducto especifico")
-    producto = str(context.args[0])
-    dsct = int(context.args[1])
-    if dsct < 31:
-           dsct = 30
-
-    product_search(producto,dsct)
-
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Termino la busqueda... si no hay nada no encontre ps"
-    )
-
-def price_max(update, context):
-    bot = context.bot
-    chatId= update.message.chat_id
-    userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  busca poducto especifico")
-    producto = str(context.args[0])
-    price = float(context.args[1])
-    print(price)
-
-    price_search(producto,price)
-
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Termino la busqueda... si no hay nada no encontre ps"
-    )
-
-
-    def one_brand(update, context):
-        bot = context.bot
-    chatId= update.message.chat_id
-    userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  busca poducto especifico")
-    producto = str(context.args[0])
-    dsct = int(context.args[1])
-    if dsct < 31:
-           dsct = 30
-
-    product_search(producto,dsct)
-
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Termino la busqueda... si no hay nada no encontre ps"
-    )
-
-    
-
 
 if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
@@ -167,9 +111,8 @@ except:
     print("esta corriendo")
 
 dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
-dp.add_handler(CommandHandler('product', producto))
 dp.add_handler(CommandHandler('cod', sku))
-dp.add_handler(CommandHandler('price', price_search))
+#dp.add_handler(CommandHandler('price', price_search))
 
 
 
