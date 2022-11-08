@@ -18,10 +18,10 @@ from decouple import config
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
-
+first_sku = None
 
 def shop(web):
-
+    global first_sku
     #headers = {"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36"}
     proxies = {"http":"http://183.111.25.248:8080" }
 
@@ -29,22 +29,33 @@ def shop(web):
     print("Servidor reponde "+str((res.status_code)))
    
     soup = BeautifulSoup(res.text, "html.parser")
-        
-    elements=soup.find_all("div",class_="product")
-   
-    if not elements:
-        return True
     
-  
+    elements=soup.find_all("div",class_="product")
+    
+    
+    if not elements:
+        print("no hay elementos")
+        return False
+    
+    count=0
     for idx, i in enumerate(elements):
-
+        count +=1
         try:
          sku= i.find("div", class_="buy-button-normal").attrs.get("id")
         except:
             sku = None
-        
 
-        #print(i.prettify())
+        if  sku == first_sku:
+                print("se repite SKU")
+                print(str(sku)+" "+ str(first_sku))
+      
+                return False 
+
+        if count == 1:
+            first_sku = sku
+    
+
+        
         brand = i.find("h6", class_="x-brand").text
         product = i.find("h6", class_="x-name").text
         try:
@@ -90,18 +101,7 @@ def shop(web):
         print(web_dsct);print(card_dsct);print(link);print("##################");print()
 
 
-def scrapero(web):
 
-    for i in range(1000):
-        x = shop(web+str(i+1))
-        print(web+str(i+1))
-        if x == True:
-            print(x)
-            return False
-
-        print("pagina "+str(i+1))
-
-  
 array_tec=[]
 arg_ = sys.argv[1]
 num = sys.argv[1]
@@ -121,21 +121,25 @@ count = len(array_tec)
 
 def shop_scrapper():
 
-    for i,v in enumerate(array_tec):
-        scrap =  scrapero(v)
-        if scrap == False:
-            continue
+    for id,v in enumerate(array_tec):
+      
+        for i in range (1000):
 
-        if i == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(10)
-            
-            shop_scrapper() 
-            
+                if v[-1:] == "=":
+                    url = v+str(i+1)
+                else:
+                    url = v
+                print(url)
+                
+                scrap =  shop(url)
+        
+                if scrap == False:
+                    break
+
+                if id == count-1:
+                    print("se acabo la web y va comenzar a dar vueltas")
+                    time.sleep(10)
+                    
+                    shop_scrapper() 
+
 shop_scrapper()
-
- 
-
-# falta esta url
-#https://shopstar.pe/electrohogar/cuidado-personal
-#https://shopstar.pe/belleza-y-cuidado-personal/cuidado-del-bebe
