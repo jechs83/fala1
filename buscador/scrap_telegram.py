@@ -6,6 +6,7 @@ from pymongo import MongoClient
 import os
 import ast
 import re
+
 from datetime import datetime
 from telegram import ParseMode
 from decouple import config
@@ -31,7 +32,7 @@ db = client["scrap"]
 collection = db["scrap"] 
 
 ## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
-t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now ,"brand":{"$in":[ 
+t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date_now ,"brand":{"$in":[ 
     re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("sony", re.IGNORECASE),
     re.compile("lg", re.IGNORECASE),re.compile("asus", re.IGNORECASE),re.compile("xiaomi", re.IGNORECASE),
     re.compile("indurama", re.IGNORECASE),re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),
@@ -69,10 +70,8 @@ t1 =  collection.find( {"web_dsct":{"$lte":100, "$gte":70},"date":date_now ,"bra
     re.compile("apple", re.IGNORECASE),re.compile("chicco", re.IGNORECASE),re.compile("safety", re.IGNORECASE),
     re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("invicta22", re.IGNORECASE),
     re.compile("fisher price", re.IGNORECASE),re.compile("Hot wheels", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
-    re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),
-    
-
-
+    re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("index", re.IGNORECASE),
+    re.compile("barbie", re.IGNORECASE)
     
     
                                    
