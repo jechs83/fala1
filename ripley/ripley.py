@@ -31,10 +31,14 @@ def scrap (web):
       no_page = soup.find("div",class_="error-page-container")
     except:
         no_page=None
+    print("dddddd")
     print(no_page)
-    if no_page != None:
+    if no_page == None:
         return False
-        
+    print(no_page)
+
+    if res.status_code == 404:
+        return False
     count=0
     productos = soup.find_all( "div", class_="catalog-product-item catalog-product-item__container col-xs-6 col-sm-6 col-md-4 col-lg-4")
     for i in productos:
@@ -54,7 +58,8 @@ def scrap (web):
         
 
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
-        sku = str(sku)      
+        sku = str(sku)   
+        
       
         print(str(sku)+" "+ str(first_sku))
 
@@ -99,10 +104,10 @@ def scrap (web):
         link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
         link= "https://simple.ripley.com.pe"+link
 
-        # print()
-        # print(brand.text)
-        # print(product.text)
-        # print(link)
+        print()
+        print(brand.text)
+        print(product.text)
+        print(link)
 
 
         market = "ripley"
@@ -199,16 +204,16 @@ def scrap (web):
             
             
     time.sleep(5)      
-    return True
 
 
-def scrap_category(category_url):
-    for i in range(200):
-        success = scrap(category_url+str(i+1))
-        print(category_url+str(i+1))
-        #time.sleep(3)
-        if success == False:
-            return
+
+# def scrap_category(category_url):
+#     for i in range(200):
+#         success = scrap(category_url+str(i+1))
+#         print(category_url+str(i+1))
+#         #time.sleep(3)
+#         if success == False:
+#             return
 
 
 array_tec=[]
@@ -229,14 +234,20 @@ count =(len(array_tec))
 
 def ripley_scrap():
     for id, val in enumerate(array_tec):
-    
-        x = scrap_category(val) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        if x == False:
-                continue
+        print(count)
+        
+        for i in range(200):
+            success = scrap(val+str(i+1))
+            print(val+str(i+1))
+            #time.sleep(3)
+            if success == False:
+                break
+            print(count, id)
         if id == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(10)
-            ripley_scrap()
+
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(5)
+                ripley_scrap()
             
         
 
