@@ -7,6 +7,7 @@ from datetime import datetime
 import pytz
 import random
 import time
+from bd_record import save_data_to_mongo_db
 
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
@@ -33,9 +34,9 @@ def scrap (web):
         no_page=None
     print("dddddd")
     print(no_page)
-    if no_page == None:
-        return False
-    print(no_page)
+    # if no_page == None:
+    #     return False
+    # print(no_page)
 
     if res.status_code == 404:
         return False
@@ -47,11 +48,11 @@ def scrap (web):
         count +=1
         
         try:
-            brand = i.find(class_="brand-logo")
+            brand = i.find(class_="brand-logo").text
         except:
             brand= "None"
     
-        product = i.find(class_="catalog-product-details__name")
+        product = i.find(class_="catalog-product-details__name").text
 
         image = i.find("img").attrs.get("data-src")
 
@@ -105,8 +106,8 @@ def scrap (web):
         link= "https://simple.ripley.com.pe"+link
 
         print()
-        print(brand.text)
-        print(product.text)
+        print(brand)
+        print(product)
         print(link)
 
 
@@ -116,6 +117,8 @@ def scrap (web):
         db_max = client["scrap"]
         collection_max = db_max["scrap"]
 
+
+    
         x = collection.find_one({"_id":market+sku})
         y = collection_max.find_one({"_id":market+sku})
         
@@ -127,8 +130,8 @@ def scrap (web):
             "_id":market+sku,   
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -146,8 +149,8 @@ def scrap (web):
             "_id":market+sku,     
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -168,8 +171,8 @@ def scrap (web):
             "_id":market+sku,   
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -187,8 +190,8 @@ def scrap (web):
             "_id":market+sku,     
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -203,17 +206,8 @@ def scrap (web):
        
             
             
-    time.sleep(5)      
+    time.sleep(2)      
 
-
-
-# def scrap_category(category_url):
-#     for i in range(200):
-#         success = scrap(category_url+str(i+1))
-#         print(category_url+str(i+1))
-#         #time.sleep(3)
-#         if success == False:
-#             return
 
 
 array_tec=[]
@@ -234,7 +228,7 @@ count =(len(array_tec))
 
 def ripley_scrap():
     for id, val in enumerate(array_tec):
-        print(count)
+       
         
         for i in range(200):
             success = scrap(val+str(i+1))
