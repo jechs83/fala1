@@ -60,7 +60,7 @@ def custom_search(update, context):
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Se realizo busqueda de la marca "+ str(brand) +" de "+ str(dsct) + " a mas\n\n#####################################\n#####################################"
+        text= f"Se realizo busqueda de la marca ingresada"+ str(brand) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
     )
 
 
