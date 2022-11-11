@@ -21,7 +21,7 @@ mensaje = "test message"
 def send_telegram(message):
     requests.post(config("TELEGRAM_KEY"),
             
-   # ENTER PRISE # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
+    # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
     data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
 
 
@@ -110,6 +110,6 @@ def auto_telegram():
     #for i,v in enumerate(products):
      #  send_telegram ("<b>Marca: "+v[1]+"</b>\nModelo: "+v[2]+"\nPrecio Lista :"+str(v[3])+"\n<b>Precio web :"+str(v[4])+"</b>\nPrecio Tarjeta :"+str(v[5])+"\n"+v[0]+"\nLink :"+str(v[6]))
     
-auto_telegram()
+
 
 

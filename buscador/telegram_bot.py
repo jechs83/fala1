@@ -5,6 +5,7 @@ import telegram
 import logging
 import sys
 from telegram import message
+from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram_busca import busqueda, search_brand_dsct
 date = datetime.today().strftime('%d-%m-%Y')
@@ -92,6 +93,21 @@ def sku(update, context):
 
 
 
+def auto_search(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+  
+    auto_telegram()
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se realizo busqueda de marcas seleccionadasde 70%  a mas \n\n#################################."
+    )
+
+
 
 
 if __name__ == "__main__":
@@ -111,6 +127,7 @@ try:
  dp.add_handler(CommandHandler('buscar', custom_search))
 except:
     print("esta corriendo")
+dp.add_handler(CommandHandler('auto', auto_search))
 
 dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
 
