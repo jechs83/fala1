@@ -110,6 +110,6 @@ def auto_telegram():
     #for i,v in enumerate(products):
      #  send_telegram ("<b>Marca: "+v[1]+"</b>\nModelo: "+v[2]+"\nPrecio Lista :"+str(v[3])+"\n<b>Precio web :"+str(v[4])+"</b>\nPrecio Tarjeta :"+str(v[5])+"\n"+v[0]+"\nLink :"+str(v[6]))
     
-auto_telegram()
+
 
 
