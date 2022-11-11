@@ -164,6 +164,7 @@ def saga_scrapper():
         web = val
         
         scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+        print("esta web es la numero "+str(id+1)+" de aprox 500")
        
 
         if id == count-1:

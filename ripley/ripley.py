@@ -7,6 +7,7 @@ from datetime import datetime
 import pytz
 import random
 import time
+from bd_record import save_data_to_mongo_db
 
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
@@ -31,10 +32,14 @@ def scrap (web):
       no_page = soup.find("div",class_="error-page-container")
     except:
         no_page=None
+    print("dddddd")
     print(no_page)
-    if no_page != None:
+    # if no_page == None:
+    #     return False
+    # print(no_page)
+
+    if res.status_code == 404:
         return False
-        
     count=0
     productos = soup.find_all( "div", class_="catalog-product-item catalog-product-item__container col-xs-6 col-sm-6 col-md-4 col-lg-4")
     for i in productos:
@@ -43,18 +48,19 @@ def scrap (web):
         count +=1
         
         try:
-            brand = i.find(class_="brand-logo")
+            brand = i.find(class_="brand-logo").text
         except:
             brand= "None"
     
-        product = i.find(class_="catalog-product-details__name")
+        product = i.find(class_="catalog-product-details__name").text
 
         image = i.find("img").attrs.get("data-src")
 
         
 
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
-        sku = str(sku)      
+        sku = str(sku)   
+        
       
         print(str(sku)+" "+ str(first_sku))
 
@@ -99,10 +105,10 @@ def scrap (web):
         link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
         link= "https://simple.ripley.com.pe"+link
 
-        # print()
-        # print(brand.text)
-        # print(product.text)
-        # print(link)
+        print()
+        print(brand)
+        print(product)
+        print(link)
 
 
         market = "ripley"
@@ -111,6 +117,8 @@ def scrap (web):
         db_max = client["scrap"]
         collection_max = db_max["scrap"]
 
+
+    
         x = collection.find_one({"_id":market+sku})
         y = collection_max.find_one({"_id":market+sku})
         
@@ -122,8 +130,8 @@ def scrap (web):
             "_id":market+sku,   
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -141,8 +149,8 @@ def scrap (web):
             "_id":market+sku,     
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -163,8 +171,8 @@ def scrap (web):
             "_id":market+sku,   
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -182,8 +190,8 @@ def scrap (web):
             "_id":market+sku,     
             "sku":sku, 
             "market":market,
-            "brand":str(brand.text),
-            "product": str(product.text),
+            "brand":str(brand),
+            "product": str(product),
             "list_price":float(list_price),
             "best_price":float(best_price),
             "card_price": float(card_price),
@@ -198,17 +206,8 @@ def scrap (web):
        
             
             
-    time.sleep(5)      
-    return True
+    time.sleep(2)      
 
-
-def scrap_category(category_url):
-    for i in range(200):
-        success = scrap(category_url+str(i+1))
-        print(category_url+str(i+1))
-        #time.sleep(3)
-        if success == False:
-            return
 
 
 array_tec=[]
@@ -229,14 +228,21 @@ count =(len(array_tec))
 
 def ripley_scrap():
     for id, val in enumerate(array_tec):
-    
-        x = scrap_category(val) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        if x == False:
-                continue
+       
+        
+        for i in range(200):
+            print("web numero "+str(id+1)+ " de 500 aprox")
+            success = scrap(val+str(i+1))
+            print(val+str(i+1))
+            #time.sleep(3)
+            if success == False:
+                break
+
         if id == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(10)
-            ripley_scrap()
+
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(5)
+                ripley_scrap()
             
         
 

@@ -6,7 +6,7 @@ import logging
 import sys
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram_busca import busqueda , brand_search, search_brand_dsct, product_search, price_search
+from telegram_busca import busqueda, search_brand_dsct
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
 TOKEN = config("TOKEN_CHAT")
@@ -113,8 +113,9 @@ except:
     print("esta corriendo")
 
 dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
+
 dp.add_handler(CommandHandler('cod', sku))
-#dp.add_handler(CommandHandler('price', price_search))
+
 
 
 
