@@ -231,12 +231,13 @@ def ripley_scrap():
        
         
         for i in range(200):
+            print("web numero "+str(id+1)+ " de 500 aprox")
             success = scrap(val+str(i+1))
             print(val+str(i+1))
             #time.sleep(3)
             if success == False:
                 break
-            print(count, id)
+
         if id == count-1:
 
                 print("se acabo la web y va comenzar a dar vueltas")
