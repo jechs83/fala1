@@ -60,7 +60,7 @@ def custom_search(update, context):
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Ya no se encontro nada Recon.. ahora si que pase el siguiente gil con su busqueda PTM\n#################################\n CarLitux  deja de buscar tus consoladores y huevadas......."
+        text= f"Se realizo busqueda de la marca "+ brand +" de "+ dsct + " a mas\n\n#####################################\n#####################################""
     )
 
 
