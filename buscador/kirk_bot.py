@@ -7,7 +7,7 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from kirk_busca import busqueda, search_brand_dsct, auto_telegram
+from kirk_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
 TOKEN = config("ENTERPRISE_TOKEN")
@@ -107,7 +107,7 @@ def auto_tele2(update, context):
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    auto_telegram()
+    auto_telegram_2()
     
     
     # bot.sendMessage(
