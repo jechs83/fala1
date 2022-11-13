@@ -102,114 +102,15 @@ def scrap (web):
                             best_price,card_price,link,image,dsct, card_dsct)
         
 
-        # t = collection.find_one({"_id":market+str(sku)})
-        # y = collection_max.find_one({"_id":market+str(sku)})
-        
-        # if t :
-        #     #print(" ACTUALIZA BASE DE DATOS ")
-        #     filter = {"_id":market+str(sku)}
-        #     newvalues = { "$set":{ 
-        #     "_id":market+str(sku),   
-        #     "sku":sku, 
-        #     "market":market,
-        #     "brand":str(brand),
-        #     "product": str(product),
-        #     "list_price":float(list_price),
-        #     "best_price":float(best_price),
-        #     "card_price": float(card_price),
-        #     "web_dsct":float(web_dsct),
-        #     "link": str(link),
-        #     "image": str(image),
-        #     "date":current_date,
-        #     "time":current_time
-        #     }}
-        #     collection.update_one(filter,newvalues)
-        #     collection_max.update_one(filter,newvalues)
-                    
-        # else:     
-        #     data =  {
-        #     "_id":market+str(sku),     
-        #     "sku":sku, 
-        #     "market":market,
-        #     "brand":str(brand),
-        #     "product": str(product),
-        #     "list_price":float(list_price),
-        #     "best_price":float(best_price),
-        #     "card_price": float(card_price),
-        #     "web_dsct":float(web_dsct),
-        #     "link": str(link),
-        #     "image": str(image),
-        #     "date":current_date,
-        #     "time":current_time
-        #     }
-        #     collection.insert_one(data)
-    
-    
-        # if y :
-        #     #print(" ACTUALIZA BASE DE DATOS ")
-        #     filter = {"_id":market+str(sku)}
-        #     newvalues = { "$set":{ 
-        #     "_id":market+str(sku),   
-        #     "sku":sku, 
-        #     "market":market,
-        #     "brand":str(brand),
-        #     "product": str(product),
-        #     "list_price":float(list_price),
-        #     "best_price":float(best_price),
-        #     "card_price": float(card_price),
-        #     "web_dsct":float(web_dsct),
-        #     "link": str(link),
-        #     "image": str(image),
-        #     "date":current_date,
-        #     "time":current_time
-        #     }}  
-        #     collection_max.update_one(filter,newvalues)
-                    
-        # else:    
-        #     data =  {
-        #     "_id":market+str(sku),     
-        #     "sku":sku, 
-        #     "market":market,
-        #     "brand":str(brand),
-        #     "product": str(product),
-        #     "list_price":float(list_price),
-        #     "best_price":float(best_price),
-        #     "card_price": float(card_price),
-        #     "web_dsct":float(web_dsct),
-        #     "link": str(link),
-        #     "image": str(image),
-        #     "date":current_date,
-        #     "time":current_time
-        #     }
-    
-        #     collection_max.insert_one(data)
-    
-                
+# def scrap_category(web1,web2,count):
+#     for i in range(500):
        
-
-
-# array_tec=[]
-
-# arg_=sys.argv[1]
-
-# f = open(arg_, "r")
-# x = f.readlines()
-# for i in x:
-#    array_tec.append(i.rstrip()) 
-# f.close
-## OBTEGO UNA LISTA DE LAS URLS PARA SCRAPEAR 
-
-def scrap_category(web1,web2,count):
-    for i in range(500):
-       
-        success = scrap(web1+str((i+1)*count)+web2)
-        print(web1+str((i+1)*count)+web2)
-        #time.sleep(3)
-        if success == True:
-            print("succes es Verdadero ")
-            return False
-
-
+#         success = scrap(web1+str((i+1)*count)+web2)
+#         print(web1+str((i+1)*count)+web2)
+#         #time.sleep(3)
+#         if success == True:
+#             print("succes es Verdadero ")
+#             return False
 
 array_tec=[]
 
@@ -225,22 +126,51 @@ with open(arg_) as load_file:
 
 
 
-for id, val in enumerate(data):
+# for id, val in enumerate(data):
     
-        count = 12
-        web1 = val[0]
-        #web2=val[1]
-        web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
+#         count = 12
+#         web1 = val[0]
+#         #web2=val[1]
+#         web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
         
-        scrap_category(web1,web2,count) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        if scrap_category == False:
-            continue
+#         scrap_category(web1,web2,count) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+#         if scrap_category == False:
+#             continue
+
+
+counter =len(array_tec)
+def curacaro_scrap():
+
+    for id, val in enumerate(data):
+        
+            count = 12
+            web1 = val[0]
+            #web2=val[1]
+            web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
+
+            for i in range(500):
        
-# x= "https://www.falabella.com.pe/falabella-pe/category/cat760702/Telefonia?page="
+                success = scrap(web1+str((i+1)*count)+web2)
+                print(web1+str((i+1)*count)+web2)
+                #time.sleep(3)
+                if success == True:
+                    print("se termino pahginacion")
+                    break
 
-# scrap_category(x)
+            if id == counter-1:
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(5)
+                
+                curacaro_scrap()
+        
+
+curacaro_scrap()
 
 
+
+
+
+         
 
 
 
