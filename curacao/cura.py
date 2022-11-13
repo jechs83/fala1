@@ -7,6 +7,7 @@ import pytz
 import random
 import time
 import json
+from bd_record import save_data_to_mongo_db
 from decouple import config
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
@@ -93,90 +94,95 @@ def scrap (web):
             card_price = 0
         except:card_price=0
         #print(card_price)
-        
+        bd_name_store = market
+        dsct = web_dsct
+
+        card_dsct = 0
+        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct)
         
 
-        t = collection.find_one({"_id":market+str(sku)})
-        y = collection_max.find_one({"_id":market+str(sku)})
+        # t = collection.find_one({"_id":market+str(sku)})
+        # y = collection_max.find_one({"_id":market+str(sku)})
         
-        if t :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+str(sku)}
-            newvalues = { "$set":{ 
-            "_id":market+str(sku),   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(web_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }}
-            collection.update_one(filter,newvalues)
-            collection_max.update_one(filter,newvalues)
+        # if t :
+        #     #print(" ACTUALIZA BASE DE DATOS ")
+        #     filter = {"_id":market+str(sku)}
+        #     newvalues = { "$set":{ 
+        #     "_id":market+str(sku),   
+        #     "sku":sku, 
+        #     "market":market,
+        #     "brand":str(brand),
+        #     "product": str(product),
+        #     "list_price":float(list_price),
+        #     "best_price":float(best_price),
+        #     "card_price": float(card_price),
+        #     "web_dsct":float(web_dsct),
+        #     "link": str(link),
+        #     "image": str(image),
+        #     "date":current_date,
+        #     "time":current_time
+        #     }}
+        #     collection.update_one(filter,newvalues)
+        #     collection_max.update_one(filter,newvalues)
                     
-        else:     
-            data =  {
-            "_id":market+str(sku),     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(web_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }
-            collection.insert_one(data)
+        # else:     
+        #     data =  {
+        #     "_id":market+str(sku),     
+        #     "sku":sku, 
+        #     "market":market,
+        #     "brand":str(brand),
+        #     "product": str(product),
+        #     "list_price":float(list_price),
+        #     "best_price":float(best_price),
+        #     "card_price": float(card_price),
+        #     "web_dsct":float(web_dsct),
+        #     "link": str(link),
+        #     "image": str(image),
+        #     "date":current_date,
+        #     "time":current_time
+        #     }
+        #     collection.insert_one(data)
     
     
-        if y :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+str(sku)}
-            newvalues = { "$set":{ 
-            "_id":market+str(sku),   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(web_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }}  
-            collection_max.update_one(filter,newvalues)
+        # if y :
+        #     #print(" ACTUALIZA BASE DE DATOS ")
+        #     filter = {"_id":market+str(sku)}
+        #     newvalues = { "$set":{ 
+        #     "_id":market+str(sku),   
+        #     "sku":sku, 
+        #     "market":market,
+        #     "brand":str(brand),
+        #     "product": str(product),
+        #     "list_price":float(list_price),
+        #     "best_price":float(best_price),
+        #     "card_price": float(card_price),
+        #     "web_dsct":float(web_dsct),
+        #     "link": str(link),
+        #     "image": str(image),
+        #     "date":current_date,
+        #     "time":current_time
+        #     }}  
+        #     collection_max.update_one(filter,newvalues)
                     
-        else:    
-            data =  {
-            "_id":market+str(sku),     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(web_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }
+        # else:    
+        #     data =  {
+        #     "_id":market+str(sku),     
+        #     "sku":sku, 
+        #     "market":market,
+        #     "brand":str(brand),
+        #     "product": str(product),
+        #     "list_price":float(list_price),
+        #     "best_price":float(best_price),
+        #     "card_price": float(card_price),
+        #     "web_dsct":float(web_dsct),
+        #     "link": str(link),
+        #     "image": str(image),
+        #     "date":current_date,
+        #     "time":current_time
+        #     }
     
-            collection_max.insert_one(data)
+        #     collection_max.insert_one(data)
     
                 
        
@@ -203,20 +209,16 @@ def scrap_category(web1,web2,count):
             print("succes es Verdadero ")
             return False
 
-###########################################################
+
+
 array_tec=[]
-arg_ = sys.argv[1]
 
-# f = open(arg_, "r")
-# x = f.readlines()
+#arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = config("CURACAO_TEXT_PATH")+str(num)+".txt"
 
-# for i in x:
-#     array_tec.append(i.rstrip()) 
-# webs= []
-# for i,v in enumerate(array_tec):
-#     for i in range (3):
-#         webs.append(v+(str(i+1)))
-# print(webs)
+f = open(arg_, "r")
+x = f.readlines()
 
 with open(arg_) as load_file:
     data = [tuple(line.split()) for line in load_file]

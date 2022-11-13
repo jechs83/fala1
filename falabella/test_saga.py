@@ -7,7 +7,8 @@ import pytz
 import random
 import time
 import json
-from bd_record import save_data_to_mongo_db
+import threading
+from iii import save_data_to_mongo_db
 
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
@@ -101,12 +102,24 @@ def scrap (web):
         market = "saga"
         bd_name_store = "saga"
         card_dsct = 0
-        page_array = [bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct]
+        page_array = [  "_id:"+market+sku,   
+                        "sku:"+sku, 
+                        "market:"+market,
+                        "brand:"+brand,
+                        "product:"+product,
+                        "list_price:"+str(list_price),
+                        "best_price:"+str(best_price),
+                        "card_price:"+str(card_price),
+                        "web_dsct:"+str(dsct),
+                        "card_dsct:"+str(card_dsct),
+                        "link:"+(link),
+                        "image:"+ (image),
+                        "date:"+current_date,
+                        "time:"+current_time
+                        ]
         products_array.append(page_array)
 
-
-        
+        save_data_to_mongo_db(page_array)
         # products_array.append(market)
         # products_array.append(sku)
         # products_array.append(brand)
@@ -118,7 +131,22 @@ def scrap (web):
         # products_array.append(dsct)
         # products_array.append(card_dsct)
         
-      
+        # print()
+        # print( "producto numero "+ str(i+1));
+        # print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
+        # print("descuento "+str(dsct)); print("link "+link)
+
+    #print(products_array)
+       
+        
+        # db = client["saga"]
+        # collection = db["market"]
+        # db_max = client["scrap"]
+        # collection_max = db_max["scrap"]
+        
+        # save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+        #                     best_price,card_price,link,image,dsct, card_dsct)
+    
 
 def scrap_category(category_url):
     for i in range(500):
@@ -135,7 +163,11 @@ def scrap_category(category_url):
                 save_data_to_mongo_db(v[0], v[1],v[2],v[3],v[4],v[5],
                             v[6],v[7],v[8],v[9],v[10], v[11])
                
-   
+                
+                    
+               
+                # with open("/Users/javier/GIT/fala/falabella/g.txt","w") as h:
+                #   h.writelines(str(v))
             print("se termino de grabar")
             time.sleep(10)
             return
@@ -173,12 +205,7 @@ def saga_scrapper():
             saga_scrapper() 
         
 
-
-
-saga_scrapper()
-
-
-
+saga_scrapper() 
 
 
 
