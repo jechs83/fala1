@@ -43,25 +43,29 @@ def scrap (web):
 
     js = json.loads(data)
     try:
-     x = js["props"]["pageProps"]["results"]
-    except: return False
+     x = js["props"]["pageProps"]["searchProps"]["searchData"]["results"]
 
-  
+     #{"props":{"pageProps":{"searchProps":{"searchData":{"results":
+    except: return False
+    count = 0
     for i in range (55):
-       
+        count = count+1
+        if count == 2:
+            break
         try:
          brand = x[i]["brand"]
         except: brand= "None"
+        print(brand)
 
         try:
          product = x[i]["displayName"]
         except: product= "None"
 
-        try:
-         web_dsct = x[i]["discountBadge"]["label"]
-         web_dsct = web_dsct.replace("-","").replace("%","")
-         dsct = web_dsct
-        except: dsct =0
+        # try:
+        #  web_dsct = x[i]["discountBadge"]["label"]
+        #  web_dsct = web_dsct.replace("-","").replace("%","")
+        #  dsct = web_dsct
+        # except: dsct =0
 
         try:
          image = x[i]["mediaUrls"][0]
@@ -76,48 +80,41 @@ def scrap (web):
         if sku ==0:
             continue
 
-        try:
-         link = x[i]["url"]
-        except: link = "None"
-        try:
-         card_price = x[i]["prices"][0]["price"][0]
-         card_price = card_price.replace(",","")
-        except: card_price = 0
+        # try:
+        #  link = x[i]["url"]
+        # except: link = "None"
+        # try:
+        #  card_price = x[i]["prices"][0]["price"][0]
+        #  card_price = card_price.replace(",","")
+        # except: card_price = 0
 
-        try:
-         best_price = x[i]["prices"][1]["price"][0]
-         best_price = best_price.replace(",","")
-        except: best_price= 0
+        # try:
+        #  best_price = x[i]["prices"][1]["price"][0]
+        #  best_price = best_price.replace(",","")
+        # except: best_price= 0
 
-        try:
-         list_price= x[i]["prices"][2]["price"][0]
-         list_price = list_price.replace(",","")
-        except: list_price = 0 
+        # try:
+        #  list_price= x[i]["prices"][1]["price"][4]
+        #  list_price = list_price.replace(",","")
+        # except: list_price = 0 
 
-        try:   
-         seller = x[i]["sellerName"]
-        except: seller = "None"
-
-        market = "saga"
-        bd_name_store = "saga"
-        card_dsct = 0
-        page_array = [bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct]
-        products_array.append(page_array)
+        # try:   
+        #  seller = x[i]["sellerName"]
+        # except: seller = "None"
+        
+        print(product) 
+        print(brand)
+        print(sku)
+        # market = "sodimac"
+        # bd_name_store = "sodimac"
+        # card_dsct = 0
+        # page_array = [bd_name_store, market,sku,brand,product,list_price,
+        #                     best_price,card_price,link,image,dsct, card_dsct]
+        # products_array.append(page_array)
 
 
         
-        # products_array.append(market)
-        # products_array.append(sku)
-        # products_array.append(brand)
-        # products_array.append(product)
-        # products_array.append(list_price)
-        # products_array.append(best_price)
-        # products_array.append(link)
-        # products_array.append(image)
-        # products_array.append(dsct)
-        # products_array.append(card_dsct)
-        
+     
       
 
 def scrap_category(category_url):
@@ -129,11 +126,11 @@ def scrap_category(category_url):
         if success == False:
             # print((products_array))
 
-            for idx, v in enumerate(products_array) :
+            # for idx, v in enumerate(products_array) :
                
                     
-                save_data_to_mongo_db(v[0], v[1],v[2],v[3],v[4],v[5],
-                            v[6],v[7],v[8],v[9],v[10], v[11])
+            #     save_data_to_mongo_db(v[0], v[1],v[2],v[3],v[4],v[5],
+            #                 v[6],v[7],v[8],v[9],v[10], v[11])
                
    
             print("se termino de grabar")
@@ -145,7 +142,7 @@ array_tec=[]
 
 #arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
+arg_ = config("SODIMAC_TEXT_PATH")+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()

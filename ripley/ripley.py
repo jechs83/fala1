@@ -43,8 +43,6 @@ def scrap (web):
     count=0
     productos = soup.find_all( "div", class_="catalog-product-item catalog-product-item__container col-xs-6 col-sm-6 col-md-4 col-lg-4")
     for i in productos:
-    
-        
         count +=1
         
         try:
@@ -56,27 +54,19 @@ def scrap (web):
 
         image = i.find("img").attrs.get("data-src")
 
-        
-
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
         sku = str(sku)   
         
-      
         print(str(sku)+" "+ str(first_sku))
 
         if  sku == first_sku:
             print("se repite SKU")
             print(str(sku)+" "+ str(first_sku))
-      
             return False 
 
         if count == 1:
             first_sku = sku
 
-            
-        
-
-        
         try:
             dsct= i.find(class_="catalog-product-details__discount-tag")
             dsct= dsct.text.replace("-","").replace("%","")
@@ -111,101 +101,14 @@ def scrap (web):
         print(link)
 
 
-        market = "ripley"
-        db = client["ripley"]
-        collection = db["market"]
-        db_max = client["scrap"]
-        collection_max = db_max["scrap"]
-
-
-    
-        x = collection.find_one({"_id":market+sku})
-        y = collection_max.find_one({"_id":market+sku})
+        market = "ripley" 
+        bd_name_store ="ripley"
+        card_dsct = 0
         
-   
-        if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+sku}
-            newvalues = { "$set":{ 
-            "_id":market+sku,   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }}
-            collection.update_one(filter,newvalues)
- 
-            
-        else:
-            
-            data =  {
-            "_id":market+sku,     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }
-            collection.insert_one(data)
-          
-            
-            
-        if y :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+sku}
-            newvalues = { "$set":{ 
-            "_id":market+sku,   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }}
-           
-            collection_max.update_one(filter,newvalues)
-            
-        else:
-            
-            data =  {
-            "_id":market+sku,     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time
-            }
-          
-            collection_max.insert_one(data)
-       
-            
-            
+        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct)
+        
+
     time.sleep(2)      
 
 
@@ -223,13 +126,10 @@ for i in x:
 
 count =(len(array_tec))
 
-
-
-
 def ripley_scrap():
+
     for id, val in enumerate(array_tec):
        
-        
         for i in range(200):
             print("web numero "+str(id+1)+ " de 500 aprox")
             success = scrap(val+str(i+1))
@@ -239,15 +139,22 @@ def ripley_scrap():
                 break
 
         if id == count-1:
-
                 print("se acabo la web y va comenzar a dar vueltas")
                 time.sleep(5)
                 ripley_scrap()
-            
-        
 
-ripley_scrap()
 
+i=1
+def prueba():
+    while i == 1:        
+        try:
+            ripley_scrap()
+        except: 
+            print("fallo")
+            prueba()
+            sys.write()
+
+prueba()
   
 
 

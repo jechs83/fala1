@@ -1,16 +1,43 @@
-with open ("//Users//javier//GIT//fala//ripley//urls//test//ripley0.txt", "r") as f:
-   x =  f.readlines()
-print(len(x))
+# from multiprocessing import Process
+# import os
 
-for idx, v in enumerate (x):
 
-    x = (idx+500)-idx
-    if idx == x:
-        print(v)
+# def funcion(numero):
+#     print(os.getpid())
+#     for n in range (10):
+#         valor = n*n+n
+#         print(valor, "---->", numero)
+  
 
-    #  list.append()
-    # if idx == 499:
-    #     print(v)
-    # # print(i+501)
-    # # print(i.replace("\n",""))
+# if __name__ == "__main__":
+#     procesos=[]
 
+#     cores=os.cpu_count()
+#     print("Tienes ",cores, " cores")
+
+#     print("--------- Instanciar")
+
+
+#     for n in range ( cores ):
+#         proceso = Process(target = funcion, args=(n,))
+#         procesos.append(proceso)
+#     print("------- Ejecutar")
+
+#     for proceso in procesos:
+#         proceso.start()
+
+#     print("------- Espera")
+
+#     for proceso in procesos:
+#         proceso.join()
+
+#     print("------ regreso a la ejecucion")
+
+
+
+array = [["hola", "chau", "adios"], ["bya","assas","asad"]]
+
+
+array = str(array)
+
+print(array.replace("[","{").replace("]","}"))

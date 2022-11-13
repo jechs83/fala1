@@ -1,0 +1,3 @@
+"Samsung"
+"Lenovo"
+"Sony"

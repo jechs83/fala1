@@ -12,6 +12,7 @@ peru_date = server_date.astimezone(timezone)
 current_date = peru_date.strftime("%d/%m/%Y" )
 current_time =peru_date.strftime("%H:%M" )
 from decouple import config
+from bd_record import save_data_to_mongo_db
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
@@ -87,103 +88,109 @@ def shop(web):
         except:web_dsct = 0
 
         market = "promart"
-        # print()
-        # print(brand)
-        # print(sku)
-        # print(product) 
-        # print(link)
-        # print(category)
-        # print(list_price)
-        # print(best_price)
-        # print(image)
-        # print(market)
-        # print(web_dsct)
+        bd_name_store = market
+        card_price = 0
+        card_dsct =0
+        dsct = web_dsct
+        print()
+        print(brand)
+        print(sku)
+        print(product) 
+        print(link)
+        print(category)
+        print(list_price)
+        print(best_price)
+        print(image)
+        print(market)
+        print(web_dsct)
+        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct)
 
-        x = collection.find_one({"_id":market+sku})
-        y = collection_max.find_one({"_id":market+sku})
+        # x = collection.find_one({"_id":market+sku})
+        # y = collection_max.find_one({"_id":market+sku})
 
-        if x:
-                filter = {"_id":market+sku}
-                newvalues = { "$set":{ 
+        # if x:
+        #         filter = {"_id":market+sku}
+        #         newvalues = { "$set":{ 
 
-                "_id":market+sku, 
-                "brand":brand,
-                "sku":sku,
-                "market":market,
-                "product": product,
-                "list_price":float(list_price),           
-                "best_price":float(best_price),
-                "card_price":0,
-                "web_dsct":web_dsct,
-                "category":category,
-                "link": str(link),
-                "image":str(image),
-                "date":current_date,
-                "time":current_time,
-                }}
-                collection.update_one(filter,newvalues)
-                collection_max.update_one(filter, newvalues)
+        #         "_id":market+sku, 
+        #         "brand":brand,
+        #         "sku":sku,
+        #         "market":market,
+        #         "product": product,
+        #         "list_price":float(list_price),           
+        #         "best_price":float(best_price),
+        #         "card_price":0,
+        #         "web_dsct":web_dsct,
+        #         "category":category,
+        #         "link": str(link),
+        #         "image":str(image),
+        #         "date":current_date,
+        #         "time":current_time,
+        #         }}
+        #         collection.update_one(filter,newvalues)
+        #         collection_max.update_one(filter, newvalues)
               
-        else:
-                data =  {
-                "_id":market+sku, 
-                "brand":brand,
-                "sku":sku,
-                "market":market,
-                "product": product,
-                "list_price":float(list_price),           
-                "best_price":float(best_price),
-                "card_price":0,
-                 "web_dsct":web_dsct,
-                "category":category,
-                "link": str(link),
-                "image":str(image),
-                "date":current_date,
-                "time":current_time,
-                    }
-                collection.insert_one(data)
-                collection_max.insert_one(data)
-        if y:
-                filter = {"_id":market+sku}
-                newvalues = { "$set":{ 
+        # else:
+        #         data =  {
+        #         "_id":market+sku, 
+        #         "brand":brand,
+        #         "sku":sku,
+        #         "market":market,
+        #         "product": product,
+        #         "list_price":float(list_price),           
+        #         "best_price":float(best_price),
+        #         "card_price":0,
+        #          "web_dsct":web_dsct,
+        #         "category":category,
+        #         "link": str(link),
+        #         "image":str(image),
+        #         "date":current_date,
+        #         "time":current_time,
+        #             }
+        #         collection.insert_one(data)
+        #         collection_max.insert_one(data)
+        # if y:
+        #         filter = {"_id":market+sku}
+        #         newvalues = { "$set":{ 
 
-                "_id":market+sku, 
-                "brand":brand,
-                "sku":sku,
-                "market":market,
-                "product": product,
-                "list_price":float(list_price),           
-                "best_price":float(best_price),
-                "card_price":0,
-                "web_dsct":web_dsct,
-                "category":category,
-                "link": str(link),
-                "image":str(image),
-                "date":current_date,
-                "time":current_time,
-                }}
+        #         "_id":market+sku, 
+        #         "brand":brand,
+        #         "sku":sku,
+        #         "market":market,
+        #         "product": product,
+        #         "list_price":float(list_price),           
+        #         "best_price":float(best_price),
+        #         "card_price":0,
+        #         "web_dsct":web_dsct,
+        #         "category":category,
+        #         "link": str(link),
+        #         "image":str(image),
+        #         "date":current_date,
+        #         "time":current_time,
+        #         }}
             
-                collection_max.update_one(filter, newvalues)
+        #         collection_max.update_one(filter, newvalues)
               
-        else:
-                data =  {
-                "_id":market+sku, 
-                "brand":brand,
-                "sku":sku,
-                "market":market,
-                "product": product,
-                "list_price":float(list_price),           
-                "best_price":float(best_price),
-                "card_price":0,
-                 "web_dsct":web_dsct,
-                "category":category,
-                "link": str(link),
-                "image":str(image),
-                "date":current_date,
-                "time":current_time,
-                    }
+        # else:
+        #         data =  {
+        #         "_id":market+sku, 
+        #         "brand":brand,
+        #         "sku":sku,
+        #         "market":market,
+        #         "product": product,
+        #         "list_price":float(list_price),           
+        #         "best_price":float(best_price),
+        #         "card_price":0,
+        #          "web_dsct":web_dsct,
+        #         "category":category,
+        #         "link": str(link),
+        #         "image":str(image),
+        #         "date":current_date,
+        #         "time":current_time,
+        #             }
                
-                collection_max.insert_one(data)
+        #         collection_max.insert_one(data)
         
 
 
@@ -198,10 +205,19 @@ def scrapero(web):
 
         print("pagina "+str(i+1))
 
+
 array_tec=[]
-arg_ = sys.argv[1]
+
+#arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = config("PROMART_TEXT_PATH")+str(num)+".txt"
+
 f = open(arg_, "r")
 x = f.readlines()
+# array_tec=[]
+# arg_ = sys.argv[1]
+# f = open(arg_, "r")
+# x = f.readlines()
 for i in x:
     array_tec.append(i.rstrip())
 
