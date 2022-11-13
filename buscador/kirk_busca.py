@@ -131,3 +131,15 @@ def auto_telegram():
 
 
 
+def auto_telegram_2():
+    db_name = "scrap"
+    db_collection1 = "offer1"
+    db_collection2 = "offer2"
+    for idx, value in enumerate(pro):
+        
+        for i in value:
+        
+            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+    send_telegram(" Se termino busqueda automatica FORZADA 70%  a mas  ")
+
+                

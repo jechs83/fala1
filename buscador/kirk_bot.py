@@ -101,6 +101,14 @@ def auto_tele(update, context):
 
     auto_telegram()
     
+def auto_tele2(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  buscqueda automatica")
+
+    auto_telegram()
+    
     
     # bot.sendMessage(
     #     chat_id=chatId,
@@ -183,6 +191,8 @@ dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
 dp.add_handler(CommandHandler('cod', sku))
 
 dp.add_handler(CommandHandler('auto', auto_tele))
+
+dp.add_handler(CommandHandler('auto2', auto_tele2))
 
 
 
