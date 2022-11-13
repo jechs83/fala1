@@ -192,7 +192,7 @@ dp.add_handler(CommandHandler('cod', sku))
 
 dp.add_handler(CommandHandler('auto', auto_tele))
 
-dp.add_handler(CommandHandler('auto2', auto_tele2))
+dp.add_handler(CommandHandler('manual', auto_tele2))
 
 
 
