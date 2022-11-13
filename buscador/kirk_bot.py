@@ -101,11 +101,57 @@ def auto_tele(update, context):
 
     auto_telegram()
     
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Termino la busqueda... si no hay nada no encontre ps"
-    )
+    
+    # bot.sendMessage(
+    #     chat_id=chatId,
+    #     parse_mode="HTML",
+    #     text= f"Termino la busqueda... si no hay nada no encontre ps"
+    # )
+
+
+# paused = False  # created outside functions 
+
+# def handler(update, context):
+#     global paused   # inform function to use external variable instead of local variable
+    
+#     text = update.message.text.lower().strip()
+    
+#     if text == '/start':
+#         paused = False
+#         return 
+
+#     if text == '/end':
+#         paused = True
+#         return        
+        
+#     if not paused:
+#         try:
+#             if text_src==lang_type[0]: 
+#                 a = 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'en : ' + translator.translate(user_text, dest=lang_type[1]).text + '\n' + 'es : ' +translator.translate(user_text, dest=lang_type[2]).text
+#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=a) 
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[2]).text) 
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text) 
+    
+#             elif text_src==lang_type[1]:
+#                 b = 'en : ' + translator.translate(user_text, dest=lang_type[1]).text + '\n' + 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'es : ' + translator.translate(user_text, dest=lang_type[2]).text
+#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=b)
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[2]).text) 
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text)
+    
+#             elif text_src==lang_type[2]: 
+#                 c = 'es : ' + translator.translate(user_text, dest=lang_type[2]).text + '\n' + 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'en : ' + translator.translate(user_text, dest=lang_type[1]).text
+#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=c)
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[1]).text)
+#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text)
+    
+#         except Exception as ex:
+#             print('Exception:', ex)
+
+
+
+
+
+
 
 
 
