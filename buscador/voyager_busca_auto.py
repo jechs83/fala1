@@ -122,7 +122,7 @@ def auto_telegram():
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
 
-    send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
+    #send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
 
 
 
