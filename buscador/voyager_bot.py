@@ -7,10 +7,11 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from kirk_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
-TOKEN = config("ENTERPRISE_TOKEN")
+from voyager_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
+
+
+
+TOKEN = config("CAPITAN_JANEWAY_TOKEN")
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -28,7 +29,7 @@ def getBotInfo(update, context):
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Hola soy un bot creado para la Nave de Enterprise"
+        text= f"Hola soy un bot creado para la Nave de Enterprise"+str(chatId)
     )
 
 def welcomeMsg(update, context):
@@ -38,7 +39,7 @@ def welcomeMsg(update, context):
     for user in updateMsg.new_chat_members:
         userName = user.first_name
     
-    logger.info(f"El usuario {userName} ha ingresado al grupo")
+    logger.info(f"El usuario {userName} ha ingresado al grupo" )
 
     bot.sendMessage(
         chat_id= chatId,
@@ -110,8 +111,6 @@ def auto_tele2(update, context):
     auto_telegram_2()
     
 
-
-
 if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
     print(myBot.getMe())
@@ -138,12 +137,6 @@ dp.add_handler(CommandHandler('cod', sku))
 dp.add_handler(CommandHandler('auto', auto_tele))
 
 dp.add_handler(CommandHandler('manual', auto_tele2))
-
-
-
-
-
-
 
 updater.start_polling()
 updater.idle()

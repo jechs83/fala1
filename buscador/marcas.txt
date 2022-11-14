@@ -10,7 +10,7 @@ acer
 huawei
 panasonic
 winnia
-phillips
+philips
 mabe
 nex
 hyundai
@@ -188,3 +188,4 @@ Wahl
 Whirpool
 Woallance
 winfun
+mossimo
