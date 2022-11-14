@@ -21,14 +21,14 @@ date = peru_date.strftime("%d/%m/%Y" )
 def send_telegram(message):
     requests.post(config("VOYAGER_KEY"),
 
-    data= {'chat_id': config("-881559697"),'text': str(message) , 'parse_mode':ParseMode.HTML}  ) 
+    data= {'chat_id': config("VOYAGER_CHAT_TOKEN"),'text': str(message) , 'parse_mode':ParseMode.HTML}  ) 
 
 
 client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
-collection_offer1 = db5["offer1"]
-collection_offer2 = db5["offer2"]
+collection_offer1 = db5["voyager1"]
+collection_offer2 = db5["voyager2"]
 
 
 
@@ -78,15 +78,11 @@ products = []
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
 def auto_telegram():
     db_name = "scrap"
-    db_collection1 = "offer1"
-    db_collection2 = "offer2"
+    db_collection1 = "voyager1"
+    db_collection2 = "voyager2"
     for idx, value in enumerate(pro):
 
         for i in value:
-
-            mongo_obj = [   i["image"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["web_dsct"],i["sku"]
-                        ]
 
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection1)
@@ -127,5 +123,7 @@ def auto_telegram():
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
 
     send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
+
+
 
 auto_telegram()
