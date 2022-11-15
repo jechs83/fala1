@@ -21,14 +21,14 @@ date = peru_date.strftime("%d/%m/%Y" )
 def send_telegram(message):
     requests.post(config("ENTERPRISE_KEY"),
 
-    data= {'chat_id': '-819583862','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+    data= {'chat_id': '-1001822901270' ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
 
 
 client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
-collection_offer1 = db5["offer1"]
-collection_offer2 = db5["offer2"]
+collection_offer1 = db5["enterprise1"]
+collection_offer2 = db5["enterprise2"]
 
 
 
@@ -77,8 +77,8 @@ products = []
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
 def auto_telegram():
     db_name = "scrap"
-    db_collection1 = "offer1"
-    db_collection2 = "offer2"
+    db_collection1 = "enterprise1"
+    db_collection2 = "enterprise2"
     for idx, value in enumerate(pro):
 
         for i in value:

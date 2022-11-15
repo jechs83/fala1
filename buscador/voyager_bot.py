@@ -29,7 +29,7 @@ def getBotInfo(update, context):
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Hola soy un bot creado para la Nave de Enterprise"+str(chatId)
+        text= f"Hola soy un bot creado para la Nave Voyager. sigo funcionando no te preocupes "
     )
 
 def welcomeMsg(update, context):

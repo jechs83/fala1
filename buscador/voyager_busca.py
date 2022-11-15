@@ -48,7 +48,9 @@ def busqueda(codigo):
 
 
 def search_brand_dsct(brand,dsct):
-      
+    
+    
+    
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])

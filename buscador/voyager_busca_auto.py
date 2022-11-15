@@ -47,6 +47,10 @@ def busqueda(codigo):
 
 
 def search_brand_dsct(brand,dsct):
+    
+    client = MongoClient(config("MONGO_DB"))
+    db5 = client["scrap"]
+    collection5 = db5["scrap"] 
 
     if dsct <41:
         dsct = 40
@@ -54,15 +58,14 @@ def search_brand_dsct(brand,dsct):
 
     print( "se realizo busqueda")
 
-    count = 0
+
     for i in t5:
-        count = count+1
-        if count == 100:
-            break
+       
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
         time.sleep(2)
+    send_telegram ("Se termino la busqueda de "+brand +" de "+dsct+ " a mas")
 
 
 
@@ -126,4 +129,8 @@ def auto_telegram():
 
 
 
-auto_telegram()
+
+
+#auto_telegram()
+
+search_brand_dsct("wurden", 40)
