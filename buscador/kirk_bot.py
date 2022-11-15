@@ -121,7 +121,7 @@ updater = Updater(myBot.token, use_context=True)
 
 
 dp= updater.dispatcher
-dp.add_handler(CommandHandler("botInfo", getBotInfo))
+dp.add_handler(CommandHandler("botinfo", getBotInfo))
 dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
 
 
