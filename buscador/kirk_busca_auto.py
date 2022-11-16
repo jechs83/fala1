@@ -21,11 +21,7 @@ date = peru_date.strftime("%d/%m/%Y" )
 def send_telegram(message):
     requests.post(config("ENTERPRISE_KEY"),
 
-<<<<<<< Updated upstream
-    data= {'chat_id': '-1001822901270' ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
-=======
     data= {'chat_id': '-1001822901270','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
->>>>>>> Stashed changes
 
 
 client = MongoClient(config("MONGO_DB"))
