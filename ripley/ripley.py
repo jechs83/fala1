@@ -8,15 +8,20 @@ import pytz
 import random
 import time
 from bd_record import save_data_to_mongo_db
-
-server_date = datetime.now()
-timezone = pytz.timezone("America/Bogota")
-peru_date = server_date.astimezone(timezone)
-current_date = peru_date.strftime("%d/%m/%Y" )
-current_time =peru_date.strftime("%H:%M" )
 from decouple import config
+from datetime import datetime
+from datetime import date
+
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
+
+def load_datetime():
+    
+ today = date.today()
+ now = datetime.now()
+ date_now = today.strftime("%d/%m/%Y")  
+ time_now = now.strftime("%H:%M:%S")
+ return date_now, time_now
 
 first_sku = None
 
@@ -101,13 +106,15 @@ def scrap (web):
         print(link)
 
 
-        market = "ripley" 
-        bd_name_store ="ripley"
+       
+        bd_name_store = "ripley"
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
+        market = "ripley"    # COLECCION
         card_dsct = 0
+        date_time = load_datetime()
         
-        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct)
-        
+        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
     time.sleep(2)      
 
