@@ -7,11 +7,12 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from voyager_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
-
-
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
 
 TOKEN = config("CAPITAN_JANEWAY_TOKEN")
+chat_ide = config("VOYAGER_CHAT_TOKEN")
+bot_token = config("CAPITAN_JANEWAY_TOKEN")
+
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -49,6 +50,8 @@ def welcomeMsg(update, context):
 
 
 def custom_search(update, context):
+    global bot_token,chat_ide
+    print(bot_token,chat_ide)
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
@@ -57,7 +60,7 @@ def custom_search(update, context):
     dsct=int(context.args[1])
     if dsct <= 41:
        dsct = 40
-    search_brand_dsct(brand, dsct)
+    search_brand_dsct(brand, dsct, bot_token,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
@@ -86,7 +89,7 @@ def sku(update, context):
     logger.info(f"el usuario {userName}  busca codigo especifico")
     codigo = context.args[0]
     
-    busqueda(str(codigo))
+    busqueda(str(codigo),bot_token,chat_ide)
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
@@ -100,7 +103,7 @@ def auto_tele(update, context):
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    auto_telegram()
+    auto_telegram(bot_token,chat_ide, "voyager1", "voyager2")
     
 def auto_tele2(update, context):
     bot = context.bot
@@ -108,7 +111,7 @@ def auto_tele2(update, context):
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    auto_telegram_2()
+    auto_telegram_2(bot_token,chat_ide)
     
 
 if __name__ == "__main__":

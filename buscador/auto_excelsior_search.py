@@ -1,72 +1,39 @@
+import ast
+import os
+import re
 import sys
 import time
-import requests
-from pymongo import MongoClient
-import os
+from datetime import datetime
+
 import pymongo
-import ast
-import re
+import pytz
+import requests
 from bd_compare import save_data_to_mongo_db
 from decouple import config
-from datetime import datetime
+from pymongo import MongoClient
 from telegram import ParseMode
-import pytz
+
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
 date = peru_date.strftime("%d/%m/%Y" )
 
+TOKEN = config("CAPITAN_PIKE_TOKEN")
+chat_ide = config("EXCELSIOR_CHAT_TOKEN")
+bot_tokey_key = config("CAPITAN_PIKE_TOKEN")
 
 
-def send_telegram(message):
-    requests.post(config("VOYAGER_KEY"),
-
-    data= {'chat_id': config("VOYAGER_CHAT_TOKEN"),'text': str(message) , 'parse_mode':ParseMode.HTML}  ) 
-
+def send_telegram(message, bot_tokey_key, chat_ide):
+    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
+            
+    data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+    
 
 client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
-collection_offer1 = db5["voyager1"]
-collection_offer2 = db5["voyager2"]
-
-
-
-def busqueda(codigo):
-
-
-    t5 = collection5.find({"sku":str(codigo)})
-    print( "se realizo busqueda")
-    print(codigo)
-    for i in t5:
-        print(i)
-        print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-
-
-
-
-def search_brand_dsct(brand,dsct):
-    
-    client = MongoClient(config("MONGO_DB"))
-    db5 = client["scrap"]
-    collection5 = db5["scrap"] 
-
-    if dsct <41:
-        dsct = 40
-    t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
-    print( "se realizo busqueda")
-    print()
-    count = 0
-    for i in t5:
-        count = count+1
-        if count == 100:
-            break
-        print(i)
-        print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
-        time.sleep(2)
-    send_telegram ("Se termino la busqueda de "+brand +" de "+dsct+ " a mas")
+collection_offer1 = db5["excelsior1"]
+collection_offer2 = db5["excelsior2"]
 
 
 
@@ -82,8 +49,8 @@ products = []
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
 def auto_telegram():
     db_name = "scrap"
-    db_collection1 = "voyager1"
-    db_collection2 = "voyager2"
+    db_collection1 = "excelsior1"
+    db_collection2 = "excelsior2"
     for idx, value in enumerate(pro):
 
         for i in value:
@@ -108,7 +75,8 @@ def auto_telegram():
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
-                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+                               ,bot_tokey_key, chat_ide)
 
                 print(" b no extiste")
                 continue

@@ -15,14 +15,19 @@ from decouple import config
 date = datetime.today().strftime('%d/%m/%Y')
 date_now = datetime.today().strftime('%d/%m/%Y')
 print(date_now)
+TOKEN = config("ENTERPRISE_TOKEN")
 
-mensaje = "test message"
+chat_ide = config("ENTERPRISE_CHAT_TOKEN")
+bot_tokey_key = config("ENTERPRISE_TOKEN")
 
-def send_telegram(message):
-    requests.post(config("TELEGRAM_KEY"),
+
+
+
+def send_telegram(message, bot_tokey_key, chat_ide):
+    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
             
-   # ENTER PRISE # ENTER PRISE data= {'chat_id': '-1001765171182','text': str(message) , 'parse_mode':ParseMode.HTML}  )
-    data= {'chat_id': '-1001811194463','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+    data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+    
 
 
 client = MongoClient(config("MONGO_DB"))
@@ -60,7 +65,7 @@ def mongodb_search():
             print(i["brand"])
             print(i["product"])
             print(i["link"])
-            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])), bot_tokey_key, chat_ide)
             
             time.sleep(1)
     send_telegram("Se termino busqueda de marcas seleccionadas de 70%  a mas\n\n##############################################\n############################################## " )

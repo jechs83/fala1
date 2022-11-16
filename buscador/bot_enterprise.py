@@ -7,10 +7,14 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from kirk_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
 TOKEN = config("ENTERPRISE_TOKEN")
+
+chat_ide = config("ENTERPRISE_CHAT_TOKEN")
+bot_token = config("ENTERPRISE_TOKEN")
+
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -19,6 +23,7 @@ logger = logging.getLogger()
 
 
 def getBotInfo(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     chatId = chatId
@@ -33,6 +38,7 @@ def getBotInfo(update, context):
     )
 
 def welcomeMsg(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId = update.message.chat_id
     updateMsg= getattr(update, "message", None)
@@ -49,6 +55,7 @@ def welcomeMsg(update, context):
 
 
 def custom_search(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
@@ -57,7 +64,7 @@ def custom_search(update, context):
     dsct=int(context.args[1])
     if dsct <= 41:
        dsct = 40
-    search_brand_dsct(brand, dsct)
+    search_brand_dsct(brand, dsct, bot_token,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
@@ -67,6 +74,7 @@ def custom_search(update, context):
 
 
 def alert_all(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
@@ -80,13 +88,14 @@ def alert_all(update, context):
 
 
 def sku(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  busca codigo especifico")
     codigo = context.args[0]
     
-    busqueda(str(codigo))
+    busqueda(str(codigo), bot_token, chat_ide)
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
@@ -95,20 +104,22 @@ def sku(update, context):
 
 
 def auto_tele(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    auto_telegram()
+    auto_telegram( bot_token, chat_ide, "enterprise1", "enterprise2")
     
 def auto_tele2(update, context):
+    global chat_ide, bot_token
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    auto_telegram_2()
+    auto_telegram_2(bot_token, chat_ide)
     
 
 

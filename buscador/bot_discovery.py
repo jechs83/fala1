@@ -5,13 +5,14 @@ import telegram
 import logging
 import sys
 from telegram import message
-from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram_busca import busqueda, search_brand_dsct
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
-TOKEN = config("TOKEN_CHAT")
-ENTERPRISE = config("ENTERPRISE_TOKEN")
+
+TOKEN = config("CAPITAN_SPOK_TOKEN")
+chat_ide = config("DISCOVERY_CHAT_TOKEN")
+bot_tokey_key = config("CAPITAN_SPOK_TOKEN")
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -23,7 +24,7 @@ def getBotInfo(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot")
+    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot "+str(chatId))
     print(context.args)
     bot.sendMessage(
         chat_id=chatId,
@@ -56,7 +57,7 @@ def custom_search(update, context):
     dsct=int(context.args[1])
     if dsct <= 41:
        dsct = 40
-    search_brand_dsct(brand, dsct)
+    search_brand_dsct(str(brand), dsct,bot_tokey_key,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
@@ -85,7 +86,7 @@ def sku(update, context):
     logger.info(f"el usuario {userName}  busca codigo especifico")
     codigo = context.args[0]
     
-    busqueda(str(codigo))
+    busqueda(str(codigo), bot_tokey_key, chat_ide)
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
@@ -100,7 +101,7 @@ def auto_search(update, context):
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
   
-    auto_telegram()
+    auto_telegram( bot_tokey_key, chat_ide,"discovery1","disocovery2")
 
     bot.sendMessage(
         chat_id=chatId,
@@ -125,7 +126,7 @@ dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg
 
 #dp.add_handler(MessageHandler( Filters.text, echo))
 try:
- dp.add_handler(CommandHandler('buscar', custom_search))
+ dp.add_handler(CommandHandler('b', custom_search))
 except:
     print("esta corriendo")
 dp.add_handler(CommandHandler('auto', auto_search))
