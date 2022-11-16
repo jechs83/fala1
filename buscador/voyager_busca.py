@@ -142,6 +142,9 @@ def auto_telegram():
 
 
 def auto_telegram_2():
+    db5 = client["scrap"]
+    collection5 = db5["scrap"]
+
     t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
         re.compile("Basement",re.IGNORECASE), re.compile("Bearcliff",re.IGNORECASE), re.compile("Calvin Klein",re.IGNORECASE), re.compile("Casio",re.IGNORECASE), re.compile("Christian Lacroix",re.IGNORECASE), re.compile("Denimlab",re.IGNORECASE), re.compile("Dockers",re.IGNORECASE), re.compile("Doo Australia",re.IGNORECASE), re.compile("Guess",re.IGNORECASE), re.compile("La Martina",re.IGNORECASE), re.compile("Mango",re.IGNORECASE), re.compile("Mossimo",re.IGNORECASE), re.compile("Newport",re.IGNORECASE), re.compile("Polo Ralph Lauren",re.IGNORECASE), re.compile("Ray Ban",re.IGNORECASE), re.compile("Riff&Raff",re.IGNORECASE), re.compile("Springfield",re.IGNORECASE), re.compile("Superdry",re.IGNORECASE), re.compile("Tommy Hilfiger",re.IGNORECASE), re.compile("University Club",re.IGNORECASE), re.compile("Wolf&Hank",re.IGNORECASE), re.compile("HARVEST",re.IGNORECASE), re.compile("CLARINS",re.IGNORECASE), re.compile("NAVIGATA",re.IGNORECASE), re.compile("CLOUDBREAK",re.IGNORECASE), re.compile("KENNETH STEVENS",re.IGNORECASE), re.compile("STRAWBERRY",re.IGNORECASE), re.compile("STEVE MADDEN",re.IGNORECASE), re.compile("GOTCHA",re.IGNORECASE), re.compile("ROBERT LEWIS",re.IGNORECASE)
         ]}})

@@ -21,8 +21,9 @@ logger = logging.getLogger()
 def getBotInfo(update, context):
     bot = context.bot
     chatId= update.message.chat_id
+    chatId = chatId
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot")
+    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot, este es el chat "+str(chatId))
     print(context.args)
 
     bot.sendMessage(

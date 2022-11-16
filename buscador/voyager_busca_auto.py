@@ -55,23 +55,35 @@ def search_brand_dsct(brand,dsct):
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
-
     print( "se realizo busqueda")
+<<<<<<< Updated upstream
 
 
     for i in t5:
        
+=======
+    print()
+    count = 0
+    for i in tv:
+        count = count+1
+        if count == 100:
+            break
+>>>>>>> Stashed changes
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
         time.sleep(2)
     send_telegram ("Se termino la busqueda de "+brand +" de "+dsct+ " a mas")
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 
 
 t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
 
-    re.compile("Basement",re.IGNORECASE), re.compile("Bearcliff",re.IGNORECASE), re.compile("Calvin Klein",re.IGNORECASE), re.compile("Casio",re.IGNORECASE), re.compile("Christian Lacroix",re.IGNORECASE), re.compile("Denimlab",re.IGNORECASE), re.compile("Dockers",re.IGNORECASE), re.compile("Doo Australia",re.IGNORECASE), re.compile("Guess",re.IGNORECASE), re.compile("La Martina",re.IGNORECASE), re.compile("Mango",re.IGNORECASE), re.compile("Mossimo",re.IGNORECASE), re.compile("Newport",re.IGNORECASE), re.compile("Polo Ralph Lauren",re.IGNORECASE), re.compile("Ray Ban",re.IGNORECASE), re.compile("Riff&Raff",re.IGNORECASE), re.compile("Springfield",re.IGNORECASE), re.compile("Superdry",re.IGNORECASE), re.compile("Tommy Hilfiger",re.IGNORECASE), re.compile("University Club",re.IGNORECASE), re.compile("Wolf&Hank",re.IGNORECASE), re.compile("HARVEST",re.IGNORECASE), re.compile("CLARINS",re.IGNORECASE), re.compile("NAVIGATA",re.IGNORECASE), re.compile("CLOUDBREAK",re.IGNORECASE), re.compile("KENNETH STEVENS",re.IGNORECASE), re.compile("STRAWBERRY",re.IGNORECASE), re.compile("STEVE MADDEN",re.IGNORECASE), re.compile("GOTCHA",re.IGNORECASE), re.compile("ROBERT LEWIS",re.IGNORECASE)
+re.compile("Basement",re.IGNORECASE), re.compile("Bearcliff",re.IGNORECASE), re.compile("Calvin Klein",re.IGNORECASE), re.compile("Casio",re.IGNORECASE), re.compile("Christian Lacroix",re.IGNORECASE), re.compile("Denimlab",re.IGNORECASE), re.compile("Dockers",re.IGNORECASE), re.compile("Doo Australia",re.IGNORECASE), re.compile("Guess",re.IGNORECASE), re.compile("La Martina",re.IGNORECASE), re.compile("Mango",re.IGNORECASE), re.compile("Mossimo",re.IGNORECASE), re.compile("Newport",re.IGNORECASE), re.compile("Polo Ralph Lauren",re.IGNORECASE), re.compile("Ray Ban",re.IGNORECASE), re.compile("Riff&Raff",re.IGNORECASE), re.compile("Springfield",re.IGNORECASE), re.compile("Superdry",re.IGNORECASE), re.compile("Tommy Hilfiger",re.IGNORECASE), re.compile("University Club",re.IGNORECASE), re.compile("Wolf&Hank",re.IGNORECASE), re.compile("HARVEST",re.IGNORECASE), re.compile("CLARINS",re.IGNORECASE), re.compile("NAVIGATA",re.IGNORECASE), re.compile("CLOUDBREAK",re.IGNORECASE), re.compile("KENNETH STEVENS",re.IGNORECASE), re.compile("STRAWBERRY",re.IGNORECASE), re.compile("STEVE MADDEN",re.IGNORECASE), re.compile("GOTCHA",re.IGNORECASE), re.compile("ROBERT LEWIS",re.IGNORECASE), re.compile("Aldo",re.IGNORECASE), re.compile("American Abbey",re.IGNORECASE), re.compile("Apology",re.IGNORECASE), re.compile("Basement",re.IGNORECASE), re.compile("Cortefiel",re.IGNORECASE), re.compile("Dahla",re.IGNORECASE), re.compile("Denimlab",re.IGNORECASE), re.compile("Doo Australia",re.IGNORECASE), re.compile("Exit",re.IGNORECASE), re.compile("Guess",re.IGNORECASE), re.compile("Leonisa",re.IGNORECASE), re.compile("Levis",re.IGNORECASE), re.compile("Mango",re.IGNORECASE), re.compile("Mossimo",re.IGNORECASE), re.compile("Naf Naf",re.IGNORECASE), re.compile("Newport",re.IGNORECASE), re.compile("Pionier",re.IGNORECASE), re.compile("Stefano Cocci",re.IGNORECASE), re.compile("Sybilla",re.IGNORECASE), re.compile("Tommy Hilfiger",re.IGNORECASE), re.compile("University Club",re.IGNORECASE), re.compile("Vero moda",re.IGNORECASE), re.compile("Basement",re.IGNORECASE), re.compile("Bearcliff",re.IGNORECASE), re.compile("Calvin Klein",re.IGNORECASE), re.compile("Casio",re.IGNORECASE), re.compile("Christian Lacroix",re.IGNORECASE), re.compile("Denimlab",re.IGNORECASE), re.compile("Dockers",re.IGNORECASE), re.compile("Doo Australia",re.IGNORECASE), re.compile("Guess",re.IGNORECASE), re.compile("La Martina",re.IGNORECASE), re.compile("Mango",re.IGNORECASE), re.compile("Mossimo",re.IGNORECASE), re.compile("Newport",re.IGNORECASE), re.compile("Polo Ralph Lauren",re.IGNORECASE), re.compile("Ray Ban",re.IGNORECASE), re.compile("Riff&Raff",re.IGNORECASE), re.compile("Springfield",re.IGNORECASE), re.compile("Superdry",re.IGNORECASE), re.compile("Tommy Hilfiger",re.IGNORECASE), re.compile("University Club",re.IGNORECASE), re.compile("Wolf&Hank",re.IGNORECASE)
     ]}})
 
 pro = [t1]  ## ARREGLO DE LOS QUERYS DE MONGO PARA MANDAR POR TELEGRAM
@@ -129,8 +141,14 @@ def auto_telegram():
 
 
 
+<<<<<<< Updated upstream
 
 
 #auto_telegram()
 
 search_brand_dsct("wurden", 40)
+=======
+#auto_telegram()
+
+search_brand_dsct("wurden",20)
+>>>>>>> Stashed changes
