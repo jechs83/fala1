@@ -5,7 +5,6 @@ from pymongo import MongoClient
 import os
 import pymongo
 import ast
-
 import re
 from bd_compare import save_data_to_mongo_db
 from decouple import config
@@ -21,20 +20,24 @@ date = peru_date.strftime("%d/%m/%Y" )
 
 def send_telegram(message):
     requests.post(config("ENTERPRISE_KEY"),
-            
-    data= {'chat_id': '-819583862','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
-    
+
+<<<<<<< Updated upstream
+    data= {'chat_id': '-1001822901270' ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+=======
+    data= {'chat_id': '-1001822901270','text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+>>>>>>> Stashed changes
+
 
 client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
-collection_offer1 = db5["offer1"]
-collection_offer2 = db5["offer2"]
+collection_offer1 = db5["enterprise1"]
+collection_offer2 = db5["enterprise2"]
 
-  
+
 
 def busqueda(codigo):
-      
+
 
     t5 = collection5.find({"sku":str(codigo)})
     print( "se realizo busqueda")
@@ -48,11 +51,11 @@ def busqueda(codigo):
 
 
 def search_brand_dsct(brand,dsct):
-      
+
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
-   
+
     print( "se realizo busqueda")
 
     count = 0
@@ -78,16 +81,16 @@ products = []
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
 def auto_telegram():
     db_name = "scrap"
-    db_collection1 = "offer1"
-    db_collection2 = "offer2"
+    db_collection1 = "enterprise1"
+    db_collection2 = "enterprise2"
     for idx, value in enumerate(pro):
-        
+
         for i in value:
-            
+
             mongo_obj = [   i["image"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["web_dsct"],i["sku"]
                         ]
-            
+
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection1)
             # # se guarda en offer1  
@@ -98,7 +101,7 @@ def auto_telegram():
             a= collection_offer1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
-        
+
             b= collection_offer2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
@@ -126,8 +129,6 @@ def auto_telegram():
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
 
-    send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
-
-
+    #send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
 
 auto_telegram()

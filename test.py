@@ -1,43 +1,24 @@
-# from multiprocessing import Process
-# import os
 
 
-# def funcion(numero):
-#     print(os.getpid())
-#     for n in range (10):
-#         valor = n*n+n
-#         print(valor, "---->", numero)
+from datetime import datetime
+from datetime import date
+import time
+
+def load_datetime():
+
+ today = date.today()
+ now = datetime.now()
+ date1 = today.strftime("%d/%m/%Y")  
+ current_time = now.strftime("%H:%M:%S")
+ return current_time, date1
+
+
+def prueba():
+    for i in range (100):
+        x = load_datetime()
+        print(x[0])
+        print(x[1])
+        time.sleep(2)
   
 
-# if __name__ == "__main__":
-#     procesos=[]
-
-#     cores=os.cpu_count()
-#     print("Tienes ",cores, " cores")
-
-#     print("--------- Instanciar")
-
-
-#     for n in range ( cores ):
-#         proceso = Process(target = funcion, args=(n,))
-#         procesos.append(proceso)
-#     print("------- Ejecutar")
-
-#     for proceso in procesos:
-#         proceso.start()
-
-#     print("------- Espera")
-
-#     for proceso in procesos:
-#         proceso.join()
-
-#     print("------ regreso a la ejecucion")
-
-
-
-array = [["hola", "chau", "adios"], ["bya","assas","asad"]]
-
-
-array = str(array)
-
-print(array.replace("[","{").replace("]","}"))
+prueba()

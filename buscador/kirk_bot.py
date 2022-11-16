@@ -21,14 +21,15 @@ logger = logging.getLogger()
 def getBotInfo(update, context):
     bot = context.bot
     chatId= update.message.chat_id
+    chatId = chatId
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot")
+    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot, este es el chat "+str(chatId))
     print(context.args)
 
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Hola soy un bot creado para la Nave de Enterprise"
+        text= f"Hola soy un bot creado para la Nave de Enterprice. Sigo funcionando no te preocupes "
     )
 
 def welcomeMsg(update, context):
@@ -109,61 +110,6 @@ def auto_tele2(update, context):
 
     auto_telegram_2()
     
-    
-    # bot.sendMessage(
-    #     chat_id=chatId,
-    #     parse_mode="HTML",
-    #     text= f"Termino la busqueda... si no hay nada no encontre ps"
-    # )
-
-
-# paused = False  # created outside functions 
-
-# def handler(update, context):
-#     global paused   # inform function to use external variable instead of local variable
-    
-#     text = update.message.text.lower().strip()
-    
-#     if text == '/start':
-#         paused = False
-#         return 
-
-#     if text == '/end':
-#         paused = True
-#         return        
-        
-#     if not paused:
-#         try:
-#             if text_src==lang_type[0]: 
-#                 a = 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'en : ' + translator.translate(user_text, dest=lang_type[1]).text + '\n' + 'es : ' +translator.translate(user_text, dest=lang_type[2]).text
-#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=a) 
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[2]).text) 
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text) 
-    
-#             elif text_src==lang_type[1]:
-#                 b = 'en : ' + translator.translate(user_text, dest=lang_type[1]).text + '\n' + 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'es : ' + translator.translate(user_text, dest=lang_type[2]).text
-#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=b)
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[2]).text) 
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text)
-    
-#             elif text_src==lang_type[2]: 
-#                 c = 'es : ' + translator.translate(user_text, dest=lang_type[2]).text + '\n' + 'ko : ' + translator.translate(user_text, dest=lang_type[0]).text + '\n' + 'en : ' + translator.translate(user_text, dest=lang_type[1]).text
-#                 telegram.Bot(TelegramToken).send_message(user_id, reply_to_message_id=update.message.message_id, text=c)
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[1]).text)
-#                 # telegram.Bot(TelegramToken).send_message(user_id,translator.translate(user_text, dest=lang_type[3]).text)
-    
-#         except Exception as ex:
-#             print('Exception:', ex)
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -176,7 +122,7 @@ updater = Updater(myBot.token, use_context=True)
 
 
 dp= updater.dispatcher
-dp.add_handler(CommandHandler("botInfo", getBotInfo))
+dp.add_handler(CommandHandler("botinfo", getBotInfo))
 dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
 
 

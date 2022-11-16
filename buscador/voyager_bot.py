@@ -5,13 +5,13 @@ import telegram
 import logging
 import sys
 from telegram import message
-from auto_telegram import auto_telegram
+#from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from telegram_busca import busqueda, search_brand_dsct
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
-TOKEN = config("TOKEN_CHAT")
-ENTERPRISE = config("ENTERPRISE_TOKEN")
+from voyager_busca import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
+
+
+
+TOKEN = config("CAPITAN_JANEWAY_TOKEN")
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -23,12 +23,13 @@ def getBotInfo(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot")
+    logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
     print(context.args)
+
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Hola soy un bot creado para la Nave de Discovery. Sigo Funcionando no te preocupes"
+        text= f"Hola soy un bot creado para la Nave Voyager. sigo funcionando no te preocupes "
     )
 
 def welcomeMsg(update, context):
@@ -38,7 +39,7 @@ def welcomeMsg(update, context):
     for user in updateMsg.new_chat_members:
         userName = user.first_name
     
-    logger.info(f"El usuario {userName} ha ingresado al grupo")
+    logger.info(f"El usuario {userName} ha ingresado al grupo" )
 
     bot.sendMessage(
         chat_id= chatId,
@@ -93,23 +94,22 @@ def sku(update, context):
     )
 
 
-
-def auto_search(update, context):
+def auto_tele(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-  
+    logger.info(f"el usuario {userName}  buscqueda automatica")
+
     auto_telegram()
+    
+def auto_tele2(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  buscqueda automatica")
 
-    bot.sendMessage(
-        chat_id=chatId,
-        parse_mode="HTML",
-        text= f"Se realizo busqueda de marcas seleccionadasde 70%  a mas \n\n#################################."
-    )
-
-
-
+    auto_telegram_2()
+    
 
 if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
@@ -123,21 +123,20 @@ dp= updater.dispatcher
 dp.add_handler(CommandHandler("botinfo", getBotInfo))
 dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
 
-#dp.add_handler(MessageHandler( Filters.text, echo))
+
 try:
- dp.add_handler(CommandHandler('buscar', custom_search))
+ dp.add_handler(CommandHandler('b', custom_search))
 except:
     print("esta corriendo")
-dp.add_handler(CommandHandler('auto', auto_search))
+
 
 dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
 
 dp.add_handler(CommandHandler('cod', sku))
 
+dp.add_handler(CommandHandler('auto', auto_tele))
 
-
-
-
+dp.add_handler(CommandHandler('manual', auto_tele2))
 
 updater.start_polling()
 updater.idle()
