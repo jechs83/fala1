@@ -1,7 +1,6 @@
 import sys
 import time
 from pymongo import MongoClient
-from datetime import date
 import sys
 import requests
 from bs4 import BeautifulSoup
@@ -10,13 +9,21 @@ from bd_record import save_data_to_mongo_db
 import time
 import random
 from decouple import config
-current_time= time.strftime("%H:%M")
-date = date.today()
-current_day= date.strftime("%d/%m/%Y")
-
+from datetime import datetime
+from datetime import date
 from decouple import config
+
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
+
+def load_datetime():
+    
+ today = date.today()
+ now = datetime.now()
+ date_now = today.strftime("%d/%m/%Y")  
+ time_now = now.strftime("%H:%M:%S")
+ return date_now, time_now
+
 
 first_sku = None
 
@@ -90,13 +97,17 @@ def shop(web):
           image = i.find("img").attrs.get("src")
         except: image = "Null"
         link = i.find("a").attrs.get("href")
-        market= "shopstar"
         category = i.attrs.get("data-cate")
         
-        
-        save_data_to_mongo_db("shopstar", market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct)
-    
+        bd_name_store = "shopstar"
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
+        market = "shopstar"    # COLECCION\
+        date_time = load_datetime()
+
+
+        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+
         print("product number "+ str(idx+1));print(brand);print(product);print(sku);print(category);print(list_price);print(best_price);print(card_price);
         print(web_dsct);print(card_dsct);print(link);print("##################");print()
 

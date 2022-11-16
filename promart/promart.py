@@ -2,24 +2,26 @@ import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 import sys
-from datetime import datetime
 import pytz
 import random
 import time
-server_date = datetime.now()
-timezone = pytz.timezone("America/Bogota")
-peru_date = server_date.astimezone(timezone)
-current_date = peru_date.strftime("%d/%m/%Y" )
-current_time =peru_date.strftime("%H:%M" )
 from decouple import config
 from bd_record import save_data_to_mongo_db
+from datetime import datetime
+from datetime import date
+
+
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
-db = client["shopstar"]
-collection = db["promart"]
-db_max = client["scrap"]
-collection_max = db_max["scrap"]
+def load_datetime():
+    
+ today = date.today()
+ now = datetime.now()
+ date_now = today.strftime("%d/%m/%Y")  
+ time_now = now.strftime("%H:%M:%S")
+ return date_now, time_now
+
 
 
 
@@ -79,17 +81,18 @@ def shop(web):
             web_dsct=round(web_dsct,2)
         except:web_dsct = 0
 
+        bd_name_store = "promart"
+        collection = "market"
         market = "promart"
-        bd_name_store = market
         card_price = 0
         card_dsct =0
         dsct = web_dsct
+        date_time = load_datetime()
         print(),print(brand),print(sku),print(product) ,print(link),print(category),print(list_price)
         print(best_price),print(image),print(market),print(web_dsct)
 
-        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct)
-
+        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
 # def scrapero(web):
 
