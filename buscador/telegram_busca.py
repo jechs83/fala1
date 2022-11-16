@@ -61,7 +61,7 @@ def search_brand_dsct(brand,dsct):
         time.sleep(1)
 
 
-search_brand_dsct("index", 70)
+
 
 
 
