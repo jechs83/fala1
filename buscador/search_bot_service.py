@@ -110,10 +110,6 @@ def auto_telegram( bot_tokey_key, chat_id, bd_1, bd_2):
             print(".")
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection1)
-            # se guarda en offer1  
-
-            #products.append(mongo_obj)
-            #print();print(i["sku"]);print(i["brand"]);print(i["product"]),print(i["link"])
 
             a= collection_offer1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion

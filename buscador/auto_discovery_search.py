@@ -15,10 +15,10 @@ from decouple import config
 date = datetime.today().strftime('%d/%m/%Y')
 date_now = datetime.today().strftime('%d/%m/%Y')
 print(date_now)
-TOKEN = config("ENTERPRISE_TOKEN")
+TOKEN = config("CAPITAN_SPOK_TOKEN")
 
-chat_ide = config("ENTERPRISE_CHAT_TOKEN")
-bot_tokey_key = config("ENTERPRISE_TOKEN")
+chat_ide = config("DISCOVERY_CHAT_TOKEN")
+bot_tokey_key = config("CAPITAN_SPOK_TOKEN")
 
 
 

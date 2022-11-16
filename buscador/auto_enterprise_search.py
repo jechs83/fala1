@@ -54,15 +54,11 @@ def auto_telegram():
 
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection1)
-            # # se guarda en offer1  
-
-            #products.append(mongo_obj)
-            #print();print(i["sku"]);print(i["brand"]);print(i["product"]),print(i["link"])
+  
 
             a= collection_offer1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
-
             b= collection_offer2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
@@ -78,16 +74,14 @@ def auto_telegram():
                 print(" b no extiste")
                 continue
 
-
             if b!=a:
-                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])), bot_tokey_key,  chat_ide, )
                 print("SON DIFERENTES SE MANDA MENSAJE")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
                 continue
             if a==b:
                 print("son iguales no se envia nada")
-
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
 

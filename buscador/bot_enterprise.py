@@ -11,7 +11,6 @@ from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_
 date = datetime.today().strftime('%d-%m-%Y')
 date_now = datetime.today().strftime('%d-%m-%Y')
 TOKEN = config("ENTERPRISE_TOKEN")
-
 chat_ide = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
 
