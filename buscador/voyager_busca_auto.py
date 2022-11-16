@@ -56,28 +56,17 @@ def search_brand_dsct(brand,dsct):
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort([{"web_dsct", pymongo.DESCENDING}])
     print( "se realizo busqueda")
-<<<<<<< Updated upstream
-
-
-    for i in t5:
-       
-=======
     print()
     count = 0
-    for i in tv:
+    for i in t5:
         count = count+1
         if count == 100:
             break
->>>>>>> Stashed changes
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"])
         time.sleep(2)
     send_telegram ("Se termino la busqueda de "+brand +" de "+dsct+ " a mas")
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 
 
@@ -141,14 +130,5 @@ def auto_telegram():
 
 
 
-<<<<<<< Updated upstream
+auto_telegram()
 
-
-#auto_telegram()
-
-search_brand_dsct("wurden", 40)
-=======
-#auto_telegram()
-
-search_brand_dsct("wurden",20)
->>>>>>> Stashed changes
