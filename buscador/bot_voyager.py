@@ -56,7 +56,7 @@ def custom_search(update, context):
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-    brand= str(context.args[0])
+    brand= (context.args[0]).replace("%"," ")
     dsct=int(context.args[1])
     if dsct <= 41:
        dsct = 40
