@@ -48,7 +48,7 @@ products = []
 ## FUNCION QUE COLOCA EN UNA LISTA (products) TODO LOS PRODUCTOS PARA SER MANDADOS A TELEGRAM,
 ## AQUI SE LE PASA EL OBJETO  MONGO PARA ITERACION Y EXTRACCIONDE LOS CAMPOS
 def auto_telegram():
-    db_name = "scrap"
+  
     db_collection1 = "excelsior1"
     db_collection2 = "excelsior2"
     for idx, value in enumerate(pro):
@@ -56,7 +56,7 @@ def auto_telegram():
         for i in value:
 
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection1)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],db_collection1)
             # # se guarda en offer1  
 
             #products.append(mongo_obj)
@@ -74,7 +74,7 @@ def auto_telegram():
             print(len_b)
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],db_collection2)
                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                ,bot_tokey_key, chat_ide)
 
@@ -86,13 +86,13 @@ def auto_telegram():
                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
                 print("SON DIFERENTES SE MANDA MENSAJE")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],db_collection2)
                 continue
             if a==b:
                 print("son iguales no se envia nada")
 
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], db_name,db_collection2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],db_collection2)
 
     #send_telegram( ("No se encontro nada mas en la bsuqueda automatica mayor igual a  70%"))
 
