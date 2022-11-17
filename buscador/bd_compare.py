@@ -15,11 +15,11 @@ client = MongoClient(config("MONGO_DB"))
 
 
 def save_data_to_mongo_db( sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct,db_name,db_collection):
+                            best_price,card_price,link,image,dsct,db_collection):
 
-     
-    
-        db = client[db_name]
+        
+        
+        db = client["scrap"]
         collection = db[db_collection]
 
         x = collection.find_one({"_id":sku})

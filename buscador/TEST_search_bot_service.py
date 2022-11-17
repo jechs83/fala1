@@ -1,10 +1,8 @@
-import sys
 import time
 import requests
 from pymongo import MongoClient
-import os
-import pymongo
 import re
+import pandas
 from bd_compare import save_data_to_mongo_db
 from decouple import config
 from datetime import datetime
@@ -237,27 +235,177 @@ def read_brands(category, bot_tokey_key,chat_id):
     send_telegram(" Busqueda de marcas de 70%  a  mas  ", bot_tokey_key, chat_id)
 
 
-def send_results_brand_search(category,bot_tokey_key, chat_ide):
+# def send_results_brand_search(category,ship1, ship2,bot_tokey_key, chat_ide):
+
+#     db = client["brands"]
+#     collection= db[category]
+#     t9 = collection.find({})
+#     array_brand= []
+#     for i in t9:
+#         array_brand.append(i["brand"])
+    
+#     collection_var = db[ship1]
+#     collection_var2 = db[ship2]
+
+#     for brand in array_brand:
+        
+#         t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(str(brand),re.IGNORECASE) ]}})
+#         print(brand)
+
+#         for i in t1:
+   
+#             send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+#                                 ,bot_tokey_key, chat_ide)
+
+#             if y  :
+#                     #print(" ACTUALIZA BASE DE DATOS ")
+#                     filter = {"_id":i["sku"]}
+#                     newvalues = { "$set":{  "_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }}
+#                     collection_var.update_one(filter,newvalues)
+#             else:
+#                     data =  {"_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }
+#                     collection_var.insert_one(data)
+
+
+#             a= collection_var.find({"sku":i["sku"]})
+#             # se busca datos en offer1 cada iteracion
+#             a=list(a)
+        
+#             b= collection_var2.find({"sku":i["sku"]})
+#             # se busca datos en offer2  en cada iteracion 
+#             b = list(b)
+#             print(b)
+#             len_b = len(b)
+#             print(len_b)
+
+#             if len_b == 0:
+
+#                 y = collection_var2.find_one({"_id":i["sku"]})
+        
+#                 if y  :
+#                     #print(" ACTUALIZA BASE DE DATOS ")
+#                     filter = {"_id":i["sku"]}
+#                     newvalues = { "$set":{  "_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }}
+#                     collection_var2.update_one(filter,newvalues)
+#                 else:
+#                     data =  {"_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }
+#                     collection_var2.insert_one(data)
+#                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+#                                 ,bot_tokey_key, chat_ide)
+
+#                 print(" b no extiste")
+#                 continue
+            
+#             if b!=a:
+#                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+#                                 ,bot_tokey_key, chat_ide)                
+#                 print("SON DIFERENTES SE MANDA MENSAJE")
+#                 y = collection_var2.find_one({"_id":i["sku"]})
+        
+#                 if y  :
+#                     #print(" ACTUALIZA BASE DE DATOS ")
+#                     filter = {"_id":i["sku"]}
+#                     newvalues = { "$set":{  "_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }}
+#                     collection_var2.update_one(filter,newvalues)
+#                 else:
+#                     data =  {"_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }
+#                     collection_var2.insert_one(data)
+               
+               
+                
+#                 continue
+#             if a==b:
+#                 print("son iguales no se envia nada")
+
+#                 y = collection_var2.find_one({"_id":i["sku"]})
+        
+#                 if y  :
+#                     #print(" ACTUALIZA BASE DE DATOS ")
+#                     filter = {"_id":i["sku"]}
+#                     newvalues = { "$set":{  "_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }}
+#                     collection_var2.update_one(filter,newvalues)
+#                 else:
+#                     data =  {"_id":i["sku"],"sku":i["sku"], "brand":i["brand"],"product": i["product"], "list_price":i["list_price"],"best_price":i["best_price"],"card_price": i["card_price"],"web_dsct":i["dsct"],"link": i["link"],"image":i["image"]
+#                     }
+#                     collection_var2.insert_one(data)
+               
+                
+       
+
+
+def auto_search_category( category, db_name, ship_db1,ship_db2, bot_tokey_key, chat_ide):
 
     db = client["brands"]
     collection= db[category]
     t9 = collection.find({})
+
     array_brand= []
     for i in t9:
         array_brand.append(i["brand"])
 
-
-
+    print(db_name)
+    print(type(db_name))
     for brand in array_brand:
+     
+        db = client["scrap"]
+        collection = db["scrap"]
+
+        t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
+
         
-        t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(str(brand),re.IGNORECASE) ]}})
-        print(brand)
+        collection_1 = db[ship_db1]
+        collection_2 = db[ship_db2]
 
         for i in t1:
+            print(i)
+            
+            save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
+            f = print("se graba en bd datos")
+            
 
-            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+            a= collection_1.find({"sku":i["sku"]})
+            # se busca datos en offer1 cada iteracion
+            a=list(a)
+        
+            b= collection_2.find({"sku":i["sku"]})
+            # se busca datos en offer2  en cada iteracion 
+            b = list(b)
+            print(b)
+            len_b = len(b)
+            print(len_b)
+
+            if len_b == 0:
+                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
 
+                print(" b no extiste")
+                continue
 
 
+            if b!=a:
+                #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+                print("SON DIFERENTES SE MANDA MENSAJE")
+               
+                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                continue
+            if a==b:
+                print("son iguales no se envia nada")
+
+                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+
+        
+
+   
 

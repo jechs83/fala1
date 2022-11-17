@@ -7,7 +7,7 @@ import re
 import sys
 import time
 from datetime import datetime
-
+import pandas
 import pymongo
 import pytz
 import requests
@@ -38,17 +38,20 @@ collection_offer1 = db5["excelsior1"]
 collection_offer2 = db5["excelsior2"]
 
 
-array_brand= ["sony", "lg", "panasonic"]
+brand = "sony"
 
-for brand in array_brand:
+t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(str(brand),re.IGNORECASE) ]}})
 
-    t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(str(brand),re.IGNORECASE) ]}})
-    print(brand)
+mongo_docs = list(t1)
 
-    for i in t1:
+docs = pandas.DataFrame(columns=[])
+print(docs)
 
-        send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
-                               ,bot_tokey_key, chat_ide)
+for num, doc in enumerate( mongo_docs ):
+    g = list(doc)
+
+    df = pandas.DataFrame(data=g)
+    print(df)
 
 
-
+  

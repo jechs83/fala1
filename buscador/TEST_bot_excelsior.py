@@ -7,7 +7,7 @@ import sys
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
-from TEST_search_bot_service import add_brand_list, read_brands, send_results_brand_search, delete_brand
+from TEST_search_bot_service import add_brand_list, read_brands, auto_search_category, delete_brand,auto_search_category
 
 
 TOKEN = config("CAPITAN_PIKE_TOKEN")
@@ -78,7 +78,7 @@ def alert_all(update, context):
         text= f"@Kokotinaa @Vulcannnn @Sr_toto @Rcmed @Chucky_3  @Kaiesmipastor @lalilove9 @JkingM14 @Lachicadelascajas @Lunitaaa_0 @CarLiTuxD "
     )
 
-
+### BUSCA PRODUCTO PRO CODIGO DE PRODUCTO ( /cod codigo_deproducto)
 def sku(update, context):
     bot = context.bot
     chatId= update.message.chat_id
@@ -110,28 +110,32 @@ def auto_tele2(update, context):
     auto_telegram_2(bot_token,chat_ide)
 
 
-
-
-def add_brand(update, context):
+    
+### EMVIA A TELEGRAM RESULTADO DE LAS MARCAS POR CATEGORIA  ( /auto ropa )
+def search_result_brands(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-    brand= (context.args[0]).replace("%"," ")
-    
-    category=context.args[1]
-    
-    add_brand_list(brand, category,bot_token,chat_ide)
+    logger.info(f"el usuario {userName}  trata de hacer buscqueda por categoria al 70%")
 
-  
-    
+    category=str(context.args[0])
+ 
+    #send_results_brand_search(category,bot_token,chat_ide)
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Se agrego al buscador de "+str(category)+" la "+str(brand)
+        text= f"Por favor espera un momento estoy trabajando en tu solicitud "
+    )
+    auto_search_category( category,"scrap","excelsior1", "excelsior2" ,bot_token,chat_ide)
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se termino la busqueda.... si no arrojo resultados es porque no hay nada nuevo"
     )
 
 
+###  ENVIA LISTA DE MARCAS ( /read_brands ropa)
 def brands_list(update, context):
     bot = context.bot
     chatId= update.message.chat_id
@@ -139,24 +143,32 @@ def brands_list(update, context):
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
     # brand= str(context.args[0])
     category=context.args[0]
-    
     read_brands(category,bot_token,chat_ide)
-    
-def search_result_brands(update, context):
+
+### AGREGA MARCA A LA LISTA ( /brand marca ropa)
+def add_brand(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  muestra lista de marcas y categoria")
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+    brand= (context.args[0]).replace("%"," ")
+    
+    category=(context.args[1]).replace("%","")
+    add_brand_list(brand, category,bot_token,chat_ide)
 
-    category=context.args[0]
-    send_results_brand_search(category,bot_token,chat_ide)
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se agrego al buscador de "+str(category)+" la "+str(brand)
+    )
 
+### ELIMINA MARCA DE LA LISTA (/delete marca ropa)
 def brand_delete(update,context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  se elimina  marca")
-    brand=context.args[0]
+    brand=(context.args[0]).replace("%","")
     category=context.args[1]
 
     delete_brand(brand,category,bot_token,chat_ide)
@@ -169,9 +181,6 @@ if __name__ == "__main__":
     print(myBot.getMe())
 
 updater = Updater(myBot.token, use_context=True)
-
-
-
 
 dp= updater.dispatcher
 dp.add_handler(CommandHandler("botinfo", getBotInfo))
@@ -188,7 +197,7 @@ dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
 
 dp.add_handler(CommandHandler('cod', sku))
 
-#dp.add_handler(CommandHandler('auto', auto_tele))
+#dp.add_handler(CommandHandler('auto2', search_result_brands))
 dp.add_handler(CommandHandler('auto', search_result_brands))
 
 dp.add_handler(CommandHandler('manual', auto_tele2))
