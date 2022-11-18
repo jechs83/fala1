@@ -203,29 +203,29 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
     db = client["brands"]
     collection= db[category]
     t9 = collection.find({})
-
+    
     array_brand= []
+    product_array = []
     for i in t9:
         array_brand.append(i["brand"])
     print(array_brand)
 
-    mongo_search = []
     for brand in array_brand:
      
         db = client["scrap"]
         collection = db["scrap"]
 
         t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
-        print(t1)
+
+       
         collection_1 = db[ship_db1]
         collection_2 = db[ship_db2]
 
         for i in t1:
+            product_array.append(i)
+
             print(i)
-            mongo_search.append(i)
-
-    for i in mongo_search:
-
+    for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
             f = print("se graba en bd datos")
@@ -276,8 +276,6 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
     for i in t9:
         array_brand.append(i["brand"])
         
-    mongo_search =[]  
-      
     for brand in array_brand:
      
         db = client["scrap"]
@@ -285,13 +283,11 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
 
         t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
 
-    
+
         for i in t1:
             print(i)
-            mongo_search.append(i)
         
-    for i in mongo_search:     
-        send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
 
 
