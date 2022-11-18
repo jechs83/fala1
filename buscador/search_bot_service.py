@@ -363,13 +363,13 @@ except: argument = "nope"
 
 if argument == "discovery":
 
-    auto_telegram( "tecno+celular", "scrap", "discoverya","discoveryb", config("CAPITAN_SPOK_TOKEN"), config("DISCOVERY_CHAT_TOKEN"))
+    auto_telegram( "tecno_celular", "scrap", "discoverya","discoveryb", config("CAPITAN_SPOK_TOKEN"), config("DISCOVERY_CHAT_TOKEN"))
 
 if argument == "enterprise":
-        auto_telegram( "electro+herramientas+colchones", "scrap", "enterprisea","enterpriseb", config("ENTERPRISE_TOKEN"), config("ENTERPRISE_CHAT_TOKEN"))
+        auto_telegram( "electro_herramientas_colchones", "scrap", "enterprisea","enterpriseb", config("ENTERPRISE_TOKEN"), config("ENTERPRISE_CHAT_TOKEN"))
 
 if argument == "voyager":
-        auto_telegram( "juguetes+bicicleta+abarrates", "scrap", "voyagera","voyagerb", config("CAPITAN_JANEWAY_TOKEN"), config("VOYAGER_CHAT_TOKEN"))
+        auto_telegram( "juguetes_bicicleta_abarrates", "scrap", "voyagera","voyagerb", config("CAPITAN_JANEWAY_TOKEN"), config("VOYAGER_CHAT_TOKEN"))
     
 if argument == "excelsior":
         auto_telegram( "ropa", "scrap", "excelsiora","excelsiorb", config("CAPITAN_PIKE_TOKEN"),config("EXCELSIOR_CHAT_TOKEN"))
