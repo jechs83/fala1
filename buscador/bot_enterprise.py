@@ -7,7 +7,7 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2,delete_brand,add_brand_list,read_brands,manual_telegram
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram,delete_brand,add_brand_list,read_brands,manual_telegram
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_ide = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
