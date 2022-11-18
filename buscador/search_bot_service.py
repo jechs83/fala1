@@ -244,23 +244,21 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
 
-                print(" b no extiste")
+                print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
                 continue
 
 
             if b!=a:
                 #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
-                print("SON DIFERENTES SE MANDA MENSAJE")
+                print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
                
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
                 continue
             if a==b:
-                print("son iguales no se envia nada")
+                print("SON IGUALES,  NO SE ENVIA TELEGRAM")
 
-                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
-
+               
         
 
 
