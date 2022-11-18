@@ -6,13 +6,10 @@ import logging
 import sys
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
-
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2,delete_brand,add_brand_list,read_brands,manual_telegram
 TOKEN = config("CAPITAN_SPOK_TOKEN")
 chat_ide = config("DISCOVERY_CHAT_TOKEN")
-bot_tokey_key = config("CAPITAN_SPOK_TOKEN")
+bot_token = config("CAPITAN_SPOK_TOKEN")
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,"
@@ -57,7 +54,7 @@ def custom_search(update, context):
     dsct=int(context.args[1])
     if dsct <= 41:
        dsct = 40
-    search_brand_dsct(str(brand), dsct,bot_tokey_key,chat_ide)
+    search_brand_dsct(str(brand), dsct,bot_token,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
@@ -86,7 +83,7 @@ def sku(update, context):
     logger.info(f"el usuario {userName}  busca codigo especifico")
     codigo = context.args[0]
     
-    busqueda(str(codigo), bot_tokey_key, chat_ide)
+    busqueda(str(codigo), bot_token, chat_ide)
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
@@ -99,15 +96,91 @@ def auto_search(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-  
-    auto_telegram( bot_tokey_key, chat_ide,"discovery1","disocovery2")
+    logger.info(f"el usuario {userName} ha solicitado una busqueda")
+    category=str(context.args[0])
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Espera un momento se esta procesando la solicitud "
+    )
+    
+    auto_telegram( category,"scrap","discovery1","discovery2" ,bot_token,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",
-        text= f"Se realizo busqueda de marcas seleccionadasde 70%  a mas \n\n#################################."
+        text= f"Se termino la busqueda "
+        )
+    logger.info(f"se Termino la Busqueda")
+
+
+    
+
+###########################################################################
+
+###  ENVIA LISTA DE MARCAS ( /read_brands ropa)
+def brands_list(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+   
+    category=context.args[0]
+    read_brands(category,bot_token,chat_ide)
+
+### AGREGA MARCA A LA LISTA ( /brand marca ropa)
+def add_brand(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+    brand= (context.args[0]).replace("%"," ")
+    
+    category=(context.args[1]).replace("%","")
+    add_brand_list(brand, category,bot_token,chat_ide)
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se agrego al buscador de "+str(category)+" la "+str(brand)
     )
+
+### ELIMINA MARCA DE LA LISTA (/delete marca ropa)
+def brand_delete(update,context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  se elimina  marca")
+    brand=(context.args[0]).replace("%","")
+    category=context.args[1]
+
+    delete_brand(brand,category,bot_token,chat_ide)
+
+
+
+def auto_tele_dsct(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  buscqueda automatica")
+    category=str(context.args[0])
+    dsct=int(context.args[1])
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Espera un momento se esta procesando la solicitud "
+    )
+    
+    manual_telegram( category,dsct,"scrap","discovery1", "discovery2" ,bot_token,chat_ide)
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se termino la busqueda "
+    )
+    logger.info(f"se Termino la Busqueda")
+
+
 
 
 
@@ -129,13 +202,17 @@ try:
  dp.add_handler(CommandHandler('b', custom_search))
 except:
     print("esta corriendo")
-dp.add_handler(CommandHandler('auto', auto_search))
+dp.add_handler(CommandHandler('auto', auto_tele))
 
-dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
+dp.add_handler(CommandHandler('alert', alert_all))
 
 dp.add_handler(CommandHandler('cod', sku))
 
+###############################
 
+dp.add_handler(CommandHandler('brand', add_brand))
+dp.add_handler(CommandHandler('delete', brand_delete))
+dp.add_handler(CommandHandler('cat', brands_list))
 
 
 

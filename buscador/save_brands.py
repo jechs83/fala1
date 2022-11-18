@@ -10,22 +10,19 @@ from decouple import config
 from datetime import datetime
 from telegram import ParseMode
 import pytz
-server_date = datetime.now()
-timezone = pytz.timezone("America/Bogota")
-peru_date = server_date.astimezone(timezone)
-date = peru_date.strftime("%d/%m/%Y" )
 
-#https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
 
-def send_telegram(message, bot_tokey_key, chat_ide):
-    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
+# #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
+
+# def send_telegram(message, bot_tokey_key, chat_ide):
+#     requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
             
-    data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+#     data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
 
 client = MongoClient(config("MONGO_DB"))
-db5 = client["scrap"]
-collection5 = db5["scrap"] 
+# db5 = client["scrap"]
+# collection5 = db5["scrap"] 
 
 
 def save_brand_to_mongodb(brand,category):
@@ -64,12 +61,16 @@ def brand_list(brand,category):
         print("se envio lista ropa")      
         save_brand_to_mongodb(brand,category)
 
+category="bicicleta"
 
+#array = ["abarrotes","bicicleta","celular","colchones","electro","herramientas","juguetes","ropa","tecno"]
+array = ["tecno_celular", "electro_herramientas_colchones", "juguetes_bicicleta_abarrates"]
+for category in array:
+    with open ("/Users/javier/GIT/fala/buscador/Brand_constructor/"+category+".txt","r" ) as brands:
+        x = brands.readlines()
 
-with open ("/Users/javier/GIT/fala/buscador/ropa.txt","r" ) as brands:
-    x = brands.readlines()
+    for i in x:
+        print("se graba")
+        brand = i.replace("\n","")
+        save_brand_to_mongodb(brand,category)
 
-for i in x:
-    brand = i.replace("\n","")
-    save_brand_to_mongodb(brand,"ropa")
-    

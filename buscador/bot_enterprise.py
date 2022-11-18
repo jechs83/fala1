@@ -7,9 +7,7 @@ import sys
 from telegram import message
 #from auto_telegram import auto_telegram
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2
-date = datetime.today().strftime('%d-%m-%Y')
-date_now = datetime.today().strftime('%d-%m-%Y')
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, auto_telegram_2,delete_brand,add_brand_list,read_brands,manual_telegram
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_ide = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
@@ -107,19 +105,94 @@ def auto_tele(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  buscqueda automatica")
+    logger.info(f"el usuario {userName}  busqueda automatica")
+    category=str(context.args[0])
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Espera un momento se esta procesando la solicitud "
+    )
+    auto_telegram( category,"scrap","enterprise1", "enterprise2" ,bot_token,chat_ide)
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se termino la busqueda "
+    )
+    logger.info(f"se Termino la Busqueda")
 
-    auto_telegram( bot_token, chat_ide, "enterprise1", "enterprise2")
-    
+
 def auto_tele2(update, context):
-    global chat_ide, bot_token
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  bucqueda automatica")
+    auto_telegram_2(bot_token, chat_ide)
+    
+
+###########################################################################
+
+###  ENVIA LISTA DE MARCAS ( /read_brands ropa)
+def brands_list(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+
+    category=context.args[0]
+    read_brands(category,bot_token,chat_ide)
+
+### AGREGA MARCA A LA LISTA ( /brand marca ropa)
+def add_brand(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+    brand= (context.args[0]).replace("%"," ")
+    
+    category=(context.args[1]).replace("%","")
+    add_brand_list(brand, category,bot_token,chat_ide)
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se agrego al buscador de "+str(category)+" la "+str(brand)
+    )
+
+### ELIMINA MARCA DE LA LISTA (/delete marca ropa)
+def brand_delete(update,context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName}  se elimina  marca")
+    brand=(context.args[0]).replace("%","")
+    category=context.args[1]
+
+    delete_brand(brand,category,bot_token,chat_ide)
+
+
+
+def auto_tele_dsct(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
     logger.info(f"el usuario {userName}  buscqueda automatica")
-
-    auto_telegram_2(bot_token, chat_ide)
+    category=str(context.args[0])
+    dsct=int(context.args[1])
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Espera un momento se esta procesando la solicitud "
+    )
     
+    manual_telegram( category,dsct,"scrap","enterprise1", "enterprise2" ,bot_token,chat_ide)
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se termino la busqueda "
+    )
+    logger.info(f"se Termino la Busqueda")
+
 
 
 
@@ -142,7 +215,7 @@ except:
     print("esta corriendo")
 
 
-dp.add_handler(CommandHandler('mierdas_compren_rapido', alert_all))
+dp.add_handler(CommandHandler('alert', alert_all))
 
 dp.add_handler(CommandHandler('cod', sku))
 
@@ -150,7 +223,11 @@ dp.add_handler(CommandHandler('auto', auto_tele))
 
 dp.add_handler(CommandHandler('manual', auto_tele2))
 
+###############################
 
+dp.add_handler(CommandHandler('brand', add_brand))
+dp.add_handler(CommandHandler('delete', brand_delete))
+dp.add_handler(CommandHandler('cat', brands_list))
 
 
 
