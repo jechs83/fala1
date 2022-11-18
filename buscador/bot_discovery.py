@@ -92,7 +92,7 @@ def sku(update, context):
 
 
 
-def auto_search(update, context):
+def auto_tele(update, context):
     bot = context.bot
     chatId= update.message.chat_id
     userName = update.effective_user["first_name"]
@@ -202,12 +202,13 @@ try:
  dp.add_handler(CommandHandler('b', custom_search))
 except:
     print("esta corriendo")
-dp.add_handler(CommandHandler('auto', auto_tele))
-
 dp.add_handler(CommandHandler('alert', alert_all))
 
 dp.add_handler(CommandHandler('cod', sku))
 
+dp.add_handler(CommandHandler('auto', auto_tele))
+
+dp.add_handler(CommandHandler('manual', auto_tele_dsct))
 ###############################
 
 dp.add_handler(CommandHandler('brand', add_brand))
