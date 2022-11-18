@@ -273,6 +273,7 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
     t9 = collection.find({})
 
     array_brand= []
+    product_search = []
     for i in t9:
         array_brand.append(i["brand"])
         
@@ -286,7 +287,8 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
 
         for i in t1:
             print(i)
-        
+            product_search.append(i)
+    for i in product_search:
             send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
 
