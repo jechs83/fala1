@@ -113,13 +113,7 @@ def auto_tele(update, context):
     logger.info(f"se Termino la Busqueda")
     
 
-def auto_tele2(update, context):
-    bot = context.bot
-    chatId= update.message.chat_id
-    userName = update.effective_user["first_name"]
-    logger.info(f"el usuario {userName}  busqueda automatica")
-    auto_telegram_2(bot_token,chat_ide)
-    
+
 
 ###########################################################################
 
