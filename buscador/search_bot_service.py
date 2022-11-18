@@ -225,7 +225,7 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
             mongo_search.append(i)
 
     for i in mongo_search:
-        
+
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
             f = print("se graba en bd datos")
@@ -276,6 +276,8 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
     for i in t9:
         array_brand.append(i["brand"])
         
+    mongo_search =[]  
+      
     for brand in array_brand:
      
         db = client["scrap"]
@@ -283,11 +285,13 @@ def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, 
 
         t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
 
-
+    
         for i in t1:
             print(i)
+            mongo_search.append(i)
         
-            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+    for i in mongo_search:     
+        send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
 
 
