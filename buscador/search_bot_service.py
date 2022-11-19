@@ -266,31 +266,37 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
         
 
 
-def manual_telegram( category, dsct, db_name, ship_db1,ship_db2, bot_tokey_key, chat_ide):
+def manual_telegram( category, dsct, bot_tokey_key, chat_ide):
     
     db = client["brands"]
     collection= db[category]
     t9 = collection.find({})
 
     array_brand= []
-    product_search = []
+
     for i in t9:
         array_brand.append(i["brand"])
         
-    for brand in array_brand:
+    print(array_brand)
+   # for brand in array_brand:
      
-        db = client["scrap"]
-        collection = db["scrap"]
+    db = client["scrap"]
+    collection = db["scrap"]
 
-        t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
-
-
-        for i in t1:
-            print(i)
-            product_search.append(i)
-    for i in product_search:
-            send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
-                                ,bot_tokey_key, chat_ide)
+# t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
+    t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ] }})
+    print(t1)
+    print("pasa por aqui")
+    for i in t1:
+        print(i)
+    
+        send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
+                        ,bot_tokey_key, chat_ide)
+        time.sleep(2)
+    
+             
+        
+          
 
 
 try:      
