@@ -174,7 +174,7 @@ def auto_tele_dsct(update, context):
         text= f"Espera un momento se esta procesando la solicitud "
     )
     
-    manual_telegram( category,dsct,"scrap","voyager1", "voyager2" ,bot_token,chat_ide)
+    manual_telegram( category,dsct,bot_token,chat_ide)
 
     bot.sendMessage(
         chat_id=chatId,
