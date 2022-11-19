@@ -64,7 +64,7 @@ def brand_list(brand,category):
 category="bicicleta"
 
 #array = ["abarrotes","bicicleta","celular","colchones","electro","herramientas","juguetes","ropa","tecno"]
-array = ["tecno_celular", "electro_herramientas_colchones", "juguetes_bicicleta_abarrates"]
+array = ["perfumes"]
 for category in array:
     with open ("/Users/javier/GIT/fala/buscador/Brand_constructor/"+category+".txt","r" ) as brands:
         x = brands.readlines()
