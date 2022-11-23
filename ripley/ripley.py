@@ -62,11 +62,11 @@ def scrap (web):
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
         sku = str(sku)   
         
-        print(str(sku)+" "+ str(first_sku))
+        #print(str(sku)+" "+ str(first_sku))
 
         if  sku == first_sku:
             print("se repite SKU")
-            print(str(sku)+" "+ str(first_sku))
+            #print(str(sku)+" "+ str(first_sku))
             return False 
 
         if count == 1:
@@ -113,8 +113,9 @@ def scrap (web):
         card_dsct = 0
         date_time = load_datetime()
         
-        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
+        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+       
 
     time.sleep(2)      
 
@@ -151,6 +152,9 @@ def ripley_scrap():
                 ripley_scrap()
 
 
+
+
+
 i=1
 def prueba():
     while i == 1:        
@@ -159,7 +163,7 @@ def prueba():
         except: 
             print("fallo")
             prueba()
-            sys.write()
+        
 
 prueba()
   
