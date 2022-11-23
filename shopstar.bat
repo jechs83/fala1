@@ -5,7 +5,4 @@ start python  C:\GIT\fala\shopstar\shopstar.py 3
 start python  C:\GIT\fala\shopstar\shopstar.py 4
 start python  C:\GIT\fala\shopstar\shopstar.py 5
 start python  C:\GIT\fala\shopstar\shopstar.py 6
-start python  C:\GIT\fala\shopstar\shopstar.py 7
-start python  C:\GIT\fala\shopstar\shopstar.py 8
-start python  C:\GIT\fala\shopstar\shopstar.py 9
-start python  C:\GIT\fala\shopstar\shopstar.py 10
+start python  C:\GIT\fala\shopstar\shopstar.py 00
