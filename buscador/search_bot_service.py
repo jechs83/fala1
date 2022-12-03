@@ -319,4 +319,6 @@ if argument == "excelsior":
 
 
 
-
+# chat_ide = config("DISCOVERY_CHAT_TOKEN")
+# bot_token = config("CAPITAN_SPOK_TOKEN")
+# search_brand_dsct("cry babies", 60, bot_token, chat_ide)

@@ -13,7 +13,8 @@ from bd_record import save_data_to_mongo_db
 from datetime import datetime
 from datetime import date
 from decouple import config
-web_url = random.choice(config("PROXY"))
+
+web_ram = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
 def load_datetime():
@@ -27,7 +28,7 @@ def load_datetime():
 web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=21&_to=41&O=OrderByScoreDESC&"
 def scrap (web):
 
-    proxies = {"http":"http://"+web_url }
+    proxies = {"http":"http://"+web_ram }
         
     res=requests.get(web,  proxies= proxies)
     print("Respuesta del servidor :"+str(res.status_code))

@@ -140,12 +140,13 @@ def shop_scrapper():
 
                 if v[-1:] == "=":
                     url = v+str(i+1)
+                    print(url)
                 else:
                     url = v
                 #print(url)
-                
+                print(url)
                 scrap =  shop(url)
-        
+            
                 if scrap == False:
                     print("salata a la siguiente url")
                     break

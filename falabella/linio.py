@@ -30,12 +30,18 @@ def scrap (web):
     print("Respuesta del servidor :"+str(res.status_code))
     soup = BeautifulSoup(res.text, "html.parser")
     
-    error = soup.find( "h3" , class_="jsx-860724461")
-    print()
-    print(error)
-    print()
-    if error:
-        return False
+
+
+    # try:
+    #  error = soup.find( "div", id= "NE-2-titulo-principal" ).text
+    # except: error = None
+    # print(type(error))
+
+  
+    # print()
+    # if type(error) ==  str:
+    #     return True
+
     try:
      data = soup.find("script", id="__NEXT_DATA__" ).text
     except: return False
@@ -43,11 +49,11 @@ def scrap (web):
     js = json.loads(data)
     try:
      x = js["props"]["pageProps"]["results"]
+
     except: return False
 
-    for i in range (55):
+    for i in range (49):
        
-
         try:
          brand = x[i]["brand"]
         except: brand= "None"
@@ -95,15 +101,15 @@ def scrap (web):
         except: list_price = 0 
 
       
-        print()
-        print( "producto numero "+ str(i+1));
-        print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
-        print("descuento "+str(web_dsct)); print("link "+link)
+        # print()
+        # print( "producto numero "+ str(i+1));
+        # print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
+        # print("descuento "+str(web_dsct)); print("link "+link)
         
 
-        bd_name_store = "saga"
+        bd_name_store = "linio"
         collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "saga"    # COLECCION
+        market = "linio"    # COLECCION
         dsct = web_dsct
         card_dsct = 0
         date_time = load_datetime()
@@ -112,14 +118,14 @@ def scrap (web):
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
 
-def scrap_category(category_url):
-    for i in range(250):
+# def scrap_category(category_url):
+#     for i in range(500):
 
-        success = scrap(category_url+str(i+1))
-        print(category_url+str(i+1))
-        #time.sleep(3)
-        if success == False:
-            break
+#         success = scrap(category_url+str(i+1))
+#         print(category_url+str(i+1))
+#         #time.sleep(3)
+#         if success == False:
+#             return
 
 
 array_tec=[]
@@ -132,22 +138,31 @@ f = open(arg_, "r")
 x = f.readlines()
 
 for i in x:
-    array_tec.append(i.rstrip()) 
+    #print(i)
+    array_tec.append(i.split()) 
 
 count = len(array_tec)
-
+print(count)
 def saga_scrapper():
     
     for id, val in enumerate(array_tec):
-        print(val)
+    #print(val[0], val[1])
+     url_count = id-1
+
+     for i in range(500):
+        if i <=19:
+            continue
     
-        web = val
+        success = scrap(val[0]+str(i+1)+val[1])
+        print(val[0]+str(i+1)+val[1])
+        #time.sleep(3)
+        if success == False:
+            break
+ 
         
-        scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        print("esta web es la numero "+str(id+1)+" de aprox 500")
+        print(id, count-1)
+        if id == count-1 :
 
-
-        if id == count-1:
             print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
             

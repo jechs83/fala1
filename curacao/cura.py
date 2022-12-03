@@ -51,12 +51,13 @@ def scrap (web):
     
     for i in product:
 
-    
-        product = i.find("a")["title"]
-        #print(product)
+        try:
+         product = i.find("a")["title"]
+        except: product = None
+        print(product)
         brand = i.find("div", class_="Manufacturer").text
         
-        #print(brand)
+        print(brand)
         try:
             sku = i.find("div" ,class_="PartNumber" ).text
             sku = sku.replace("_P","")
@@ -119,16 +120,19 @@ with open(arg_) as load_file:
     data = [tuple(line.split()) for line in load_file]
 
 counter =len(data)
+print(data)
 print(counter)
-def curacaro_scrap():
+
+def curacao_scrap(data):
 
     for id, val in enumerate(data):
-        
+            print("entrea aqui ")
             count = 12
             web1 = val[0]
             #web2=val[1]
             web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
-
+            print(web1+str((id+1)*count)+web2)
+            
             for i in range(500):
        
                 success = scrap(web1+str((i+1)*count)+web2)
@@ -146,10 +150,10 @@ def curacaro_scrap():
                 print("se acabo la web y va comenzar a dar vueltas")
                 time.sleep(5)
                 
-                curacaro_scrap()
+                curacao_scrap(data)
         
 
-curacaro_scrap()
+curacao_scrap(data)
 
 
 

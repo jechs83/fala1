@@ -56,6 +56,8 @@ def custom_search(update, context):
        dsct = 40
     search_brand_dsct(str(brand), dsct,bot_token,chat_ide)
 
+    logger.info(f"marca "+ brand + "dsct "+ str(dsct))
+
     bot.sendMessage(
         chat_id=chatId,
         parse_mode="HTML",

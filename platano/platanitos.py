@@ -33,28 +33,27 @@ def scrap (web):
         
     res=requests.get(web,  proxies= proxies)
     print("Respuesta del servidor :"+str(res.status_code))
-
-
-
     soup = BeautifulSoup(res.text, "html.parser")
 
-
-    #data = soup.find("div", class_="col-12 d-none d-lg-block")
     data = soup.find_all("div", class_="col-flt col-3")
 
 
-    try:
+    # try:
+    #  no_page = soup.find("h3", class_="nosearch-title mb-3").text
+    # except: return True
 
-     no_page = soup.find("h3", class_="nosearch-title mb-3").text
-    except: no_page = True
-    if no_page == "No encontramos resultados que coincidan con tu búsqueda":
-            return False
-    print(no_page)
+    # if no_page == "No encontramos resultados que coincidan con tu búsqueda":
+    #         print("son Iguales")
+    #         return False
+   
     for idx, producto in enumerate (data):
+        print("entra la productos")
           
         try:
          product = producto.find("p", class_="nd-ct__item-title line-clamp-2").text
-        except: product = None
+        except: return False
+
+        
        
         if idx == 0:
             if firstProduct == product:
@@ -62,15 +61,7 @@ def scrap (web):
             
             firstProduct = product
 
-    
 
-        try:
-         dsct = producto.find("div", class_="nd-ct__label-porc ps-1 pe-1 me-2").text
-
-         dsct = dsct.replace("-","").replace("%","")
-        except: dsct = 0
-
-        
 
         try:
          brand = producto.find("p", class_="nd-ct__item-title line-clamp-2").text
@@ -92,6 +83,13 @@ def scrap (web):
          best_price = best_price[1]
         except: best_price = 0
 
+
+        try:
+            dsct = 100-(best_price*100/list_price)
+
+            dsct = round(dsct)
+        except: dsct = 0
+
         try:
          image = producto.find("img").attrs.get("src")
         except: image = None
@@ -104,17 +102,17 @@ def scrap (web):
         sku  = product.replace(" ","")
 
 
-
-
-        # print()
-        # print(idx+1)
-        # print(brand)
-        # print(product)
-        # print(list_price)
-        # print(best_price)
-        # print(image)
-        # print(link)
-        # print(sku)
+     
+        print()
+        print(idx+1)
+        print(brand)
+        print(product)
+        print(list_price)
+        print(best_price)
+        print(image)
+        print(link)
+        print(sku)
+        print(dsct)
 
         # print(dsct)
 
@@ -129,7 +127,7 @@ def scrap (web):
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
         except:
-            continue
+            break
     
 
 
@@ -165,6 +163,7 @@ def platanito_scrapper():
             
             print(url)
             succes = scrap(url) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+            print(succes)
             if succes == False:
                 break
 

@@ -29,6 +29,8 @@ def scrap (web):
     global first_sku
     proxies = {"http":"http://"+web_url }
         
+    print(web_url)
+    print("#####################################################################################")
     res=requests.get(web,  proxies= proxies)
     print("Respuesta del servidor :"+str(res.status_code))
 
