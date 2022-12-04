@@ -45,6 +45,7 @@ def search_brand_dsct(brand,dsct, bot_tokey_key, chat_ide):
     print
     print(bot_tokey_key)
     print(chat_ide)
+    brand = str(brand).replace("%"," ")
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date})
@@ -215,7 +216,7 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
         db = client["scrap"]
         collection = db["scrap"]
 
-        t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
+        t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
 
        
         collection_1 = db[ship_db1]
@@ -247,6 +248,7 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                                 ,bot_tokey_key, chat_ide)
+                
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
                 continue
@@ -321,4 +323,4 @@ if argument == "excelsior":
 
 # chat_ide = config("DISCOVERY_CHAT_TOKEN")
 # bot_token = config("CAPITAN_SPOK_TOKEN")
-# search_brand_dsct("cry babies", 60, bot_token, chat_ide)
+# search_brand_dsct("WESDAR", 50, bot_token, chat_ide)

@@ -1,0 +1,10 @@
+https://www.falabella.com.pe/falabella-pe/category/cat40712/Laptops?sortBy=derived.price.search%2Casc&f.product.brandName=asus&page=
+https://www.falabella.com.pe/falabella-pe/category/cat40712/Laptops?f.product.brandName=hp&facetSelected=true&page=
+https://www.falabella.com.pe/falabella-pe/category/cat40712/Laptops?f.product.brandName=lenovo&facetSelected=true&page=
+https://www.falabella.com.pe/falabella-pe/search?Ntt=amd&page=
+https://www.falabella.com.pe/falabella-pe/category/cat40793/Tecnologia?f.product.brandName=apple&page=
+https://www.falabella.com.pe/falabella-pe/category/cat40712/Laptops?f.product.brandName=dell&facetSelected=true&page=
+https://www.falabella.com.pe/falabella-pe/search?Ntt=msi&page=
+https://www.falabella.com.pe/falabella-pe/search?Ntt=intel&page=
+https://www.falabella.com.pe/falabella-pe/search?Ntt=razer&page=
+https://www.falabella.com.pe/falabella-pe/brand/XIAOMI?page=

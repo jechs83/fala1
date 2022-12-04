@@ -52,9 +52,10 @@ def custom_search(update, context):
     logger.info(f"el usuario {userName} ha solicitado una buesqueda")
     brand= (context.args[0]).replace("%"," ")
     dsct=int(context.args[1])
+    dsct = int(dsct)
     if dsct <= 41:
        dsct = 40
-    search_brand_dsct(str(brand), dsct,bot_token,chat_ide)
+    search_brand_dsct(str(brand), int(dsct),bot_token,chat_ide)
 
     logger.info(f"marca "+ brand + "dsct "+ str(dsct))
 

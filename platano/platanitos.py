@@ -84,11 +84,13 @@ def scrap (web):
         except: best_price = 0
 
 
-        try:
-            dsct = 100-(best_price*100/list_price)
-
+        if best_price != 0 and list_price !=0:
+           
+            dsct = 100-(float(best_price)*100/float(list_price))
             dsct = round(dsct)
-        except: dsct = 0
+        else:  
+             dsct = 0
+       
 
         try:
          image = producto.find("img").attrs.get("src")
@@ -112,7 +114,7 @@ def scrap (web):
         print(image)
         print(link)
         print(sku)
-        print(dsct)
+        print("descuento " +str(dsct))
 
         # print(dsct)
 
