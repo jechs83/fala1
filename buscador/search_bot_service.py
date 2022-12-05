@@ -65,6 +65,30 @@ def search_brand_dsct(brand,dsct, bot_tokey_key, chat_ide):
         time.sleep(2)
 
 
+def search_market_dsct(market,dsct, bot_tokey_key, chat_ide):
+    print
+    print(bot_tokey_key)
+    print(chat_ide)
+    
+    if dsct <41:
+        dsct = 40
+    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "date": date})
+   
+    print( "se realizo busqueda")
+
+    count = 0
+    for i in t5:
+        count = count+1
+        if count == 100:
+            break
+        print(i)
+        print("se envio a telegram")   
+        msn =  "<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"]
+
+        send_telegram (msn, bot_tokey_key, chat_ide)
+        time.sleep(2)
+
+
 t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
 re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("Lg", re.IGNORECASE),
 re.compile("Asus", re.IGNORECASE),re.compile("Xiaomi", re.IGNORECASE),re.compile("indurama", re.IGNORECASE),
