@@ -77,6 +77,7 @@ def custom_search_market(update, context):
     dsct = int(dsct)
     if dsct <= 41:
        dsct = 40
+       
     search_market_dsct(str(market), int(dsct),bot_token,chat_ide)
 
     logger.info(f"marca "+ market + "dsct "+ str(dsct))

@@ -72,7 +72,7 @@ def search_market_dsct(market,dsct, bot_tokey_key, chat_ide):
     
     if dsct <41:
         dsct = 40
-    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "date": date})
+    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
    
     print( "se realizo busqueda")
 
@@ -87,6 +87,8 @@ def search_market_dsct(market,dsct, bot_tokey_key, chat_ide):
 
         send_telegram (msn, bot_tokey_key, chat_ide)
         time.sleep(2)
+
+
 
 
 t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
