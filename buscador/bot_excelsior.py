@@ -6,7 +6,7 @@ import logging
 import sys
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct
 TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_ide = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
@@ -64,6 +64,27 @@ def custom_search(update, context):
         text= f"Se realizo busqueda de la marca ingresada "+ str(brand) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
     )
 
+
+def custom_search_market(update, context):
+    bot = context.bot
+    chatId= update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+    market= (context.args[0]).replace("%"," ")
+    dsct=int(context.args[1])
+    dsct = int(dsct)
+    if dsct <= 41:
+       dsct = 40
+       
+    search_market_dsct(str(market), int(dsct),bot_token,chat_ide)
+
+    logger.info(f"marca "+ market + "dsct "+ str(dsct))
+
+    bot.sendMessage(
+        chat_id=chatId,
+        parse_mode="HTML",
+        text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
+    )
 
 def alert_all(update, context):
     bot = context.bot
@@ -204,6 +225,7 @@ except:
 
 dp.add_handler(CommandHandler('alert', alert_all))
 
+dp.add_handler(CommandHandler('market', custom_search_market))
 dp.add_handler(CommandHandler('cod', sku))
 
 dp.add_handler(CommandHandler('auto', auto_tele))
