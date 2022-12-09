@@ -150,8 +150,7 @@ def saga_scrapper():
      url_count = id-1
 
      for i in range(500):
-        if i <=19:
-            continue
+      
     
         success = scrap(val[0]+str(i+1)+val[1])
         print(val[0]+str(i+1)+val[1])
@@ -163,7 +162,7 @@ def saga_scrapper():
         print(id, count-1)
         if id == count-1 :
 
-            print("se acabo la web y va comenzar a dar vueltas")
+            print("se acabo la web y va comenzar a dar vueltas")ß
             time.sleep(10)
             
             saga_scrapper() 

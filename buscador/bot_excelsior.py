@@ -6,7 +6,7 @@ import logging
 import sys
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct
 TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_ide = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
@@ -204,6 +204,32 @@ def auto_tele_dsct(update, context):
 
 
 
+
+
+
+
+
+def send_document(update, context):
+    chat_id = update.message.chat_id
+    userName = update.effective_user["first_name"]
+    logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+
+    market = (context.args[0]).replace("%"," ")
+    dsct=int(context.args[1])
+    dsct = int(dsct)
+
+    search_market2_dsct(market,dsct, bot_token, chat_ide)
+
+    document = open('/Users/javier/GIT/fala/buscador/'+market+'.html', 'rb')
+    context.bot.send_document(chat_id, document)
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
     print(myBot.getMe())
@@ -222,7 +248,7 @@ try:
 except:
     print("esta corriendo")
 
-
+dp.add_handler(CommandHandler("send", send_document))
 dp.add_handler(CommandHandler('alert', alert_all))
 
 dp.add_handler(CommandHandler('market', custom_search_market))

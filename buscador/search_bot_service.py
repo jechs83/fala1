@@ -9,6 +9,8 @@ from bd_compare import save_data_to_mongo_db
 from decouple import config
 from datetime import datetime
 from telegram import ParseMode
+from pandas import DataFrame
+import pandas as pd
 import pytz
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
@@ -323,7 +325,37 @@ def manual_telegram( category, dsct, bot_tokey_key, chat_ide):
         time.sleep(2)
     
              
+
+def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
+
+    if market == "all":
+            t5 = collection5.find({ "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
+    else:
         
+     t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
+
+
+    list_cur = list(t5)
+    products = []
+    for i in list_cur:
+        
+       
+        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"]}
+        products.append(p)
+
+    df = DataFrame(products)
+    
+    def path_to_image_html(path):
+ 
+        return '<img src="'+ path + '" style=max-height:124px;"/>'
+
+    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+    with open ("/Users/javier/GIT/fala/buscador/"+market+".html", "w") as f:
+        f.write(html)
+        f.close
+    print(html)
+    send_telegram(html, bot_tokey_key, chat_ide )
           
 
 
