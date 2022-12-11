@@ -162,21 +162,10 @@ def saga_scrapper():
         print(id, count-1)
         if id == count-1 :
 
-            print("se acabo la web y va comenzar a dar vueltas")ß
+            print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
             
             saga_scrapper() 
-        
-
-
+    
 
 saga_scrapper()
-
-
-
-
-
-
-
-
-    
