@@ -351,7 +351,7 @@ def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
 
     html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
-    with open ("C:\\Git\\fala\\buscador\\"+market+".html", "w") as f:
+    with open ("C:\\Git\\fala\\buscador\\"+market+".html", "w", encoding='utf-8') as f:
         f.write(html)
         f.close
     print(html)

@@ -194,7 +194,7 @@ def send_document(update, context):
 
     search_market2_dsct(market,dsct, bot_token, chat_ide)
 
-    document = open(" C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
+    document = open("C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
     context.bot.send_document(chat_id, document)
 
 if __name__ == "__main__":
