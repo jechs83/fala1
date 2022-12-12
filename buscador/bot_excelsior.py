@@ -231,12 +231,12 @@ def send_product(update, context):
 
     product = (context.args[0]).replace("%"," ")
     dsct=int(context.args[1])
-    dsct = int(dsct)
+   
     
     search_product_dsct_html(product,dsct, bot_token, chat_ide)
 
-    # document = open("C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
-    # context.bot.send_document(chat_id, document)
+    document = open("C:\\Git\\fala\\buscador\\producto.html", 'rb')
+    context.bot.send_document(chat_id, document)
 
 
 
