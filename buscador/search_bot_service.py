@@ -292,9 +292,6 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
 
-               
-        
-
 
 def manual_telegram( category, dsct, bot_tokey_key, chat_ide):
     
@@ -357,6 +354,36 @@ def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
     print(html)
     send_telegram(html, bot_tokey_key, chat_ide )
           
+
+def search_product_dsct_html(product,dsct, bot_tokey_key, chat_ide):
+    
+
+    t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
+
+
+    list_cur = list(t5)
+    products = []
+    for i in list_cur:
+        
+       
+        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"]}
+        products.append(p)
+
+    df = DataFrame(products)
+    
+    def path_to_image_html(path):
+ 
+        return '<img src="'+ path + '" style=max-height:124px;"/>'
+
+    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+    with open ("C:\\Git\\fala\\buscador\\producto.html", "w") as f:
+        f.write(html)
+        f.close
+    print(html)
+    send_telegram(html, bot_tokey_key, chat_ide )
+
+
 
 
 try:      
