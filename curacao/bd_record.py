@@ -19,7 +19,7 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
             #print(" ACTUALIZA BASE DE DATOS ")
             filter = {"_id":market+sku}
             newvalues = { "$set":{ 
-            "_id":market+sku,   
+          
             "sku":sku, 
             "market":market,
             "brand":str(brand),
@@ -59,7 +59,7 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
             #print(" ACTUALIZA BASE DE DATOS ")
             filter = {"_id":market+sku}
             newvalues = { "$set":{ 
-            "_id":market+sku,   
+          
             "sku":sku, 
             "market":market,
             "brand":str(brand),
