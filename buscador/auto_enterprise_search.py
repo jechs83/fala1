@@ -16,10 +16,9 @@ timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
 date = peru_date.strftime("%d/%m/%Y" )
 
-TOKEN = config("ENTERPRISE_TOKEN")
-
-chat_ide = config("ENTERPRISE_CHAT_TOKEN")
-bot_tokey_key = config("ENTERPRISE_TOKEN")
+TOKEN = config("CAPITAN_SPOK_TOKEN")
+chat_ide = config("DISCOVERY_CHAT_TOKEN")
+bot_token = config("CAPITAN_SPOK_TOKEN")
 
 
 def send_telegram(message, bot_tokey_key, chat_ide):

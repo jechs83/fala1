@@ -336,7 +336,6 @@ def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
     products = []
     for i in list_cur:
         
-       
         p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"]}
         products.append(p)
 
