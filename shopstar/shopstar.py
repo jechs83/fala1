@@ -135,26 +135,29 @@ def shop_scrapper():
 
     for id,v in enumerate(array_tec):
         print(v)
+        try:
+            for i in range (1000):
 
-        for i in range (1000):
-
-                if v[-1:] == "=":
-                    url = v+str(i+1)
+                    if v[-1:] == "=":
+                        url = v+str(i+1)
+                        print(url)
+                    else:
+                        url = v
+                    #print(url)
                     print(url)
-                else:
-                    url = v
-                #print(url)
-                print(url)
-                scrap =  shop(url)
-            
-                if scrap == False:
-                    print("salata a la siguiente url")
-                    break
-                print(id, count-1)
-        if id == count-1:
-                print("se acabo la web y va comenzar a dar vueltas")
-                time.sleep(10)
+                    scrap =  shop(url)
                 
-                shop_scrapper() 
+                    if scrap == False:
+                        print("salata a la siguiente url")
+                        break
+                    print(id, count-1)
+            if id == count-1:
+                    print("se acabo la web y va comenzar a dar vueltas")
+                    time.sleep(10)
+                    
+                    shop_scrapper() 
+        except:
+            shop_scrapper() 
+
 
 shop_scrapper()
