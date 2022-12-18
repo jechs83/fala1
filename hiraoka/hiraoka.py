@@ -139,24 +139,24 @@ for i in x:
 count =(len(array_tec))
 
 def ripley_scrap():
+    try:
+        for id, val in enumerate(array_tec):
+        
+            for i in range(200):
+                print("web numero "+str(id+1)+ " de 500 aprox")
+                success = scrap(val+str(i+1))
+                print(val+str(i+1))
+                #time.sleep(3)
+                if success == False:
+                    print(success)
+                    break
 
-    for id, val in enumerate(array_tec):
-       
-        for i in range(200):
-            print("web numero "+str(id+1)+ " de 500 aprox")
-            success = scrap(val+str(i+1))
-            print(val+str(i+1))
-            #time.sleep(3)
-            if success == False:
-                print(success)
-                break
-
-        if id == count-1:
-                print("se acabo la web y va comenzar a dar vueltas")
-                time.sleep(5)
-                ripley_scrap()
-
-
+            if id == count-1:
+                    print("se acabo la web y va comenzar a dar vueltas")
+                    time.sleep(5)
+                    ripley_scrap()
+    except: 
+        ripley_scrap()
 
 
 ripley_scrap()
