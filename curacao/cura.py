@@ -124,33 +124,36 @@ print(data)
 print(counter)
 
 def curacao_scrap(data):
-
-    for id, val in enumerate(data):
-            print("entrea aqui ")
-            count = 12
-            web1 = val[0]
-            #web2=val[1]
-            web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
-            print(web1+str((id+1)*count)+web2)
-            
-            for i in range(500):
-       
-                success = scrap(web1+str((i+1)*count)+web2)
-                if i == 1:
-
-                         current_url = web1+str((i+1)*count)+web2
-                         print(current_url)
-                #time.sleep(3)
-                if success == True:
-                    print("se termino paginacion continua con la siguiente ")
-                    break
-            
-
-            if id == counter-1:
-                print("se acabo la web y va comenzar a dar vueltas")
-                time.sleep(5)
+    try:
+        for id, val in enumerate(data):
+                print("entrea aqui ")
+                count = 12
+                web1 = val[0]
+                #web2=val[1]
+                web2 = "&pageSize=12&pageGroup=Category&urlLangId=-24"
+                print(web1+str((id+1)*count)+web2)
                 
-                curacao_scrap(data)
+                for i in range(500):
+        
+                    success = scrap(web1+str((i+1)*count)+web2)
+                    if i == 1:
+
+                            current_url = web1+str((i+1)*count)+web2
+                            print(current_url)
+                    #time.sleep(3)
+                    if success == True:
+                        print("se termino paginacion continua con la siguiente ")
+                        break
+                
+
+                if id == counter-1:
+                    print("se acabo la web y va comenzar a dar vueltas")
+                    time.sleep(5)
+                    
+                    curacao_scrap(data)
+    except:
+        curacao_scrap(data)
+
         
 
 curacao_scrap(data)

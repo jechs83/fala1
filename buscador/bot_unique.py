@@ -71,7 +71,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         if dsct <= 41:
            dsct = 40
         
-        search_market_dsct(str(market), int(dsct),bot_token,chat_ide)
+        search_market2_dsct(str(market), int(dsct),bot_token,chat_ide)
 
         logger.info(f"marca "+ market + "dsct "+ str(dsct))
 
@@ -249,22 +249,13 @@ def super_bot(TOKEN,chat_ide, bot_token):
 
     
     dp.add_handler(CommandHandler('b', custom_search))
-
-
     dp.add_handler(CommandHandler("send", send_document))
-
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('alert', alert_all))
-
     dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))
-
     dp.add_handler(CommandHandler('auto', auto_tele))
-
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
-
-    ###############################
-
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', brands_list))
