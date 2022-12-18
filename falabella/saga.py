@@ -136,8 +136,11 @@ for i in x:
 
 count = len(array_tec)
 
+
+
+
 def saga_scrapper():
-    
+  try:
     for id, val in enumerate(array_tec):
         print(val)
     
@@ -152,6 +155,8 @@ def saga_scrapper():
             time.sleep(10)
             
             saga_scrapper() 
+  except:
+    saga_scrapper()
         
 
 
