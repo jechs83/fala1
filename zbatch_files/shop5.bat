@@ -1,5 +1,5 @@
 
-title curacao web 5 &   python  C:\GIT\fala\shopstar\shopstar.py 5
+title shopstar web 5 &   python  C:\GIT\fala\shopstar\shopstar.py 5
 
 
 
