@@ -19,10 +19,10 @@ date = peru_date.strftime("%d/%m/%Y" )
 
 #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
 
-def send_telegram(message, bot_tokey_key, chat_ide):
-    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
+def send_telegram(message, bot_token, chat_id):
+    requests.post("https://api.telegram.org/bot"+str(bot_token)+"/sendMessage",
             
-    data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
+    data= {'chat_id': chat_id ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
 
 client = MongoClient(config("MONGO_DB"))
@@ -31,7 +31,7 @@ collection5 = db5["scrap"]
 
   
 
-def busqueda(codigo,bot_tokey_key, chat_id):
+def busqueda(codigo,bot_token, chat_id):
       
     t5 = collection5.find({"sku":str(codigo)})
     print( "se realizo busqueda")
@@ -40,13 +40,13 @@ def busqueda(codigo,bot_tokey_key, chat_id):
         print(i)
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"],
-                       bot_tokey_key, chat_id)
+                       bot_token, chat_id)
 
 
-def search_brand_dsct(brand,dsct, bot_tokey_key, chat_ide):
+def search_brand_dsct(brand,dsct, bot_token, chat_id):
     print
-    print(bot_tokey_key)
-    print(chat_ide)
+    print(bot_token)
+    print(chat_id)
     brand = str(brand).replace("%"," ")
     if dsct <41:
         dsct = 40
@@ -63,14 +63,14 @@ def search_brand_dsct(brand,dsct, bot_tokey_key, chat_ide):
         print("se envio a telegram")   
         msn =  "<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"]
 
-        send_telegram (msn, bot_tokey_key, chat_ide)
+        send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
 
 
-def search_market_dsct(market,dsct, bot_tokey_key, chat_ide):
+def search_market_dsct(market,dsct, bot_token, chat_id):
     print
-    print(bot_tokey_key)
-    print(chat_ide)
+    print(bot_token)
+    print(chat_id)
     
     if dsct <41:
         dsct = 40
@@ -87,7 +87,7 @@ def search_market_dsct(market,dsct, bot_tokey_key, chat_ide):
         print("se envio a telegram")   
         msn =  "<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"]
 
-        send_telegram (msn, bot_tokey_key, chat_ide)
+        send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
 
 
@@ -116,7 +116,7 @@ pro = [t1]  ## ARREGLO DE LOS QUERYS DE MONGO PARA MANDAR POR TELEGRAM
 products = []
 
 
-# def auto_telegram_2( bot_tokey_key, chat_id):
+# def auto_telegram_2( bot_token, chat_id):
 
 
 #     print("entra")
@@ -138,11 +138,11 @@ products = []
     #         print(i["product"])
         
     #         send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])), 
-    #                          bot_tokey_key, chat_id)
-    # send_telegram(" Se termino busqueda automatica FORZADA 70%  a mas  ", bot_tokey_key, chat_id)
+    #                          bot_token, chat_id)
+    # send_telegram(" Se termino busqueda automatica FORZADA 70%  a mas  ", bot_token, chat_id)
 
 
-def brand_list(ropa,cat, bot_tokey_key,chat_id):
+def brand_list(ropa,cat, bot_token,chat_id):
     db_cat = client["scrap"]
     collection_cat = db_cat[cat]   
 
@@ -152,7 +152,7 @@ def brand_list(ropa,cat, bot_tokey_key,chat_id):
         print(i)
         print("se envio lista ropa")      
         send_telegram ("brand",
-                       bot_tokey_key, chat_id)
+                       bot_token, chat_id)
 
 
 ###############################################################################
@@ -185,7 +185,7 @@ def save_brand_to_mongodb(brand,category):
 
 
 
-def add_brand_list(brand,category,bot_tokey_key,chat_id):
+def add_brand_list(brand,category,bot_token,chat_id):
 
     db = client["brands"]
     collection= db[category]
@@ -196,20 +196,20 @@ def add_brand_list(brand,category,bot_tokey_key,chat_id):
         print("se envio lista ropa")      
         save_brand_to_mongodb(brand,category)
     
-    send_telegram(" se grabo la Marca en la lista de busqueda  ", bot_tokey_key, chat_id)
+    send_telegram(" se grabo la Marca en la lista de busqueda  ", bot_token, chat_id)
 
 
 
-def delete_brand(brand,category,bot_tokey_key,chat_id):
+def delete_brand(brand,category,bot_token,chat_id):
     
     db = client["brands"]
     collection= db[category]
     collection.delete_one({"brand":brand})
     
-    send_telegram(" se elimino la marca ingresa ", bot_tokey_key, chat_id)
+    send_telegram(" se elimino la marca ingresa ", bot_token, chat_id)
 
 
-def read_brands(category, bot_tokey_key,chat_id):
+def read_brands(category, bot_token,chat_id):
 
     db = client["brands"]
     collection= db[category]
@@ -220,14 +220,14 @@ def read_brands(category, bot_tokey_key,chat_id):
 
     print(list_brand)
 
-    send_telegram( str(list_brand), bot_tokey_key, chat_id)
-    send_telegram(" Busqueda de marcas de 70%  a  mas  \n categorias existentes \n abarrotes ,bicicleta, celular,colchones,electro, herramientas, juguetes, ropa, tecno", bot_tokey_key, chat_id)
+    send_telegram( str(list_brand), bot_token, chat_id)
+    send_telegram(" Busqueda de marcas de 70%  a  mas  \n categorias existentes \n abarrotes ,bicicleta, celular,colchones,electro, herramientas, juguetes, ropa, tecno", bot_token, chat_id)
 
 ############################
 
 
 
-def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide):
+def auto_telegram( category, d_name, ship_db1,ship_db2, bot_token, chat_id):
     print("se esta ejecutando")
     db = client["brands"]
     collection= db[category]
@@ -275,7 +275,7 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
                 send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
-                                ,bot_tokey_key, chat_ide)
+                                ,bot_token, chat_id)
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
@@ -293,7 +293,7 @@ def auto_telegram( category, d_name, ship_db1,ship_db2, bot_tokey_key, chat_ide)
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
 
 
-def manual_telegram( category, dsct, bot_tokey_key, chat_ide):
+def manual_telegram( category, dsct, bot_token, chat_id):
     
     db = client["brands"]
     collection= db[category]
@@ -318,12 +318,12 @@ def manual_telegram( category, dsct, bot_tokey_key, chat_ide):
         print(i)
     
         send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"]))
-                        ,bot_tokey_key, chat_ide)
+                        ,bot_token, chat_id)
         time.sleep(2)
     
              
 
-def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
+def search_market2_dsct(market,dsct, bot_token, chat_id ):
 
     if market == "all":
             t5 = collection5.find({ "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
@@ -331,11 +331,9 @@ def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
         
      t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
 
-
     list_cur = list(t5)
     products = []
     for i in list_cur:
-        
         p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"]}
         products.append(p)
 
@@ -347,14 +345,16 @@ def search_market2_dsct(market,dsct, bot_tokey_key, chat_ide):
 
     html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
-    with open ("C:\\Git\\fala\\buscador\\"+market+".html", "w", encoding='utf-8') as f:
+    with open ("/Users/javier/GIT/fala/buscador/"+market+".html", "w", encoding='utf-8') as f:
+     
         f.write(html)
         f.close
     print(html)
-    send_telegram(html, bot_tokey_key, chat_ide )
-          
 
-def search_product_dsct_html(product,dsct, bot_tokey_key, chat_ide):
+    send_telegram(html, bot_token, chat_id )
+    print("se envia html")
+
+def search_product_dsct_html(product,dsct, bot_token, chat_id):
     
 
     t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
@@ -380,7 +380,7 @@ def search_product_dsct_html(product,dsct, bot_tokey_key, chat_ide):
         f.write(html)
         f.close
     print(html)
-    send_telegram(html, bot_tokey_key, chat_ide )
+    send_telegram(html, bot_token, chat_id )
 
 
 
@@ -405,6 +405,6 @@ if argument == "excelsior":
 
 
 
-# chat_ide = config("DISCOVERY_CHAT_TOKEN")
+# chat_id = config("DISCOVERY_CHAT_TOKEN")
 # bot_token = config("CAPITAN_SPOK_TOKEN")
-# search_brand_dsct("WESDAR", 50, bot_token, chat_ide)
+# search_brand_dsct("WESDAR", 50, bot_token, chat_id)

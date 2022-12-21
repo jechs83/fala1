@@ -6,7 +6,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html
 
-def super_bot(TOKEN,chat_ide, bot_token):
+def super_bot(TOKEN, bot_token ,chat_id):
 
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
@@ -51,7 +51,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         dsct=int(context.args[1])
         if dsct <= 41:
            dsct = 40
-        search_brand_dsct(brand, dsct, bot_token,chat_ide)
+        search_brand_dsct(brand, dsct, bot_token ,chat_id)
 
         bot.sendMessage(
             chat_id=chatId,
@@ -71,7 +71,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         if dsct <= 41:
            dsct = 40
         
-        search_market2_dsct(str(market), int(dsct),bot_token,chat_ide)
+        search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
 
         logger.info(f"marca "+ market + "dsct "+ str(dsct))
 
@@ -101,7 +101,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         logger.info(f"el usuario {userName}  busca codigo especifico")
         codigo = context.args[0]
         
-        busqueda(str(codigo),bot_token,chat_ide)
+        busqueda(str(codigo), bot_token ,chat_id)
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
@@ -121,7 +121,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
             text= f"Espera un momento se esta procesando la solicitud "
         )
         
-        auto_telegram( category,"scrap","excelsior1", "excelsior2" ,bot_token,chat_ide)
+        auto_telegram( category,"scrap","excelsior1", "excelsior2" ,bot_token ,chat_id)
 
         bot.sendMessage(
             chat_id=chatId,
@@ -143,7 +143,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
     
         category=context.args[0]
-        read_brands(category,bot_token,chat_ide)
+        read_brands(category,bot_token ,chat_id)
 
     ### AGREGA MARCA A LA LISTA ( /brand marca ropa)
     def add_brand(update, context):
@@ -154,7 +154,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         brand= (context.args[0]).replace("%"," ")
         
         category=(context.args[1]).replace("%","")
-        add_brand_list(brand, category,bot_token,chat_ide)
+        add_brand_list(brand, category,bot_token ,chat_id)
 
         bot.sendMessage(
             chat_id=chatId,
@@ -171,7 +171,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         brand=(context.args[0]).replace("%","")
         category=context.args[1]
 
-        delete_brand(brand,category,bot_token,chat_ide)
+        delete_brand(brand,category,bot_token ,chat_id)
 
 
 
@@ -188,7 +188,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
             text= f"Espera un momento se esta procesando la solicitud "
         )
         
-        manual_telegram( category,dsct ,bot_token,chat_ide)
+        manual_telegram( category,dsct ,bot_token ,chat_id)
 
         bot.sendMessage(
             chat_id=chatId,
@@ -213,7 +213,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         dsct=int(context.args[1])
         dsct = int(dsct)
 
-        search_market2_dsct(market,dsct, bot_token, chat_ide)
+        search_market2_dsct(market,dsct, bot_token ,chat_id)
 
         document = open("C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
@@ -228,7 +228,7 @@ def super_bot(TOKEN,chat_ide, bot_token):
         dsct=int(context.args[1])
     
         
-        search_product_dsct_html(product,dsct, bot_token, chat_ide)
+        search_product_dsct_html(product,dsct, bot_token ,chat_id)
 
         document = open("C:\\Git\\fala\\buscador\\producto.html", 'rb')
         context.bot.send_document(chat_id, document)

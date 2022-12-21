@@ -159,6 +159,7 @@ def ripley_scrap():
 
 i=1
 def prueba():
+
     while i == 1:        
         try:
             ripley_scrap()
