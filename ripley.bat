@@ -1,4 +1,4 @@
-start python  C:\GIT\fala\ripley\ripley.py 0
-start python  C:\GIT\fala\ripley\ripley.py 1
-start python  C:\GIT\fala\ripley\ripley.py 2
-start python  C:\GIT\fala\ripley\ripley.py 99
+start C:\GIT\fala\zbatch_files\ripley0.bat
+start C:\GIT\fala\zbatch_files\ripley1.bat
+start C:\GIT\fala\zbatch_files\ripley2.bat
+start C:\GIT\fala\zbatch_files\ripley99.bat
