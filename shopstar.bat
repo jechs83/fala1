@@ -1,8 +1,8 @@
-start python  C:\GIT\fala\shopstar\shopstar.py 0
-start python  C:\GIT\fala\shopstar\shopstar.py 1
-start python  C:\GIT\fala\shopstar\shopstar.py 2
-start python  C:\GIT\fala\shopstar\shopstar.py 3
-start python  C:\GIT\fala\shopstar\shopstar.py 4
-start python  C:\GIT\fala\shopstar\shopstar.py 5
-start python  C:\GIT\fala\shopstar\shopstar.py 6
-start python  C:\GIT\fala\shopstar\shopstar.py 00
+start C:\GIT\fala\zbatch_files\shop00.bat
+start C:\GIT\fala\zbatch_files\shop0.bat
+start C:\GIT\fala\zbatch_files\shop1.bat
+start C:\GIT\fala\zbatch_files\shop2.bat
+start C:\GIT\fala\zbatch_files\shop3.bat
+start C:\GIT\fala\zbatch_files\shop4.bat
+start C:\GIT\fala\zbatch_files\shop5.bat
+start C:\GIT\fala\zbatch_files\shop6.bat

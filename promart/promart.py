@@ -126,21 +126,23 @@ for i in x:
 #         continue
 count  = len(array_tec)
 def promart_scrap():
-    for i,v in enumerate(array_tec):
+    try:
+        for i,v in enumerate(array_tec):
 
-        for e in range(1000):
-            x = shop(v+str(e+1))
-            print(v+str(e+1))
-            if x == True:
-             print(x)
-             break
+            for e in range(1000):
+                x = shop(v+str(e+1))
+                print(v+str(e+1))
+                if x == True:
+                 print(x)
+                break
 
-        if i == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(5)
-            
-            promart_scrap()
-        
+            if i == count-1:
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(5)
+                
+                promart_scrap()
+    except:
+        return promart_scrap()
 
         
 
