@@ -12,9 +12,9 @@ from bot_unique import super_bot
 
 
 TOKEN = config("CAPITAN_SPOK_TOKEN")
-chat_ide = config("DISCOVERY_CHAT_TOKEN")
+chat_id = config("DISCOVERY_CHAT_TOKEN")
 bot_token = config("CAPITAN_SPOK_TOKEN")
 
 
-super_bot(TOKEN,chat_ide, bot_token)
+super_bot(TOKEN,chat_id, bot_token)
 

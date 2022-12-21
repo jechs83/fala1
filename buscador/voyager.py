@@ -14,7 +14,7 @@ from bot_unique import super_bot
 
 
 TOKEN = config("CAPITAN_JANEWAY_TOKEN")
-chat_ide = config("VOYAGER_CHAT_TOKEN")
+chat_id = config("VOYAGER_CHAT_TOKEN")
 bot_token = config("CAPITAN_JANEWAY_TOKEN")
 
 
