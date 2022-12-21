@@ -18,5 +18,5 @@ chat_ide = config("VOYAGER_CHAT_TOKEN")
 bot_token = config("CAPITAN_JANEWAY_TOKEN")
 
 
-super_bot(TOKEN,chat_ide, bot_token)
+super_bot(TOKEN, bot_token, chat_id)
 
