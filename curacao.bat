@@ -1,6 +1,4 @@
-start python  C:\GIT\fala\curacao\cura.py 1
-start python  C:\GIT\fala\curacao\cura.py 2
-start python  C:\GIT\fala\curacao\cura.py 3
-start python  C:\GIT\fala\curacao\cura.py 4
-start python  C:\GIT\fala\curacao\cura.py 5
-start python  C:\GIT\fala\curacao\cura.py 6
+start C:\GIT\fala\zbatch_files\cura1.bat
+start C:\GIT\fala\zbatch_files\cura2.bat
+start C:\GIT\fala\zbatch_files\cura3.bat
+
