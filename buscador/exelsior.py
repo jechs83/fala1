@@ -17,5 +17,5 @@ TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_ide = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
 
-super_bot(TOKEN,chat_ide, bot_token)
+super_bot(TOKEN,bot_token,chat_ide)
 
