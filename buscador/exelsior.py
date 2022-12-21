@@ -11,8 +11,6 @@ from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delet
 from bot_unique import super_bot
 
 
-
-
 TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_id = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")

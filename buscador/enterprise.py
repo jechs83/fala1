@@ -14,9 +14,9 @@ from bot_unique import super_bot
 
 
 TOKEN = config("ENTERPRISE_TOKEN")
-chat_ide = config("ENTERPRISE_CHAT_TOKEN")
+chat_id = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
 
 
-super_bot(TOKEN,chat_ide, bot_token)
+super_bot(TOKEN, bot_token, chat_id)
 
