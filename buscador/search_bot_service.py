@@ -345,7 +345,7 @@ def search_market2_dsct(market,dsct, bot_token, chat_id ):
 
     html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
-    with open ("/Users/javier/GIT/fala/buscador/"+market+".html", "w", encoding='utf-8') as f:
+    with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
      
         f.write(html)
         f.close
@@ -376,7 +376,7 @@ def search_product_dsct_html(product,dsct, bot_token, chat_id):
 
     html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
-    with open ("C:\\Git\\fala\\buscador\\producto.html", "w", encoding="utf-8") as f:
+    with open (config("HTML_PATH")+"producto.html", "w", encoding="utf-8") as f:
         f.write(html)
         f.close
     print(html)
