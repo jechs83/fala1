@@ -215,7 +215,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         search_market2_dsct(market,dsct, bot_token ,chat_id)
 
-        document = open("C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
+        document = open(config("HTML_PATH")+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
 
 
@@ -226,11 +226,16 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         product = (context.args[0]).replace("%"," ")
         dsct=int(context.args[1])
-    
+        try:
+         price = (context.args[2])
+        except: price = None
+        if  price !="+" or "-":
+            price = None
+       
         
-        search_product_dsct_html(product,dsct, bot_token ,chat_id)
+        search_product_dsct_html(product,dsct,price ,bot_token ,chat_id)
 
-        document = open("C:\\Git\\fala\\buscador\\producto.html", 'rb')
+        document = open(config("HTML_PATH")+"producto.html", 'rb')
         context.bot.send_document(chat_id, document)
 
 
