@@ -221,8 +221,11 @@ def super_bot(TOKEN, bot_token ,chat_id):
         market = (context.args[0]).replace("%"," ")
         dsct=int(context.args[1])
         dsct = int(dsct)
+        try:
+         price = (context.args[2])
+        except: price = None
 
-        search_market2_dsct(market,dsct, bot_token ,chat_id)
+        search_market2_dsct(market,dsct,price, bot_token ,chat_id)
 
         document = open(config("HTML_PATH")+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
