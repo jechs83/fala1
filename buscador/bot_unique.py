@@ -32,11 +32,17 @@ def super_bot(TOKEN, bot_token ,chat_id):
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
         print(context.args)
-     
+
+        text = open ("/Users/javier/GIT/fala/buscador/comandos.txt" ,"r")
+        line = text.readlines()
+        line = str(line)
+        line = line.replace("'","").replace(",","")[:-1][1:]
+        print(line)
+        
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
-            text= f"Lista de Comandos:\n /b marca porcentaje    # busca la marca y el porcentaje mayor igual\n /send tienda porcentaje     # busca la tienda y el porcentaje mayor igual\n /product palabra porcentaje    # buscar la palabra dentro del nombre de los productos y el porcentaje mayor igual que"
+            text= f"#################\n LISTA DE COMANDOS\n #################\n \n >Marca y porcentaje (Telegram)\n /b marca %   \n \n >Palabra  y % (HTML)\n /product palabra %\n \n >Tienda y %  (HTML)\n /send tienda %\n \n >Tienda y %  (Telegram)\n /market tienda % \n \n >Codigo de producto (Telegram)\n /cod codigo_de_producto\n \n >Busca y envia variacion o nuevo (Telegram)\n /auto categoria  (Telegram)\n \n >Busca toda categoria 60% (Telegram)\n /manual categoria % (Telegram)\n \n >Agrega marca a categoria(Telegram)\n /brand marca categoria\n \n >Elimina marca a categoria(Telegram)\n /delete marca categoria"
         )
 
 ### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
