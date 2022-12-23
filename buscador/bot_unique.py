@@ -33,11 +33,11 @@ def super_bot(TOKEN, bot_token ,chat_id):
         logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
         print(context.args)
 
-        text = open ("/Users/javier/GIT/fala/buscador/comandos.txt" ,"r")
-        line = text.readlines()
-        line = str(line)
-        line = line.replace("'","").replace(",","")[:-1][1:]
-        print(line)
+        # text = open ("/Users/javier/GIT/fala/buscador/comandos.txt" ,"r")
+        # line = text.readlines()
+        # line = str(line)
+        # line = line.replace("'","").replace(",","")[:-1][1:]
+        # print(line)
         
         bot.sendMessage(
             chat_id=chatId,
