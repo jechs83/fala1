@@ -405,7 +405,8 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
         f.write(html)
         f.close
     #print(html)
-    send_telegram(html, bot_token, chat_id )
+    # send_telegram(html, bot_token, chat_id )
+    # os.remove(config("HTML_PATH")+"producto.html")
 
 
 

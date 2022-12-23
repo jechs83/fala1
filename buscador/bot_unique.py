@@ -1,9 +1,8 @@
-from datetime import datetime
-from telegram import ParseMode
 from decouple import config
 import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import os
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html
 
 def super_bot(TOKEN, bot_token ,chat_id):
@@ -227,6 +226,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         document = open(config("HTML_PATH")+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
+        os.remove(config("HTML_PATH")+market+".html")
 
 ### 14 CREA HTML DE BUSQUEDA DE PALABRA CONTENIDA EN EL NOMBRE DEL PRODUCTO Y DSCT PERSONALIZADO POSIBLE ORDENAR PRECIO MAYOR A MENOR
     def send_product(update, context):
@@ -245,6 +245,8 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         document = open(config("HTML_PATH")+"producto.html", 'rb')
         context.bot.send_document(chat_id, document)
+        os.remove(config("HTML_PATH")+"producto.html")
+
 
 
     # if __name__ == "__main__":
@@ -252,8 +254,6 @@ def super_bot(TOKEN, bot_token ,chat_id):
     print(myBot.getMe())
 
     updater = Updater(myBot.token, use_context=True)
-
-
 
     dp= updater.dispatcher
     dp.add_handler(CommandHandler("botinfo", getBotInfo))

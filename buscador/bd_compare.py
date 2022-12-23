@@ -1,6 +1,5 @@
 
 from pymongo import MongoClient
-
 from datetime import datetime
 import pytz
 import random
