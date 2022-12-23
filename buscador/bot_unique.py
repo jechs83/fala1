@@ -215,7 +215,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         search_market2_dsct(market,dsct, bot_token ,chat_id)
 
-        document = open("C:\\Git\\fala\\buscador\\"+market+".html", 'rb')
+        document = open(config("HTML_PATH")+"+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
 
 
