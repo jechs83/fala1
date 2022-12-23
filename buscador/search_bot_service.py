@@ -355,7 +355,7 @@ def search_market2_dsct(market,dsct, bot_token, chat_id ):
     print("se envia html")
 
 def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
-    
+    print(price)
     if price == "+":
              t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
     if price ==None:
@@ -386,7 +386,7 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     with open (config("HTML_PATH")+"producto.html", "w", encoding="utf-8") as f:
         f.write(html)
         f.close
-    print(html)
+    #print(html)
     send_telegram(html, bot_token, chat_id )
 
 
