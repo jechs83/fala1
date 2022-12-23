@@ -37,7 +37,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
-            text= f"Lista de Comandos:\n /b marca porcentaje # busca la marca y el porcentaje mayor igual\n /send tienda porcentaje # busca la tienda y el porcentaje mayor igual"
+            text= f"Lista de Comandos:\n /b marca porcentaje    # busca la marca y el porcentaje mayor igual\n /send tienda porcentaje     # busca la tienda y el porcentaje mayor igual\n /product palabra porcentaje    # buscar la palabra dentro del nombre de los productos y el porcentaje mayor igual que"
         )
 
 ### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
