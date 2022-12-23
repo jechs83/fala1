@@ -33,13 +33,11 @@ def super_bot(TOKEN, bot_token ,chat_id):
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
         print(context.args)
-        with open ("/Users/javier/GIT/fala/buscador/comandos.txt" ,"r") as g:
-            text1 = g.readlines
-            text1 = text1.strip()
+     
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
-            text= text1
+            text= f"Lista de Comandos:\n /b marca porcentaje # busca la marca y el porcentaje mayor igual\n /send tienda porcentaje # busca la tienda y el porcentaje mayor igual"
         )
 
 ### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
