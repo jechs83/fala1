@@ -61,6 +61,11 @@ def scrap (web):
 
         image = i.find("img").attrs.get("data-src")
 
+        image_start = image[:6]
+        if image_start != "https:":
+             image = "https:"+image
+    
+
         sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
         sku = str(sku)   
         
