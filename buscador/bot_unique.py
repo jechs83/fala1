@@ -224,8 +224,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
         market = (context.args[0]).replace("%"," ")
         dsct=int(context.args[1])
         dsct = int(dsct)
-        if dsct == 0:
-            dsct = None
+     
         try:
          price = (context.args[2])
         except: price = None
