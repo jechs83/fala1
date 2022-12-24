@@ -224,6 +224,8 @@ def super_bot(TOKEN, bot_token ,chat_id):
         market = (context.args[0]).replace("%"," ")
         dsct=int(context.args[1])
         dsct = int(dsct)
+        if dsct == 0:
+            dsct = None
         try:
          price = (context.args[2])
         except: price = None
@@ -242,6 +244,8 @@ def super_bot(TOKEN, bot_token ,chat_id):
 
         product = (context.args[0]).replace("%"," ")
         dsct=int(context.args[1])
+        if dsct == 0:
+            dsct = None
         try:
          price = (context.args[2])
         except: price = None
@@ -253,6 +257,20 @@ def super_bot(TOKEN, bot_token ,chat_id):
         context.bot.send_document(chat_id, document)
         os.remove(config("HTML_PATH")+"producto.html")
 
+
+### 15 PARA JODER 
+    def joder(update, context):
+        bot = context.bot
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
+        print(context.args)
+
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f""
+        )
 
 
     # if __name__ == "__main__":
