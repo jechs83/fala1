@@ -22,7 +22,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
-            text= f"Hola soy un bot creado para la Nave Excelsior. sigo funcionando no te preocupes "
+            text= f"Hola soy un bot creado para la Nave pro Sr Spok. sigo funcionando no te preocupes "
         )
 
 ### 2 ENVIA LOS COMANDOS DEL BOT 
