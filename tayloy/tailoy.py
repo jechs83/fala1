@@ -48,55 +48,68 @@ def scrap (web):
         link = i.find("a").attrs.get("href")
      
         try:
-            brand = i.find("strong", class_="product brand product-item-brand").text
+            brand = i.find("div", class_="brand-label").text
             brand = brand.strip()
         except:
             brand = None
       
         try:
-         product = i.find("img").attrs.get("alt")
+         product = i.find("a", class_="product-item-link").text
+         product = product.strip()
         except: product = None
         if product == None:
             return False
 
+   
+
         image = i.find("img").attrs.get("src")
 
-        
-        best_price = i.find("span", class_="special-price").find("span",class_="price").text
-        best_price = best_price.split()
-        best_price= best_price[1].replace(",","")
+        try:
+            best_price = i.find("span",class_="special-price").find("span", class_="price").text
+            best_price = best_price.replace("S/","")
+            best_price= best_price.replace(",","")
+        except: best_price = 0
 
+   
         
         try:
-            list_price = i.find("span", class_="old-price").text
-            list_price = list_price.split()[1].replace(",","")
+            list_price = i.find("span", class_="old-price").find("span", class_="price").text
+            list_price = list_price .replace("S/","")
+            list_price = list_price .replace(",","")
             
         except: list_price = None
 
         if list_price == None:
             try:
-                list_price = i.find("div", class_="price-box price-final_price").find("span", class_="price").text
-                list_price = list_price.split()[1].replace(",","")
+                list_price = i.find("span",class_="price-container price-final_price tax weee").find("span", class_="price").text
+                list_price = list_price .replace("S/","")
+                list_price = list_price .replace(",","")
             except: list_price = 0
 
 
-  
-     
+    
+            
         
       
 
 
-        sku = i.find("div",class_="actions-primary").find("form").attrs.get("data-product-sku")
+        sku = i.find("div",class_="price-box price-final_price").attrs.get("data-product-id")
         sku = str(sku)   
 
         try:                
-            calculo = float(best_price)*100/float(list_price)
-            if calculo == 0:
-                calculo =100
-            dsct = 100-calculo
-            dsct = round(dsct)
-           
+            # calculo = float(best_price)*100/float(list_price)
+            # if calculo == 0:
+            #     calculo =100
+            # dsct = 100-calculo
+            # dsct = round(dsct)
+            dsct = i.find("div", class_="discount-box").find("span", class_="discount-value").text
+            dsct = dsct.replace("-","").replace("%","")
+            dsct  = dsct.strip()
+        
         except: dsct = 0
+        print(list_price)
+
+        print(dsct)
 
         card_price = 0
 
@@ -111,9 +124,9 @@ def scrap (web):
         print(dsct)
         print(sku)
     
-        bd_name_store = "hiraoka"
+        bd_name_store = "tailoy"
         # collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "hiraoka"    # COLECCION
+        market = "tailoy"    # COLECCION
         card_dsct = 0
         date_time = load_datetime()
         
@@ -128,7 +141,7 @@ def scrap (web):
 array_tec=[]
 arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = config("HIRAOKA_TEXT_PATH")+str(num)+".txt"
+arg_ = config("TAILOY_TEXT_PATH")+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()

@@ -1,0 +1,148 @@
+
+#########################################################
+<li class="lo-mejor-en-tecnologia--laptops-smart-tv-y-mas" layout="19ccd66b-b568-43cb-a106-b52f9796f5cd">
+<div class="product-item product-item--970084" data-brand="Samsung" data-category="https://www.metro.pe/tecnologia/televisores/tv" data-id="970084" data-index="-1" data-name='Samsung Smart Tv Uhd 65" Un65Au7090Gxpe' data-price="S/. 3,099.00" data-refid="-1" data-sku="39207920" data-uri="https://www.metro.pe/samsung-smart-tv-uhd-65-un65au7090gxpe-964958/p">
+<div class="product-item__data" style="display: none">
+<div class="product-item__data--product">
+<div class="product-field product_field_471 product-field-type_2">
+ProductData
+<ul>
+<li allow_notes":true"allow_substitute":true"cart_limit":"1""brandname":"samsung""brandecomid":"4201""measurement_unit":"un""unit_multiplier":1"unit_multiplier_un":0"measurement_unit_selector":false-"="" class="-">{"allow_notes":true,"allow_substitute":true,"cart_limit":"1","brandName":"Samsung","brandEcomId":"4201","measurement_unit":"un","unit_multiplier":1,"unit_multiplier_un":0,"measurement_unit_selector":false}</li>
+</ul>
+</div>
+</div>
+<div class="product-item__data--sku">
+<div class="product-field product_field_472 product-field-type_2">
+SkuData
+<ul>
+<li 39207920":-"ref_id":"964958""cart_limit":1"allow_notes":true"allow_substitute":true"measurement_unit":"un""unit_multiplier":1"promotions":-"18""19""20""21""22""23""24""25""26""27""31""35""111""130""140""145""185""191""207""213""218""227""228""250""272""273""276""277""293""308""312""328""331""332""336""343""350""372""375""387""405""406""423""424""517""519""524""546""654""655""656""705""726""728""739""748""751""752""759""764""807""905""1017""1018""1019""1020""1023""1024""1025""1056""1057""1078""1175""1177""1182""1185""1189""1192""1206""1210""4667""6651""16707""32388""42110""44304""66726""66728""81393""130165""130166""138289""138290""139629""146589""146591""146595""146596""146598""146603""151777""158125""158127""170396""170710""170719""170725""170726""184416""184418""184420""184709""209323""209324""289988""293088""293090""293091""293093""316946""316947""371499""371500""385136""385138""385378""385872""386122""386126""404360""405529""405530""407193""407194""410062""410063""410064""410065""411039""411040""411042""411043""427045""427046""427047""427295""435557""435558""435559""435560""435561""435562""435563""435565""435566""435567""435568""435569""435570""435571""436411""436417""448882""448885""448886""448889""448890""448892""448893""451166""451167""465423""465424""473386""473387""483358""484916""490255""490258""490259""490260""490262""490425""490427""490432""490785""496317""496318""523575""1263042""1263245""1451965""1452371""2035656""2035945""3157950""3158780""4992590""4996136""5024221""5024752""5728533""5728851""5747737""5748067""13953383""13953991""13956893""13957356""14593911""15688770""18295312""19149341""19325600""19326455""19327027""19327888""19854703""20928891""20929102""21772948""21773416""22243821""22244571""23870180""23922254""26435766""26436010""31587651""31587651""32526748""32526748""32526748""33214881""33214881""34548107""35056491""35057133""36278552""36278740""38181550""38182159""38187477""38191833""38192669""39571741""40803951""40804117""40889488""40893835""41586092""41586277""42530457""43121169""43121170""45974728""48282871""49721048""51732785""58374072""61011628""73861213""75694739""79694460""81630460""91759694""100590364""101423384""103953997""108757536""121972125""121989756""121991718""121993683""129657137""129684614""133622873""133624058""133845047""134268933""137880957""139065494""139535135""139535136""170942803""187405097""187405098""188404820""194441660""215738072""219374011""219382465""219388283""219513755""219568736""219569240""219630591""219630592""219630593""219640588""219642080""219694483""219694484""219734478""219850952""220029482""220029483""220029484""220029485""220059937""220065543""220065565""220085700""220102947""220156582""220159582""220159595""220159596""220199894""220231477""220263379""220339288""220619013""220622796""220711124""221081376""221318122""221405507""221424788""221585666""221585667""221726328""221747924""221900557""222034792""222051866""222057363""222215056""222511803""222518560""222518561""222518562""222543757""222544186""222654126""222916444""222943939""223104705""223104706""223104707""223104708""223111712""223230362""223266735""223281346""223281346""223310659""223391377""223406158""223473051""223501457""223501458""223563488""223916669""224346654""224933521""225106939""225414223""226112322""226112323""226112324""226112325""226112327""226182781""226182782""226468893""227027965""227363120""227662641""227673823""228528302""229325615""230075798""230089038""230308920""230678937""230897706""231178039""231246349""231472952""231472959""231573133""231687974""231687976""231687977"-"url_canonical":"""unit_multiplier_un":0"measurement_unit_selector":false"release_data":-"is_new":false---"="" class="-">{"39207920":{"ref_id":"964958","cart_limit":1,"allow_notes":true,"allow_substitute":true,"measurement_unit":"un","unit_multiplier":1,"promotions":["18","19","20","21","22","23","24","25","26","27","31","35","111","130","140","145","185","191","207","213","218","227","228","250","272","273","276","277","293","308","312","328","331","332","336","343","350","372","375","387","405","406","423","424","517","519","524","546","654","655","656","705","726","728","739","748","751","752","759","764","807","905","1017","1018","1019","1020","1023","1024","1025","1056","1057","1078","1175","1177","1182","1185","1189","1192","1206","1210","4667","6651","16707","32388","42110","44304","66726","66728","81393","130165","130166","138289","138290","139629","146589","146591","146595","146596","146598","146603","151777","158125","158127","170396","170710","170719","170725","170726","184416","184418","184420","184709","209323","209324","289988","293088","293090","293091","293093","316946","316947","371499","371500","385136","385138","385378","385872","386122","386126","404360","405529","405530","407193","407194","410062","410063","410064","410065","411039","411040","411042","411043","427045","427046","427047","427295","435557","435558","435559","435560","435561","435562","435563","435565","435566","435567","435568","435569","435570","435571","436411","436417","448882","448885","448886","448889","448890","448892","448893","451166","451167","465423","465424","473386","473387","483358","484916","490255","490258","490259","490260","490262","490425","490427","490432","490785","496317","496318","523575","1263042","1263245","1451965","1452371","2035656","2035945","3157950","3158780","4992590","4996136","5024221","5024752","5728533","5728851","5747737","5748067","13953383","13953991","13956893","13957356","14593911","15688770","18295312","19149341","19325600","19326455","19327027","19327888","19854703","20928891","20929102","21772948","21773416","22243821","22244571","23870180","23922254","26435766","26436010","31587651","31587651","32526748","32526748","32526748","33214881","33214881","34548107","35056491","35057133","36278552","36278740","38181550","38182159","38187477","38191833","38192669","39571741","40803951","40804117","40889488","40893835","41586092","41586277","42530457","43121169","43121170","45974728","48282871","49721048","51732785","58374072","61011628","73861213","75694739","79694460","81630460","91759694","100590364","101423384","103953997","108757536","121972125","121989756","121991718","121993683","129657137","129684614","133622873","133624058","133845047","134268933","137880957","139065494","139535135","139535136","170942803","187405097","187405098","188404820","194441660","215738072","219374011","219382465","219388283","219513755","219568736","219569240","219630591","219630592","219630593","219640588","219642080","219694483","219694484","219734478","219850952","220029482","220029483","220029484","220029485","220059937","220065543","220065565","220085700","220102947","220156582","220159582","220159595","220159596","220199894","220231477","220263379","220339288","220619013","220622796","220711124","221081376","221318122","221405507","221424788","221585666","221585667","221726328","221747924","221900557","222034792","222051866","222057363","222215056","222511803","222518560","222518561","222518562","222543757","222544186","222654126","222916444","222943939","223104705","223104706","223104707","223104708","223111712","223230362","223266735","223281346","223281346","223310659","223391377","223406158","223473051","223501457","223501458","223563488","223916669","224346654","224933521","225106939","225414223","226112322","226112323","226112324","226112325","226112327","226182781","226182782","226468893","227027965","227363120","227662641","227673823","228528302","229325615","230075798","230089038","230308920","230678937","230897706","231178039","231246349","231472952","231472959","231573133","231687974","231687976","231687977"],"url_canonical":"","unit_multiplier_un":0,"measurement_unit_selector":false,"release_data":{"is_new":false}}}</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="product-item__image-wrapper">
+<div class="pflags">
+<div class="cat octogonos pflags-top">
+<div class="product-field product_field_3248 product-field-type_1">
+Octogonos
+<ul>
+<li class=""></li>
+</ul>
+</div>
+</div>
+<div class="product-item__flags pflags-left">
+<p class="flag 10--de-descuento-en-electro">10% de descuento en electro</p><p class="flag -tcenco-dn-150-00-maxcarrito-1--electro-tag-s-150">[TCENCO-DN:150.00&amp;MaxCarrito:1] Electro TAG S/150</p><p class="flag s-150-de-descuento-en-todo-televisores-y-audio-pag">S/150 de descuento en todo Televisores y Audio pag</p><p class="flag s-150-de-dscto-en-audio-y-tv-a-partir-de-s-1299">S/150 de Dscto en Audio y TV a partir de S/1299</p><p class="flag tvs-y-camisetas-qatar">Tvs y camisetas Qatar</p><p class="flag televisores">Televisores</p><p class="flag cyber-wow-julio-tvs">Cyber Wow Julio TVs</p><p class="flag cyber-wow-julio-tvs-carrusel">Cyber Wow Julio TVs Carrusel</p><p class="flag 12-msi---cyber-wow">12 MSI - Cyber Wow</p><p class="flag cyber-wow-12msi">Cyber Wow 12MSI</p><p class="flag cyber-wow-llamado-general-tv">Cyber Wow llamado general TV</p><p class="flag coleccion-tvs-mayor-a-1299">COLECCION TVS MAYOR A 1299</p><p class="flag tvs-promo-rack">TVS PROMO RACK</p><p class="flag mundo-qatar">Mundo Qatar</p><p class="flag mundial-qatar-2022---wong">Mundial Qatar 2022 - Wong</p><p class="flag mundial-qatar-2022---metro">Mundial Qatar 2022 - Metro</p><p class="flag metro-aniversario-general-06-09-al-03-10">Metro Aniversario General 06.09 al 03.10</p><p class="flag panasonic_lg_samsung-06-10">Panasonic_LG_Samsung 06.10</p><p class="flag bh-tecno-cyber-wow-metro">BH Tecno Cyber wow metro</p><p class="flag electro-tv-samsung">Electro TV Samsung</p><p class="flag delivery-gratis-en-todo-electro-tecno-colchones">Delivery gratis en todo Electro, Tecno, Colchones,</p><p class="flag 13-msi-sin-monto-minimo">13 MSI sin monto minimo</p><p class="flag coleccion---centro-de-entre">Colección - Centro de Entre</p><p class="flag top-10-vta-metro">TOP 10 VTA METRO</p><p class="flag top-10-vta-wong">TOP 10 VTA WONG</p><p class="flag qatar-tvs-metro">Qatar TVs Metro</p><p class="flag coleccion-metro-televisores-wf">COLECCION METRO TELEVISORES WF</p><p class="flag coleccion-tv-y-audio-10-11">Coleccion Tv y Audio 10.11</p><p class="flag coleccion-cyberdays-samsung">Coleccion Cyberdays Samsung</p><p class="flag banner-qatar-cyber-days-metro">Banner Qatar Cyber days metro</p><p class="flag tv-y-video-21-al-24-11">TV Y VIDEO 21 al 24.11</p><p class="flag colecc-tv-pauta-0512-al-1212">COLECC TV PAUTA 0512 AL 1212</p><p class="flag smart-tv-desde-s-479">Smart TV desde S/479</p><p class="flag hasta-30--dsct-pauta-wong-1212-al-1812">HASTA 30% DSCT PAUTA WONG 1212 AL 1812</p><p class="flag coleccion-tv-samsung-25-11">Coleccion TV Samsung 25.11</p>
+<div class="flag discount-percent" data-discount="32,27 %">32,27 %</div>
+<div class="flag discount-nominal" data-discount="32,27 %">S/. 1,000.00</div>
+</div>
+<div class="dinamic-discount pflags-rigth">
+<p class="flag 10--de-descuento-en-electro">10% de descuento en electro</p><p class="flag -tcenco-dn-150-00-maxcarrito-1--electro-tag-s-150">[TCENCO-DN:150.00&amp;MaxCarrito:1] Electro TAG S/150</p><p class="flag s-150-de-descuento-en-todo-televisores-y-audio-pag">S/150 de descuento en todo Televisores y Audio pag</p><p class="flag s-150-de-dscto-en-audio-y-tv-a-partir-de-s-1299">S/150 de Dscto en Audio y TV a partir de S/1299</p><p class="flag tvs-y-camisetas-qatar">Tvs y camisetas Qatar</p><p class="flag televisores">Televisores</p><p class="flag cyber-wow-julio-tvs">Cyber Wow Julio TVs</p><p class="flag cyber-wow-julio-tvs-carrusel">Cyber Wow Julio TVs Carrusel</p><p class="flag 12-msi---cyber-wow">12 MSI - Cyber Wow</p><p class="flag cyber-wow-12msi">Cyber Wow 12MSI</p><p class="flag cyber-wow-llamado-general-tv">Cyber Wow llamado general TV</p><p class="flag coleccion-tvs-mayor-a-1299">COLECCION TVS MAYOR A 1299</p><p class="flag tvs-promo-rack">TVS PROMO RACK</p><p class="flag mundo-qatar">Mundo Qatar</p><p class="flag mundial-qatar-2022---wong">Mundial Qatar 2022 - Wong</p><p class="flag mundial-qatar-2022---metro">Mundial Qatar 2022 - Metro</p><p class="flag metro-aniversario-general-06-09-al-03-10">Metro Aniversario General 06.09 al 03.10</p><p class="flag panasonic_lg_samsung-06-10">Panasonic_LG_Samsung 06.10</p><p class="flag bh-tecno-cyber-wow-metro">BH Tecno Cyber wow metro</p><p class="flag electro-tv-samsung">Electro TV Samsung</p><p class="flag delivery-gratis-en-todo-electro-tecno-colchones">Delivery gratis en todo Electro, Tecno, Colchones,</p><p class="flag 13-msi-sin-monto-minimo">13 MSI sin monto minimo</p><p class="flag coleccion---centro-de-entre">Colección - Centro de Entre</p><p class="flag top-10-vta-metro">TOP 10 VTA METRO</p><p class="flag top-10-vta-wong">TOP 10 VTA WONG</p><p class="flag qatar-tvs-metro">Qatar TVs Metro</p><p class="flag coleccion-metro-televisores-wf">COLECCION METRO TELEVISORES WF</p><p class="flag coleccion-tv-y-audio-10-11">Coleccion Tv y Audio 10.11</p><p class="flag coleccion-cyberdays-samsung">Coleccion Cyberdays Samsung</p><p class="flag banner-qatar-cyber-days-metro">Banner Qatar Cyber days metro</p><p class="flag tv-y-video-21-al-24-11">TV Y VIDEO 21 al 24.11</p><p class="flag colecc-tv-pauta-0512-al-1212">COLECC TV PAUTA 0512 AL 1212</p><p class="flag smart-tv-desde-s-479">Smart TV desde S/479</p><p class="flag hasta-30--dsct-pauta-wong-1212-al-1812">HASTA 30% DSCT PAUTA WONG 1212 AL 1812</p><p class="flag coleccion-tv-samsung-25-11">Coleccion TV Samsung 25.11</p>
+</div>
+</div>
+<div class="product-item__actions">
+<a class="product-item__action product-item__action--quickview btn dark font-icn view-more" data-tooltip="Vista Rápida" data-tooltip-pos="top" href="https://www.metro.pe/samsung-smart-tv-uhd-65-un65au7090gxpe-964958/p"></a>
+<button class="product-item__action product-item__action--add-shop-list btn dark font-icn add-to-list food-site" data-overlay="add-shop-list" data-tooltip="Agregar a Lista" data-tooltip-pos="top"></button>
+</div>
+<a class="product-item__image-link" href="https://www.metro.pe/samsung-smart-tv-uhd-65-un65au7090gxpe-964958/p">
+<div class="js--lazyload has--lazyload" data-noscript="">
+<noscript><img alt="Samsung-Smart-Tv-Uhd-65-Un65Au7090Gxpe-1-310267396" height="230" id="" src="https://wongfood.vteximg.com.br/arquivos/ids/558022-230-230/Samsung-Smart-Tv-Uhd-65-Un65Au7090Gxpe-1-310267396.jpg?v=637919590322400000" width="230"/></noscript>
+</div>
+</a>
+</div>
+<div class="product-item__bottom">
+<div class="product-item__info">
+<a class="product-item__name" href="https://www.metro.pe/samsung-smart-tv-uhd-65-un65au7090gxpe-964958/p" title='Samsung Smart Tv Uhd 65" Un65Au7090Gxpe'>Samsung Smart Tv Uhd 65" Un65Au7090Gxpe</a>
+<div class="product-item__brand"><p class="texto brand samsung">samsung</p></div>
+<div class="product-item__description" style="display: none"></div>
+<label class="product-item__compare product-compare">
+<input class="product-compare__input" name="prod-compare-checkbox" type="checkbox"/>
+<div class="font-icn check"></div>
+<span class="product-compare__text">Comparar</span>
+</label>
+</div>
+<div class="product-prices__wrapper product-prices__wrapper--better">
+<div class="product-prices__price product-prices__price--cencosud-price" style="visibility: hidden;">
+<span class="product-prices__label">Tarjeta Cencosud</span>
+<span class="product-prices__value"></span>
+</div>
+<div class="product-prices__price product-prices__price--better-price">
+<span class="product-prices__label">
+<span class="product-prices__label--discount-name">Online</span>
+<span class="product-prices__label--discount-label">todo medio de pago</span>
+</span>
+<span class="product-prices__value product-prices__value--best-price">S/. 2,099.00</span>
+</div>
+<div class="product-prices__price product-prices__price--former-price">
+<span class="product-prices__label">Regular</span>
+<span class="product-prices__value">S/. 3,099.00</span>
+</div>
+<div class="product-prices__notes">
+<div class="product-field product_field_944 product-field-type_1">
+Nota Pesables
+<ul>
+<li class=""></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="product-item__note product-note" style="display: none">
+<button class="product-note__toggle-open" type="button">+ Agregar comentario</button>
+<div class="product-note__input-wrapper">
+<div class="product-note__close font-icn cross"></div>
+<textarea class="product-note__input" maxlength="50" name="comment" placeholder="Escribe un comentario sobre éste producto..."></textarea>
+</div>
+</div>
+<div class="product-item__quantity-mode product-quantity--mode desktop" style="display: none;">
+<label class="product-quantity__input-wrapper">
+<input class="product-quantity__input" name="product-quantity__input--970084" type="radio" value="unit"/>
+<div class="product-quantity__input-fake"></div>
+<div class="product-quantity__label">Cantidad</div>
+</label>
+<label class="product-quantity__input-wrapper">
+<input checked="true" class="product-quantity__input" name="product-quantity__input--970084" type="radio" value="measurementUnit"/>
+<div class="product-quantity__input-fake"></div>
+<div class="product-quantity__label">Peso (<span class="product-quantity__measurement-unit"></span>)</div>
+</label>
+</div>
+<div class="product-item__controls">
+<div class="product-item__quantity product-quantity">
+<input class="product-quantity__input" type="text" value="1"/>
+<input class="product-quantity__input--hidden" style="display: none;" type="text" value="1"/>
+<div class="product-quantity__controls">
+<button class="product-quantity__control product-quantity__control--increase font-icn plus"></button>
+<button class="product-quantity__control product-quantity__control--decrease product-quantity__control--disabled font-icn minus"></button>
+</div>
+</div>
+<button class="product-item__add-to-cart product-add-to-cart btn red add-to-cart" data-productid="970084">
+<span class="font-icn check"></span>
+<span class="product-add-to-cart__text product-add-to-cart__text--success">Agregado</span>
+<span class="font-icn plus"></span>
+<span class="font-icn shopping-cart"></span>
+<span class="product-add-to-cart__text">Agregar</span>
+</button>
+<div class="product-item__cart-amount">
+<span class="font-icn check"></span>
+<span class="value"></span>
+</div>
+</div>
+<label class="product-item__quantity-mode product-quantity--mode product-quantity__switch-mode mobile" style="display: none;">
+<input checked="true" class="product-quantity__mode-checkbox" type="checkbox"/>
+<div class="product-quantity__label product-quantity__label--unit">Cantidad</div>
+<div class="switch">
+<div class="toggle-indicator"></div>
+</div>
+<div class="product-quantity__label product-quantity__label--measurementunit">Peso (<span class="product-quantity__measurement-unit"></span>)</div>
+</label>
+</div>
+</div>
+<label class="product-item__compare product-compare">
+<input class="product-compare__input" name="prod-compare-checkbox" type="checkbox" value="970084"/>
+<div class="font-icn check"></div>
+<span class="product-compare__text">Comparar</span>
+</label>
+<div class="product-item__cart-amount">
+<span class="font-icn check"></span>
+<span class="value"></span>
+<span class="text">en el carrito</span>
+</div>
+</li>
