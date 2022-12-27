@@ -3,7 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2
 
 def super_bot(TOKEN, bot_token ,chat_id):
 
@@ -22,7 +22,9 @@ def super_bot(TOKEN, bot_token ,chat_id):
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
+            #parse_mode="MarkdownV2",
             text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes "
+        
         )
 
 ### 2 ENVIA LOS COMANDOS DEL BOT 
@@ -271,6 +273,23 @@ def super_bot(TOKEN, bot_token ,chat_id):
         )
 
 
+
+
+### TEST BUSCA EN PRODUCTO CON EL CODIGO SKU
+    def test(update, context):
+        bot = context.bot
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName}  busca codigo especifico")
+        codigo = context.args[0]
+        
+        test2(str(codigo), bot_token ,chat_id)
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Termino la busqueda... si no hay nada no encontre ps"
+        )
+
     # if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
     print(myBot.getMe())
@@ -292,6 +311,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', brands_list))
+    dp.add_handler(CommandHandler('test', test))
 
     updater.start_polling()
     updater.idle()
