@@ -187,10 +187,20 @@ def delete_brand(brand,category,bot_token,chat_id):
     send_telegram(" se elimino la marca ingresa ", bot_token, chat_id)
 
 
-def read_brands(category, bot_token,chat_id):
+def read_category (bot_token,chat_id):
+    categories = []
+    db = client["brands"]
+    for i in db.list_collection_names():
+        categories.append(i)
+    
+    send_telegram( str(categories), bot_token, chat_id)
 
+
+
+def read_brands(category, bot_token,chat_id):
     db = client["brands"]
     collection= db[category]
+
     t9 = collection.find({})
     list_brand= []
     for i in t9:
@@ -199,7 +209,7 @@ def read_brands(category, bot_token,chat_id):
     print(list_brand)
 
     send_telegram( str(list_brand), bot_token, chat_id)
-    send_telegram(" Busqueda de marcas de 70%  a  mas  \n categorias existentes \n abarrotes ,bicicleta, celular,colchones,electro, herramientas, juguetes, ropa, tecno", bot_token, chat_id)
+    send_telegram(" Busqueda de marcas de 70%  a  mas ", bot_token, chat_id)
 
 ############################
 
@@ -231,7 +241,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id):
     for i in t1:
         product_array.append(i)
         print(i)
-        
+
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)

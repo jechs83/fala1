@@ -3,7 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
@@ -156,13 +156,22 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 
 ### 9 ENVIA PRODUCTOS QUE HAY EN UNA CARTEGORIAS 
-    def brands_list(update, context):
+    def category_list(update, context):
+        bot = context.bot
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+        read_category(bot_token ,chat_id)
+
+
+    def brand_list(update, context):
         bot = context.bot
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
         category=context.args[0]
         read_brands(category,bot_token ,chat_id)
+
 
 ### 10 AÑADE MARCA A UNA CATEGORIA SELECCIONADA
     def add_brand(update, context):
@@ -330,7 +339,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
-    dp.add_handler(CommandHandler('cat', brands_list))
+    dp.add_handler(CommandHandler('cat', category_list))
+    dp.add_handler(CommandHandler('catlist', brand_list))
     dp.add_handler(CommandHandler('marca', brand_to_html))
 
 
