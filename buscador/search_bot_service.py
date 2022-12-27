@@ -74,7 +74,9 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
     
     if dsct <41:
         dsct = 40
-    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
+    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), 
+                            re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), 
+                            re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
    
     print( "se realizo busqueda")
 
@@ -361,18 +363,19 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     product = str(product).replace("%"," ")
     print(price)
     if price == "+":
-             t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
-    if price ==None:
-
-       t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
+        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.DESCENDING)
     if price =="-":
-    
-       t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.DESCENDING)
+        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
+
+    if price ==None:
+       t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
 
     if dsct == 0:
         t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.ASCENDING)
+
     if dsct == 0 and price == "+":
         t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.DESCENDING)
+
     if dsct == 0 and price == "-":
         t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
 
@@ -419,14 +422,13 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     brand = str(brand).replace("%"," ")
     print(price)
     if price == "+":
-             t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort("best_price",pymongo.ASCENDING)
-    if price ==None:
-
-       t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort("web_dsct",pymongo.DESCENDING)
+        t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort("best_price",pymongo.DESCENDING)
     if price =="-":
-    
-       t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)},"date": date}).sort("best_price",pymongo.DESCENDING)
+        t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)},"date": date}).sort("best_price",pymongo.ASCENDING)
 
+    if price ==None:
+       t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "date": date}).sort("web_dsct",pymongo.DESCENDING)
+  
     if dsct == 0:
         t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]},"web_dsct":{"$gte":int(dsct)}, "date": date}).sort("web_dsct",pymongo.ASCENDING)
     if dsct == 0 and price == "+":
