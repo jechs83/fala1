@@ -16,7 +16,7 @@ from bot_unique import super_bot
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
-bd1 = "enterprise1"
+db1 = "enterprise1"
 db2 = "enterprise2"
 
 super_bot(TOKEN, bot_token, chat_id,db1,db2)
