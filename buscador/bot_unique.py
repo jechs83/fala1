@@ -3,7 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html
 
 def super_bot(TOKEN, bot_token ,chat_id):
 
@@ -273,6 +273,26 @@ def super_bot(TOKEN, bot_token ,chat_id):
         )
 
 
+### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
+    def brand_to_html(update, context):
+        chat_id = update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+
+        brand = (context.args[0]).replace("%"," ")
+        dsct=int(context.args[1])
+        dsct = int(dsct)
+     
+        try:
+         price = (context.args[2])
+        except: price = None
+
+        search_brand_dsct_html(brand,dsct,price, bot_token ,chat_id)
+
+        document = open(config("HTML_PATH")+brand+".html", 'rb')
+        context.bot.send_document(chat_id, document)
+        os.remove(config("HTML_PATH")+brand+".html")
+
 
 
 ### TEST BUSCA EN PRODUCTO CON EL CODIGO SKU
@@ -311,7 +331,8 @@ def super_bot(TOKEN, bot_token ,chat_id):
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', brands_list))
-    dp.add_handler(CommandHandler('test', test))
+    dp.add_handler(CommandHandler('marca', brand_to_html))
+
 
     updater.start_polling()
     updater.idle()
