@@ -24,16 +24,15 @@ bot_tokey_key = config("CAPITAN_PIKE_TOKEN")
 
 
 def send_telegram(message, bot_tokey_key, chat_ide):
-    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",
-            
+    requests.post("https://api.telegram.org/bot"+str(bot_tokey_key)+"/sendMessage",    
     data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
-
 client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
 collection_offer1 = db5["excelsior1"]
 collection_offer2 = db5["excelsior2"]
+
 
 
 

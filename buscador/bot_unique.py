@@ -5,7 +5,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_brands,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html
 
-def super_bot(TOKEN, bot_token ,chat_id):
+def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
@@ -143,7 +143,7 @@ def super_bot(TOKEN, bot_token ,chat_id):
             text= f"Espera un momento se esta procesando la solicitud "
         )
         
-        auto_telegram( category,"scrap","excelsior1", "excelsior2" ,bot_token ,chat_id)
+        auto_telegram( category,db1, db2 ,bot_token ,chat_id)
 
         bot.sendMessage(
             chat_id=chatId,

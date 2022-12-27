@@ -205,7 +205,7 @@ def read_brands(category, bot_token,chat_id):
 
 
 
-def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id):
+def auto_telegram( category, d_name, ship_db1,ship_db2, bot_token, chat_id):
     print("se esta ejecutando")
     db = client["brands"]
     collection= db[category]
@@ -217,21 +217,21 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id):
         array_brand.append(i["brand"])
     print(array_brand)
 
-    #for brand in array_brand:
+    for brand in array_brand:
      
-    db = client["scrap"]
-    collection = db["scrap"]
+        db = client["scrap"]
+        collection = db["scrap"]
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
+        t1 =  collection.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
 
        
-    collection_1 = db[ship_db1]
-    collection_2 = db[ship_db2]
+        collection_1 = db[ship_db1]
+        collection_2 = db[ship_db2]
 
-    for i in t1:
-        product_array.append(i)
-        print(i)
-        
+        for i in t1:
+            product_array.append(i)
+
+            print(i)
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)

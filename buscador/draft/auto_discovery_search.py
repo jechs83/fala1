@@ -1,12 +1,7 @@
-from enum import auto
-import sys
 import time
 import requests
 from pymongo import MongoClient
-import os
-import ast
 import re
-
 from datetime import datetime
 from telegram import ParseMode
 from decouple import config
@@ -16,11 +11,9 @@ date = datetime.today().strftime('%d/%m/%Y')
 date_now = datetime.today().strftime('%d/%m/%Y')
 print(date_now)
 TOKEN = config("CAPITAN_SPOK_TOKEN")
-
 chat_ide = config("DISCOVERY_CHAT_TOKEN")
 bot_tokey_key = config("CAPITAN_SPOK_TOKEN")
-
-
+client = MongoClient(config("MONGO_DB"))
 
 
 def send_telegram(message, bot_tokey_key, chat_ide):
@@ -28,14 +21,8 @@ def send_telegram(message, bot_tokey_key, chat_ide):
             
     data= {'chat_id': chat_ide ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
-
-
-client = MongoClient(config("MONGO_DB"))
-
-        
 db = client["scrap"]
 collection = db["scrap"] 
-
 
 
 ## QUERYS DE MONGO PARA BUSCAR OFERTAS O PRECIOS BUGS 
