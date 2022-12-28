@@ -196,7 +196,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName}  se elimina  marca")
-        brand=(context.args[0]).replace("%","")
+        brand=(context.args[0])
         category=context.args[1]
 
         delete_brand(brand,category,bot_token ,chat_id)

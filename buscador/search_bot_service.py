@@ -180,6 +180,7 @@ def add_brand_list(brand,category,bot_token,chat_id):
 
 def delete_brand(brand,category,bot_token,chat_id):
     
+    brand = brand.replace("%"," ")
     db = client["brands"]
     collection= db[category]
     collection.delete_one({"brand":brand})
