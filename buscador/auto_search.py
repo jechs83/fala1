@@ -23,3 +23,11 @@ auto_telegram("tecno", bd1,bd2,bot_token, chat_id)
 auto_telegram("juguetes", bd1,bd2,bot_token, chat_id)
 
 auto_telegram("ropa", bd1,bd2,bot_token, chat_id)
+
+auto_telegram("bicicleta", bd1,bd2,bot_token, chat_id)
+
+auto_telegram("celular", bd1,bd2,bot_token, chat_id)
+
+auto_telegram("herramientas", bd1,bd2,bot_token, chat_id)
+
+
