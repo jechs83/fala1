@@ -3,7 +3,7 @@ from bot_unique import super_bot
 
 
 TOKEN = config("RICHI_BOY_TOKEN")
-chat_id = config("RICHI_CHAT_TOKEN")
+chat_id = config("DISCOVERY_CHAT_TOKEN")
 bot_token = config("RICHI_BOY_TOKEN")
 db1 = "excelsior1"
 db2 = "excelsior2"
