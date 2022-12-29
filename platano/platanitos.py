@@ -34,8 +34,12 @@ def scrap (web):
     res=requests.get(web,  proxies= proxies)
     print("Respuesta del servidor :"+str(res.status_code))
     soup = BeautifulSoup(res.text, "html.parser")
-
     data = soup.find_all("div", class_="col-flt col-3")
+    print()
+    print(data)
+
+    if data == []:
+        return False
 
 
     # try:
@@ -53,7 +57,6 @@ def scrap (web):
          product = producto.find("p", class_="nd-ct__item-title line-clamp-2").text
         except: return False
 
-        
        
         if idx == 0:
             if firstProduct == product:
@@ -68,7 +71,7 @@ def scrap (web):
          brand = brand.split()
          brand = brand[0]
         except: brand = None
-
+        
    
 
         try:
@@ -105,16 +108,16 @@ def scrap (web):
 
 
      
-        print()
-        print(idx+1)
-        print(brand)
-        print(product)
-        print(list_price)
-        print(best_price)
-        print(image)
-        print(link)
-        print(sku)
-        print("descuento " +str(dsct))
+        # print()
+        # print(idx+1)
+        # print(brand)
+        # print(product)
+        # print(list_price)
+        # print(best_price)
+        # print(image)
+        # print(link)
+        # print(sku)
+        # print("descuento " +str(dsct))
 
         # print(dsct)
 
@@ -129,6 +132,7 @@ def scrap (web):
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
         except:
+            print("no pudo grabar")
             break
     
 
@@ -167,6 +171,7 @@ def platanito_scrapper():
             succes = scrap(url) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
             print(succes)
             if succes == False:
+                print("se rompe bucle")
                 break
 
        
