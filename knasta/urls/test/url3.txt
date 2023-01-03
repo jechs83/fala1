@@ -1,2 +1,2 @@
-https://knasta.pe/results?partners=oechsle&page=
-https://knasta.pe/results?partners=wong&page=
+https://knasta.pe/results?partners=oechsle&order=asc&page=
+https://knasta.pe/results?partners=wong&order=asc&page=

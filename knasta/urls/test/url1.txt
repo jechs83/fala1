@@ -1,2 +1,2 @@
-https://knasta.pe/results?partners=shopstar&page=
-https://knasta.pe/results?category=160002&page=
+https://knasta.pe/results?partners=shopstar&order=asc&page=
+https://knasta.pe/results?category=160002&order=asc&page=

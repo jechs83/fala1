@@ -127,11 +127,11 @@ def scrap (web):
 
         bd_name_store = "knasta"
         collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "Cariñositos"    # COLECCION
+        market = "carinositos"    # COLECCION
         
         card_dsct = 0
         date_time = load_datetime()
-        brand = "knasta"
+        brand = "carinositos"
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
