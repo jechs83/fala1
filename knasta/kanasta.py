@@ -105,13 +105,14 @@ def scrap (web):
         if sku ==0:
             continue
 
-        try:
-            dsct = x[i]["percent"]
-            if dsct[:1] == "-":
-                dsct = str(dsct).replace("-","")
-                dsct = round(float(dsct))
-        except: 
-            dsct = 0
+    
+        dsct = x[i]["percent"]
+        print(type(dsct))
+        if dsct >0:
+            
+            dsct = round(float(dsct))
+        else:
+           dsct = 0
 
         
 
