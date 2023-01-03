@@ -25,7 +25,7 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
-web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=21&_to=41&O=OrderByScoreDESC&"
+web = "https://www.plazavea.com.pe/tecnologia?page="
 def scrap (web):
 
     proxies = {"http":"http://"+web_ram }
