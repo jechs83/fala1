@@ -107,15 +107,18 @@ def scrap (web):
 
     
         dsct = x[i]["percent"]
-        print(type(dsct))
-        if dsct >0:
-            
+        print(dsct)
+        print("################")
+        if dsct < 0:
+            dsct = str(dsct).replace("-","")
             dsct = round(float(dsct))
         else:
-           dsct = 0
+            dsct = 0
+            
+            
 
         
-
+        print("esto es el descuento #################")
         print(dsct)
       
 
