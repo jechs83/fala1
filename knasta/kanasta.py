@@ -127,7 +127,7 @@ def scrap (web):
 
         bd_name_store = "knasta"
         collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "knasta"    # COLECCION
+        market = "Cariñositos"    # COLECCION
         
         card_dsct = 0
         date_time = load_datetime()
