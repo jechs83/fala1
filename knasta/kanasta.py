@@ -48,8 +48,7 @@ def scrap (web):
      
     except: return False
 
-    with open ("/Users/javier/GIT/fala/knasta/source.txt", "w+") as t:
-        t.write(str(x))
+   
 
 
 
