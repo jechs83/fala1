@@ -1,1 +1,1 @@
-https://knasta.pe/results?category=100082&order=asc&page=
+https://knasta.pe/results?order=asc&page=

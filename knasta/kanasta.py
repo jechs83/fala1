@@ -44,7 +44,12 @@ def scrap (web):
     js = json.loads(data)
     try:
      x = js["props"]["pageProps"]["initialData"]["products"]
+
+     
     except: return False
+
+    with open ("/Users/javier/GIT/fala/knasta/source.txt", "w+") as t:
+        t.write(str(x))
 
 
 
@@ -55,8 +60,11 @@ def scrap (web):
          brand = x[i]["title"]
         except: brand= "None"
 
+        try:
+         brand = x[i]["brand"]
+        except: brand= "None"
 
-
+        print("LAM MARCA ES LA SIGUIENTE")
         print(brand)
 
 
@@ -137,8 +145,8 @@ def scrap (web):
         date_time = load_datetime()
         brand = "carinositos"
 
-        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+        # save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
+        #                     best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
 
 def scrap_category(category_url):
