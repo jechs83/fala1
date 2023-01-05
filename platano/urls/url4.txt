@@ -1,8 +1,1 @@
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda+-+hombres&sort=timestamp_active+desc&title=Moda+-+hombres&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Deportes+y+aire+libre&sort=timestamp_active+desc&title=Deportes+y+aire+libre&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Juguetes+y+juegos&sort=timestamp_active+desc&title=Juguetes+y+juegos&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Hogar+y+cocina&sort=timestamp_active+desc&title=Hogar+y+cocina&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Salud+y+cuidado+personal&sort=timestamp_active+desc&title=Salud+y+cuidado+personal&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Belleza&sort=timestamp_active+desc&title=Belleza&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Productos+de+oficina&sort=timestamp_active+desc&title=Productos+de+oficina&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda+-+mujeres&sort=timestamp_active+desc&title=Moda+-+mujeres&start=
+https://platanitos.com/catalogo?title=Equipaje+y+artículos+de+viaje&breadcrumbs%5B0%5D=Equipaje+y+artículos+de+viaje&sort=discount_percentage+desc&start=

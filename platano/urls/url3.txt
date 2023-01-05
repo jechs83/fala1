@@ -1,7 +1,2 @@
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&filter_genders%5B0%5D=Mujer&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&filter_genders%5B0%5D=Hombre&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&filter_genders%5B0%5D=Niña&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&filter_genders%5B0%5D=Niño&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&filter_genders%5B0%5D=Bebé&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Moda&sort=timestamp_active+desc&start=
+https://platanitos.com/catalogo?title=Hogar+y+cocina&breadcrumbs%5B0%5D=Hogar+y+cocina&sort=discount_percentage+desc&start=
+https://platanitos.com/catalogo?title=Ofertas&filter_discount_percentage[]=%5B10%2C%7D&sort=discount_percentage+desc&start=

@@ -1,4 +1,1 @@
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Insumos+para+mascotas&sort=timestamp_active+desc&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Abarrotes+y+comida+gourmet&sort=timestamp_active+desc&title=Abarrotes+y+comida+gourmet&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Herramientas+y+mejoras+para+el+hogar&sort=timestamp_active+desc&title=Herramientas+y+mejoras+para+el+hogar&start=
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Industrial+y+científica&sort=timestamp_active+desc&title=Industrial+y+científica&start=
+https://platanitos.com/catalogo?title=Moda+-+hombres&breadcrumbs%5B0%5D=Moda+-+hombres&sort=discount_percentage+desc&start=

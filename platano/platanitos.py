@@ -35,8 +35,7 @@ def scrap (web):
     print("Respuesta del servidor :"+str(res.status_code))
     soup = BeautifulSoup(res.text, "html.parser")
     data = soup.find_all("div", class_="col-flt col-3")
-    print()
-    print(data)
+   
 
     if data == []:
         return False
@@ -108,18 +107,17 @@ def scrap (web):
 
 
      
-        # print()
-        # print(idx+1)
-        # print(brand)
-        # print(product)
-        # print(list_price)
-        # print(best_price)
-        # print(image)
-        # print(link)
-        # print(sku)
-        # print("descuento " +str(dsct))
-
-        # print(dsct)
+        print()
+        print(idx+1)
+        print(brand)
+        print(product)
+        print(list_price)
+        print(best_price)
+        print(image)
+        print(link)
+        print(sku)
+        print("descuento " +str(dsct))
+        
 
         bd_name_store = "platanitos"
         collection = "market"  #   NOMBRE DE BASE DE DATOS
@@ -150,47 +148,43 @@ x = f.readlines()
 for i in x:
     array_tec.append(i.rstrip()) 
 
-print(array_tec)
+#print(array_tec)
 
 count = len(array_tec)
 
 def platanito_scrapper():
-    page = -100
-    for id, val in enumerate(array_tec):
-                                                                                                                                                                                                                                                                                      
-        for i in range (200) : 
 
-            page = page+100  
+    try:
+        page = -100
+        for id, val in enumerate(array_tec):
+                                                                                                                                                                                                                                                                                        
+            for i in range (200) : 
 
-            if val[-4:]=="desc":
-                url = val  
-            if val[-1:]   == "=" :
-                url =    val+str(page)                                                                                                                                                                                                                                                                      
-            
-            print(url)
-            succes = scrap(url) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-            print(succes)
-            if succes == False:
-                print("se rompe bucle")
-                break
+                page = page+100  
 
-       
+                if val[-4:]=="desc":
+                    url = val  
+                if val[-1:]   == "=" :
+                    url =    val+str(page)                                                                                                                                                                                                                                                                      
+                
+                print(url)
+                succes = scrap(url) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+                print(succes)
+                if succes == False:
+                    print("se rompe bucle")
+                    break
 
-        if id == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(10)
-            
-            platanito_scrapper() 
         
 
-
-
+            if id == count-1:
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(10)
+                
+                platanito_scrapper() 
+    except:
+           platanito_scrapper()
+            
 platanito_scrapper()
-
-
-
-
-
 
 
 

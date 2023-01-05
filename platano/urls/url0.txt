@@ -1,12 +1,1 @@
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Pequeños+accesorios&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Purificadores+de+aire&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Lavadoras+y+secadoras&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Aspiradoras+y+cuidado+de+pisos&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Refrigeradores&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Deshumidificadores&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Estufas&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Hornos+de+microondas&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Ventiladores&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Campanas&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Humidificadores&sort=timestamp_active+desc
-https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Electrodomésticos&sort=timestamp_active+desc&start=
+https://platanitos.com/catalogo?title=Electrónica&breadcrumbs%5B0%5D=Electrónica&sort=discount_percentage+desc&start=
