@@ -150,7 +150,7 @@ for i in x:
 count =(len(array_tec))
 
 def ripley_scrap():
-    #try:
+    try:
         for id, val in enumerate(array_tec):
         
             for i in range(200):
@@ -166,8 +166,8 @@ def ripley_scrap():
                     print("se acabo la web y va comenzar a dar vueltas")
                     time.sleep(5)
                     ripley_scrap()
-    #except: 
-     #   ripley_scrap()
+    except: 
+       ripley_scrap()
 
 
 ripley_scrap()
