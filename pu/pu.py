@@ -34,7 +34,7 @@ def shop(web):
 
     elements=soup.find_all("li", class_="item product product-item")
     if not elements:
-        return True
+        return False
     
     for idx, i in enumerate(elements):
     
@@ -42,9 +42,12 @@ def shop(web):
             link=i.find("a", class_="product-item-link").attrs.get("href")
         except: link = None
 
+        
+
         try:
             brand=i.find( "div" ,class_="product details product-item-details").find("span", class_="list_item_product_manufacturer").text
         except: brand = "Null"
+
 
         try:
             best_price=i.find("div", class_="price-box price-final_price").find("span",class_="price-container price-final_price tax weee").find("span", class_="price").text
@@ -59,18 +62,9 @@ def shop(web):
 
         try:
             list_price=i.find("div", class_="price-box price-final_price").find("span",class_="old-price").find("span", class_="price").text
-            # best_price = best_price[1]
             list_price = list_price.replace("S/","").replace(",","").replace("S/. ","")
-            # if best_price != int or float:
-            #     best_price=i.find("div", class_="price-box price-final_price").text
-            #     best_price = best_price.split()
-            #     best_price = best_price[2]
-            #     best_price = best_price.replace("S/","").replace(",","").replace("S/. ","")
         except: list_price=0
-        # try:
-        #     list_price=i.find("span", class_="old-price").find("span,", class_="price").text
-        #     list_price = list_price.replace("S/","").replace(",","").replace("S/. ","")
-        # except: list_price = 0
+    
 
         try:
             sku=i.find("div", class_="product-item-inner").find("form").attrs.get("data-product-sku")
@@ -113,17 +107,6 @@ def shop(web):
         save_data_to_mongo_db(bd_name_store,collection, market,str(sku),brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
 
-# def scrapero(web):
-
-#     for i in range(1000):
-#         x = shop(web+str(i+1))
-#         print(web+str(i+1))
-#         if x == True:
-#             print(x)
-#             return False
-
-#         print("pagina "+str(i+1))
-
 
 array_tec=[]
 
@@ -137,33 +120,31 @@ for i in x:
     array_tec.append(i.rstrip())
 
 
-# for i,v in enumerate(array_tec):
 
-#     scrap =  scrapero(v)
-
-#     if scrap == False:
-#         continue
 count  = len(array_tec)
 def promart_scrap():
-    # try:
+    try:
         for i,v in enumerate(array_tec):
             print(array_tec)
 
             for e in range(1000):
                 x = shop(v+str(e+1))
                 print(v+str(e+1))
-                # if x == True:
-                #  print(x)
-                # break
+
+                if x == False:
+                    print("SE PARA PIRQUE NO  HAY MAS ")
+                    print(x)
+                    promart_scrap()
 
             # if i == count-1:
             #     print("se acabo la web y va comenzar a dar vueltas")
             #     time.sleep(5)
                 
             #     promart_scrap()
-    # except:
-    #     return promart_scrap()
+    except:
+        return promart_scrap()
 
         
+
 
 promart_scrap()
