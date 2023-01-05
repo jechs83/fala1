@@ -61,32 +61,39 @@ def scrap (web):
 
         image = i.find("img").attrs.get("src")
 
-        
-        best_price = i.find("span", class_="special-price").find("span",class_="price").text
-        best_price = best_price.split()
-        best_price= best_price[1].replace(",","")
+        try:
+            best_price = i.find("span", class_="special-price").find("span",class_="price").text
+            best_price = best_price.split()
+            best_price= best_price[1].replace(",","")
+        except:
+            best_price  = 0
+
 
         
         try:
             list_price = i.find("span", class_="old-price").text
-            list_price = list_price.split()[1].replace(",","")
+            print(list_price)
+            list_price = list_price.split()[3].replace(",","")
+      
             
         except: list_price = None
+        print(list_price)
+
 
         if list_price == None:
             try:
                 list_price = i.find("div", class_="price-box price-final_price").find("span", class_="price-label").find("span", class_="price").text
-               
-                #list_price = list_price.split()[1].replace(",","")
-            except: list_price = 0
+                list_price = list_price.split()[1].replace(",","")
+            except: 
+                try:
+                    list_price = i.find("div", class_="price-box price-final_price").find("span", class_="price").text
+                    list_price = list_price.split()[1].replace(",","")
+                except:
+                 list_price = 0
             
 
         print(list_price)
-        print("#########")
 
-        
-     
-        
       
 
 
