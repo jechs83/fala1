@@ -40,7 +40,7 @@ def buscador_richi():
     auto_telegram("herramientas", bd1,bd2,bot_token, chat_id)
     print("se pausa 10 min")
     print(hora())
-    time.sleep(60) #this will stop the program for 10 minutes
+    time.sleep(10*60) #this will stop the program for 10 minutes
     
 
 
