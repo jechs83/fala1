@@ -75,12 +75,16 @@ def scrap (web):
 
         if list_price == None:
             try:
-                list_price = i.find("div", class_="price-box price-final_price").find("span", class_="price").text
-                list_price = list_price.split()[1].replace(",","")
+                list_price = i.find("div", class_="price-box price-final_price").find("span", class_="price-label").find("span", class_="price").text
+               
+                #list_price = list_price.split()[1].replace(",","")
             except: list_price = 0
+            
 
+        print(list_price)
+        print("#########")
 
-  
+        
      
         
       
@@ -139,7 +143,7 @@ for i in x:
 count =(len(array_tec))
 
 def ripley_scrap():
-    try:
+    #try:
         for id, val in enumerate(array_tec):
         
             for i in range(200):
@@ -155,8 +159,8 @@ def ripley_scrap():
                     print("se acabo la web y va comenzar a dar vueltas")
                     time.sleep(5)
                     ripley_scrap()
-    except: 
-        ripley_scrap()
+    #except: 
+     #   ripley_scrap()
 
 
 ripley_scrap()
