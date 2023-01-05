@@ -10,6 +10,9 @@ from search_bot_service import  auto_telegram
 import time
 
 
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+
 TOKEN = config("RICHI_BOY_TOKEN")
 chat_id = config("RICHI_CHAT_TOKEN")
 bot_token = config("RICHI_BOY_TOKEN")
@@ -30,7 +33,8 @@ def buscador_richi():
     auto_telegram("celular", bd1,bd2,bot_token, chat_id)
 
     auto_telegram("herramientas", bd1,bd2,bot_token, chat_id)
-    print("se pausa 10 segudnos")
+    print("se pausa 10 min")
+    print(current_time)
     time.sleep(10*60) #this will stop the program for 10 minutes
     
 
