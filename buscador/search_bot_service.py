@@ -39,7 +39,7 @@ def busqueda(codigo,bot_token, chat_id):
     for i in t5:
         print(i)
         print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\n\nLink :"+i["link"],
+        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"] + i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"],
                        bot_token, chat_id)
 
 
