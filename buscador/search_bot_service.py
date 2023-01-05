@@ -33,7 +33,7 @@ collection5 = db5["scrap"]
 
 def busqueda(codigo,bot_token, chat_id):
       
-    t5 = collection5.find({"sku":str(codigo)})
+    t5 = collection5.find({"sku":str(codigo), "date":date})
     print( "se realizo busqueda")
     print(codigo)
     for i in t5:
