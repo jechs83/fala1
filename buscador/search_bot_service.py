@@ -233,7 +233,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id):
     db = client["scrap"]
     collection = db["scrap"]
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":60},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
+    t1 =  collection.find( {"web_dsct":{ "$gte":50},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
 
        
     collection_1 = db[ship_db1]
