@@ -32,7 +32,7 @@ def buscador():
 
     auto_telegram("ropa", bd1,bd2,bot_token, chat_id,porcentage)
 
-    auto_telegram("bicicleta", bd1,bd2,bot_token, chat_id,v)
+    auto_telegram("bicicleta", bd1,bd2,bot_token, chat_id,porcentage)
 
     auto_telegram("celular", bd1,bd2,bot_token, chat_id,porcentage)
 
