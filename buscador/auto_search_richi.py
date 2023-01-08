@@ -33,6 +33,9 @@ def buscador_richi():
 
     auto_telegram("ropa", bd1,bd2,bot_token, chat_id)
 
+    auto_telegram("perfumes", bd1,bd2,bot_token, chat_id)
+
+
     auto_telegram("bicicleta", bd1,bd2,bot_token, chat_id)
 
     auto_telegram("celular", bd1,bd2,bot_token, chat_id)
