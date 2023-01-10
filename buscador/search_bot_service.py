@@ -281,7 +281,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 continue
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
-
+    gc.collect()
 
 
 

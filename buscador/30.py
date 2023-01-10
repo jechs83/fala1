@@ -33,6 +33,7 @@ def buscador():
     time.sleep(30) #this will stop the program for 10 minutes
 
     buscador()
+    buscador()
 
 
 buscador()
