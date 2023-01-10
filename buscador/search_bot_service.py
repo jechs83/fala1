@@ -1,6 +1,7 @@
 import sys
 import time
 import requests
+import gc
 from pymongo import MongoClient
 import os
 import pymongo
@@ -286,19 +287,13 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
 
 def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
     print("se esta ejecutando")
-  
-
     product_array = []
-  
-
-    #for brand in array_brand:
      
     db = client["scrap"]
     collection = db["scrap"]
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date })
 
-       
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
@@ -344,6 +339,7 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
 
+    gc.collect()
 
 
 

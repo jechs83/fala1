@@ -1,14 +1,8 @@
 from datetime import datetime
-from telegram import ParseMode
 from decouple import config
-import telegram
-import logging
 import sys
 import time
-from telegram import message
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from search_bot_service import  auto_telegram
-
 
 
 TOKEN = config("ENTERPRISE_TOKEN")
