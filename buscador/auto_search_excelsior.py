@@ -29,7 +29,7 @@ def buscador():
 
     print("se pausa 10 min")
     print(hora())
-    time.sleep(5*60) #this will stop the program for 10 minutes
+    time.sleep(60) #this will stop the program for 10 minutes
 
     buscador()
 
