@@ -25,38 +25,49 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
-web = "https://www.plazavea.com.pe/tecnologia?page="
+web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=0&_to=20&O=OrderByScoreDESC&"
 def scrap (web):
 
     proxies = {"http":"http://"+web_ram }
-        
-    res=requests.get(web,  proxies= proxies)
-    print("Respuesta del servidor :"+str(res.status_code))
+    #res=requests.get(web,  proxies= proxies)
+    res = requests.get("https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=0&_to=-1&&", proxies = proxies).json()
+    #print("Respuesta del servidor :"+str(res.status_code))
 
    
-    res=requests.get(web,  proxies= proxies)
-    soup = BeautifulSoup(res.text, "html.parser")
-    print(soup)
-
-    with open ("/Users/javier/GIT/fala/plazavea/json.txt", "w") as f:
-        f.write(str(soup))
+    # res=requests.get(web,  proxies= proxies)
+    # soup = BeautifulSoup(res.text, "html.parser")
 
 
-    # json_data = json.loads(soup)
+    #print(res)
 
 
-    # print(json_data)
-scrap(web)
 #     lista = []
 #     #elements = soup.find("div",class_="ShowcaseGrid")
  
 #     elements = soup.find_all("div",class_="Showcase__content")
    
-#     for idx,i   in  enumerate (elements):
-#         # print(i.text)
-#         # time.sleep(20)
+    for idx,i   in  enumerate (res):
+        # print(i.text)
+        # time.sleep(20)
         
-#         product = (i["title"])
+        product = i["productName"]
+        brand = i["brand"]
+        sku = i["productReference"]
+        link= i["link"]
+        price_list = i["items"][0]["sellers"][0]["commertialOffer"]["ListPrice"]
+        best_price=   i["items"][0]["sellers"][0]["commertialOffer"]["Price"]
+
+        print()
+        print(brand)
+        print(product)
+        print(sku)
+        print(link)
+        print(price_list)
+        print()
+        print(best_price)
+        
+
+scrap(web)
 #         product = product.replace("'","")
 #         link = i.find("a", class_="Showcase__link").attrs.get("href")
        

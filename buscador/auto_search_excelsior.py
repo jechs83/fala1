@@ -8,6 +8,7 @@ import time
 from telegram import message
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from search_bot_service import  auto_telegram ,auto_telegram_total
+import gc
 
 
 
@@ -31,6 +32,7 @@ def buscador():
     print(hora())
     time.sleep(5*60) #this will stop the program for 10 minutes
 
+    gc.collect()
     buscador()
 
 
