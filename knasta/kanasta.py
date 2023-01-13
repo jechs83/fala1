@@ -6,6 +6,7 @@ from datetime import datetime
 import random
 import time
 import json
+import gc
 from bd_record import save_data_to_mongo_db
 from datetime import datetime
 from datetime import date
@@ -146,6 +147,8 @@ def scrap (web):
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+
+    gc.collect()
 
 
 def scrap_category(category_url):
