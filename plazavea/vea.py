@@ -36,11 +36,6 @@ def scrap (web):
     for idx,i   in  enumerate (res):
 
         sku = i["productReference"]
-
-        # if sku ==  False or "":
-        #         print("no hay stock")
-        #         continue
-
         product = i["productName"]
         brand = i["brand"]
         link= i["link"]
@@ -49,7 +44,6 @@ def scrap (web):
         best_price=   i["items"][0]["sellers"][0]["commertialOffer"]["Price"]
         stock=  i["items"][0]["sellers"][0]["commertialOffer"]["IsAvailable"]
 
-       
 
         dsct = (list_price*100/best_price)-100
         if dsct == 100:
@@ -67,8 +61,6 @@ def scrap (web):
         print(best_price)
         print(stock)
         
-     
-
         bd_name_store = "plaza"
             # collection = "market"  #   NOMBRE DE BASE DE DATOS
         market = "vea"    # COLECCION
@@ -76,8 +68,6 @@ def scrap (web):
         card_price = 0
         date_time = load_datetime()
 
-    
-      
         save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
                                 best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
         print("graba")
