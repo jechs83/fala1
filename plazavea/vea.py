@@ -25,119 +25,71 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
-web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=0&_to=20&O=OrderByScoreDESC&"
+web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=21&_to=41&O=OrderByScoreDESC&"
 def scrap (web):
 
     proxies = {"http":"http://"+web_ram }
     #res=requests.get(web,  proxies= proxies)
-    res = requests.get("https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=0&_to=-1&&", proxies = proxies).json()
+    res = requests.get(web, proxies = proxies).json()
     #print("Respuesta del servidor :"+str(res.status_code))
 
-   
-    # res=requests.get(web,  proxies= proxies)
-    # soup = BeautifulSoup(res.text, "html.parser")
-
-
-    #print(res)
-
-
-#     lista = []
-#     #elements = soup.find("div",class_="ShowcaseGrid")
- 
-#     elements = soup.find_all("div",class_="Showcase__content")
-   
     for idx,i   in  enumerate (res):
-        # print(i.text)
-        # time.sleep(20)
-        
+
+        sku = i["productReference"]
+
+        # if sku ==  False or "":
+        #         print("no hay stock")
+        #         continue
+
         product = i["productName"]
         brand = i["brand"]
-        sku = i["productReference"]
         link= i["link"]
-        price_list = i["items"][0]["sellers"][0]["commertialOffer"]["ListPrice"]
+        image = i["items"][0]["images"][0]["imageUrl"]
+        list_price = i["items"][0]["sellers"][0]["commertialOffer"]["ListPrice"]
         best_price=   i["items"][0]["sellers"][0]["commertialOffer"]["Price"]
+        stock=  i["items"][0]["sellers"][0]["commertialOffer"]["IsAvailable"]
 
+       
+
+        dsct = (list_price*100/best_price)-100
+        if dsct == 100:
+            dsct = 0
+        dsct = round(dsct)
         print()
         print(brand)
         print(product)
         print(sku)
         print(link)
-        print(price_list)
+        print(image)
+        print(list_price)
         print()
+        print(dsct)
         print(best_price)
+        print(stock)
         
+     
+
+        bd_name_store = "plaza"
+            # collection = "market"  #   NOMBRE DE BASE DE DATOS
+        market = "vea"    # COLECCION
+        card_dsct = 0
+        card_price = 0
+        date_time = load_datetime()
+
+    
+      
+        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+                                best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+        print("graba")
+    print("termino")
+        
+
+
+# for i  in range (500):
+#     print(web+str(i+1))
+#     scrap(web+str(i+1))
 
 scrap(web)
-#         product = product.replace("'","")
-#         link = i.find("a", class_="Showcase__link").attrs.get("href")
-       
-#         price = i.find("div", class_="Showcase__priceBox__col").text
-#         price = price.split()
-#         list_price = price[1].replace(",","")# normal
-#         best_price = price[3].replace(",","") # online
-#         brand = i.find("div", class_ = "Showcase__brand").text
-#         brand = brand.strip()
-#         brand = brand.replace("'","")
-#         image = i.find("figure", class_="Showcase__photo").find("img").attrs.get("src")
-
-#         try:
-#          dsct = round ( (float(best_price)*100/float(list_price)))
-#         except: dsct = 0
-      
-      
-#         #print(product)
-#         print(list_price)
-#         print(best_price)
-#         print(dsct)
-
-     
-#         market = "vea"    # COLECCION
-#         dsct = dsct
-#         card_price =0
-#         sku = "null"
-#         # bd_name_store = "plaza"
-#         # collection = "market"  #   NOMBRE DE BASE DE DATOS
-#         # date_time = load_datetime()
-        
-#         card_dsct = 0
-
-#         arr = [{"market":market,
-#                 "sku":sku,"brand":brand,
-#                 "product":product,
-#                 "list_price":str(list_price),
-#                  "best_price":str(best_price),
-#                  "card_price":str(card_price),
-#                  "link":link,
-#                  "image":image,
-#                  "web_dsct":str(dsct),
-#                   "card_dsct":str(card_dsct) 
-#                   }]
-
-#         lista.append(arr)
-#     lista = str(lista)
-#     lista = lista.replace("'",'"').replace("[","").replace("]","")
-#     lista = "["+lista+"]"
-
-
-#     bd_name_store = "plaza"
-    
-#     collection = "market"  #   NOMBRE DE BASE DE DATOS
-#     date_time = load_datetime()
-#     db = client[bd_name_store]
-#     collection = db[collection]
-#     # with open ("/Users/javier/GIT/fala/plazavea/json.txt", "r") as f:
-        
-#     lista = json.loads(lista)
- 
-#     collection.insert_many(lista)
-
-
-# web = "https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/678/&_from=84&_to=104&O=OrderByScoreDESC&"
-# # for i  in range (500):
-# #     print(web+str(i+1))
-# #     scrap(web+str(i+1))
-
-# scrap(web)
 
             
 
