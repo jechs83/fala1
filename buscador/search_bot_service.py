@@ -13,6 +13,7 @@ from telegram import ParseMode
 from pandas import DataFrame
 import pandas as pd
 import pytz
+import gc
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
@@ -42,6 +43,7 @@ def busqueda(codigo,bot_token, chat_id):
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"],
                        bot_token, chat_id)
+    gc.collect()
 
 
 def search_brand_dsct(brand,dsct, bot_token, chat_id):
@@ -66,6 +68,8 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
 
         send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
+    gc.collect()
+        
 
 
 def search_market_dsct(market,dsct, bot_token, chat_id):
@@ -92,6 +96,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
 
         send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
+    gc.collect()
 
 
 
@@ -132,6 +137,7 @@ def brand_list(ropa,cat, bot_token,chat_id):
         print("se envio lista ropa")      
         send_telegram ("brand",
                        bot_token, chat_id)
+    gc.collect()
 
 
 ###############################################################################
@@ -161,6 +167,7 @@ def save_brand_to_mongodb(brand,category):
 
             }
             collection.insert_one(data)
+        gc.collect()
 
 
 
@@ -176,6 +183,7 @@ def add_brand_list(brand,category,bot_token,chat_id):
         save_brand_to_mongodb(brand,category)
     
     send_telegram(" se grabo la Marca en la lista de busqueda  ", bot_token, chat_id)
+    gc.collect()
 
 
 
@@ -187,6 +195,7 @@ def delete_brand(brand,category,bot_token,chat_id):
     collection.delete_one({"brand":brand})
     
     send_telegram(" se elimino la marca ingresa ", bot_token, chat_id)
+    gc.collect()
 
 
 def read_category (bot_token,chat_id):
@@ -196,6 +205,7 @@ def read_category (bot_token,chat_id):
         categories.append(i)
     
     send_telegram( str(categories), bot_token, chat_id)
+    gc.collect()
 
 
 
@@ -212,6 +222,7 @@ def read_brands(category, bot_token,chat_id):
 
     send_telegram( str(list_brand), bot_token, chat_id)
     send_telegram(" Busqueda de marcas de 70%  a  mas ", bot_token, chat_id)
+    gc.collect()
 
 ############################
 
@@ -371,6 +382,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
         send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"]))
                         ,bot_token, chat_id)
         time.sleep(2)
+    gc.collect()
     
              
 
@@ -429,6 +441,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
 
     send_telegram(html, bot_token, chat_id )
     print("se envia html")
+    gc.collect()
 
 
 # SE BUSCA POR PRODUCTO 
@@ -476,6 +489,7 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     #print(html)
     # send_telegram(html, bot_token, chat_id )
     # os.remove(config("HTML_PATH")+"producto.html")
+    gc.collect()
 
 def test2(codigo,bot_token, chat_id):
       
@@ -487,6 +501,7 @@ def test2(codigo,bot_token, chat_id):
         print("se envio a telegram")      
         send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"],
                        bot_token, chat_id)
+    gc.collect()
       
 
 
@@ -533,7 +548,7 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     #print(html)
     # send_telegram(html, bot_token, chat_id )
     # os.remove(config("HTML_PATH")+"producto.html")
-
+    gc.collect()
 
 try:      
     argument = sys.argv[1] 
