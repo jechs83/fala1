@@ -3,6 +3,7 @@ from decouple import config
 import sys
 import time
 from search_bot_service import  auto_telegram
+import gc
 
 
 TOKEN = config("ENTERPRISE_TOKEN")
@@ -35,7 +36,7 @@ def buscador():
     print("se pausa 10 min")
     print(hora())
     time.sleep(5*60) #this will stop the program for 10 minutes
-
+    gc.collect()
     buscador()
 
 
