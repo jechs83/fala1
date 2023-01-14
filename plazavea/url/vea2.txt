@@ -1,0 +1,4 @@
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/1761/&_from= &_to=
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/1409/&_from= &_to=
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/681/&_from= &_to=
+https://www.plazavea.com.pe/api/catalog_system/pub/products/search?fq=C:/1105/&_from= &_to=
