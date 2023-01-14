@@ -16,7 +16,7 @@ chat_id = config("DISCOVERY_CHAT_TOKEN")
 bot_token = config("CAPITAN_SPOK_TOKEN")
 bd1 = "discovery1"
 bd2 = "discovery2"
-dsct = 60
+dsct = 70
 
 def hora():
     now = datetime.now()
@@ -30,7 +30,7 @@ def buscador():
 
     print("se pausa 10 min")
     print(hora())
-    time.sleep(30) #this will stop the program for 10 minutes
+    time.sleep(60) #this will stop the program for 10 minutes
 
     buscador()
     buscador()
