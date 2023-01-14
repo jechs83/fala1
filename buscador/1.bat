@@ -1,0 +1,1 @@
+start python  /Users/javier/GIT/fala/buscador/30.py
