@@ -1,1 +1,2 @@
-start python  /Users/javier/GIT/fala/buscador/30.py
+
+title Discovery 70% && python  C:\Git\fala\buscador\30.py

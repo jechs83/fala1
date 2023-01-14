@@ -4,10 +4,9 @@ import time
 
 def open_python():
 
-    subprocess.call([r'/Users/javier/GIT/fala/buscador/1.bat'])
+    subprocess.call([r'C:\Git\fala\buscador\00.bat'])
 
-
-    time.sleep(60)
+    time.sleep(5*60)
 
     open_python()
 

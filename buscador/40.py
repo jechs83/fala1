@@ -25,12 +25,11 @@ def hora():
 def buscador():
     auto_telegram_total( bd1,bd2,bot_token, chat_id, dsct)
 
-    print("se pausa 10 min")
-    print(hora())
-    time.sleep(120) #this will stop the program for 10 minutes
+    #print("se pausa 1 min")
+    #print(hora())
+    #time.sleep(60) #this will stop the program for 10 minutes
 
-    gc.collect()
-    buscador()
+  
 
 
 buscador()

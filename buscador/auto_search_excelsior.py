@@ -28,12 +28,8 @@ def buscador():
     auto_telegram_total( bd1,bd2,bot_token, chat_id, porcentage)
 
 
-    print("se pausa 10 min")
     print(hora())
-    time.sleep(60) #this will stop the program for 10 minutes
-
-    gc.collect()
-    buscador()
+  
 
 
 buscador()
