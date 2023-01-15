@@ -439,9 +439,9 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
         f.close
     print(html)
 
-    send_telegram(html, bot_token, chat_id )
-    print("se envia html")
-    gc.collect()
+    #send_telegram(html, bot_token, chat_id )
+    #print("se envia html")
+    #gc.collect()
 
 
 # SE BUSCA POR PRODUCTO 

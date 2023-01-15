@@ -244,8 +244,12 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         document = open(config("HTML_PATH")+market+".html", 'rb')
         context.bot.send_document(chat_id, document)
+        document.close()
         os.remove(config("HTML_PATH")+market+".html")
-
+        print("pasa por aqui")
+       
+      
+        
 ### 14 CREA HTML DE BUSQUEDA DE PALABRA CONTENIDA EN EL NOMBRE DEL PRODUCTO Y DSCT PERSONALIZADO POSIBLE ORDENAR PRECIO MAYOR A MENOR
     def send_product(update, context):
         chat_id = update.message.chat_id
@@ -264,6 +268,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         document = open(config("HTML_PATH")+"producto.html", 'rb')
         context.bot.send_document(chat_id, document)
+        document.close()
         os.remove(config("HTML_PATH")+"producto.html")
 
 
@@ -300,6 +305,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         document = open(config("HTML_PATH")+brand+".html", 'rb')
         context.bot.send_document(chat_id, document)
+        document.close()
         os.remove(config("HTML_PATH")+brand+".html")
 
 
