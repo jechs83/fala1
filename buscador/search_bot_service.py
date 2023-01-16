@@ -34,7 +34,7 @@ collection5 = db5["scrap"]
   
 
 def busqueda(codigo,bot_token, chat_id):
-      
+    db5.command({"planCacheClear": "scrap"})
     t5 = collection5.find({"sku":str(codigo), "date":date})
     print( "se realizo busqueda")
     print(codigo)
@@ -47,6 +47,7 @@ def busqueda(codigo,bot_token, chat_id):
 
 
 def search_brand_dsct(brand,dsct, bot_token, chat_id):
+    db5.command({"planCacheClear": "scrap"})
     print
     print(bot_token)
     print(chat_id)
@@ -73,6 +74,7 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
 
 
 def search_market_dsct(market,dsct, bot_token, chat_id):
+    db5.command({"planCacheClear": "scrap"})
     print
     print(bot_token)
     print(chat_id)
@@ -127,8 +129,10 @@ products = []
 
 
 def brand_list(ropa,cat, bot_token,chat_id):
+    
     db_cat = client["scrap"]
     collection_cat = db_cat[cat]   
+    db_cat.command({"planCacheClear": cat})
 
     t9 = collection_cat.find({})
 
@@ -149,6 +153,7 @@ def save_brand_to_mongodb(brand,category):
 
         db = client["brands"]
         collection= db[category]
+        db.command({"planCacheClear": category})
       
         x = collection.find_one({"brand":brand})
       
@@ -175,7 +180,9 @@ def add_brand_list(brand,category,bot_token,chat_id):
 
     db = client["brands"]
     collection= db[category]
+    db.command({"planCacheClear": "brands"})
     t9 = collection.find({})
+    
 
     for i in t9:
         print(i)
@@ -229,6 +236,7 @@ def read_brands(category, bot_token,chat_id):
 
 
 def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
+    
     print("se esta ejecutando")
     db = client["brands"]
     collection= db[category]
@@ -244,6 +252,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
      
     db = client["scrap"]
     collection = db["scrap"]
+    db.command({"planCacheClear": "scrap"})
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
 
@@ -302,8 +311,9 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
      
     db = client["scrap"]
     collection = db["scrap"]
+    db.command({"planCacheClear": "scrap"})
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date })
+    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date }).sort({"_id":pymongo.ASCENDING})
 
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
@@ -359,6 +369,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
     
     db = client["brands"]
     collection= db[category]
+    
     t9 = collection.find({})
 
     array_brand= []
@@ -371,8 +382,12 @@ def manual_telegram( category, dsct, bot_token, chat_id):
      
     db = client["scrap"]
     collection = db["scrap"]
+    db.command({"planCacheClear": "scrap"})
 
+    
 # t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) ]}})
+   
+    #db.command({"planCacheClear": "scrap"})
     t1 =  collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ] }})
     print(t1)
     print("pasa por aqui")
@@ -387,6 +402,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
              
 
 def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
+    db5.command({"planCacheClear": "scrap"})
     
     if price == None:
 
@@ -446,6 +462,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
 
 # SE BUSCA POR PRODUCTO 
 def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
+    db5.command({"planCacheClear": "scrap"})
     product = str(product).replace("%"," ")
     print(price)
     if price == "+":
@@ -492,6 +509,7 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     gc.collect()
 
 def test2(codigo,bot_token, chat_id):
+    db5.command({"planCacheClear": "scrap"})
       
     t5 = collection5.find({"sku":str(codigo)})
     print( "se realizo busqueda")
@@ -507,6 +525,7 @@ def test2(codigo,bot_token, chat_id):
 
 
 def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
+    db5.command({"planCacheClear": "scrap"})
     brand = str(brand).replace("%"," ")
     print(price)
     if price == "+":
