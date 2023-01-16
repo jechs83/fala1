@@ -17,9 +17,17 @@ import gc
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
-date = peru_date.strftime("%d/%m/%Y" )
+#date = peru_date.strftime("%d/%m/%Y" )
 
 #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
+
+
+def dia():
+    now = datetime.now()
+    date = now.strftime("%d/%m/%Y")
+    return date
+
+date = dia()
 
 def send_telegram(message, bot_token, chat_id):
     requests.post("https://api.telegram.org/bot"+str(bot_token)+"/sendMessage",
@@ -31,7 +39,9 @@ client = MongoClient(config("MONGO_DB"))
 db5 = client["scrap"]
 collection5 = db5["scrap"] 
 
-  
+
+
+
 
 def busqueda(codigo,bot_token, chat_id):
     db5.command({"planCacheClear": "scrap"})

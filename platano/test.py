@@ -1,3 +1,13 @@
-t = "https://platanitos.com/catalogo?breadcrumbs[]=Electrodomésticos+>+Purificadores+de+aire&sort=timestamp_active+desc="
+from datetime import datetime
 
-print(t[-1:])
+def hora():
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    date = now.strftime("%d/%m/%Y" )
+    print(date)
+    return current_time
+
+
+
+hora()
+
