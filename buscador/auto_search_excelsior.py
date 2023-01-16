@@ -29,6 +29,8 @@ def buscador():
 
 
     print(hora())
+    time.sleep(60)
+    buscador()
   
 
 
