@@ -313,7 +313,7 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
     collection = db["scrap"]
     db.command({"planCacheClear": "scrap"})
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date }).sort({"_id":pymongo.ASCENDING})
+    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date })
 
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
