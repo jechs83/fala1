@@ -15,7 +15,7 @@ client = MongoClient(config("MONGO_DB"))
 
 
 def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct,current_date,current_time):
+                            best_price,card_price,link,image,dsct, card_dsct,current_date,current_time, web):
 
                          
        
@@ -45,7 +45,8 @@ def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
             "link": str(link),
             "image": str(image),
             "date":current_date,
-            "time":current_time
+            "time":current_time,
+            "home_list":web
             }}
             collection.update_one(filter,newvalues)
  
@@ -66,7 +67,8 @@ def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
             "link": str(link),
             "image": str(image),
             "date":current_date,
-            "time":current_time
+             "time":current_time,
+            "home_list":web
             }
             collection.insert_one(data)
           
@@ -89,7 +91,8 @@ def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
             "link": str(link),
             "image": str(image),
             "date":current_date,
-            "time":current_time
+            "time":current_time,
+            "home_list":web
             }}
            
             collection_max.update_one(filter,newvalues)
@@ -110,7 +113,8 @@ def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
             "link": str(link),
             "image": str(image),
             "date":current_date,
-            "time":current_time
+             "time":current_time,
+            "home_list":web
             }
           
             collection_max.insert_one(data)
