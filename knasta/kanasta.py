@@ -146,7 +146,7 @@ def scrap (web):
         brand = "carinositos"
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
 
     gc.collect()
 

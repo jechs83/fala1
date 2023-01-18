@@ -106,7 +106,7 @@ def shop(web):
 
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
 
         print("product number "+ str(idx+1));print(brand);print(product);print(sku);print(category);print(list_price);print(best_price);print(card_price);
         print(web_dsct);print(card_dsct);print(link);print("##################");print()

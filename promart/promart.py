@@ -92,7 +92,7 @@ def shop(web):
         print(best_price),print(image),print(market),print(web_dsct)
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
 
 # def scrapero(web):
 
