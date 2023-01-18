@@ -352,7 +352,7 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
-                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]))
+                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
                                 ,bot_token, chat_id)
                 
 
