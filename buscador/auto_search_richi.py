@@ -29,13 +29,13 @@ def buscador_richi():
     auto_telegram_total( bd1,bd2,bot_token, chat_id, porcentage)
 
 
-    print("se pausa 10 min")
+    print("se pausa 60 seg")
     print(hora())
-    time.sleep(5*60) #this will stop the program for 10 minutes
+    time.sleep(60) #this will stop the program for 10 minutes
     
 
-
-i = 1
+             
+i = 1                                         
 
 def richi ():
 
