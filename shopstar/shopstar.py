@@ -12,6 +12,7 @@ from decouple import config
 from datetime import datetime
 from datetime import date
 from decouple import config
+import os
 
 web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
@@ -153,6 +154,11 @@ def shop_scrapper():
                     print(id, count-1)
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
+                   
+                    os.system('say "end code"')
+
+
+                    os.system('afplay /System/Library/Sounds/Sosumi.aiff')
                     time.sleep(10)
                     
                     shop_scrapper() 
