@@ -33,6 +33,8 @@ def buscador():
     print("se pausa 60 min")
     print(hora())
     time.sleep(60) #this will stop the program for 10 minutes
-
-
-buscador()
+   
+try: 
+ buscador()
+except:
+    buscador()

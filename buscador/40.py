@@ -32,5 +32,7 @@ def buscador():
 
   
 
-
-buscador()
+try: 
+ buscador()
+except:
+    buscador()
