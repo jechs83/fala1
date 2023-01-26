@@ -82,5 +82,5 @@ while i == 0:
         status = e["status"]
     x = status
     if x == 2:
-        os.system("/Users/javier/GIT/fala/buscador/1.bat")
+        os.system("C:\Git\\fala\\buscador\\1.bat")
         #buscador()
