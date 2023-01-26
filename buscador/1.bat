@@ -1,2 +1,2 @@
 
-title Discovery 70% && python  C:\Git\fala\buscador\30.py
+start python  C:\Git\fala\buscador\30.py

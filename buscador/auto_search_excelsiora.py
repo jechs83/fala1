@@ -1,31 +1,22 @@
-from datetime import datetime
-from telegram import ParseMode
-from decouple import config
-import telegram
-import logging
-import sys
 import time
-from telegram import message
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from search_bot_service import  auto_telegram ,auto_telegram_total
-import gc
+import os
+from pymongo import MongoClient
+from decouple import config
+client = MongoClient(config("MONGO_DB"))
 
 
+db = client["trigger"]
+collection = db["excelsior"]
+    
+i = 0
+while i == 0:
 
-TOKEN = config("CAPITAN_PIKE_TOKEN")
-chat_id = config("EXCELSIOR_CHAT_TOKEN")
-bot_token = config("CAPITAN_PIKE_TOKEN")
-bd1 = "excelsior1"
-bd2 = "excelsior2"
-porcentage = 70
+    x = collection.find({"_id":"excelsior"})
 
-def hora():
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    return current_time
-
-def buscador():
-    auto_telegram_total( bd1,bd2,bot_token, chat_id, porcentage)
-
-
-buscador()
+    for  e in x:
+        status = e["status"]
+    x = status
+    if x == 2:
+        os.system("C:\Git\\fala\\buscador\\3.bat")
+        time.sleep(40)
+        #buscador()
