@@ -136,7 +136,8 @@ for i in x:
 
 count = len(array_tec)
 
-
+db = client["trigger"]
+collection = db[num]
 
 
 def saga_scrapper():
@@ -153,10 +154,26 @@ def saga_scrapper():
         if id == count-1:
             print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
+            x = collection.find_one({"_id":num})
+            if x  :
+                    #print(" ACTUALIZA BASE DE DATOS ")
+                filter = {"_id":num}
+                newvalues = { "$set":{ 
+                "status":1, 
+                }}
+                collection.update_one(filter,newvalues)    
+                    
             
-            saga_scrapper() 
+           
   except:
-    saga_scrapper()
+            x = collection.find_one({"_id":num})
+            if x  :
+                    #print(" ACTUALIZA BASE DE DATOS ")
+                filter = {"_id":num}
+                newvalues = { "$set":{ 
+                "status":1, 
+                }}
+                collection.update_one(filter,newvalues)    
         
 
 
