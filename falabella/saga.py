@@ -126,17 +126,11 @@ def scrap_category(category_url):
             break
 
 
-# array_tec=[]
+
 
 
 num = sys.argv[1]
-# arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
 
-# f = open(arg_, "r")
-# x = f.readlines()
-
-# for i in x:
-#     array_tec.append(i.rstrip()) 
 
 def urls_list( id):
     

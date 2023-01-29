@@ -324,6 +324,18 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             parse_mode="HTML",
             text= f"Termino la busqueda... si no hay nada no encontre ps"
         )
+        
+    
+    ### 11 ELIMINA MARCA DE CARTEGORIA
+    def restart_bot(update,context):
+        bot = context.bot
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName}  se elimina  marca")
+       
+
+        bot_restart()
+        
 
     # if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
@@ -343,6 +355,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('auto', auto_tele))
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
+    dp.add_handler(CommandHandler('restartbot', restart_bot))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))

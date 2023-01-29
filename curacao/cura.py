@@ -145,7 +145,7 @@ def bd_change(num, bd_status):
 
 def curacao_scrap(data):
     
-    bd_change(num, 1)
+   
     try:
         for id, val in enumerate(data):
                 print("entrea aqui ")
@@ -172,9 +172,9 @@ def curacao_scrap(data):
                     print("se acabo la web y va comenzar a dar vueltas")
                     time.sleep(5)
                     
-                    bd_change(num, 2)
+                    curacao_scrap(data)
     except:
-        bd_change(num, 2)
+        curacao_scrap(data)
 
         
 

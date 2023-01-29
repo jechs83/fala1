@@ -199,7 +199,7 @@ def bd_change(num, bd_status):
 
 
 def saga_scrapper():
-    bd_change(num,1)
+
     
     try:
         for id, val in enumerate(array_tec):
@@ -215,9 +215,9 @@ def saga_scrapper():
                 print("se acabo la web y va comenzar a dar vueltas")
                 time.sleep(10)
                 
-                bd_change(num,2)
+                saga_scrapper()
     except:
-            bd_change(num,2)
+           saga_scrapper()
         
 
 

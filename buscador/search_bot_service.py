@@ -14,6 +14,7 @@ from pandas import DataFrame
 import pandas as pd
 import pytz
 import gc
+from restart_bot import restart
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
@@ -578,6 +579,10 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     # send_telegram(html, bot_token, chat_id )
     # os.remove(config("HTML_PATH")+"producto.html")
     gc.collect()
+    
+def bot_restart  ():
+    restart()
+    
 
 try:      
     argument = sys.argv[1] 

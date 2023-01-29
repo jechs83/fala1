@@ -168,7 +168,7 @@ def bd_change(num, bd_status):
 
 
 def ripley_scrap():
-    bd_change(num, 1)
+    
     try:
         for id, val in enumerate(array_tec):
         
@@ -184,9 +184,9 @@ def ripley_scrap():
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
                  
-                    bd_change(num, 2)
+                    ripley_scrap()
     except: 
-        bd_change(num, 2)
+        ripley_scrap()
 
 
 ripley_scrap()

@@ -149,7 +149,7 @@ def bd_change(num, bd_status):
 
 
 def shop_scrapper():
-    bd_change(num, 1)
+    
     	
     for id,v in enumerate(array_tec):
         print(v)
@@ -174,11 +174,11 @@ def shop_scrapper():
                    
                    
                     time.sleep(10)
-                    bd_change(num, 2)
+                    shop_scrapper()
                     
                    
         except:
-              bd_change(num, 2)
+              shop_scrapper()
 
 
 shop_scrapper()
