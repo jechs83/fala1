@@ -1,1 +1,1 @@
-https://knasta.pe/results?knastaday=7&order=asc&page=
+"https://knasta.pe/results?knastaday=7&order=asc&page="

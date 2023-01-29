@@ -1,1 +1,1 @@
-https://knasta.pe/results?order=asc&page=
+"https://knasta.pe/results?order=asc&page="
