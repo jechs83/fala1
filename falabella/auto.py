@@ -40,7 +40,7 @@ def loop():
                 except: 
                     print( "siguiente")
                     bd_change(i, 2)
-                        
+                            
                   
 i = 0
 while i == 0:   

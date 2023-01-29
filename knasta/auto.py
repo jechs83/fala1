@@ -8,7 +8,18 @@ client = MongoClient(config("MONGO_DB"))
 
 db = client["trigger"]
 collection = db["knasta"]
+ 
+def bd_change(num, bd_status):
     
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
+        
 
 def loop():
     x = collection.find( )
@@ -21,13 +32,12 @@ def loop():
             if id ==i and status ==2:
                 try:
                     subprocess.Popen([ "start", "C:\\GIT\\fala\\knasta\\kanasta.py", str(i)], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-
+                    bd_change(i, 1)
                     print(i)
+                except: 
+                    print( "siguiente")
+                    bd_change(i, 2)
 
-
-                    #os.system("python C:\GIT\fala\falabella\saga.py "+str(i))
-      
-                except: print( "siguiente")
             
                 
 i = 0

@@ -10,11 +10,21 @@ client = MongoClient(config("MONGO_DB"))
 
 array = ["knasta", "ripley", "saga", "curacao", "shop", "tailoy"]
 
-def restart():
-
+def close():
     try:
+        print("sads")
         subprocess.run(["taskkill", "/IM", "WindowsTerminal.exe", "/F"])
-    except: print(" no hay terminal abierto")
+ 
+    except:
+        print ("Unexpected error:", sys.exc_info())
+    
+    
+
+def restart():
+    print("empezo")
+    
+
+    
     time.sleep(10)
     subprocess.Popen(["start", "C:\GIT\\fala\\curacao\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\falabella\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
@@ -22,12 +32,8 @@ def restart():
     subprocess.Popen(["start", "C:\GIT\\fala\\knasta\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    print("empezo")
     
-
-
-
-
-
 
     def bd_change(num, bd_status, market ):
         
@@ -42,10 +48,7 @@ def restart():
             newvalues = { "$set":{ 
             "status":bd_status, 
             }}
-            collection.update_one(filter,newvalues)      
-
-        
-
+            collection.update_one(filter,newvalues)     
         
     for idx, val in enumerate(array):
         
@@ -75,6 +78,10 @@ arg_ = sys.argv[1]
 
 
 if arg_ == "restart":
+    
+    try:
+        close()
+    except: print("no hay nada que cerrar")
     restart()
 
 if arg_ == "stop":
