@@ -123,7 +123,29 @@ counter =len(data)
 print(data)
 print(counter)
 
+
+db = client["trigger"]
+collection = db["curacao"]
+
+def bd_change(num, bd_status):
+    
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
+    
+
+
+
+
 def curacao_scrap(data):
+    
+    bd_change(num, 1)
     try:
         for id, val in enumerate(data):
                 print("entrea aqui ")
@@ -150,9 +172,9 @@ def curacao_scrap(data):
                     print("se acabo la web y va comenzar a dar vueltas")
                     time.sleep(5)
                     
-                    curacao_scrap(data)
+                    bd_change(num, 2)
     except:
-        curacao_scrap(data)
+        bd_change(num, 2)
 
         
 

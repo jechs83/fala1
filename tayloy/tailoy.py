@@ -151,7 +151,24 @@ for i in x:
 
 count =(len(array_tec))
 
+db = client["trigger"]
+collection = db["tailoy"]
+
+def bd_change(num, bd_status):
+    
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)   
+
+
 def ripley_scrap():
+    bd_change(num, 1)
     try:
         for id, val in enumerate(array_tec):
         
@@ -166,10 +183,10 @@ def ripley_scrap():
 
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
-                    time.sleep(5)
-                    ripley_scrap()
+                 
+                    bd_change(num, 2)
     except: 
-        ripley_scrap()
+        bd_change(num, 2)
 
 
 ripley_scrap()

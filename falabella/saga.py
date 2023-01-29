@@ -4,7 +4,10 @@ from pymongo import MongoClient
 import sys
 from datetime import datetime
 import random
+import os
 import time
+import signal
+import gc
 import json
 from bd_record import save_data_to_mongo_db
 from datetime import datetime
@@ -110,7 +113,8 @@ def scrap (web):
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
-
+        gc.collect()
+    gc.collect()
 
 def scrap_category(category_url):
     for i in range(250):
@@ -124,7 +128,7 @@ def scrap_category(category_url):
 
 array_tec=[]
 
-#arg_ = sys.argv[1]
+
 num = sys.argv[1]
 arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
 
@@ -137,16 +141,30 @@ for i in x:
 count = len(array_tec)
 
 db = client["trigger"]
-collection = db[num]
+collection = db["saga"]
+
+def bd_change(num, bd_status):
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
+    
 
 
 def saga_scrapper():
-  try:
-    for id, val in enumerate(array_tec):
+   
+    bd_change(num,1)
+   
+    try:
+     for id, val in enumerate(array_tec):
         print(val)
     
         web = val
-        
         scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
         print("esta web es la numero "+str(id+1)+" de aprox 500")
 
@@ -154,31 +172,20 @@ def saga_scrapper():
         if id == count-1:
             print("se acabo la web y va comenzar a dar vueltas")
             time.sleep(10)
-            x = collection.find_one({"_id":num})
-            if x  :
-                    #print(" ACTUALIZA BASE DE DATOS ")
-                filter = {"_id":num}
-                newvalues = { "$set":{ 
-                "status":1, 
-                }}
-                collection.update_one(filter,newvalues)    
+            bd_change(num,2) 
+          
+          
                     
             
            
-  except:
-            x = collection.find_one({"_id":num})
-            if x  :
-                    #print(" ACTUALIZA BASE DE DATOS ")
-                filter = {"_id":num}
-                newvalues = { "$set":{ 
-                "status":1, 
-                }}
-                collection.update_one(filter,newvalues)    
+    except:
+          bd_change(num,2)
+         
         
 
-
-
 saga_scrapper()
+
+
 
 
 

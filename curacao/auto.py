@@ -1,15 +1,13 @@
 import time
 import os
-import subprocess 
 from pymongo import MongoClient
 from decouple import config
-
 client = MongoClient(config("MONGO_DB"))
+import subprocess
 
 
 db = client["trigger"]
-collection = db["saga"]
-
+collection = db["curacao"]
 
 def bd_change(num, bd_status):
     
@@ -20,9 +18,8 @@ def bd_change(num, bd_status):
         newvalues = { "$set":{ 
         "status":bd_status, 
         }}
-        collection.update_one(filter,newvalues)      
-    
-    
+        collection.update_one(filter,newvalues)     
+
 def loop():
     x = collection.find( )
     
@@ -30,18 +27,20 @@ def loop():
         id = e["_id"]
         status = e["status"]
         
-        for i in range (10):
+        for i in range (4):
             if id ==i and status ==2:
                 try:
-                    subprocess.Popen([ "start", "C:\\GIT\\fala\\falabella\\saga.py", str(i)], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+                    #os.system("C:\GIT\\fala\\zbatch_files\\cura"+str(i)+".bat")
+                    subprocess.Popen([ "start", "C:\\GIT\\fala\\curacao\\cura.py", str(i)], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+
                     bd_change(i, 1)
                     print("proceso "+str(i))
                    
                 except: 
                     print( "siguiente")
                     bd_change(i, 2)
-                        
-                  
+            
+                
 i = 0
 while i == 0:   
     loop() 

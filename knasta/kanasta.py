@@ -170,27 +170,54 @@ arg_ = config("KNASTA_TEXT_PATH")+str(num)+".txt"
 f = open(arg_, "r")
 x = f.readlines()
 
+
+
+
 for i in x:
     array_tec.append(i.rstrip()) 
 
 count = len(array_tec)
 
+
+db = client["trigger"]
+collection = db["knasta"]
+
+def bd_change(num, bd_status):
+    
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
+
+
+
+
+
 def saga_scrapper():
+    bd_change(num,1)
     
-    for id, val in enumerate(array_tec):
-        print(val)
-    
-        web = val
+    try:
+        for id, val in enumerate(array_tec):
+            print(val)
         
-        scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        print("esta web es la numero "+str(id+1)+" de aprox 500")
-
-
-        if id == count-1:
-            print("se acabo la web y va comenzar a dar vueltas")
-            time.sleep(10)
+            web = val
             
-            saga_scrapper() 
+            scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
+            print("esta web es la numero "+str(id+1)+" de aprox 500")
+
+
+            if id == count-1:
+                print("se acabo la web y va comenzar a dar vueltas")
+                time.sleep(10)
+                
+                bd_change(num,2)
+    except:
+            bd_change(num,2)
         
 
 

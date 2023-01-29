@@ -132,8 +132,25 @@ for i in x:
 count = len(array_tec)
 print(count)
 
-def shop_scrapper():
+db = client["trigger"]
+collection = db["shop"]
 
+def bd_change(num, bd_status):
+    
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
+
+
+def shop_scrapper():
+    bd_change(num, 1)
+    	
     for id,v in enumerate(array_tec):
         print(v)
         try:
@@ -155,15 +172,13 @@ def shop_scrapper():
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
                    
-                    os.system('say "end code"')
-
-
-                    os.system('afplay /System/Library/Sounds/Sosumi.aiff')
+                   
                     time.sleep(10)
+                    bd_change(num, 2)
                     
-                    shop_scrapper() 
+                   
         except:
-            shop_scrapper() 
+              bd_change(num, 2)
 
 
 shop_scrapper()

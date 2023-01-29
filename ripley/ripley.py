@@ -140,41 +140,47 @@ for i in x:
     array_tec.append(i.rstrip()) 
 
 count =(len(array_tec))
+db = client["trigger"]
+collection = db["ripley"]
+
+def bd_change(num, bd_status):
+    
+    
+    x = collection.find_one({"_id":int(num)})
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { "$set":{ 
+        "status":bd_status, 
+        }}
+        collection.update_one(filter,newvalues)      
 
 def ripley_scrap():
+    bd_change(num, 1)
 
     for id, val in enumerate(array_tec):
-       
-        for i in range(200):
-            print("web numero "+str(id+1)+ " de 500 aprox")
-            success = scrap(val+str(i+1))
-            print(val+str(i+1))
-            #time.sleep(3)
-            if success == False:
-                break
-
-        if id == count-1:
-                print("se acabo la web y va comenzar a dar vueltas")
-                time.sleep(5)
-                ripley_scrap()
-
-
-
-
-
-i=1
-def prueba():
-
-    while i == 1:        
         try:
-            ripley_scrap()
-        except: 
-            print("fallo")
-            prueba()
-        
+            for i in range(200):
+                print("web numero "+str(id+1)+ " de 500 aprox")
+                success = scrap(val+str(i+1))
+                print(val+str(i+1))
+                #time.sleep(3)
+                if success == False:
+                    break
 
-prueba()
-  
+            if id == count-1:
+                    print("se acabo la web y va comenzar a dar vueltas")
+                    time.sleep(5)
+                    bd_change(num, 2)
+        except:
+            bd_change(num, 2)
+                
+
+
+ripley_scrap()
+
+
+
 
 
 
