@@ -126,22 +126,36 @@ def scrap_category(category_url):
             break
 
 
-array_tec=[]
+# array_tec=[]
 
 
 num = sys.argv[1]
-arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
+# arg_ = config("SAGA_TEXT_PATH")+str(num)+".txt"
 
-f = open(arg_, "r")
-x = f.readlines()
+# f = open(arg_, "r")
+# x = f.readlines()
 
-for i in x:
-    array_tec.append(i.rstrip()) 
+# for i in x:
+#     array_tec.append(i.rstrip()) 
 
+def urls_list( id):
+    
+    db = client["saga"]
+    collection = db["lista"]
+    
+    x = collection.find({"_id":int(id)})
+    for i in x:
+        list = i["url"]
+    return list
+
+    
+array_tec = urls_list(num)
 count = len(array_tec)
 
 db = client["trigger"]
 collection = db["saga"]
+
+
 
 def bd_change(num, bd_status):
     

@@ -1,4 +1,6 @@
-start python C:\GIT\fala\knasta\kanasta.py 0
+
+start python /Users/javier/GIT/fala/knasta/kanasta.py
+
 
 
 
