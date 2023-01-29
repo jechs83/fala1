@@ -123,14 +123,18 @@ def scrap (web):
         print("list price :"+str(list_price))
         print(dsct)
         print(sku)
-    
+        url = web
+        card_dsct = 0
+        print(url)
         bd_name_store = "tailoy"
         # collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "tailoy"    # COLECCION
-        card_dsct = 0
+        bd_name_store = "tailoy"
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
+        market = "tailoy"    # COLECCION\
         date_time = load_datetime()
-        
-        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
+
+
+        save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
        
 
@@ -152,13 +156,13 @@ def urls_list( id):
 array_tec = urls_list(num)
 count = len(array_tec)
 print(count)
+print(array_tec)
 
 db = client["trigger"]
 collection = db["tailoy"]
 
 def bd_change(num, bd_status):
-    
-    
+
     x = collection.find_one({"_id":int(num)})
     if x  :
             #print(" ACTUALIZA BASE DE DATOS ")
@@ -168,14 +172,14 @@ def bd_change(num, bd_status):
         }}
         collection.update_one(filter,newvalues)   
 
-
 def ripley_scrap():
-    bd_change(num, 1)
+
     try:
         for id, val in enumerate(array_tec):
         
             for i in range(200):
                 print("web numero "+str(id+1)+ " de 500 aprox")
+                print(val+str(i+1))
                 success = scrap(val+str(i+1))
                 print(val+str(i+1))
                 #time.sleep(3)
@@ -185,17 +189,15 @@ def ripley_scrap():
 
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
-                 
-                    bd_change(num, 2)
+                    ripley_scrap()
+                
     except: 
-        bd_change(num, 2)
+        ripley_scrap()
+
+
 
 
 ripley_scrap()
-  
-
-
-
 
 
 
