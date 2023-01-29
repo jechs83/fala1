@@ -138,18 +138,20 @@ def scrap (web):
 
 
 
-array_tec=[]
-arg_ = sys.argv[1]
+
 num = sys.argv[1]
-arg_ = config("TAILOY_TEXT_PATH")+str(num)+".txt"
-
-f = open(arg_, "r")
-x = f.readlines()
-
-for i in x:
-    array_tec.append(i.rstrip()) 
-
-count =(len(array_tec))
+def urls_list( id):
+    
+    db = client["tailoy"]
+    collection = db["lista"]
+    
+    x = collection.find({"_id":int(id)})
+    for i in x:
+        list = i["url"]
+    return list
+array_tec = urls_list(num)
+count = len(array_tec)
+print(count)
 
 db = client["trigger"]
 collection = db["tailoy"]

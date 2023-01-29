@@ -1,6 +1,6 @@
-https://www.falabella.com.pe/falabella-pe/category/cat4100462/Moda-Mujer?page=
-https://www.falabella.com.pe/falabella-pe/category/cat7720500/Ropa-interior-y-pijamas?page=
-https://www.falabella.com.pe/falabella-pe/category/cat1470526/Zapatos?page=
-https://www.falabella.com.pe/falabella-pe/category/cat4100481/Moda-Hombre?page=2
-https://www.falabella.com.pe/falabella-pe/category/cat1470538/Zapatos?page=
-https://www.falabella.com.pe/falabella-pe/category/cat40567/Tecnologia-para-la-Belleza?page=
+"https://www.falabella.com.pe/falabella-pe/category/cat4100462/Moda-Mujer?page=",
+"https://www.falabella.com.pe/falabella-pe/category/cat7720500/Ropa-interior-y-pijamas?page=",
+"https://www.falabella.com.pe/falabella-pe/category/cat1470526/Zapatos?page=",
+"https://www.falabella.com.pe/falabella-pe/category/cat4100481/Moda-Hombre?page=",2
+"https://www.falabella.com.pe/falabella-pe/category/cat1470538/Zapatos?page=",
+"https://www.falabella.com.pe/falabella-pe/category/cat40567/Tecnologia-para-la-Belleza?page="

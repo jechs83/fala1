@@ -1,6 +1,6 @@
-https://www.tailoy.com.pe/electrohogar.html?p=
-https://www.tailoy.com.pe/tecnologia.html?p=
-https://www.tailoy.com.pe/jugueteria.html?p=
-https://www.tailoy.com.pe/hogar-y-decoracion.html?p=
-https://www.tailoy.com.pe/outdoors-deporte.html?p=
-https://www.tailoy.com.pe/fisher-price.html?p=
+"https://www.tailoy.com.pe/electrohogar.html?p=",
+"https://www.tailoy.com.pe/tecnologia.html?p=",
+"https://www.tailoy.com.pe/jugueteria.html?p=",
+"https://www.tailoy.com.pe/hogar-y-decoracion.html?p=",
+"https://www.tailoy.com.pe/outdoors-deporte.html?p=",
+"https://www.tailoy.com.pe/fisher-price.html?p=",
