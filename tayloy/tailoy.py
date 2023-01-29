@@ -190,9 +190,9 @@ def ripley_scrap():
             if id == count-1:
                     print("se acabo la web y va comenzar a dar vueltas")
                  
-                    bd_change(num, 2)
+                    ripley_scrap()
     except: 
-        bd_change(num, 2)
+        ripley_scrap()
 
 
 ripley_scrap()
