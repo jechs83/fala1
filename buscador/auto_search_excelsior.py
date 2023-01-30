@@ -22,7 +22,7 @@ bd2 = "excelsior2"
 dsct = 70
 
 db = client["trigger"]
-collection = db[0]
+collection = db["excelsior"]
     
 def hora():
     now = datetime.now()

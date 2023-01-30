@@ -18,6 +18,6 @@ while i == 0:
         status = e["status"]
     x = status
     if x == 2:
-        subprocess.Popen([ "start", "C:\Git\\fala\\buscador\\excelsior.py"], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+        subprocess.Popen([ "start", "C:\Git\\fala\\buscador\\auto_search_excelsior.py"], shell=True, executable="C:\Windows\system32\cmd.exe")
         time.sleep(10)
         #buscador()
