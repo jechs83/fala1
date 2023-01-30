@@ -61,10 +61,12 @@ def buscador():
     time.sleep(30)
     print("YA SE TERMINO")
     print(hora)
+    quit()
 
 try:
     buscador()
 except:
+    time.sleep(120)
     x = collection.find_one({"_id":0})
   
     if x  :

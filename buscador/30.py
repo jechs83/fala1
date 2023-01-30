@@ -56,6 +56,7 @@ def buscador():
 try:
     buscador()
 except:
+    time.sleep(120)
     x = collection.find_one({"_id":0})
   
     if x  :
