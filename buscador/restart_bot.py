@@ -8,7 +8,7 @@ import subprocess
 
 client = MongoClient(config("MONGO_DB"))
 
-array = ["knasta", "ripley", "saga", "curacao", "shop", "tailoy"]
+array = ["knasta", "ripley", "saga", "curacao", "shop", "tailoy", "promart"]
 array2 = ["30", "40", "excelsior" ]
 def close():
     try:
@@ -32,7 +32,7 @@ def restart():
     subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\promart\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-
+    
     print("empezo")
     
 

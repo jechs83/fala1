@@ -32,7 +32,7 @@ def loop():
         for i in range (10):
             if id ==i and status ==2:
                 try:
-                    subprocess.Popen([ "start", "C:\\GIT\\fala\\promart\\promart.py", str(i)], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+                    subprocess.Popen([ "start", "C:\\GIT\\fala\\promart\\auto.py", str(i)], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
                     bd_change(i, 1)
                     print("proceso "+str(i))
                    
