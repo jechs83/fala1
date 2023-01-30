@@ -12,6 +12,7 @@ from search_bot_service import  auto_telegram, auto_telegram_total, auto_telegra
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
+
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")
@@ -21,7 +22,7 @@ dsct = 50
 dsct2 = 60
 
 db = client["trigger"]
-collection = db["40"]
+collection = db["60"]
     
 def hora():
     now = datetime.now()
@@ -29,12 +30,12 @@ def hora():
     return current_time
 
 def buscador():
-
+ 
     try:
-     auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, " ")
+     auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, "lentes")
     except:
         buscador()
 
-buscador()
 
+buscador()
     
