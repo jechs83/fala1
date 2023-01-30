@@ -2,6 +2,7 @@ import time
 import os
 from pymongo import MongoClient
 from decouple import config
+import subprocess
 client = MongoClient(config("MONGO_DB"))
 
 
@@ -17,6 +18,6 @@ while i == 0:
         status = e["status"]
     x = status
     if x == 2:
-        os.system("C:\Git\\fala\\buscador\\3.bat")
-        time.sleep(40)
+        subprocess.Popen([ "start", "/Users/javier/GIT/fala/buscador/excelsior.py"], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+        time.sleep(10)
         #buscador()

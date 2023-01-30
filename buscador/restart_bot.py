@@ -31,6 +31,8 @@ def restart():
     subprocess.Popen(["start", "C:\GIT\\fala\\knasta\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
     subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\promart\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+
     print("empezo")
     
 
