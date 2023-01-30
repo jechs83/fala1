@@ -374,8 +374,67 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
     gc.collect()
 
 
+##################################################################################################
+##################################################################################################
+def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2):
+    print("se esta ejecutando")
+    product_array = []
+     
+    db = client["scrap"]
+    collection = db["scrap"]
+    db.command({"planCacheClear": "scrap"})
+
+    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date })
+
+    collection_1 = db[ship_db1]
+    collection_2 = db[ship_db2]
+
+    for i in t1:
+        product_array.append(i)
+        print(i)
+
+    for i in product_array:
+            save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
+            f = print("se graba en bd datos")
+            
+
+            a= collection_1.find({"sku":i["sku"]})
+            # se busca datos en offer1 cada iteracion
+            a=list(a)
+        
+            b= collection_2.find({"sku":i["sku"]})
+            # se busca datos en offer2  en cada iteracion 
+            b = list(b)
+            print(b)
+            len_b = len(b)
+            print(len_b)
+
+            if len_b == 0:
+                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
+                                ,bot_token, chat_id)
+                
+
+                print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
+                continue
 
 
+            if b!=a:
+                #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
+                print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
+               
+                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                continue
+            if a==b:
+                print("SON IGUALES,  NO SE ENVIA TELEGRAM")
+
+    gc.collect()
+
+##################################################################################################
+##################################################################################################
 def manual_telegram( category, dsct, bot_token, chat_id):
     
     db = client["brands"]
