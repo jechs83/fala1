@@ -29,52 +29,12 @@ def hora():
     return current_time
 
 def buscador():
-    x = collection.find_one({"_id":0})
-    if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":0}
-        newvalues = { "$set":{ 
-        "status":1, 
-        }}
-        collection.update_one(filter,newvalues)            
-    else:
-        data =  {
-        "_id":0,     
-        "status":1, 
-        }
-        collection.insert_one(data)
 
-    auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2)
+    try:
+     auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, " ")
+    except:
+        buscador()
 
+buscador()
 
-    x = collection.find_one({"_id":0})
-  
-    if x  :
-        #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":0}
-        newvalues = { "$set":{ 
-        "status":2, 
-        }}
-        collection.update_one(filter,newvalues)            
-   
-    time.sleep(30)
-    print("YA SE TERMINO")
-    print(hora)
-    quit()
-    
-  
-try:
- buscador()
-except:
-    time.sleep(120)
-    x = collection.find_one({"_id":0})
-  
-    if x  :
-        #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":0}
-        newvalues = { "$set":{ 
-        "status":2, 
-        }}
-        collection.update_one(filter,newvalues)            
-   
     
