@@ -106,25 +106,32 @@ def shop(web):
 #         print("pagina "+str(i+1))
 
 
-array_tec=[]
+# array_tec=[]
+
+# num = sys.argv[1]
+# arg_ = config("PROMART_TEXT_PATH")+str(num)+".txt"
+
+# f = open(arg_, "r")
+# x = f.readlines()
+
+# for i in x:
+#     array_tec.append(i.rstrip())
+# count  = len(array_tec)
+
 
 num = sys.argv[1]
-arg_ = config("PROMART_TEXT_PATH")+str(num)+".txt"
+def urls_list( id):
+    
+    db = client["knasta"]
+    collection = db["lista"]
+    
+    x = collection.find({"_id":int(id)})
+    for i in x:
+        list = i["url"]
+    return list
+array_tec = urls_list(num)
+count = len(array_tec)
 
-f = open(arg_, "r")
-x = f.readlines()
-
-for i in x:
-    array_tec.append(i.rstrip())
-
-
-# for i,v in enumerate(array_tec):
-
-#     scrap =  scrapero(v)
-
-#     if scrap == False:
-#         continue
-count  = len(array_tec)
 def promart_scrap():
     try:
         for i,v in enumerate(array_tec):

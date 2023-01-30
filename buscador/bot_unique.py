@@ -3,7 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands, bot_restart
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
@@ -332,9 +332,13 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName}  se elimina  marca")
-       
 
         bot_restart()
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Reiniciando Bots recolectores, sistema en linea en 2 minutos"
+        )
         
 
     # if __name__ == "__main__":

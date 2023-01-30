@@ -8,7 +8,7 @@ import subprocess
 
 client = MongoClient(config("MONGO_DB"))
 
-array = ["knasta", "ripley", "saga", "curacao", "shop", "tailoy"]
+array = ["knasta", "ripley", "saga", "curacao", "shop", "tailoy", "promart"]
 
 def close():
     try:
