@@ -18,7 +18,7 @@ while i == 0:
         status = e["status"]
     x = status
     if x == 2:
-        subprocess.Popen([ "start", "/Users/javier/GIT/fala/buscador/30.py"], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+        subprocess.Popen([ "start", "C:\Git\\fala\\buscador\\30.py"], shell=True, executable="C:\WINDOWS\system32\cmd.exe")
         time.sleep(10)
         #buscador()
         
