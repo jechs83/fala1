@@ -11,7 +11,7 @@ collection = db["excelsior"]
 i = 0
 while i == 0:
 
-    x = collection.find({"_id":"excelsior"})
+    x = collection.find({"_id":0})
 
     for  e in x:
         status = e["status"]

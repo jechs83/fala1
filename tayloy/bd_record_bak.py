@@ -15,7 +15,7 @@ client = MongoClient(config("MONGO_DB"))
 
 
 def save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct,current_date,current_time, web):
+                            best_price,card_price,link,image,dsct, card_dsct,current_date,current_time,web):
 
                          
        

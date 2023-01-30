@@ -122,7 +122,7 @@ def shop(web):
 num = sys.argv[1]
 def urls_list( id):
     
-    db = client["knasta"]
+    db = client["promart"]
     collection = db["lista"]
     
     x = collection.find({"_id":int(id)})

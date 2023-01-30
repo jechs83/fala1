@@ -11,7 +11,7 @@ collection = db["40"]
 i = 0
 while i == 0:
 
-    x = collection.find({"_id":"40a"})
+    x = collection.find({"_id":0})
 
     for  e in x:
         status = e["status"]
