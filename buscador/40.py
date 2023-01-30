@@ -28,17 +28,17 @@ def hora():
     return current_time
 
 def buscador():
-    x = collection.find_one({"_id":"40a"})
+    x = collection.find_one({"_id":0})
     if x  :
             #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":"40a"}
+        filter = {"_id":0}
         newvalues = { "$set":{ 
         "status":1, 
         }}
         collection.update_one(filter,newvalues)            
     else:
         data =  {
-        "_id":"40a",     
+        "_id":0,     
         "status":1, 
         }
         collection.insert_one(data)
@@ -46,11 +46,11 @@ def buscador():
     auto_telegram_total( bd1,bd2,bot_token, chat_id, dsct)
 
 
-    x = collection.find_one({"_id":"40a"})
+    x = collection.find_one({"_id":0})
   
     if x  :
         #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":"40a"}
+        filter = {"_id":0}
         newvalues = { "$set":{ 
         "status":2, 
         }}
@@ -63,11 +63,11 @@ def buscador():
 try:
  buscador()
 except:
-    x = collection.find_one({"_id":"40a"})
+    x = collection.find_one({"_id":0})
   
     if x  :
         #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":"40a"}
+        filter = {"_id":0}
         newvalues = { "$set":{ 
         "status":2, 
         }}
