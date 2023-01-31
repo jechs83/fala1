@@ -33,7 +33,7 @@ def buscador():
       auto_telegram_total( bd1,bd2,bot_token, chat_id, dsct)
     except:
         buscador()
-
+    buscador()
 buscador()
 
     

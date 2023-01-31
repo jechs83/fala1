@@ -38,5 +38,6 @@ def buscador():
 
     except:
         buscador()
+    buscador()
 
 buscador()
