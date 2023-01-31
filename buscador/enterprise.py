@@ -1,7 +1,7 @@
 
 
 from decouple import config
-from bot_unique import super_bot
+from bot_unique2 import super_bot
 
 
 
