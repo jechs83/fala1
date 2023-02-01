@@ -24,132 +24,120 @@ def load_datetime():
  return date_now, time_now
 
 first_sku = None
-
+# web = "https://juntoz.com/catalogo?categoryId=995783&top=28&skip=0"
 def scrap (web):
     global first_sku
     proxies = {"http":"http://"+web_url }
         
-    print(web_url)
+    print(web)
     print("#####################################################################################")
     res=requests.get(web,  proxies= proxies)
     print("Respuesta del servidor :"+str(res.status_code))
 
     soup = BeautifulSoup(res.text, "html.parser")
-    # try:
-    #   no_page = soup.find("div",class_="error-page-container")
-    # except:
-    #     no_page=None
-    # print("dddddd")
-    # print(no_page)
-    # if no_page == None:
-    #     return False
-    # print(no_page)
 
-    if res.status_code == 404:
+
+    print(web)
+
+    productos = soup.find_all( "div", id="product-preview-card")
+
+    if not productos:
         return False
-    count=0
-    productos = soup.find_all( "div", class_="product-preview-card__wrapper")
     for i in productos:
-        count +=1
         
-        try:
-            brand = i.find("div",class_="product-preview-card__wrapper__heading").find("a").attrs.get("title")
+        product = i.attrs.get("title")
+        sku = i.find("input", class_="skuProductCatalog" ).attrs.get("value")
+
+        if not sku:
+            return False
+        brand = i.find("a" ,class_="product-preview-card__wrapper__heading__product-brand").attrs.get("title")
+        try: 
+         dsct = i.find("div", class_="product-preview-card__wrapper__heading__product-discount").text
         except:
-            brand= "None"
-    
-        print(product)
-        product = i.find(class_="catalog-product-details__name").text
-
-        image = i.find("img").attrs.get("data-src")
-
-        image_start = image[:6]
-        if image_start != "https:":
-             image = "https:"+image
-    
-
-        sku = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("id")
-        sku = str(sku)   
-        
-        #print(str(sku)+" "+ str(first_sku))
-
-        if  sku == first_sku:
-            print("se repite SKU")
-            #print(str(sku)+" "+ str(first_sku))
-            return False 
-
-        if count == 1:
-            first_sku = sku
-
+            dsct = 0
+        web_dsct = str(dsct).strip().replace("%","")
+        web_dsct  = web_dsct.rstrip()
+        link = i.find("a", class_="product-preview-card__wrapper__body__main-image" ).attrs.get("href")
+        link= "https://juntoz.com/"+link
+        image = i.find("img").attrs.get("src")
         try:
-            dsct= i.find(class_="catalog-product-details__discount-tag")
-            dsct= dsct.text.replace("-","").replace("%","")
+         list_price = i.find("span", class_="product-preview-card__wrapper__footer__product-price__current-price").attrs.get("jztm-content")
         except:
-            dsct= 0
-
+            list_price = 0
         try:
-            list_price= i.find(class_="catalog-prices__list-price catalog-prices__lowest catalog-prices__line_thru")
-            list_price= list_price.text.replace("S/","").replace(",","")
-        except:
-            list_price= 0
-
-        try:
-            best_price = i.find(class_="catalog-prices__offer-price")
-            best_price=best_price.text.replace("S/","").replace(",","")
-
+         best_price = i.find("span", class_="product-preview-card__wrapper__footer__product-price__old-price" ).attrs.get("jztm-content")
         except:
             best_price = 0
-
-        try:
-            card_price = i.find(class_= "catalog-prices__card-price")
-            card_price= card_price.text.replace("S/","").replace(",","")
-        except:
-            card_price= 0
-        
-        link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
-        link= "https://simple.ripley.com.pe"+link
-
         print()
         print(brand)
         print(product)
+        print(sku)
+        print(list_price)
+        print(best_price)
+        print(web_dsct)
         print(link)
+        print(image)
+        # count +=1
+        url = web
 
-
-       
-        bd_name_store = "ripley"
+        bd_name_store = "juntoz"
         collection = "market"  #   NOMBRE DE BASE DE DATOS
-        market = "ripley"    # COLECCION
+        market = "juntoz"    # COLECCION
         card_dsct = 0
+        card_price = 0
         date_time = load_datetime()
         
-        save_data_to_mongo_db(bd_name_store, market,sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1])
-       
+        save_data_to_mongo_db(bd_name_store, collection, market,sku,brand,product,list_price,
+                            best_price,card_price,link,image,web_dsct, card_dsct, date_time[0] ,date_time[1], url)
 
-    time.sleep(2)      
+        
+   
 
 
 
-array_tec=[]
-arg_ = sys.argv[1]
+# array_tec=[]
+# arg_ = sys.argv[1]
+# num = sys.argv[1]
+# arg_ = config("JUNTOZ_TEXT_PATH")+str(num)+".txt"
+
+# f = open(arg_, "r")
+# x = f.readlines()
+# for i in x:
+#     array_tec.append(i.rstrip()) 
+
+# count =(len(array_tec))
+
+
+
+
 num = sys.argv[1]
-arg_ = config("JUNTOZ_TEXT_PATH")+str(num)+".txt"
 
-f = open(arg_, "r")
-x = f.readlines()
 
-for i in x:
-    array_tec.append(i.rstrip()) 
+def urls_list( id):
+    
+    db = client["juntoz"]
+    collection = db["lista"]
+    
+    x = collection.find({"_id":int(id)})
+    for i in x:
+        list = i["url"]
+    return list
 
-count =(len(array_tec))
+    
+array_tec = urls_list(num)
+count = len(array_tec)
+
+
+
 
 def ripley_scrap():
-
+    c = 28
     for id, val in enumerate(array_tec):
        
-        for i in range(200):
-            print("web numero "+str(id+1)+ " de 500 aprox")
-            success = scrap(val+str(i+1))
-            print(val+str(i+1))
+        for i in range(800):
+            print("web numero "+str(c*i)+ " de 500 aprox")
+            success = scrap(val+str(c*i))
+            print(val+str(c*i))
             #time.sleep(3)
             if success == False:
                 break
@@ -160,22 +148,8 @@ def ripley_scrap():
                 ripley_scrap()
 
 
+ripley_scrap()
 
-
-
-i=1
-def prueba():
-
-    while i == 1:        
-        try:
-            ripley_scrap()
-        except: 
-            print("fallo")
-            prueba()
-        
-
-prueba()
-  
 
 
 
