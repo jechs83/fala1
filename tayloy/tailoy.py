@@ -13,6 +13,7 @@ text_file = open(config("PROXY"), "r")
 lines = text_file.readlines() 
 from datetime import datetime
 from datetime import date
+HEADERS = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
 
 web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
@@ -31,7 +32,7 @@ def scrap (web):
     global first_sku
     proxies = {"http":"http://"+web_url }
         
-    res=requests.get(web,  proxies= proxies)
+    res=requests.get(web,  proxies= proxies, headers=HEADERS)
     print("Respuesta del servidor :"+str(res.status_code))
 
     soup = BeautifulSoup(res.text, "html.parser")
@@ -41,30 +42,29 @@ def scrap (web):
     productos = soup.find_all( "li", class_="item product product-item")
 
 
-    # if not productos:
-    #     return False
+    if not productos:
+        return False
 
     for i in productos:
-        print(i)
-        time.sleep(120)
+
         
         count +=1
 
         link = i.find("a").attrs.get("href")
      
-        #try:
-        brand = i.find("div", class_="brand-label").text
-        brand = brand.strip()
-        print(brand)
-        #except:
-            #brand = None
+        try:
+            brand = i.find("div", class_="brand-label").text
+            brand = brand.strip()
+     
+        except:
+            brand = None
       
         try:
          product = i.find("a", class_="product-item-link").text
          product = product.strip()
         except: product = None
-        # if product == None:
-        #     return False
+        if product == None:
+            return False
 
    
 
@@ -143,6 +143,7 @@ def scrap (web):
 
 
 num = sys.argv[1]
+
 def urls_list(id):
     
     db = client["tailoy"]

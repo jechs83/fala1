@@ -12,7 +12,7 @@ from decouple import config
 from datetime import datetime
 from datetime import date
 text_file = open(config("PROXY"), "r")
-web_url = text_file.readlines() 
+lines = text_file.readlines() 
 
 
 prox = random.choice(lines)
@@ -29,13 +29,14 @@ def load_datetime():
  return date_now, time_now
 
 first_sku = None
+HEADERS = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
 
 web = "https://www.tailoy.com.pe/electrohogar.html?p=1"
 def scrap (web):
     global first_sku
     proxies = {"http":"http://"+prox }
     print(prox)
-    res=requests.get(web,  proxies= proxies, headers=headers)
+    res=requests.get(web,  proxies= proxies, headers=HEADERS)
     print("Respuesta del servidor :"+str(res.status_code))
 
     soup = BeautifulSoup(res.text, "html.parser")
