@@ -9,10 +9,12 @@ import random
 import time
 from bd_record import save_data_to_mongo_db
 from decouple import config
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
 from datetime import datetime
 from datetime import date
 
-web_url = random.choice(config("PROXY"))
+web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
 
 def load_datetime():
@@ -38,27 +40,31 @@ def scrap (web):
     
     productos = soup.find_all( "li", class_="item product product-item")
 
-    if not productos:
-        return False
+
+    # if not productos:
+    #     return False
 
     for i in productos:
+        print(i)
+        time.sleep(120)
         
         count +=1
 
         link = i.find("a").attrs.get("href")
      
-        try:
-            brand = i.find("div", class_="brand-label").text
-            brand = brand.strip()
-        except:
-            brand = None
+        #try:
+        brand = i.find("div", class_="brand-label").text
+        brand = brand.strip()
+        print(brand)
+        #except:
+            #brand = None
       
         try:
          product = i.find("a", class_="product-item-link").text
          product = product.strip()
         except: product = None
-        if product == None:
-            return False
+        # if product == None:
+        #     return False
 
    
 
@@ -85,13 +91,6 @@ def scrap (web):
                 list_price = list_price .replace("S/","")
                 list_price = list_price .replace(",","")
             except: list_price = 0
-
-
-    
-            
-        
-      
-
 
         sku = i.find("div",class_="price-box price-final_price").attrs.get("data-product-id")
         sku = str(sku)   
@@ -144,7 +143,7 @@ def scrap (web):
 
 
 num = sys.argv[1]
-def urls_list( id):
+def urls_list(id):
     
     db = client["tailoy"]
     collection = db["lista"]
@@ -153,28 +152,18 @@ def urls_list( id):
     for i in x:
         list = i["url"]
     return list
+
 array_tec = urls_list(num)
 count = len(array_tec)
 print(count)
 print(array_tec)
 
-db = client["trigger"]
-collection = db["tailoy"]
 
-def bd_change(num, bd_status):
 
-    x = collection.find_one({"_id":int(num)})
-    if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":int(num)}
-        newvalues = { "$set":{ 
-        "status":bd_status, 
-        }}
-        collection.update_one(filter,newvalues)   
 
 def ripley_scrap():
 
-    try:
+    # try:
         for id, val in enumerate(array_tec):
         
             for i in range(200):
@@ -191,8 +180,8 @@ def ripley_scrap():
                     print("se acabo la web y va comenzar a dar vueltas")
                  
                     ripley_scrap()
-    except: 
-        ripley_scrap()
+    # except: 
+    #     ripley_scrap()
 
 
 ripley_scrap()

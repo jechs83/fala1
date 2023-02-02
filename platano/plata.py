@@ -7,11 +7,13 @@ import time
 import json
 import re
 from decouple import config
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
 from datetime import datetime
 from datetime import date
 
 
-web_url = random.choice(config("PROXY"))
+web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
 
 def load_datetime():

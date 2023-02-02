@@ -13,6 +13,10 @@ from bd_record import save_data_to_mongo_db
 from datetime import datetime
 from datetime import date
 from decouple import config
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
+
+
 
 def load_datetime():
     
@@ -22,7 +26,9 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
-web_url = random.choice(config("PROXY"))
+web_url = random.choice(lines)
+print(web_url)
+
 client = MongoClient(config("MONGO_DB"))
 
 

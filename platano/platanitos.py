@@ -12,9 +12,11 @@ import re
 from datetime import datetime
 from datetime import date
 from decouple import config
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
 
 
-web_url = random.choice(config("PROXY"))
+web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
 
 def load_datetime():

@@ -9,10 +9,12 @@ import time
 import json
 from bd_record import save_data_to_mongo_db
 from decouple import config
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
 from datetime import datetime
 from datetime import date
 
-web_url = random.choice(config("PROXY"))
+web_url = random.choice(lines)
 web_url = "http://"+web_url
 client = MongoClient(config("MONGO_DB"))
 
