@@ -22,20 +22,7 @@ def close():
 
 def restart():
     close()
-    time.sleep(5)
-    print("empezo")
-    time.sleep(5)
-    subprocess.Popen(["start", "C:\GIT\\fala\\curacao\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\falabella\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\ripley\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\knasta\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\juntoz\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    subprocess.Popen(["start", "C:\GIT\\fala\\promart\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-
-    
-    
+   
     print("empezo")
     
 
@@ -76,6 +63,18 @@ def restart():
             
         for i in range (10):
             status_bot(val)
+            
+    time.sleep(5)
+    print("empezo")
+    time.sleep(5)
+    subprocess.Popen(["start", "C:\GIT\\fala\\curacao\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\falabella\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\ripley\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\knasta\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\juntoz\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    subprocess.Popen(["start", "C:\GIT\\fala\\promart\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
 
 
 def stop ():
