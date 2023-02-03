@@ -22,6 +22,7 @@ def bd_change(num, bd_status):
         }}
         collection.update_one(filter,newvalues)      
     
+    
 def loop():
     x = collection.find( )
     
