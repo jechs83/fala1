@@ -14,89 +14,91 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
 
         x = collection.find_one({"_id":market+sku})
         y = collection_max.find_one({"_id":market+sku})
+        try: 
+            if x  :
+                #print(" ACTUALIZA BASE DE DATOS ")
+                filter = {"_id":market+sku}
+                newvalues = { "$set":{ 
+                "_id":market+sku,   
+                "sku":sku, 
+                "market":market,
+                "brand":str(brand),
+                "product": str(product),
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price": float(card_price),
+                "web_dsct":float(dsct),
+                "card_dsct":float(card_dsct),
+                "link": str(link),
+                "image": str(image),
+                "date":current_date,
+                "time":current_time,
+                "home_list":web
+                }}
+                collection.update_one(filter,newvalues)            
+            else:
+                
+                data =  {
+                "_id":market+sku,     
+                "sku":sku, 
+                "market":market,
+                "brand":str(brand),
+                "product": str(product),
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price": float(card_price),
+                "web_dsct":float(dsct),
+                "card_dsct":float(card_dsct),
+                "link": str(link),
+                "image": str(image),
+                "date":current_date,
+                "time":current_time,
+                "home_list":web
+                }
+                collection.insert_one(data)
+                
+            if y :
+                #print(" ACTUALIZA BASE DE DATOS ")
+                filter = {"_id":market+sku}
+                newvalues = { "$set":{ 
+                "_id":market+sku,   
+                "sku":sku, 
+                "market":market,
+                "brand":str(brand),
+                "product": str(product),
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price": float(card_price),
+                "web_dsct":float(dsct),
+                "card_dsct":float(card_dsct),
+                "link": str(link),
+                "image": str(image),
+                "date":current_date,
+                "time":current_time,
+                "home_list":web
+                }}
+            
+                collection_max.update_one(filter,newvalues)
+            else:
+                
+                data =  {
+                "_id":market+sku,     
+                "sku":sku, 
+                "market":market,
+                "brand":str(brand),
+                "product": str(product),
+                "list_price":float(list_price),
+                "best_price":float(best_price),
+                "card_price": float(card_price),
+                "web_dsct":float(dsct),
+                "card_dsct":float(card_dsct),
+                "link": str(link),
+                "image": str(image),
+                "date":current_date,
+                "time":current_time,
+                "home_list":web
+                }
+                collection_max.insert_one(data)
+        except:
+            print("error")
         
-        if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+sku}
-            newvalues = { "$set":{ 
-            "_id":market+sku,   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "card_dsct":float(card_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time,
-            "home_list":web
-            }}
-            collection.update_one(filter,newvalues)            
-        else:
-            
-            data =  {
-            "_id":market+sku,     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "card_dsct":float(card_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time,
-            "home_list":web
-            }
-            collection.insert_one(data)
-            
-        if y :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":market+sku}
-            newvalues = { "$set":{ 
-            "_id":market+sku,   
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "card_dsct":float(card_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time,
-            "home_list":web
-            }}
-           
-            collection_max.update_one(filter,newvalues)
-        else:
-            
-            data =  {
-            "_id":market+sku,     
-            "sku":sku, 
-            "market":market,
-            "brand":str(brand),
-            "product": str(product),
-            "list_price":float(list_price),
-            "best_price":float(best_price),
-            "card_price": float(card_price),
-            "web_dsct":float(dsct),
-            "card_dsct":float(card_dsct),
-            "link": str(link),
-            "image": str(image),
-            "date":current_date,
-            "time":current_time,
-            "home_list":web
-            }
-            collection_max.insert_one(data)
-       

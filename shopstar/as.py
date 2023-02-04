@@ -12,6 +12,7 @@ from decouple import config
 from datetime import datetime
 from datetime import date
 from decouple import config
+from multiprocessing import Pool, freeze_support
 text_file = open(config("PROXY"), "r")
 lines = text_file.readlines() 
 import os
@@ -82,6 +83,9 @@ def shop(web):
             web_dsct= web_dsct.replace("-","").replace(",",".").replace(" %","").replace(" ","")
             dsct = web_dsct
         except:  dsct = web_dsct
+
+        if dsct == 0 :
+            continue
        
 
         try:
@@ -115,68 +119,68 @@ def shop(web):
         print(web_dsct);print(card_dsct);print(link);print("##################");print()
 
 
-
 num = sys.argv[1]
-def urls_list( id):
-    
-    db = client["shopstar"]
-    collection = db["lista"]
-    
-    x = collection.find({"_id":int(id)})
-    for i in x:
-        list = i["url"]
-    return list
-array_tec = urls_list(num)
-count = len(array_tec)
-print(count)
-
-db = client["trigger"]
-collection = db["shop"]
-
-def bd_change(num, bd_status):
-    
-    
-    x = collection.find_one({"_id":int(num)})
-    if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-        filter = {"_id":int(num)}
-        newvalues = { "$set":{ 
-        "status":bd_status, 
-        }}
-        collection.update_one(filter,newvalues)      
+arg_ = "/Users/javier/GIT/fala/shopstar/urls/shop"+str(num)+".txt"
 
 
-def shop_scrapper():
-    
-    	
-    for id,v in enumerate(array_tec):
-        print(v)
-        try:
-            for i in range (1000):
+array_tec=[]
 
-                    if v[-1:] == "=":
-                        url = v+str(i+1)
-                        print(url)
-                    else:
-                        url = v
-                    #print(url)
-                    print(url)
-                    scrap =  shop(url)
+f = open(arg_, "r")
+x = f.readlines()
+for i in x:
+    array_tec.append(i.rstrip()) 
+
+
+
+# num = sys.argv[1]
+# def urls_list( id):
+    
+#     db = client["shopstar"]
+#     collection = db["lista"]
+    
+#     x = collection.find({"_id":int(id)})
+#     for i in x:
+#         list = i["url"]
+#     return list
+# array_tec = urls_list(num)
+# count = len(array_tec)
+# print(count)
+
+# db = client["trigger"]
+# collection = db["shop"]
+
+# def bd_change(num, bd_status):
+    
+    
+#     x = collection.find_one({"_id":int(num)})
+#     if x  :
+#             #print(" ACTUALIZA BASE DE DATOS ")
+#         filter = {"_id":int(num)}
+#         newvalues = { "$set":{ 
+#         "status":bd_status, 
+#         }}
+#         collection.update_one(filter,newvalues)      
+
+
+def shop_scrapper(web):
+        scrap =  shop(web)
+
+
                 
-                    if scrap == False:
-                        print("salata a la siguiente url")
-                        break
-                    print(id, count-1)
-            if id == count-1:
-                    print("se acabo la web y va comenzar a dar vueltas")
-                   
-                   
-                    time.sleep(10)
-                    shop_scrapper()
-                    
-                   
-        except:
-              shop_scrapper()
+lista = []
+for idx, val in enumerate  (array_tec):
+
+    for i in range (55):
+       lista.append(array_tec[idx]+str(i+1))
 
 
-shop_scrapper()
+if __name__ == '__main__':
+        freeze_support()
+
+
+        p = Pool()
+        p.map (shop_scrapper,lista )
+        p.terminate()
+        p.join()
+
+        print(load_datetime())
