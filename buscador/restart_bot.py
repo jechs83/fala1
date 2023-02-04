@@ -68,12 +68,20 @@ def restart():
     print("empezo")
     time.sleep(5)
     subprocess.Popen(["start", "C:\GIT\\fala\\curacao\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(15)
+    
     subprocess.Popen(["start", "C:\GIT\\fala\\falabella\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\ripley\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\knasta\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\juntoz\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\tayloy\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+    time.sleep(20)
     subprocess.Popen(["start", "C:\GIT\\fala\\promart\\auto.py"] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
 
 

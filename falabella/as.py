@@ -5,6 +5,7 @@ import sys
 from datetime import datetime
 import random
 import gc
+import time
 import json
 from bd_record import save_data_to_mongo_db
 from datetime import datetime
@@ -121,7 +122,7 @@ def scrap (web):
 
 
 num = sys.argv[1]
-arg_ = "/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
+arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
 
 
 array_tec=[]
@@ -149,8 +150,10 @@ def saga_scrapper(web):
         
 
 lista = []
+inicio = None
 for idx, val in enumerate  (array_tec):
-
+    if idx ==0:
+        inicio = load_datetime()
     for i in range (210):
        lista.append(array_tec[idx]+str(i+1))
 
@@ -165,16 +168,20 @@ def scrap_category(web):
         print(web)
 
 
+
+
 if __name__ == '__main__':
         freeze_support()
 
+        def d():
+            p = Pool(8)
+            p.map (scrap_category,lista )
+            p.terminate()
+            p.join()
+            print(inicio)
+            print(load_datetime())
+            time.sleep(5)
+            d()
 
-        p = Pool(8)
-        p.map (scrap_category,lista )
-        p.terminate()
-        p.join()
 
-        print(load_datetime())
-
-
-
+        d()
