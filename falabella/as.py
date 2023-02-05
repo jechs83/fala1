@@ -120,7 +120,8 @@ def scrap (web):
 
 
 num = sys.argv[1]
-arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
+#arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
+arg_ = r"/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
 
 
 array_tec=[]
