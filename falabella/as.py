@@ -12,8 +12,11 @@ from datetime import datetime
 from datetime import date
 from multiprocessing import Pool, freeze_support
 from decouple import config
+
 text_file = open(config("PROXY"), "r")
 lines = text_file.readlines() 
+web_url = random.choice(lines)
+client = MongoClient(config("MONGO_DB"))
 
 
 def load_datetime():
@@ -24,23 +27,18 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
-web_url = random.choice(lines)
-
-
-client = MongoClient(config("MONGO_DB"))
+HEADERS = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
 
 
 def scrap (web):
-
+ 
     proxies = {"http":"http://"+web_url }
-    res=requests.get(web,  proxies= proxies)
+    res=requests.get(web,  proxies= proxies, headers= HEADERS)
     print("Respuesta del servidor :"+str(res.status_code))
     soup = BeautifulSoup(res.text, "html.parser")
     
     error = soup.find( "h3" , class_="jsx-860724461")
-    print()
-    print(error)
-    print()
+
     if error:
         return False
     try:
@@ -104,10 +102,10 @@ def scrap (web):
         except: list_price = 0 
 
       
-        # print()
-        # print( "producto numero "+ str(i+1));
-        # print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
-        # print("descuento "+str(web_dsct)); print("link "+link)
+        print()
+        print( "producto numero "+ str(i+1));
+        print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
+        print("descuento "+str(web_dsct)); print("link "+link)
         
 
         bd_name_store = "saga"
@@ -126,62 +124,43 @@ arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
 
 
 array_tec=[]
-
 f = open(arg_, "r")
 x = f.readlines()
 for i in x:
     array_tec.append(i.rstrip()) 
 
-#count =(len(array_tec))
-
-# for id, val in enumerate(array_tec):
-#         print(val)
-
-#print(array_tec)
 
 
-def saga_scrapper(web):
-    
-    try:
-        scrap_category(web) ## GENERA LA LISTA DE PAGINACIONES POR CATEGORIA
-        print("esta web es la numero "+str(id+1)+" de aprox 500")
-    except:      
-        print( load_datetime()+ "se cayo el scrap")
-        
+
+inicio = None
 
 lista = []
 inicio = None
 for idx, val in enumerate  (array_tec):
-    if idx ==0:
+    if idx == 0:
         inicio = load_datetime()
-    for i in range (210):
+
+    for i in range (200):
        lista.append(array_tec[idx]+str(i+1))
 
-# with open ("/Users/javier/GIT/fala/falabella/test.txt", "w+") as f:
-#     f.write(str(lista))
-#     f.close
 
-
-def scrap_category(web):
-
-        scrap(web)
-        print(web)
-
-
-
-
-if __name__ == '__main__':
+    if __name__ == '__main__':
+        print("sdasdasdasdsa")
         freeze_support()
-
-        def d():
-            p = Pool(8)
-            p.map (scrap_category,lista )
-            p.terminate()
-            p.join()
-            print(inicio)
-            print(load_datetime())
-            time.sleep(5)
-            d()
+        p = Pool(30)
+        p.map (scrap,lista)
+        p.terminate()
+        p.join()
+print(inicio)
+print(load_datetime())
 
 
-        d()
+
+#     if i == 0:
+#         inicio = load_datetime()
+# print(inicio)
+# print(load_datetime())
+
+        
+
+
