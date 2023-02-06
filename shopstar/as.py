@@ -170,7 +170,7 @@ def shop_scrapper(web):
 lista = []
 for idx, val in enumerate  (array_tec):
 
-    for i in range (55):
+    for i in range (50):
        lista.append(array_tec[idx]+str(i+1))
 
 
