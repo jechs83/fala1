@@ -14,8 +14,8 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
 
         x = collection.find_one({"_id":market+sku})
         y = collection_max.find_one({"_id":market+sku})
-        try: 
-            if x  :
+         
+        if x  :
                 #print(" ACTUALIZA BASE DE DATOS ")
                 filter = {"_id":market+sku}
                 newvalues = { "$set":{ 
@@ -36,7 +36,7 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
                 "home_list":web
                 }}
                 collection.update_one(filter,newvalues)            
-            else:
+        else:
                 
                 data =  {
                 "_id":market+sku,     
@@ -57,7 +57,7 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
                 }
                 collection.insert_one(data)
                 
-            if y :
+        if y :
                 #print(" ACTUALIZA BASE DE DATOS ")
                 filter = {"_id":market+sku}
                 newvalues = { "$set":{ 
@@ -79,7 +79,7 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
                 }}
             
                 collection_max.update_one(filter,newvalues)
-            else:
+        else:
                 
                 data =  {
                 "_id":market+sku,     
@@ -99,6 +99,4 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
                 "home_list":web
                 }
                 collection_max.insert_one(data)
-        except:
-            print("error")
-        
+  

@@ -148,7 +148,7 @@ for idx, val in enumerate  (array_tec):
     if __name__ == '__main__':
         print("sdasdasdasdsa")
         freeze_support()
-        p = Pool(30)
+        p = Pool()
         p.map (scrap,lista)
         p.terminate()
         p.join()

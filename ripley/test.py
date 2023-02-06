@@ -1,11 +1,21 @@
-url = "//ripleype.imgix.net/https%3A%2F%2Fdpq25p1ucac70.cloudfront.net%2Fseller-place-files%2Fmrkl-files%2F589%2FMARKETPLACE%20INTERNACIONAL%2F416Qmb9xwYL_221714338603_61.jpeg?w=750&h=555&ch=Width&auto=format&cs=strip&bg=FFFFFF&q=60&trimcolor=FFFFFF&trim=color&fit=fillmax&ixlib=js-1.1.0&s=57f84713e79c42510d2323f069b44873"
+import sys
+array_tec=[]
+arg_ = sys.argv[1]
+num = sys.argv[1]
+arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
 
-url_start = url[:6]
+f = open(arg_, "r")
+x = f.readlines()
+for i in x:
+    array_tec.append(i.split()) 
 
 
-if url_start != "https:":
-    url = "https:"+url
 
+print(array_tec)
+# lista = []
+# inicio = None
+# for i,v  in enumerate  (array_tec):
+#     if i ==0:
 
-print(url)
-
+#     for i in range (15):
+#         lista.append(v+str(i+1))

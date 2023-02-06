@@ -27,14 +27,15 @@ def load_datetime():
  return date_now, time_now
 
 # first_sku = None
+HEADERS = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
 
 def scrap (web):
     # global first_sku
     proxies = {"http":"http://"+web_url }
         
-    print(web_url)
+    print(web)
     print("#####################################################################################")
-    res=requests.get(web,  proxies= proxies)
+    res=requests.get(web,  proxies= proxies, headers = HEADERS)
     print("Respuesta del servidor :"+str(res.status_code))
     response = res.status_code
 
@@ -46,7 +47,6 @@ def scrap (web):
       no_page = soup.find("div",class_="error-page-container")
     except:
         no_page=None
-    print("dddddd")
     print(no_page)
     # if no_page == None:
     #     return False
@@ -113,10 +113,10 @@ def scrap (web):
         link = i.find(class_="catalog-product-item catalog-product-item__container undefined").attrs.get("href")
         link= "https://simple.ripley.com.pe"+link
 
-        print()
-        print(brand)
-        print(product)
-        print(link)
+        # print()
+        # print(brand)
+        # print(product)
+        # print(link)
 
 
        
@@ -128,10 +128,10 @@ def scrap (web):
         
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                              best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
+     
        
 
    
-
 
 num = sys.argv[1]
 
@@ -143,12 +143,9 @@ arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
 f = open(arg_, "r")
 x = f.readlines()
 for i in x:
-    array_tec.append(i.rstrip()) 
-    
-
-def ripley_scrap(web):
-    print(web)
-    scrap(web)        
+    #array_tec.append(i.rstrip()) 
+    array_tec.append(i.split()) 
+        
 
 
 lista = []
@@ -156,26 +153,36 @@ inicio = None
 for i,v  in enumerate  (array_tec):
     if i ==0:
         inicio = load_datetime()
-    for i in range (30):
-        lista.append(v+str(i+1))
+    for i in range (int(v[1])):
+        lista.append(v[0]+str(i+1))
 
 
-
-def loop():
     if __name__ == '__main__':
 
             freeze_support()
-            p = Pool(2)
-            p.map (ripley_scrap,lista)
+            p = Pool()
+            p.map (scrap,lista)
             p.terminate()
             p.join()
-            print(inicio)
-            print(load_datetime())
+        
 
-            time.sleep(10)
+print(inicio)
+print(load_datetime())
 
 
-loop()
+# inicio =None
+# for i in range (15):
+#     if i == 0:
+#      inicio = load_datetime()
+#     web = "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?page="+(str(i+1))
+
+#     scrap(web)
+
+
+# print(inicio)
+# print(load_datetime())
+
+
 
 
 

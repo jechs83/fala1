@@ -1,7 +1,11 @@
-https://simple.ripley.com.pe/electrohogar/refrigeracion/refrigeradoras?source=menu&page=
-https://simple.ripley.com.pe/electrohogar/lavado/lavadoras?source=menu&page=
-https://simple.ripley.com.pe/electrohogar/cocina/cocinas-de-pie?source=menu&page=
-https://simple.ripley.com.pe/electrohogar/aspiradoras/ver-todo?page=
-https://simple.ripley.com.pe/electrohogar/electrodomesticos/ver-todo?page=
-https://simple.ripley.com.pe/electrohogar/cuidado-personal/ver-todo?page=
-https://simple.ripley.com.pe/electrohogar/climatizacion/ver-todo?page=
+https://simple.ripley.com.pe/jugueteria-y-bebes/jugueteria/ver-todo?source=menu&page= 210
+
+
+https://simple.ripley.com.pe/hogar/ripley-home/dormitorio-sabanas?page=40
+https://simple.ripley.com.pe/hogar/bano/ver-todo-bano?source=menu&page=30
+https://simple.ripley.com.pe/hogar/cocina/ver-todo-cocina?source=menu&page=100
+https://simple.ripley.com.pe/hogar/menaje/ver-todo-menaje?source=menu&page=50
+https://simple.ripley.com.pe/hogar/maletas-y-viajes/ver-todo-maletas-y-viajes?source=menu&page=30
+https://simple.ripley.com.pe/hogar/regaleria/ver-todo-regaleria?source=menu&page=20
+https://simple.ripley.com.pe/hogar/complementos-deco/alfombras?page=10
+
