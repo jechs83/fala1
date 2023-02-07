@@ -3,7 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from add_url import *
+#from add_url import *
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands, bot_restart
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
@@ -400,7 +400,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("comandos", Commands))
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
     dp.add_handler(CommandHandler('b', custom_search))
-    dp.add_handler(CommandHandler("url", web_url))
+    #dp.add_handler(CommandHandler("url", web_url))
     dp.add_handler(CommandHandler("send", send_document))
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('alert', alert_all))

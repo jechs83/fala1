@@ -109,7 +109,7 @@ def scrap (web):
         
 
         bd_name_store = "saga"
-        collection = "market2"  #   NOMBRE DE BASE DE DATOS
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
         market = "saga"    # COLECCION
         dsct = web_dsct
         card_dsct = 0
