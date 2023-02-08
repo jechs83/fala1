@@ -129,13 +129,9 @@ for i in x:
 lista = []
 inicio = None
 
-
-
-
-
 for id, val in enumerate(array_tec):
-    if i ==0:
-            inicio = load_datetime()
+    if id ==0:
+         inicio = load_datetime()
                
     count = 12
     web1 = val[0]
@@ -145,16 +141,12 @@ for id, val in enumerate(array_tec):
     for i in range(150):
 
         scrap(web1+str((i+1)*count)+web2)
-    
-
-
-
 
 
     if __name__ == '__main__':
 
             freeze_support()
-            p = Pool()
+            p = Pool(100)
             p.map (scrap,lista)
             p.terminate()
             p.join()
