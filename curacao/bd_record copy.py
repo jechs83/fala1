@@ -1,30 +1,11 @@
+
 from pymongo import MongoClient
 from decouple import config
-import datetime
-from datetime import datetime
-from datetime import date
-
 client = MongoClient(config("MONGO_DB"))
-
-
- 
-def load_datetime():
-    
- today = date.today()
- now = datetime.now()
- date_now = today.strftime("%d/%m/%Y")  
- time_now = now.strftime("%H:%M:%S")
- return date_now, time_now
-
-print(load_datetime()[1])
-print(load_datetime()[0])
 
 
 def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, current_date, current_time, web):
-
-
-
 
         db = client[bd_name_store]
         collection = db[collection]

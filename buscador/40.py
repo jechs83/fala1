@@ -17,7 +17,7 @@ chat_id = config("DISCOVERY_CHAT_TOKEN")
 bot_token = config("CAPITAN_SPOK_TOKEN")
 bd1 = "discovery1"
 bd2 = "discovery2"
-dsct = 80
+dsct = 70
 dsct2 = 101
 
 db = client["trigger"]
