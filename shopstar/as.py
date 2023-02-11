@@ -131,56 +131,23 @@ for i in x:
     array_tec.append(i.rstrip()) 
 
 
-
-# num = sys.argv[1]
-# def urls_list( id):
-    
-#     db = client["shopstar"]
-#     collection = db["lista"]
-    
-#     x = collection.find({"_id":int(id)})
-#     for i in x:
-#         list = i["url"]
-#     return list
-# array_tec = urls_list(num)
-# count = len(array_tec)
-# print(count)
-
-# db = client["trigger"]
-# collection = db["shop"]
-
-# def bd_change(num, bd_status):
-    
-    
-#     x = collection.find_one({"_id":int(num)})
-#     if x  :
-#             #print(" ACTUALIZA BASE DE DATOS ")
-#         filter = {"_id":int(num)}
-#         newvalues = { "$set":{ 
-#         "status":bd_status, 
-#         }}
-#         collection.update_one(filter,newvalues)      
-
-
-def shop_scrapper(web):
-        scrap =  shop(web)
-
-
                 
 lista = []
 for idx, val in enumerate  (array_tec):
 
-    for i in range (55):
+    for i in range (50):
        lista.append(array_tec[idx]+str(i+1))
 
 
-if __name__ == '__main__':
+    if __name__ == '__main__':
         freeze_support()
 
 
         p = Pool()
-        p.map (shop_scrapper,lista )
+        p.map (shop,lista )
         p.terminate()
         p.join()
 
         print(load_datetime())
+    
+    lista=[]

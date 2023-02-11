@@ -121,7 +121,7 @@ def scrap (web):
 
        
         bd_name_store = "ripley"
-        collection = "market2"  #   NOMBRE DE BASE DE DATOS
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
         market = "ripley"    # COLECCION
         card_dsct = 0
         date_time = load_datetime()
@@ -164,6 +164,7 @@ for i,v  in enumerate  (array_tec):
             p.map (scrap,lista)
             p.terminate()
             p.join()
+    lista=[]
         
 
 print(inicio)

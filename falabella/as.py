@@ -109,7 +109,7 @@ def scrap (web):
         
 
         bd_name_store = "saga"
-        collection = "market2"  #   NOMBRE DE BASE DE DATOS
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
         market = "saga"    # COLECCION
         dsct = web_dsct
         card_dsct = 0
@@ -122,46 +122,53 @@ def scrap (web):
 num = sys.argv[1]
 #arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
 arg_ = r"/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
+array_tec = []
 
-
-array_tec=[]
 f = open(arg_, "r")
 x = f.readlines()
 for i in x:
-    array_tec.append(i.rstrip()) 
+    #array_tec.append(i.rstrip()) 
+    array_tec.append(i.split()) 
+        
 
-
-
-
-inicio = None
 
 lista = []
 inicio = None
-for idx, val in enumerate  (array_tec):
-    if idx == 0:
+for i,v  in enumerate  (array_tec):
+    if i ==0:
         inicio = load_datetime()
-
-    for i in range (200):
-       lista.append(array_tec[idx]+str(i+1))
+    for i in range (int(v[1])):
+        lista.append(v[0]+str(i+1))
 
 
     if __name__ == '__main__':
-        print("sdasdasdasdsa")
-        freeze_support()
-        p = Pool()
-        p.map (scrap,lista)
-        p.terminate()
-        p.join()
+
+            freeze_support()
+            p = Pool()
+            p.map (scrap,lista)
+            p.terminate()
+            p.join()
+        
+
 print(inicio)
 print(load_datetime())
 
 
-
+# inicio =None
+# for i in range (15):
 #     if i == 0:
-#         inicio = load_datetime()
+#      inicio = load_datetime()
+#     web = "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?page="+(str(i+1))
+
+#     scrap(web)
+
+
 # print(inicio)
 # print(load_datetime())
 
-        
 
 
+
+
+
+    
