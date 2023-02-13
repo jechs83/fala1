@@ -14,6 +14,7 @@ lines = text_file.readlines()
 from datetime import datetime
 from datetime import date
 from multiprocessing import Pool, freeze_support
+import subprocess
 
 web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
@@ -138,7 +139,7 @@ num = sys.argv[1]
 array_tec=[]
 arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
+arg_ = "C:\\GIT\\fala\\ripley\\urls\\test\\ripley"+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
@@ -148,33 +149,35 @@ for i in x:
         
 
 
-lista = []
-inicio = None
-for i,v  in enumerate  (array_tec):
-    if i ==0:
-        inicio = load_datetime()
-    for i in range (int(v[1])):
-        lista.append(v[0]+str(i+1))
+def db():
+
+        lista = []
+        inicio = None
+        for i,v  in enumerate  (array_tec):
+            if i ==0:
+                inicio = load_datetime()
+            for i in range (int(v[1])):
+                lista.append(v[0]+str(i+1))
 
 
-    if __name__ == '__main__':
+            if __name__ == '__main__':
 
-            freeze_support()
-            p = Pool()
-            p.map (scrap,lista)
-            p.terminate()
-            p.join()
-    lista=[]
-        
+                    freeze_support()
+                    p = Pool()
+                    p.map (scrap,lista)
+                    p.terminate()
+                    p.join()
+                    db()
+            lista=[]
+                
+db()
 
-print(inicio)
-print(load_datetime())
-
+   
 
 # inicio =None
 # for i in range (15):
 #     if i == 0:
-#      inicio = load_datetime()
+#      inicio = load_datetime()s
 #     web = "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?page="+(str(i+1))
 
 #     scrap(web)
@@ -188,4 +191,3 @@ print(load_datetime())
 
 
 
-    

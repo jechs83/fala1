@@ -12,26 +12,49 @@ from datetime import datetime
 from datetime import date
 from multiprocessing import Pool, freeze_support
 from decouple import config
-
+import subprocess
 text_file = open(config("PROXY"), "r")
 lines = text_file.readlines() 
 web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
+num = sys.argv[1]
 
+bd_name = "saga"
+collection_status = "status"  #   NOMBRE DE BASE DE DATOS
+db1 = client[bd_name]
+collection1 = db1[collection_status]
 
-def load_datetime():
-    
- today = date.today()
- now = datetime.now()
- date_now = today.strftime("%d/%m/%Y")  
- time_now = now.strftime("%H:%M:%S")
- return date_now, time_now
 
 HEADERS = {'User-Agent': 'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'}
 
+cursor = collection1.find_one({"_id":int(num)})
+print(cursor)
+
+if cursor  :
+    #print(" ACTUALIZA BASE DE DATOS ")
+    filter = {"_id":int(num)}
+    newvalues = { 
+                 "$set":{ 
+                      "trigger":1
+                        	}
+                 }
+    collection1.update_one(filter, newvalues)
+else:
+    data={"_id":int(num), "trigger":1}
+    collection1.insert_one(data)
+
+def load_datetime():
+        
+    today = date.today()
+    now = datetime.now()
+    date_now = today.strftime("%d/%m/%Y")  
+    time_now = now.strftime("%H:%M:%S")
+    return date_now, time_now
+
+
 
 def scrap (web):
- 
+
     proxies = {"http":"http://"+web_url }
     res=requests.get(web,  proxies= proxies, headers= HEADERS)
     print("Respuesta del servidor :"+str(res.status_code))
@@ -42,12 +65,12 @@ def scrap (web):
     if error:
         return False
     try:
-     data = soup.find("script", id="__NEXT_DATA__" ).text
+        data = soup.find("script", id="__NEXT_DATA__" ).text
     except: return False
 
     js = json.loads(data)
     try:
-     x = js["props"]["pageProps"]["results"]
+        x = js["props"]["pageProps"]["results"]
     except: return False
 
     for i in range (55):
@@ -101,7 +124,7 @@ def scrap (web):
             list_price = list_price.replace(",","")
         except: list_price = 0 
 
-      
+    
         print()
         print( "producto numero "+ str(i+1));
         print(sku);print(brand);print(product);print("list price "+str(list_price));print("best price "+str(best_price));print("card price "+str(card_price));
@@ -109,20 +132,39 @@ def scrap (web):
         
 
         bd_name_store = "saga"
-        collection = "market"  #   NOMBRE DE BASE DE DATOS
+        collection = "market2"  #   NOMBRE DE BASE DE DATOS
         market = "saga"    # COLECCION
         dsct = web_dsct
         card_dsct = 0
         date_time = load_datetime()
 
         save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
-                             best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
+                            best_price,card_price,link,image,dsct, card_dsct, date_time[0] ,date_time[1],web)
+
+def bd():
+    cursor = collection1.find_one({"_id":int(num)})
+    if cursor  :
+        #print(" ACTUALIZA BASE DE DATOS ")
+        filter = {"_id":int(num)}
+        newvalues = { 
+                    "$set":{ 
+                        "trigger":0
+                                }
+                    }
+        collection1.update_one(filter, newvalues)
+    else:
+        data = {
+            "_id":int(num),
+            "trigger":0
+            }
+        collection1.insert_one(data)
 
 
-num = sys.argv[1]
-#arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
-arg_ = r"/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
-array_tec = []
+
+array_tec=[]
+#arg_ = sys.argv[1]
+#num = sys.argv[1]
+arg_ = "C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
@@ -132,43 +174,33 @@ for i in x:
         
 
 
-lista = []
-inicio = None
-for i,v  in enumerate  (array_tec):
-    if i ==0:
-        inicio = load_datetime()
-    for i in range (int(v[1])):
-        lista.append(v[0]+str(i+1))
+def db():
+
+    lista = []
+    inicio = None
+    for i,v  in enumerate  (array_tec):
+        if i ==0:
+            inicio = load_datetime()
+        for i in range (int(v[1])):
+            lista.append(v[0]+str(i+1))
 
 
-    if __name__ == '__main__':
+        if __name__ == '__main__':
 
-            freeze_support()
-            p = Pool()
-            p.map (scrap,lista)
-            p.terminate()
-            p.join()
-        
-
-print(inicio)
-print(load_datetime())
-
-
-# inicio =None
-# for i in range (15):
-#     if i == 0:
-#      inicio = load_datetime()
-#     web = "https://simple.ripley.com.pe/tecnologia/celulares/celulares-y-smartphones?page="+(str(i+1))
-
-#     scrap(web)
+                freeze_support()
+                p = Pool(3)
+                p.map (scrap,lista)
+                p.terminate()
+                p.join()
+                db()
+                
+        lista=[]  
+db()  
 
 
-# print(inicio)
-# print(load_datetime())
+#bd_name = "saga"
+#collection_status = "status"  #   NOMBRE DE BASE DE DATOS
+#db1 = client[bd_name]
+#collection1 = db1[collection_status]
 
 
-
-
-
-
-    
