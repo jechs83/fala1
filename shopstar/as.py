@@ -120,7 +120,8 @@ def shop(web):
 
 
 num = sys.argv[1]
-arg_ = "C:\\GIT\\fala\\shopstar\\urls\\shop"+str(num)+".txt"
+#arg_ = "C:\\GIT\\fala\\shopstar\\urls\\shop"+str(num)+".txt"
+arg_ = "/Users/javier/GIT/fala/shopstar/urls/shop"+str(num)+".txt"
 
 
 array_tec=[]
@@ -131,25 +132,22 @@ for i in x:
     array_tec.append(i.rstrip()) 
 
 
-def bd()     :          
-    lista = []
-    for idx, val in enumerate  (array_tec):
 
-        for i in range (50):
-            lista.append(array_tec[idx]+str(i+1))
+lista = []
+for idx, val in enumerate  (array_tec):
 
-
-        if __name__ == '__main__':
-            freeze_support()
+    for i in range (50):
+        lista.append(array_tec[idx]+str(i+1))
 
 
-            p = Pool(3)
-            p.map (shop,lista )
-            p.terminate()
-            p.join()
-            bd()
+    if __name__ == '__main__':
+        freeze_support()
+        p = Pool(20)
+        p.map (shop,lista )
+        p.terminate()
+        p.join()
+    
 
 
     
         lista=[]
-bd()

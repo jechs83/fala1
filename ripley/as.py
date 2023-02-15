@@ -139,7 +139,8 @@ num = sys.argv[1]
 array_tec=[]
 arg_ = sys.argv[1]
 num = sys.argv[1]
-arg_ = "C:\\GIT\\fala\\ripley\\urls\\test\\ripley"+str(num)+".txt"
+#arg_ = "C:\\GIT\\fala\\ripley\\urls\\test\\ripley"+str(num)+".txt"
+arg_ = "/Users/javier/GIT/fala/ripley/urls/test/ripley"+str(num)+".txt"
 
 f = open(arg_, "r")
 x = f.readlines()
@@ -163,11 +164,11 @@ def db():
             if __name__ == '__main__':
 
                     freeze_support()
-                    p = Pool()
+                    p = Pool(3)
                     p.map (scrap,lista)
                     p.terminate()
                     p.join()
-                    db()
+      
             lista=[]
                 
 db()

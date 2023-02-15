@@ -164,7 +164,9 @@ def bd():
 array_tec=[]
 #arg_ = sys.argv[1]
 #num = sys.argv[1]
-arg_ = "C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
+#arg_ = "C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
+arg_ = "/Users/javier/GIT/fala/falabella/urls/test/url"+str(num)+".txt"
+
 
 f = open(arg_, "r")
 x = f.readlines()
@@ -192,7 +194,7 @@ def db():
                 p.map (scrap,lista)
                 p.terminate()
                 p.join()
-                db()
+            
                 
         lista=[]  
 db()  

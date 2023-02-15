@@ -25,12 +25,18 @@ db1 = client[bd_name]
 collection1 = db1[collection_status]
 
 lista =[1,2,3,4]
-  
-for i, v in enumerate(lista):
+subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "1"] )
+subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "2"] )
+subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala/shopstar//as.py", "3"] )
+subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "4"] )
+
+# for i, v in enumerate(lista):
 
         
-    subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\as.py", str(v)] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-    time.sleep(10)
+#     #subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\as.py", str(v)] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
+#     subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala/shopstar/as.py", str(v)] )
+
+#     time.sleep(10)
          
         
         

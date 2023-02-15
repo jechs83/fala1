@@ -146,7 +146,7 @@ for id, val in enumerate(array_tec):
     if __name__ == '__main__':
 
             freeze_support()
-            p = Pool(100)
+            p = Pool()
             p.map (scrap,lista)
             p.terminate()
             p.join()

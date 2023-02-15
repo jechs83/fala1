@@ -13,7 +13,6 @@ text_file = open(config("PROXY"), "r")
 lines = text_file.readlines() 
 from datetime import datetime
 from datetime import date
-from multiprocessing import Pool, freeze_support
 
 web_url = random.choice(lines)
 client = MongoClient(config("MONGO_DB"))
@@ -27,6 +26,7 @@ def load_datetime():
  return date_now, time_now
 
 first_sku = None
+# web = "https://juntoz.com/catalogo?categoryId=995783&top=28&skip=0"
 def scrap (web):
     global first_sku
     proxies = {"http":"http://"+web_url }
@@ -83,7 +83,7 @@ def scrap (web):
         url = web
 
         bd_name_store = "juntoz"
-        collection = "market2"  #   NOMBRE DE BASE DE DATOS
+        collection = "market"  #   NOMBRE DE BASE DE DATOS
         market = "juntoz"    # COLECCION
         card_dsct = 0
         card_price = 0
@@ -95,44 +95,52 @@ def scrap (web):
         
    
 
+
+
+# array_tec=[]
+# arg_ = sys.argv[1]
+# num = sys.argv[1]
+# arg_ = config("JUNTOZ_TEXT_PATH")+str(num)+".txt"
+
+# f = open(arg_, "r")
+# x = f.readlines()
+# for i in x:
+#     array_tec.append(i.rstrip()) 
+
+# count =(len(array_tec))
+
+
+
+
 num = sys.argv[1]
-#arg_ = "C:\\GIT\\fala\\shopstar\\urls\\shop"+str(num)+".txt"
-arg_ = "/Users/javier/GIT/fala/juntoz/urls/test/juntoz"+str(num)+".txt"
 
 
-array_tec=[]
-
-f = open(arg_, "r")
-x = f.readlines()
-for i in x:
-    array_tec.append(i.split()) 
-
-
-
-lista = []
-
-for idx, val in enumerate  (array_tec):
-  
-    for i in range (500):
-        lista.append(val[0]+str(i*28)+"&orderBy=rating-desc")
-        
-
-
-    if __name__ == '__main__':
-
-        freeze_support()
-        p = Pool()
-        p.map (scrap,lista )
-        p.terminate()
-        p.join()
+def urls_list( id):
     
-
+    db = client["juntoz"]
+    collection = db["lista"]
+    
+    x = collection.find({"_id":int(id)})
+    for i in x:
+        list = i["url"]
+    return list
 
     
-        lista=[]
+array_tec = urls_list(num)
+count = len(array_tec)
 
 
 
+
+def ripley_scrap(web):
+ 
+
+          
+            success = scrap(web)
+           
+
+
+ripley_scrap()
 
 
 
