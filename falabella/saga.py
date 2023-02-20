@@ -26,6 +26,8 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
+text_file = open(config("PROXY"), "r")
+lines = text_file.readlines() 
 web_url = random.choice(lines)
 print(web_url)
 

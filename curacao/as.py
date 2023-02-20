@@ -57,7 +57,7 @@ def scrap (web):
          product = i.find("a")["title"]
         except: product = None
         print(product)
-        brand = i.find("div", class_="Manufacturer").text
+        brand = i.find("div", class_="product_name").text
         
         print(brand)
         try:
@@ -66,25 +66,25 @@ def scrap (web):
         except: sku = None
         
         link = i.find("a")["href"]
-        #print(link)
+        print(link)
 
         try:
             image = i.find("img")["data-src"]
             image= "https://www.lacuracao.pe"+image
         except: print("none")
-        #print(image)
+        print(image)
         
         try:
             list_price = i.find("span", class_="old_price").text
             list_price= list_price.strip().replace(",","").replace("S/","")
         except: list_price = 0 
-        #print(list_price)
+        print(list_price)
         
         try:
             best_price = i.find("span",  id="offerPriceValue").text
             best_price = best_price.strip().replace(",","")
         except: best_price = 0
-        #print(best_price)
+        print(best_price)
 
         try:
             web_dsct = (float(best_price)*100)/float(list_price)
@@ -92,6 +92,7 @@ def scrap (web):
 
         except: web_dsct = 0
         web_dsct = round( web_dsct)
+        print(web_dsct)
       
       
 

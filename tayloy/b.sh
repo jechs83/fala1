@@ -38,6 +38,14 @@ osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/c
 
 sleep 420
 
+osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/juntoz/as.py 1"' "$2"
+osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/juntoz/as.py 2"' "$2"
+osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/juntoz/as.py 3"' "$2"
+osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/juntoz/as.py 4"' "$2"
+osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/juntoz/as.py 5"' "$2"
+
+
+
 osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/promart/as.py 1"' "$2"
 osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/promart/as.py 2"' "$2"
 osascript -e 'tell app "Terminal" to do script "python3 /Users/javier/GIT/fala/promart/as.py 3"' "$2"
