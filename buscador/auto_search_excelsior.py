@@ -17,7 +17,7 @@ chat_id = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"
-dsct = 50
+dsct = 80
 dsct2 = 101
 product  = "lentes"
 

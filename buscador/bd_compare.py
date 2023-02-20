@@ -17,8 +17,8 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct,db_collection):
 
         
-        
-        db = client["scrap"]
+        ###############
+        db = client["scrap2"]
         collection = db[db_collection]
 
         x = collection.find_one({"_id":sku})

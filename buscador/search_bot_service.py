@@ -439,11 +439,13 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
 ##############################################################################################################
 
 def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_id,porcentage1, 
-                                           porcentage2, producto,db,db_collection):
+                                           porcentage2, producto,db_name,db_collection):
     print("se esta ejecutando")
     product_array = []
     
-    db = client[db]
+    
+        
+    db = client[db_name]
     collection = db[db_collection]
     db.command({"planCacheClear": "scrap2"})
 
@@ -452,9 +454,10 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
+
     for i in t1:
         product_array.append(i)
-        print(i)
+ 
 
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -465,6 +468,8 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
             a= collection_1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
+            print(a)
+            
         
             b= collection_2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
@@ -472,6 +477,7 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
             print(b)
             len_b = len(b)
             print(len_b)
+
 
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
