@@ -21,8 +21,8 @@ dsct = 80
 dsct2 = 101
 product  = "lentes"
 
-db="scrap2"
-db_collection = "scrap2"
+db="scrap"
+db_collection = "scrap"
     
 def hora():
     now = datetime.now()
