@@ -36,7 +36,7 @@ def hora():
 def buscador():
   
     try:
-     auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct, dsct2, product, db, db_collection)
+     auto_telegram_between_values_custom_bd( bd1,bd2,bot_token, chat_id, dsct, dsct2, product, db, db_collection)
 
     except:
         buscador()
