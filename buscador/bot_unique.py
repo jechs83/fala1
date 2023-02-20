@@ -7,7 +7,6 @@ import os
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands, bot_restart
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
-
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
     logger = logging.getLogger()
@@ -23,12 +22,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
         bot.sendMessage(
             chat_id=chatId,
-            parse_mode="HTML",
-
-            #parse_mode="MarkdownV2",
-            text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes ",
-            message_thread_id="5"
-        
+            parse_mode="HTML",text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes "
+            #,message_thread_id="5"
         )
 
 ### 2 ENVIA LOS COMANDOS DEL BOT 
