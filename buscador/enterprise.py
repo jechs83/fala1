@@ -3,11 +3,6 @@
 from decouple import config
 from bot_unique2 import super_bot
 
-
-
-
-
-
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
 bot_token = config("ENTERPRISE_TOKEN")

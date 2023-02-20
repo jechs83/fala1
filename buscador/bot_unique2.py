@@ -42,7 +42,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         bot.sendMessage(
             chat_id= chatId,
             parse_mode= "HTML",
-            text=f"Bienvenido al grupo {userName}."
+            text=f"Bienvenido al grupo {userName}.\n\n REGLAS DE LA NAVE\n1. Compartir las ofertas solamente al grupo de Ofertas Peru\n2. Si hay alguna oferta interesante cominucarlo al Administrador.\n3. No sean casa solas avisen y compren una unidad para todos los del grupo puedan comoprar tambien"
         )
 
 ### 4 BUSCA EN BASE A MARCA Y DESCUENTO 
@@ -322,6 +322,20 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text= f"Reiniciando Bots recolectores, sistema en linea en 2 minutos"
         )
         
+        
+    def rules(update, context):
+            bot = context.bot
+            chatId= update.message.chat_id
+            userName = update.effective_user["first_name"]
+            logger.info(f"el usuario {userName} pidio las  reglas de la nave")
+            
+            bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+                        text=f"REGLAS DE LA NAVE\n\n1. Compartir las ofertas solamente al grupo de Ofertas Peru\n2. Si hay alguna oferta interesante cominucarlo al Administrador.\n3. No sean casa solas avisen y compren una unidad para todos los del grupo puedan comoprar tambien"
+        )
+        
+        
 
     # if __name__ == "__main__":
     myBot = telegram.Bot(token = TOKEN)
@@ -332,6 +346,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp= updater.dispatcher
 
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
+    
+    dp.add_handler(CommandHandler('rules', rules))
  
 
     updater.start_polling()

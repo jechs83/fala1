@@ -438,15 +438,14 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
 
 ##############################################################################################################
 
-def auto_telegram_between_values_custom_bd(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2, producto,db,db_collection):
+def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_id,porcentage1, 
+                                           porcentage2, producto,db,db_collection):
     print("se esta ejecutando")
     product_array = []
     
-    
-        
     db = client[db]
     collection = db[db_collection]
-    db.command({"planCacheClear": "scrap"})
+    db.command({"planCacheClear": "scrap2"})
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
 

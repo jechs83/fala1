@@ -12,19 +12,15 @@ from search_bot_service import  auto_telegram, auto_telegram_total,auto_telegram
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
-
-
 TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_id = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"
-dsct = 60
+dsct = 50
 dsct2 = 101
 product  = "lentes"
 
-db = client["trigger"]
-collection = db["excelsior"]
 db="scrap2"
 db_collection = "scrap2"
     
