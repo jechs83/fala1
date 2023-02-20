@@ -100,15 +100,15 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
 
     count = 0
     for i in t5:
-        count = count+1
-        if count == 100:
-            break
-        print(i)
+        # count = count+1
+        # if count == 100:
+        #     break
+        # print(i)
         print("se envio a telegram")   
-        msn =  "<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"]+"\nhome web:"+i["home_list"]
+        msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
 
         send_telegram (msn, bot_token, chat_id)
-        time.sleep(2)
+        time.sleep(1)
     gc.collect()
 
 
@@ -577,7 +577,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
     list_cur = list(t5)
     products = []
     for i in list_cur:
-        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
+        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
         products.append(p)
 
     df = DataFrame(products)

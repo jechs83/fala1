@@ -135,14 +135,17 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName}  busqueda automatica")
+
         category=str(context.args[0])
+
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
             text= f"Espera un momento se esta procesando la solicitud "
         )
         
-        auto_telegram( category,db1, db2 ,bot_token ,chat_id)
+
+        auto_telegram( category,db1, db2 ,bot_token ,chat_id,70)
 
         bot.sendMessage(
             chat_id=chatId,
