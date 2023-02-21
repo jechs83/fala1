@@ -19,7 +19,7 @@ bd1 = "discovery1"
 bd2 = "discovery2"
 dsct = 70
 dsct2 = 101
-
+product = "reloj"
 db = client["trigger"]
 collection = db["40"]
     
