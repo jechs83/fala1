@@ -108,7 +108,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
 
         send_telegram (msn, bot_token, chat_id)
-        time.sleep(1)
+        time.sleep(2)
     gc.collect()
 
 
@@ -549,7 +549,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
                 t5 = collection5.find({ "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
         else:
             
-                t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
+         t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
 
     if price == "+":
     
@@ -586,17 +586,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
  
         return '<img src="'+ path + '" style=max-height:124px;"/>'
 
-    #html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
-    html = df.to_html(index=False, classes='table table-striped',
-                  justify='center', border=2, escape=False,
-                  formatters={'Image': path_to_image_html})
-    
-    html = html.replace('<table', '<table style="border: 2px solid black;"')
-    html = html.replace('<table', '<table style="font-family: Arial; font-size: 12pt;"')
-    html = html.replace('<thead>', '<thead style="background-color: lightgray;">', 1)
-    html = html.replace('<tbody>', '<tbody style="background-color: lightyellow;">', 1)
-    
-
+    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
     with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
      
@@ -637,8 +627,11 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     products = []
     for i in list_cur:
         
-       
-        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
+        
+        
+        #p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
+
+        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"],  'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
         products.append(p)
 
     df = DataFrame(products)
