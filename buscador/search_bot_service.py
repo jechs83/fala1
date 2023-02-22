@@ -549,7 +549,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
                 t5 = collection5.find({ "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
         else:
             
-         t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
+                t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
 
     if price == "+":
     
@@ -586,7 +586,10 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
  
         return '<img src="'+ path + '" style=max-height:124px;"/>'
 
-    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+    #html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+    html = df.to_html(index=False, classes='table table-striped',
+                  justify='center', border=0, escape=False,
+                  formatters={'Image': path_to_image_html})
 
     with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
      
