@@ -591,17 +591,10 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
                   justify='center', border=1, escape=False,
                   formatters={'Image': path_to_image_html})
     
-    html = df.to_html(index=False, classes='table table-striped',
-                  justify='center', border=1)
-
-    # Add a style attribute to the table tag
     html = html.replace('<table', '<table style="font-family: Arial; font-size: 12pt;"')
-
-    # Set the background color of the first row to light grey
     html = html.replace('<tr>', '<tr style="background-color: lightgray;">', 1)
-
-    # Set the background color of the remaining rows to light yellow
     html = html.replace('<tbody>', '<tbody style="background-color: lightyellow;">', 1)
+    
 
 
     with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
