@@ -588,11 +588,12 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
 
     #html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
     html = df.to_html(index=False, classes='table table-striped',
-                  justify='center', border=1, escape=False,
+                  justify='center', border=0, escape=False,
                   formatters={'Image': path_to_image_html})
     
+    html = html.replace('<table', '<table style="border: 2px solid black;"')
     html = html.replace('<table', '<table style="font-family: Arial; font-size: 12pt;"')
-    html = html.replace('<tr>', '<tr style="background-color: lightgray;">', 1)
+    html = html.replace('<thead>', '<thead style="background-color: lightgray;">', 1)
     html = html.replace('<tbody>', '<tbody style="background-color: lightyellow;">', 1)
     
 
