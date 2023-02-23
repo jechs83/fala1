@@ -35,6 +35,8 @@ def buscador():
      auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, "lentes")
     except:
         buscador()
+    
+    buscador()
 
 
 buscador()
