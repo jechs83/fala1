@@ -19,7 +19,7 @@ bot_token = config("ENTERPRISE_TOKEN")
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 50
-dsct2 = 60
+dsct2 = 61
 
 db = client["trigger"]
 collection = db["60"]
