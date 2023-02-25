@@ -3,7 +3,8 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands, bot_restart
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands, bot_restart,search_market_dsct_antitopo
+
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
@@ -74,23 +75,32 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
         
         if user_id == 1160667522:
+
             market= (context.args[0]).replace("%"," ")
             dsct=int(context.args[1])
-            
-            
-            dsct = int(dsct)
-            if dsct <= 41:
-                dsct = 40
-            
-            search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
+            try:
+                dsct2 = int(context.args[2])
+            except: dsct2 = None
 
-            logger.info(f"marca "+ market + "dsct "+ str(dsct))
+            if dsct2 ==None:
+                
+                dsct = int(dsct)
+                if dsct <= 41:
+                    dsct = 40
+                
+                search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
 
-            bot.sendMessage(
-                chat_id=chatId,
-                parse_mode="HTML",
-                text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
-            )
+                logger.info(f"marca "+ market + "dsct "+ str(dsct))
+
+                bot.sendMessage(
+                    chat_id=chatId,
+                    parse_mode="HTML",
+                    text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
+                     )
+                
+            else:
+                 search_market_dsct_antitopo(str(market), int(dsct),int(dsct2), bot_token ,chat_id)
+
         else:
               bot.sendMessage(
                 chat_id=chatId,

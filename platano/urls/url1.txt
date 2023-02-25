@@ -1,1 +1,6 @@
-https://platanitos.com/catalogo?title=Moda+-+mujeres&breadcrumbs%5B0%5D=Moda+-+mujeres&sort=discount_percentage+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Computadoras&sort=timestamp_active_unix+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Herramientas+y+mejoras+para+el+hogar&sort=timestamp_active_unix+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Electr%C3%B3nica&sort=timestamp_active_unix+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Tel%C3%A9fonos+m%C3%B3viles+y+accesorios&sort=timestamp_active_unix+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Tel%C3%A9fonos+m%C3%B3viles+y+accesorios&sort=timestamp_active_unix+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Industrial+y+cient%C3%ADfica&sort=timestamp_active_unix+desc&start=

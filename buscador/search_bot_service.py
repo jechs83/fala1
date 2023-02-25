@@ -112,6 +112,37 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
     gc.collect()
 
 
+def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
+    db5.command({"planCacheClear": "scrap"})
+    print
+    print(bot_token)
+    print(chat_id)
+    
+    if dsct <41:
+        dsct = 40
+    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct),"$lte":int(dsct2) }, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), 
+                            re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), 
+                            re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
+   
+    print( "se realizo busqueda")
+
+    count = 0
+    for i in t5:
+        # count = count+1
+        # if count == 100:
+        #     break
+        # print(i)
+        print("se envio a telegram")   
+        msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
+        
+        send_telegram (msn, bot_token, chat_id)
+        time.sleep(2)
+    gc.collect()
+
+
+
+
+
 
 
 t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 

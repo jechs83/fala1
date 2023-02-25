@@ -74,7 +74,8 @@ def shop(web):
          list_price = list_price.replace("S/. ","").replace(",","")
         except: list_price = 0
         try:
-         best_price= i.find("span", class_="product__price").text
+         best_price= i.css('span.product__price::text').get()
+
          best_price = best_price.replace("S/. ","").replace(",","")
         except: best_price = 0
        
