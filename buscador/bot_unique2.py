@@ -14,9 +14,11 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 ### 1 ENVIA EL STATUS DEL BOT 
     def getBotInfo(update, context):
         bot = context.bot
+        user_id = update.message.from_user.id
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
+   
+        logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId) +" "+str(user_id))
         print(context.args)
         
         bot.sendMessage(
@@ -66,24 +68,36 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 ### 5 BUSCA EN BASE A MARKET Y DESCUENTO
     def custom_search_market(update, context):
         bot = context.bot
+        user_id = update.message.from_user.id
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-        market= (context.args[0]).replace("%"," ")
-        dsct=int(context.args[1])
-        dsct = int(dsct)
-        if dsct <= 41:
-           dsct = 40
         
-        search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
+        if user_id == 1160667522:
+            market= (context.args[0]).replace("%"," ")
+            dsct=int(context.args[1])
+            
+            
+            dsct = int(dsct)
+            if dsct <= 41:
+                dsct = 40
+            
+            search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
 
-        logger.info(f"marca "+ market + "dsct "+ str(dsct))
+            logger.info(f"marca "+ market + "dsct "+ str(dsct))
 
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
-        )
+            bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",
+                text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
+            )
+        else:
+              bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",
+                text= f"NO ESTAS AUTORIZADO PARA USAR LA NAVE TOPO"
+            )
+            
 ### 6 ALERTA A TODOS EN EL GRUPO  
     def alert_all(update, context):
         bot = context.bot
@@ -344,9 +358,10 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     updater = Updater(myBot.token, use_context=True)
 
     dp= updater.dispatcher
-
+    dp.add_handler(CommandHandler("botinfo", getBotInfo))
+    dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
-    
+    dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('rules', rules))
  
 

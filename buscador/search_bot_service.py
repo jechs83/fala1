@@ -106,7 +106,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         # print(i)
         print("se envio a telegram")   
         msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
-
+        
         send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
     gc.collect()
