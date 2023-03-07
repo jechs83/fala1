@@ -254,22 +254,41 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
 ### 14 CREA HTML DE BUSQUEDA DE PALABRA CONTENIDA EN EL NOMBRE DEL PRODUCTO Y DSCT PERSONALIZADO POSIBLE ORDENAR PRECIO MAYOR A MENOR
     def send_product(update, context):
-        chat_id = update.message.chat_id
+        chat_Id = update.message.chat_id
         userName = update.effective_user["first_name"]
+        bot = context.bot
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
 
-        product = (context.args[0]).replace("%"," ")
-        dsct=int(context.args[1])
-    
+        #product = (context.args[0]).replace("%"," ")
+        #dsct=int(context.args[1])
+        text = update.message.text
+        words = text.split()
+        if not words:
+            # handle error
+            return
+        
+        product = " ".join(words[:-1]).replace("/product","")
+
         try:
-         price = (context.args[2])
-        except: price = None
+            dsct = int(words[-1])
+        except: 
+            bot.sendMessage( chat_id=chat_Id, parse_mode="HTML", text= f"Falta el Descuento" )
+                    
+
+    # do something with the arguments here
+    
+        # try:
+        #  price = (context.args[2])
+        # except: price = None
+        price = None
+        print(product)  
+        print(dsct)
         
 
-        search_product_dsct_html(product,dsct,price ,bot_token ,chat_id)
+        search_product_dsct_html(product,dsct,price ,bot_token ,chat_Id)
 
         document = open(config("HTML_PATH")+"producto.html", 'rb')
-        context.bot.send_document(chat_id, document)
+        context.bot.send_document(chat_Id, document)
         document.close()
         os.remove(config("HTML_PATH")+"producto.html")
 

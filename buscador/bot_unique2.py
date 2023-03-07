@@ -30,6 +30,24 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
         )
 
+    def find_pack(update, context):
+        bot = context.bot
+        user_id = update.message.from_user.id
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+   
+        logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId) +" "+str(user_id))
+        print(context.args)
+        person= (context.args[0]).replace("%"," ")
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            #parse_mode="MarkdownV2",
+            text= f"Espere un momento... buscando el pack de "+person
+        
+        )
+
+
 
 
 ### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
@@ -41,7 +59,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             userName = user.first_name
         
         logger.info(f"El usuario {userName} ha ingresado al grupo" )
-
+        
         bot.sendMessage(
             chat_id= chatId,
             parse_mode= "HTML",
@@ -369,6 +387,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
     dp= updater.dispatcher
     dp.add_handler(CommandHandler("botinfo", getBotInfo))
+    dp.add_handler(CommandHandler("pack", find_pack))
     dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
     dp.add_handler(CommandHandler('cod', sku))

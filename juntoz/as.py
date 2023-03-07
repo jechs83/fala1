@@ -114,7 +114,7 @@ lista = []
 for idx, val in enumerate  (array_tec):
   
     for i in range (500):
-        lista.append(val[0]+str(i*28)+"&orderBy=rating-desc")
+        lista.append(val[0]+str(i*28))
         
 
 
