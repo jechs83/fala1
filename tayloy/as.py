@@ -142,8 +142,8 @@ def scrap (web):
      
 
 num = sys.argv[1]
-#arg_ = r"C:\\GIT\\fala\\falabella\\urls\\test\\url"+str(num)+".txt"
-arg_ = r"/Users/javier/GIT/fala/tayloy/urls/test/tay"+str(num)+".txt"
+arg_ = r"C:\\Git\\fala\\tayloy\\urls\\test\\tay"+str(num)+".txt"
+#arg_ = r"/Users/javier/GIT/fala/tayloy/urls/test/tay"+str(num)+".txt"
 array_tec = []
 
 f = open(arg_, "r")

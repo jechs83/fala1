@@ -31,11 +31,40 @@ def hora():
 
 def buscador():
   
-    try:
-     auto_telegram_between_values_custom_bd( bd1,bd2,bot_token, chat_id, dsct, dsct2, product, db, db_collection)
+    
+    auto_telegram_between_values_custom_bd( bd1,bd2,bot_token, chat_id, dsct, dsct2, product, db, db_collection)
+   
+        
+        ###############
+    db1 = client["scrap"]
+    collection1 = db1["excelsior"]
 
-    except:
-        buscador()
-    buscador()
+    x = collection1.find_one({"_id":0})
+      
+    
+    if x  :
+            #print(" ACTUALIZA BASE DE DATOS ")
+            filter = {"_id":0}
+            newvalues = { "$set":{ 
+                 "_id":0,
+            "status":0,   
+        
+            }}
+            collection1.update_one(filter,newvalues)
+            
+    else:
+            data =  {
+                
+                "_id":0,
+                "status":1
+                }
+            collection1.insert_one(data)
+    
+    
+    print("se guardo en bd status de buqueda")
+
+        
+    buscador() 
+    
 
 buscador()
