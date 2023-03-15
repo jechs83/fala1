@@ -35,7 +35,7 @@ def start():
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\exelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
     ## CADA 20 MINNUTOS SE REINICIA LOS BOTS 
-    time.sleep(20*60)
+    time.sleep(20*60) 
 
     ## MATGA TODOS LOS PROCESOS ANTES DE REINICIAR LA FUNCION START 
     subprocess.run(["taskkill", "/IM", "cmd.exe", "/F"])
