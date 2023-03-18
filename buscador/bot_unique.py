@@ -22,7 +22,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
         bot.sendMessage(
             chat_id=chatId,
-            parse_mode="HTML",text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes "
+            parse_mode="HTML",text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes❗❗❗ "
             #,message_thread_id="5"
         )
 
