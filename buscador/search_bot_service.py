@@ -105,7 +105,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         #     break
         # print(i)
         print("se envio a telegram")   
-        msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\n➡️Precio Lista :"+str(i["list_price"])+"\n<b>👉Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"🟢Descuento: "+"% "+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
+        msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\n➡️Precio Lista :"+str(i["list_price"])+"\n<b>👉Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"🟢Descuento: "+"% "+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+"<image>"+str(i["image"])+"</image>"+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
         
         send_telegram (msn, bot_token, chat_id)
         time.sleep(2)
