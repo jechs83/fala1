@@ -32,7 +32,7 @@ def start():
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\voyager.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\discovery.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\enterprise.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\exelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\exelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
     ## CADA 20 MINNUTOS SE REINICIA LOS BOTS 
     time.sleep(20*60) 

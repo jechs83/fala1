@@ -31,7 +31,7 @@ def dia():
 date = dia()
 
 def send_telegram(message,foto, bot_token, chat_id):
-
+    
     response = requests.post(
         
     f'https://api.telegram.org/bot{bot_token}/sendPhoto',
