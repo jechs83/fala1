@@ -525,27 +525,27 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
-                if  i["card_price"] == 0:
-                    card_price = ""
-                else:
-                    card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
+            if  i["card_price"] == 0:
+                card_price = ""
+            else:
+                card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
 
-                if i["web_dsct"] <= 50:
-                    dsct = "🟡"
-                if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
-                    dsct = "🟢"
-                if i["web_dsct"] >=70:
-                    dsct = "🔥"
+            if i["web_dsct"] <= 50:
+                dsct = "🟡"
+            if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
+                dsct = "🟢"
+            if i["web_dsct"] >=70:
+                dsct = "🔥"
 
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️▶️▶️"
-                foto = i["image"]
-                send_telegram (msn, foto, bot_token, chat_id) 
-                # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
-                #                 ,bot_token, chat_id)
+            msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️▶️▶️"
+            foto = i["image"]
+            send_telegram (msn, foto, bot_token, chat_id) 
+            # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
+            #                 ,bot_token, chat_id)
                 
 
-                print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
-                continue
+            print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
+            continue
 
 
             if b!=a:
