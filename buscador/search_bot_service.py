@@ -503,7 +503,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
 
     for i in t1:
         product_array.append(i)
-        print(i)
+        #print(i)
 
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -518,15 +518,16 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             b= collection_2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
-            print(b)
+            #print(b)
             len_b = len(b)
             print(len_b)
 
             if len_b == 0:
+                print(" NO EXSTE EN BASE DE DATOS ")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
                 if  i["card_price"] == 0:
-                    card_price = ""
+                        card_price = ""
                 else:
                     card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
 
@@ -537,9 +538,16 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 if i["web_dsct"] >=70:
                     dsct = "🔥"
 
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️▶️▶️"
                 foto = i["image"]
-                send_telegram (msn, foto, bot_token, chat_id) 
+                print(len(foto))
+                if len(foto) <5:
+                    print(len(foto))
+                    foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                
+
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️▶️▶️"
+             
+                send_telegram (msn, foto, bot_token, chat_id)
             # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
             #                 ,bot_token, chat_id)
                 
@@ -567,8 +575,6 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                                            porcentage2, producto,db_name,db_collection):
     print("se esta ejecutando")
     product_array = []
-    
-    
         
     db = client[db_name]
     collection = db[db_collection]
@@ -588,8 +594,8 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
             f = print("se graba en bd datos")
-            
 
+    
             a= collection_1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
@@ -605,10 +611,35 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
 
             if len_b == 0:
+                print(" no exitse en base de daos 2, se graba")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
-                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
-                                ,bot_token, chat_id)
+                print("SE GRABO EN BASE DE DATOS 2")
+
+                if  i["card_price"] == 0:
+                    card_price = ""
+                else:
+                    card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
+
+                if i["web_dsct"] <= 50:
+                    dsct = "🟡"
+                if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
+                    dsct = "🟢"
+                if i["web_dsct"] >=70:
+                    dsct = "🔥"
+
+                foto = i["image"]
+                print(len(foto))
+                if len(foto) <5:
+                    print(len(foto))
+                    foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                
+
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️▶️▶️"
+             
+                send_telegram (msn, foto, bot_token, chat_id) 
+                # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
+                #                 ,bot_token, chat_id)
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
