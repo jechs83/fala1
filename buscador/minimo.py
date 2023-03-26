@@ -40,7 +40,7 @@ def minimo(sku):
             return True
         else:
             print("The last price in the list is not the historic minimum.")
-    s
+    
         
     
 
