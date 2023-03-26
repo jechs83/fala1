@@ -27,14 +27,20 @@ def minimo(sku):
     last_price = price_list[-1]
 
     print(price_list)
-    
-    if last_price == min_price:
-        print("The last price in the list is the historic minimum.")
-        print(last_price)
-        return True
+
+    if len(set(price_list)) == 1:
+        print("All prices in the list are the same.")
+        return False
+
     else:
-        print("The last price in the list is not the historic minimum.")
     
+        if last_price == min_price:
+            print("The last price in the list is the historic minimum.")
+            print(last_price)
+            return True
+        else:
+            print("The last price in the list is not the historic minimum.")
+    s
         
     
 
