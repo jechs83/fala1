@@ -74,6 +74,9 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
            dsct = 40
         search_brand_dsct(brand, dsct, bot_token ,chat_id)
 
+
+        os.remove("/Users/javier/GIT/fala/buscador/historical.html")
+
         bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
