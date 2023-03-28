@@ -19,7 +19,9 @@ collection5 = db5["scrap"]
 def minimo(sku):
     price_list = []
 
-    cod = collection5.find({"sku":str(sku)})
+    #cod = collection5.find({"sku":str(sku)}).sort("date", pymongo.DESCENDING)
+    cod = collection5.aggregate([{'$match': {'sku': str(sku)}}, {'$addFields': {'dateObject': {'$dateFromString': {'dateString': '$date', 'format': '%d/%m/%Y'}}}}, {'$sort': {'dateObject': pymongo.ASCENDING}}])
+
     for i in cod:
         price_list.append(i["best_price"])
     
@@ -37,9 +39,14 @@ def minimo(sku):
         if last_price == min_price:
             print("The last price in the list is the historic minimum.")
             print(last_price)
-            return True
+            max_value = max(price_list)
+            prev_price = price_list[-2]
+           
+            return last_price, prev_price,max_value, True
         else:
             print("The last price in the list is not the historic minimum.")
+
+            return False
     
         
     
