@@ -222,34 +222,25 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
         if i["web_dsct"] >=70:
             dsct = "🔥"
         
-        historic = minimo(i["sku"])
+        try:
+            historic = minimo(i["sku"])[3]
+        except:
+            historic = False
+        print(historic)
 
         if historic == True:
+
             historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
             historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        else:
+        if historic == False:
+
             historic_min = ""
             historic_list=""
-        
-        print("######")
-        print(i["sku"])
 
-        
-        #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n"+html_text+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-
-        #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
+
         send_telegram(msn, foto, bot_token, chat_id)
-
-
-        #send_telegram (msn,foto, bot_token, chat_id)  
-
-        
-        
-        #msn =  "<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"]+"\nhome web:"+i["home_list"
-        #send_telegram (msn, bot_token, chat_id)
-
         time.sleep(2)
     gc.collect()
         
@@ -284,22 +275,26 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
             dsct = "🟢"
         if i["web_dsct"] >=70:
             dsct = "🔥"
-        historic = minimo(i["sku"])
+
+
+        try:
+            historic = minimo(i["sku"])[3]
+        except:
+            historic = False
+        print(historic)
 
         if historic == True:
+
             historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-            historic_list = "Precio minimo: "+str(minimo(i["sku"])[1])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[2])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[3])
-        else:
+            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        if historic == False:
+
             historic_min = ""
             historic_list=""
 
-
-
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-        #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
         send_telegram (msn, foto, bot_token, chat_id)
-        #send_telegram_photo("https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg", bot_token, chat_id) 
         time.sleep(1)
     gc.collect()
 
@@ -337,17 +332,23 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
         if i["web_dsct"] >=70:
             dsct = "🔥"
 
-
-        historic = minimo(i["sku"])
+        try:
+            historic = minimo(i["sku"])[3]
+        except:
+            historic = False
+        print(historic)
 
         if historic == True:
-            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-        else:
-            historic_min = ""
 
+            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        if historic == False:
+
+            historic_min = ""
+            historic_list=""
 
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-        #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+
         foto = i["image"]
         send_telegram (msn, foto, bot_token, chat_id)   
         # msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
@@ -627,8 +628,6 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     print("se esta ejecutando")
     product_array = []
     
-    
-        
     db = client["scrap"]
     collection = db["scrap"]
     db.command({"planCacheClear": "scrap"})
@@ -640,7 +639,6 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     for i in t1:
         product_array.append(i)
         print(i)
-
 
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -675,38 +673,35 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 if i["web_dsct"] >=70:
                     dsct = "🔥"
 
-                historic = minimo(i["sku"])
+                try:
+                    historic = minimo(i["sku"])[3]
+                except:
+                    historic = False
+                print(historic)
 
                 if historic == True:
+
                     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
                     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                else:
+                if historic == False:
+
                     historic_min = ""
                     historic_list=""
-                
-                print("######")
-                print(i["sku"])
 
-        
-
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
                 foto = i["image"]
+
                 print(len(foto))
+
                 if len(foto) <5:
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
               
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
-
-                #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-             
                 send_telegram (msn, foto, bot_token, chat_id)
-            # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
-            #                 ,bot_token, chat_id)
-                
-
+           
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
                 continue
 
@@ -783,24 +778,29 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 if i["web_dsct"] >=70:
                     dsct = "🔥"
 
-                historic = minimo(i["sku"])
+                try:
+                    historic = minimo(i["sku"])[3]
+                except:
+                    historic = False
+                print(historic)
 
                 if historic == True:
+
                     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
                     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                else:
+                if historic == False:
+
                     historic_min = ""
                     historic_list=""
-                
+
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
                 foto = i["image"]
                 print(len(foto))
                 if len(foto) <5:
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
-                
-
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+            
              
                 send_telegram (msn, foto, bot_token, chat_id) 
                 # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
