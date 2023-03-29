@@ -54,3 +54,4 @@ def minimo(sku):
             return False
     
         
+minimo("18377775")

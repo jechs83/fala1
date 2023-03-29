@@ -683,7 +683,12 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 else:
                     historic_min = ""
                     historic_list=""
+                
+                print("######")
+                print(i["sku"])
+
         
+
 
                 foto = i["image"]
                 print(len(foto))
@@ -691,15 +696,9 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
-                historic = minimo(i["sku"])
-
-                if historic == True:
-                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-                else:
-                    historic_min = ""
-
-
+              
                 msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n<a href='link'>"+"</a>\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+
 
                 #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+str(card_price)+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
              
