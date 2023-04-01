@@ -451,7 +451,7 @@ def delete_brand(brand,category,bot_token,chat_id):
     collection.delete_one({"brand":brand})
     foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
 
-    send_telegram(" se elimino la marca ingresa ", foto bot_token, chat_id)
+    send_telegram(" se elimino la marca ingresa ", foto , bot_token, chat_id)
     gc.collect()
 
 
