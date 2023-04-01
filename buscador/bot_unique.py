@@ -4,7 +4,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 #from add_url import *
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     logging.basicConfig(
@@ -408,6 +408,27 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                 )
       
            
+    def send_document_price_values(update, context):
+        chat_id = update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+
+        market = (context.args[0]).replace("%"," ")
+        price_minimo=int(context.args[1])
+        price_maximo = int(context.args[2])
+     
+        try:
+         price_maximo = (context.args[2])
+        except: price_maximo = None
+
+        search_price(market,price_minimo,price_maximo, bot_token ,chat_id)
+
+        document = open(config("HTML_PATH")+market+".html", 'rb')
+        context.bot.send_document(chat_id, document)
+        document.close()
+        os.remove(config("HTML_PATH")+market+".html")
+        print("pasa por aqui")
+       
 
 
 
@@ -425,6 +446,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('b', custom_search))
     #dp.add_handler(CommandHandler("url", web_url))
     dp.add_handler(CommandHandler("send", send_document))
+    dp.add_handler(CommandHandler("price", send_document_price_values))
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('alert', alert_all))
     dp.add_handler(CommandHandler('market', custom_search_market))

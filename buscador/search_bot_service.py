@@ -117,12 +117,6 @@ def send_telegram3(message, foto, html_file, bot_token, chat_id):
 ########################################################################
 ########################################################################
 
-
-
-    
-  
-  
-
     # requests.post("https://api.telegram.org/bot"+str(bot_token)+"/sendMessage",
             
     # data= {'chat_id': chat_id ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
@@ -143,7 +137,7 @@ collection5 = db5["scrap"]
 
 
 
-
+### BUSQUEDA CON COD
 
 def busqueda(codigo,bot_token, chat_id):
     db5.command({"planCacheClear": "scrap"})
@@ -357,11 +351,6 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
     gc.collect()
 
 
-
-
-
-
-
 t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
 re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("Lg", re.IGNORECASE),
 re.compile("Asus", re.IGNORECASE),re.compile("Xiaomi", re.IGNORECASE),re.compile("indurama", re.IGNORECASE),
@@ -398,14 +387,11 @@ def brand_list(ropa,cat, bot_token,chat_id):
     for i in t9:
         print(i)
         print("se envio lista ropa")      
-        send_telegram ("brand",
-                       bot_token, chat_id)
+        send_telegram ("brand",None,bot_token, chat_id)
     gc.collect()
 
 
 ###############################################################################
-
-
 
 
 def save_brand_to_mongodb(brand,category):
@@ -492,8 +478,6 @@ def read_brands(category, bot_token,chat_id):
 
 ############################
 
-
-
 def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     
     print("se esta ejecutando")
@@ -543,8 +527,37 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
-                send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"]+"\nhome web:"+i["home_list"]))
-                                ,bot_token, chat_id)
+                
+
+                if  i["card_price"] == 0:
+                    card_price = ""
+                else:
+                    card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
+
+                if i["web_dsct"] <= 50:
+                    dsct = "🟡"
+                if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
+                    dsct = "🟢"
+                if i["web_dsct"] >=70:
+                    dsct = "🔥"
+                try:
+                    historic = minimo(i["sku"])[3]
+                except:
+                    historic = False
+                print(historic)
+
+                if historic == True:
+
+                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+                    historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+                if historic == False:
+
+                    historic_min = ""
+                    historic_list=""
+                
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+                foto = i["image"]
+                send_telegram(msn, foto, bot_token, chat_id)
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
@@ -1034,10 +1047,35 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     gc.collect()
 
 
+def search_price(market,price_minimo,price_maximo, bot_token ,chat_id):
+
+    db5.command({"planCacheClear": "scrap"})
+
+    t5 = collection5.find({ "date":date ,"market":market, "best_price":{"$gte":int(price_minimo), "$lte":int(price_maximo) }}) 
     
 
+    list_cur = list(t5)
+    products = []
+    for i in list_cur:
+        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
+        products.append(p)
+
+    df = DataFrame(products)
+    
+    def path_to_image_html(path):
+ 
+        return '<img src="'+ path + '" style=max-height:124px;"/>'
+
+    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+    with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
+     
+        f.write(html)
+        f.close
+    print(html)
 
     
+
 
 try:      
     argument = sys.argv[1] 
