@@ -816,12 +816,15 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
                 foto = i["image"]
                 print(len(foto))
-                if len(foto) <5:
+
+                if len(foto) <5 and foto.startswith('http'):
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                
             
-             
-                send_telegram (msn, foto, bot_token, chat_id) 
+                try:
+                    send_telegram (msn, foto, bot_token, chat_id) 
+                except: print("url no valida")
                 # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
                 #                 ,bot_token, chat_id)
                 

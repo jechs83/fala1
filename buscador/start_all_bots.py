@@ -20,6 +20,8 @@ def start():
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
     
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\excelsior_telegram.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\boyo_telegram.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+
        
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\discovery_telegram.py"], shell=True, executable="C:\windows\system32\cmd.exe")
    
