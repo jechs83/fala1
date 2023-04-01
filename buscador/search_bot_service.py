@@ -817,10 +817,15 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 foto = i["image"]
                 print(len(foto))
 
-                if len(foto) <5 and foto.startswith('http'):
+                if len(foto) <5 :
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
+                if foto ==[]:
+                    foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                
+
+
             
                 try:
                     send_telegram (msn, foto, bot_token, chat_id) 
