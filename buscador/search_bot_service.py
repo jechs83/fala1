@@ -36,6 +36,16 @@ def dia():
 date = dia()
 
 def send_telegram(message,foto, bot_token, chat_id):
+    print("#########")
+    print(foto)
+    print("#########")
+    if not foto:
+        foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    
+    if len(foto)<=0:
+
+            foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+
     
     response = requests.post(
         
@@ -121,12 +131,12 @@ def send_telegram3(message, foto, html_file, bot_token, chat_id):
             
     # data= {'chat_id': chat_id ,'text': str(message) , 'parse_mode':ParseMode.HTML}  ) # DISC0VERY
     
-def send_telegram_photo(foto, bot_token, chat_id):
-   response = requests.post(
-    f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-    data={'chat_id': chat_id},
-    files={'photo': requests.get(foto).content},
-)
+# def send_telegram_photo(foto, bot_token, chat_id):
+#    response = requests.post(
+#     f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+#     data={'chat_id': chat_id},
+#     files={'photo': requests.get(foto).content},
+# )
 
 
     
@@ -718,8 +728,10 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
               
-
-                send_telegram (msn, foto, bot_token, chat_id)
+                try:
+                    send_telegram (msn, foto, bot_token, chat_id)
+                except:
+                    continue
            
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
                 continue
@@ -814,14 +826,18 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
                 msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
+
                 foto = i["image"]
+                print("#########")
+                print(foto)
+                print("#########")
                 print(len(foto))
 
                 if len(foto) <5 :
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
-                if foto ==[]:
+                if not foto:
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
 
@@ -829,7 +845,7 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
             
                 try:
                     send_telegram (msn, foto, bot_token, chat_id) 
-                except: print("url no valida")
+                except: continue
                 # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
                 #                 ,bot_token, chat_id)
                 

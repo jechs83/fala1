@@ -17,7 +17,7 @@ bot_token = config("RICHI_BOY_TOKEN")
 
 bd1 = "richi1"
 bd2 = "richi2"
-dsct = 40
+dsct = 60
 product  = "lentes"
 category = "tecno"
 
@@ -33,6 +33,8 @@ def buscador():
   
     
     auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
+
+    buscador()
         
 
 

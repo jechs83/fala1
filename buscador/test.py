@@ -1,7 +1,9 @@
 
-from datetime import date
 
+foto = []
+print(len(foto))
 
-my_date = date.today()
-
-print(my_date)
+if len(foto)<=0:
+    
+     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+     print(foto)
