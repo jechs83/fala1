@@ -387,7 +387,9 @@ def brand_list(ropa,cat, bot_token,chat_id):
     for i in t9:
         print(i)
         print("se envio lista ropa")      
-        send_telegram ("brand",None,bot_token, chat_id)
+        foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
+
+        send_telegram ("brand",foto,bot_token, chat_id)
     gc.collect()
 
 
@@ -433,8 +435,10 @@ def add_brand_list(brand,category,bot_token,chat_id):
         print(i)
         print("se envio lista ropa")      
         save_brand_to_mongodb(brand,category)
+    foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
+
     
-    send_telegram(" se grabo la Marca en la lista de busqueda  ", bot_token, chat_id)
+    send_telegram(" se grabo la Marca en la lista de busqueda  ",foto , bot_token, chat_id)
     gc.collect()
 
 
@@ -445,8 +449,9 @@ def delete_brand(brand,category,bot_token,chat_id):
     db = client["brands"]
     collection= db[category]
     collection.delete_one({"brand":brand})
-    
-    send_telegram(" se elimino la marca ingresa ", bot_token, chat_id)
+    foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
+
+    send_telegram(" se elimino la marca ingresa ", foto bot_token, chat_id)
     gc.collect()
 
 
@@ -455,8 +460,8 @@ def read_category (bot_token,chat_id):
     db = client["brands"]
     for i in db.list_collection_names():
         categories.append(i)
-    
-    send_telegram( str(categories), bot_token, chat_id)
+    foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
+    send_telegram( str(categories), foto, bot_token, chat_id)
     gc.collect()
 
 
@@ -471,9 +476,10 @@ def read_brands(category, bot_token,chat_id):
         list_brand.append(i["brand"])
 
     print(list_brand)
+    foto = "https://previews.123rf.com/images/ionutparvu/ionutparvu1612/ionutparvu161200410/67602131-categories-stamp-sign-text-word-logo-red.jpg"
 
-    send_telegram( str(list_brand), bot_token, chat_id)
-    send_telegram(" Busqueda de marcas de 70%  a  mas ", bot_token, chat_id)
+    send_telegram( str(list_brand), foto, bot_token, chat_id)
+    send_telegram(" Busqueda de marcas de 70%  a  mas ", foto, bot_token, chat_id)
     gc.collect()
 
 ############################
