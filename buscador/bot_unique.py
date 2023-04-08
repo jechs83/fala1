@@ -3,6 +3,8 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
+from register import     register_safa
+
 #from add_url import *
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
 
@@ -428,6 +430,65 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         document.close()
         os.remove(config("HTML_PATH")+market+".html")
         print("pasa por aqui")
+
+
+    ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
+    def fazil_reg(update, context):
+        user_id = update.message.from_user.id
+        chat_id = update.message.chat_id
+        message_text = update.message.text
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+        bot = context.bot
+       
+        var = message_text
+        var = var[2:]
+        var = var.split()
+     
+
+        if len(var) < 6:
+                bot.sendMessage(
+            chat_id=chat_id,
+            parse_mode="HTML",text= f"Faltan datos para crear la cuenta de fazil "
+            #,message_thread_id="5"
+             )
+
+        name = (var[0])
+        last_name= (var[1])
+        dni=str(var[2])
+        cel=str(var[3])
+        email=str(var[4])
+        pwd=str(var[5])
+
+        if user_id == 1160667522:
+            bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Creando cuenta Fazil"
+        
+                )
+            try:
+                register_safa(name,last_name,dni,cel,email,pwd)
+                bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Usuario se creo exitosamente "
+                )
+            except:
+    
+        
+                bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Usuario ya existe o hubo error en el proceso "
+        
+                )
+        else:
+            bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
+        
+                )
+
+
+      
        
 
 
@@ -452,6 +513,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('auto', auto_tele))
+    dp.add_handler(CommandHandler("f", fazil_reg))
+
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     dp.add_handler(CommandHandler('restartbot', restart_bot))
     dp.add_handler(CommandHandler('brand', add_brand))

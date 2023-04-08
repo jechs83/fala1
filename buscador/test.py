@@ -1,9 +1,4 @@
+e = "nombre apllido 292929929 sjhajs@kskas.com 872728282 skadjhasdk"
 
 
-foto = []
-print(len(foto))
-
-if len(foto)<=0:
-    
-     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
-     print(foto)
+print(e.split()[1])
