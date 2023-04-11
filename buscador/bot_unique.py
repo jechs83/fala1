@@ -446,7 +446,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         var = var.split()
      
 
-        if len(var) < 6:
+        if len(var) < 4:
                 bot.sendMessage(
             chat_id=chat_id,
             parse_mode="HTML",text= f"Faltan datos para crear la cuenta de fazil "
