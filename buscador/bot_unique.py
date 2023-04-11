@@ -455,19 +455,19 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         name = (var[0])
         last_name= (var[1])
-        dni=str(var[2])
-        cel=str(var[3])
-        email=str(var[4])
-        pwd=str(var[5])
+        #dni=str(var[2])
+        cel=str(var[2])
+        email=str(var[3])
+        #pwd=str(var[5])
 
-        if user_id == 1160667522:
+        if user_id == 1160667522 or 1712594729:
             bot.sendMessage(
                 chat_id=chat_id,
                 parse_mode="HTML",text= f"Creando cuenta Fazil"
         
                 )
             try:
-                register_safa(name,last_name,dni,cel,email,pwd)
+                register_safa(name,last_name,cel,email)
                 bot.sendMessage(
                 chat_id=chat_id,
                 parse_mode="HTML",text= f"Usuario se creo exitosamente "
