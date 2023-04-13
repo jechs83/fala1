@@ -500,12 +500,21 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     db = client["brands"]
     collection= db[category]
     t9 = collection.find({})
+
+    collection2= db["trash"]
+    t10 = collection2.find({})
     
+    array_trash=[]
     array_brand= []
     product_array = []
+
     for i in t9:
         array_brand.append(i["brand"])
     print(array_brand)
+
+    for i in t10:
+            array_trash.append(i["trash"])
+    print(array_trash)
 
     #for brand in array_brand:
      
@@ -513,7 +522,8 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     collection = db["scrap"]
     db.command({"planCacheClear": "scrap"})
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}})
+    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
+    t2 =  collection.find( {"best_price":{ "$lte":50},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
 
        
     collection_1 = db[ship_db1]
@@ -522,6 +532,12 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     for i in t1:
         product_array.append(i)
         print(i)
+
+    for i in t2:
+         product_array.append(i)
+
+
+
 
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -769,6 +785,9 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
     for i in t1:
         product_array.append(i)
+    
+
+
  
 
     for i in product_array:
