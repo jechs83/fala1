@@ -523,8 +523,9 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     db.command({"planCacheClear": "scrap"})
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
-    t2 =  collection.find( {"best_price":{ "$lte":50},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
+    t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 51 },"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
 
+                                                              
        
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
@@ -532,10 +533,10 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     for i in t1:
         product_array.append(i)
         print(i)
-
+    
     for i in t2:
-         product_array.append(i)
-
+        product_array.append(i)
+        print(i)
 
 
 
