@@ -169,21 +169,21 @@ def busqueda(codigo,bot_token, chat_id):
         if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
             dsct = "🟢"
         if i["web_dsct"] >=70:
-            dsct = "🔥"
-        try:
-            historic = minimo(i["sku"])[3]
-        except:
-            historic = False
-        print(historic)
+            dsct = "🔥🔥🔥🔥🔥🔥"
+        # try:
+        #     historic = minimo(i["sku"])[3]
+        # except:
+        #     historic = False
+        # print(historic)
 
-        if historic == True:
+        # if historic == True:
 
-            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        if historic == False:
+        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        # if historic == False:
 
-            historic_min = ""
-            historic_list=""
+        historic_min = ""
+        historic_list=""
 
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
@@ -224,22 +224,22 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
         if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
             dsct = "🟢"
         if i["web_dsct"] >=70:
-            dsct = "🔥"
+            dsct = "🔥🔥🔥🔥🔥🔥"
         
-        try:
-            historic = minimo(i["sku"])[3]
-        except:
-            historic = False
-        print(historic)
+        # try:
+        #     historic = minimo(i["sku"])[3]
+        # except:
+        #     historic = False
+        # print(historic)
 
-        if historic == True:
+        # if historic == True:
 
-            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        if historic == False:
+        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        # if historic == False:
 
-            historic_min = ""
-            historic_list=""
+        historic_min = ""
+        historic_list=""
 
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
@@ -274,7 +274,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
             dsct = "🟢"
         if i["web_dsct"] >=70:
-            dsct = "🔥"
+            dsct = "🔥🔥🔥🔥🔥🔥"
 
         # try:
         #     historic = minimo(i["sku"])[3]
@@ -333,22 +333,22 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
         if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
             dsct = "🟢"
         if i["web_dsct"] >=70:
-            dsct = "🔥"
+            dsct = "🔥🔥🔥🔥🔥🔥"
 
-        try:
-            historic = minimo(i["sku"])[3]
-        except:
-            historic = False
-        print(historic)
+        # try:
+        #     historic = minimo(i["sku"])[3]
+        # except:
+        #     historic = False
+        # print(historic)
 
-        if historic == True:
+        # if historic == True:
 
-            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        if historic == False:
+        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        # if historic == False:
 
-            historic_min = ""
-            historic_list=""
+        historic_min = ""
+        historic_list=""
 
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
@@ -833,7 +833,7 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
                     dsct = "🟢"
                 if i["web_dsct"] >=70:
-                    dsct = "🔥"
+                    dsct = "🔥🔥🔥🔥🔥🔥"
 
                 # try:
                 #     historic = minimo(i["sku"])[3]
