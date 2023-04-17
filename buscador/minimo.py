@@ -19,10 +19,7 @@ collection5 = db5["scrap"]
 def minimo(sku):
     price_list = []
     
-
-    #cod = collection5.find({"sku":str(sku)}).sort("date", pymongo.DESCENDING)
     cod = collection5.aggregate([{'$match': {'sku': str(sku)}}, {'$addFields': {'dateObject': {'$dateFromString': {'dateString': '$date', 'format': '%d/%m/%Y'}}}}, {'$sort': {'dateObject': pymongo.ASCENDING}}])
-
     for i in cod:
         price_list.append(i["best_price"])
     

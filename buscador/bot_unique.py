@@ -91,21 +91,41 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-        market= (context.args[0]).replace("%"," ")
-        dsct=int(context.args[1])
-        dsct = int(dsct)
-        if dsct <= 41:
-           dsct = 40
-        
-        search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
+        try: 
+            market= (context.args[0]).replace("%"," ")
+        except IndexError:
+             market = None
+        try:
+            dsct = int(context.args[1])
+            if dsct <= 41:
+                 dsct = 40
+        except IndexError:
+             dsct = None
 
-        logger.info(f"marca "+ market + "dsct "+ str(dsct))
-
-        bot.sendMessage(
+        if dsct == None or market == None:
+            bot.sendMessage(
             chat_id=chatId,
             parse_mode="HTML",
-            text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
-        )
+            text= f"Falta market o descuento.... ejemplo:  /market metro 50"
+            )
+
+        if market and dsct != None:
+            
+            bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",
+                text= f"Realizando la busquerda"
+                )
+
+            search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
+            #logger.info(f"marca "+ market + "dsct "+ str(dsct))
+
+            bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",
+                text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
+                )
+
 ### 6 ALERTA A TODOS EN EL GRUPO  
     def alert_all(update, context):
         bot = context.bot

@@ -252,22 +252,18 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
 
 def search_market_dsct(market,dsct, bot_token, chat_id):
     db5.command({"planCacheClear": "scrap"})
-    print
-    print(bot_token)
-    print(chat_id)
-    
+
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), 
                             re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), 
                             re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
-   
-    print( "se realizo busqueda")
 
+    print("se busca en base de datos")
+ 
 
     for i in t5:
    
-        print("se envio a telegram")  
         if  i["card_price"] == 0:
             card_price = ""
         else:
@@ -280,27 +276,30 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         if i["web_dsct"] >=70:
             dsct = "🔥"
 
+        # try:
+        #     historic = minimo(i["sku"])[3]
+        # except:
+        #     historic = False
+        # print(historic)
 
-        try:
-            historic = minimo(i["sku"])[3]
-        except:
-            historic = False
-        print(historic)
+        # if historic == True:
+        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+        # if historic == False:
+        #     historic_min = ""
+        #     historic_list=""
+        historic_min = ""
+        historic_list=""
 
-        if historic == True:
-
-            historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-            historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        if historic == False:
-
-            historic_min = ""
-            historic_list=""
 
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
+      
         send_telegram (msn, foto, bot_token, chat_id)
         time.sleep(1)
+        print("Se envio mensaje a telegram")
     gc.collect()
+
 
 
 def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
@@ -509,11 +508,13 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     product_array = []
 
     for i in t9:
-        array_brand.append(i["brand"])
+        pattern = re.compile(i["brand"], re.IGNORECASE)
+        array_brand.append(pattern)
     print(array_brand)
 
     for i in t10:
-            array_trash.append(i["trash"])
+        pattern = re.compile(i["trash"], re.IGNORECASE)
+        array_trash.append(pattern)
     print(array_trash)
 
     #for brand in array_brand:
@@ -522,8 +523,12 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     collection = db["scrap"]
     db.command({"planCacheClear": "scrap"})
 
-    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
-    t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 51 },"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ]}, "product":{"$nin":[ re.compile(trash,re.IGNORECASE) for trash in array_trash ]}})
+   
+  
+
+
+    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
+    t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 51 },"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
 
                                                               
        
@@ -572,21 +577,21 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
                     dsct = "🟢"
                 if i["web_dsct"] >=70:
-                    dsct = "🔥"
-                try:
-                    historic = minimo(i["sku"])[3]
-                except:
-                    historic = False
-                print(historic)
+                    dsct = "🔥🔥🔥🔥🔥"
+                # try:
+                #     historic = minimo(i["sku"])[3]
+                # except:
+                #     historic = False
+                # print(historic)
 
-                if historic == True:
+                # if historic == True:
 
-                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-                    historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                if historic == False:
+                #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+                #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+                # if historic == False:
 
-                    historic_min = ""
-                    historic_list=""
+                historic_min = ""
+                historic_list=""
                 
                 msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
                 foto = i["image"]
@@ -717,22 +722,22 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
                     dsct = "🟢"
                 if i["web_dsct"] >=70:
-                    dsct = "🔥"
+                    dsct = "🔥🔥🔥🔥🔥🔥"
 
-                try:
-                    historic = minimo(i["sku"])[3]
-                except:
-                    historic = False
-                print(historic)
+                # try:
+                #     historic = minimo(i["sku"])[3]
+                # except:
+                #     historic = False
+                # print(historic)
 
-                if historic == True:
+                # if historic == True:
 
-                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-                    historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                if historic == False:
+                #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+                #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+                # if historic == False:
 
-                    historic_min = ""
-                    historic_list=""
+                historic_min = ""
+                historic_list=""
 
                 msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
@@ -747,6 +752,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
               
                 try:
                     send_telegram (msn, foto, bot_token, chat_id)
+                    time.sleep(1)
                 except:
                     continue
            
@@ -829,20 +835,20 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 if i["web_dsct"] >=70:
                     dsct = "🔥"
 
-                try:
-                    historic = minimo(i["sku"])[3]
-                except:
-                    historic = False
-                print(historic)
+                # try:
+                #     historic = minimo(i["sku"])[3]
+                # except:
+                #     historic = False
+                # print(historic)
 
-                if historic == True:
+                # if historic == True:
 
-                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-                    historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                if historic == False:
+                #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
+                #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
+                # if historic == False:
 
-                    historic_min = ""
-                    historic_list=""
+                historic_min = ""
+                historic_list=""
 
                 msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
@@ -864,7 +870,8 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
             
                 try:
-                    send_telegram (msn, foto, bot_token, chat_id) 
+                    send_telegram (msn, foto, bot_token, chat_id)
+                    time.sleep(1) 
                 except: continue
                 # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
                 #                 ,bot_token, chat_id)
