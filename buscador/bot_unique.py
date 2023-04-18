@@ -69,10 +69,13 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         dsct=int(context.args[1])
         if dsct <= 41:
            dsct = 40
+
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
         search_brand_dsct(brand, dsct, bot_token ,chat_id)
-
-
-        os.remove("/Users/javier/GIT/fala/buscador/historical.html")
 
         bot.sendMessage(
             chat_id=chatId,
@@ -109,7 +112,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             bot.sendMessage(
                 chat_id=chatId,
                 parse_mode="HTML",
-                text= f"Realizando la busquerda"
+                text= f"Procesnado busquerda..."
                 )
 
             search_market_dsct(str(market), int(dsct), bot_token ,chat_id)
@@ -141,6 +144,13 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName}  busca codigo especifico")
         codigo = context.args[0]
+
+
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
         
         busqueda(str(codigo), bot_token ,chat_id)
         bot.sendMessage(
@@ -250,6 +260,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 ### 13 CREA HTML DE BUSQUEDA DE MARKET Y DSCT PERSONALIZADO
     def send_document(update, context):
+        bot = context.bot
         chat_id = update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
@@ -261,6 +272,12 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         try:
          price = (context.args[2])
         except: price = None
+
+        bot.sendMessage(
+            chat_id=chat_id,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
 
         search_market2_dsct(market,dsct,price, bot_token ,chat_id)
 
@@ -303,6 +320,11 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         price = None
         print(product)  
         print(dsct)
+        bot.sendMessage(
+            chat_id=chat_Id,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
         
 
         search_product_dsct_html(product,dsct,price ,bot_token ,chat_Id)
@@ -426,6 +448,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
       
            
     def send_document_price_values(update, context):
+        bot = context.bot
         chat_id = update.message.chat_id
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
@@ -437,7 +460,11 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         try:
          price_maximo = (context.args[2])
         except: price_maximo = None
-
+        bot.sendMessage(
+            chat_id=chat_id,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
         search_price(market,price_minimo,price_maximo, bot_token ,chat_id)
 
         document = open(config("HTML_PATH")+market+".html", 'rb')
