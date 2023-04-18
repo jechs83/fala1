@@ -202,8 +202,6 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
     if dsct <41:
         dsct = 40
     t5 = collection5.find({"brand":{"$in":[ re.compile(str(brand), re.IGNORECASE)]}, "web_dsct":{"$gte":int(dsct)}, "date": date})
-   
-
 
     print( "se realizo busqueda")
 
@@ -245,7 +243,7 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
         foto = i["image"]
 
         send_telegram(msn, foto, bot_token, chat_id)
-        time.sleep(2)
+        time.sleep(1)
     gc.collect()
         
 
@@ -356,7 +354,7 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
         send_telegram (msn, foto, bot_token, chat_id)   
         # msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
         # send_telegram (msn, bot_token, chat_id)
-        time.sleep(2)
+        time.sleep(1)
     gc.collect()
 
 
@@ -927,7 +925,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
     
         send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])),
                        bot_token, chat_id)
-        time.sleep(2)
+        time.sleep(1)
     gc.collect()
     
              

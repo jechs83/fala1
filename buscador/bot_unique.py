@@ -5,9 +5,9 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from register import     register_safa
 
-#from add_url import *
+
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
-logger = logging.getLogger()
+
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
@@ -35,12 +35,6 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
         print(context.args)
-
-        # text = open ("/Users/javier/GIT/fala/buscador/comandos.txt" ,"r")
-        # line = text.readlines()
-        # line = str(line)
-        # line = line.replace("'","").replace(",","")[:-1][1:]
-        # print(line)
         
         bot.sendMessage(
             chat_id=chatId,
@@ -65,6 +59,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         )
 
 ### 4 BUSCA EN BASE A MARCA Y DESCUENTO 
+###   USANDO EL COMANDO  " /b "
     def custom_search(update, context):
         bot = context.bot
         chatId= update.message.chat_id
