@@ -3,6 +3,7 @@ import telegram
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
+from register import     register_safa
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_market_dsct_antitopo
 
 
@@ -377,6 +378,65 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                         text=f"REGLAS DE LA NAVE\n\n1. Compartir las ofertas solamente al grupo de Ofertas Peru\n2. Si hay alguna oferta interesante cominucarlo al Administrador.\n3. No sean casa solas avisen y compren una unidad para todos los del grupo puedan comoprar tambien"
         )
         
+    def fazil_reg(update, context):
+        user_id = update.message.from_user.id
+        chat_id = update.message.chat_id
+        message_text = update.message.text
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+        bot = context.bot
+       
+        var = message_text
+        var = var[2:]
+        var = var.split()
+     
+
+        if len(var) < 4:
+                bot.sendMessage(
+            chat_id=chat_id,
+            parse_mode="HTML",text= f"Faltan datos para crear la cuenta de fazil "
+            #,message_thread_id="5"
+             )
+
+        name = (var[0])
+        last_name= (var[1])
+        #dni=str(var[2])
+        cel=str(var[2])
+        email=str(var[3])
+        #pwd=str(var[5])
+
+        if user_id == 1160667522 or 1712594729:
+            bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Creando cuenta Fazil"
+        
+                )
+            try:
+                register_safa(name,last_name,cel,email)
+                bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Usuario se creo exitosamente "
+                )
+            except:
+    
+        
+                bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Usuario ya existe o hubo error en el proceso "
+        
+                )
+        else:
+            bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
+        
+                )
+
+
+      
+       
+
+
         
 
     # if __name__ == "__main__":
@@ -392,6 +452,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
     dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('rules', rules))
+    dp.add_handler(CommandHandler("f", fazil_reg))
  
 
     updater.start_polling()

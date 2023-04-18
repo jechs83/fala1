@@ -4,10 +4,13 @@ from html_test import html_code
 import gc
 from pymongo import MongoClient
 import os
-import pymongo
+import itertools
+
 import re
 import base64
 import requests
+import pymongo
+
 from bd_compare import save_data_to_mongo_db
 from decouple import config
 from datetime import datetime
@@ -515,7 +518,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
         array_trash.append(pattern)
     print(array_trash)
 
-    #for brand in array_brand:
+    print("Esta buscando en base de datos, puede tomar un tiempo")
      
     db = client["scrap"]
     collection = db["scrap"]
@@ -528,18 +531,26 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
     t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 51 },"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
 
-                                                              
+    # Concatenate the two cursors
+    result = itertools.chain(t1, t2)
+
+
+    # Iterate over the result and print each document
+    for i in result:
+    
+        product_array.append(i)
+        print(i)                                                          
        
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
-    for i in t1:
-        product_array.append(i)
-        print(i)
+    # for i in t1:
+    #     product_array.append(i)
+    #     print(i)
     
-    for i in t2:
-        product_array.append(i)
-        print(i)
+    # for i in t2:
+    #     product_array.append(i)
+    #     print(i)
 
 
 
