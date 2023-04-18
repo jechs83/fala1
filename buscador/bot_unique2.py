@@ -452,7 +452,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
     dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('rules', rules))
-    dp.add_handler(CommandHandler("f", fazil_reg))
+    dp.add_handler(CommandHandler("topo", fazil_reg))
  
 
     updater.start_polling()
