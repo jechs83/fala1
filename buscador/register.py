@@ -68,7 +68,7 @@ def register_safa(name,last_name,cel,email):
             checkbox.click()
             checkbox2 = driver.find_element(By.ID,'testId-TyC-ECO_consentTemplateRegistroCMRPuntosTyC_FAL_PE-checkbox')
             checkbox2.click()
-            time.sleep(2)
+            time.sleep(3)
 
 
             driver.find_element(By.ID, "testId-Button-submit").click()
