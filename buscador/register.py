@@ -28,8 +28,8 @@ def register_safa(name,last_name,cel,email):
         # Step # | name | target | value
         # 1 | open | /falabella-pe/myaccount/registration | 
         options = Options()
-        #options.add_argument('--headless')
-        options.add_argument('--window-size=1920,1080')
+        options.add_argument('--headless')
+        #options.add_argument('--window-size=1920,1080')
         try:
             driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
             driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
