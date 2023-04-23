@@ -153,11 +153,18 @@ collection5 = db5["scrap"]
 ### BUSQUEDA CON COD
 
 def busqueda(codigo,bot_token, chat_id):
+    print("entro a busqueda de codigo")
     #db5.command({"planCacheClear": "scrap"})
     t5 = collection5.find({"sku":str(codigo), "date":date})
+    print("#######")
+    print(t5)
+    print("#######")
+    
+
     print( "se realizo busqueda")
     print(codigo)
     for i in t5:
+
         print(i)
         print("se envio a telegram")    
      
@@ -191,8 +198,7 @@ def busqueda(codigo,bot_token, chat_id):
         #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
- 
-  
+
         send_telegram(msn, foto, bot_token, chat_id)
        
 

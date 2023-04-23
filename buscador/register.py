@@ -28,8 +28,8 @@ def register_safa(name,last_name,cel,email):
         # Step # | name | target | value
         # 1 | open | /falabella-pe/myaccount/registration | 
         options = Options()
-        options.add_argument('--headless')
-        #options.add_argument('--window-size=1920,1080')
+        #options.add_argument('--headless')
+        options.add_argument('--window-size=1920,1080')
         
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
@@ -45,9 +45,11 @@ def register_safa(name,last_name,cel,email):
         driver.find_element(By.ID, "testId-Input-lastName").send_keys(last_name)
         # 6 | type | id=testId-Input-document | 41630467
         driver.find_element(By.ID, "testId-Input-document").send_keys(str(dni_new))
+        time.sleep(2)
         # 7 | type | id=testId-Input-phoneNumber | 979630207
         driver.find_element(By.ID, "testId-Input-phoneNumber").send_keys(cel)
         driver.execute_script("window.scrollBy(0, 400);")
+        time.sleep(2)
         # 8 | click | id=testId-Input-email | 
         driver.find_element(By.ID, "testId-Input-email").click()
         # 9 | type | id=testId-Input-email | sr.spo.ck99@gmail.com
@@ -72,6 +74,8 @@ def register_safa(name,last_name,cel,email):
         time.sleep(2)
 
         driver.quit()
+
+
 
      
 
