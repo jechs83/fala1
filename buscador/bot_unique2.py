@@ -6,6 +6,7 @@ import os
 from register import     register_safa
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_market_dsct_antitopo
 import unicodedata
+import re
 
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
