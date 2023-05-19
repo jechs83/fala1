@@ -23,17 +23,18 @@ def new_dni():
 
 def register_safa(name,last_name,cel,email):    
         dni_new =new_dni()
-        pwd =  "Zz.123456"
+        pwd =  "Topo.123456"
          # Test name: registrio
         # Step # | name | target | value
         # 1 | open | /falabella-pe/myaccount/registration | 
         options = Options()
-        options.add_argument('--headless')
-        #options.add_argument('--window-size=1920,1080')
+        #options.add_argument('--headless')
+        options.add_argument('--window-size=1920,1080')
         try:
             driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
             driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
             driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
+
             # 2 | setWindowSize | 1680x951 | 
             #driver.set_window_size(1680, 951)
             # 3 | click | id=testId-Input-firstName | 
@@ -68,10 +69,14 @@ def register_safa(name,last_name,cel,email):
             checkbox.click()
             checkbox2 = driver.find_element(By.ID,'testId-TyC-ECO_consentTemplateRegistroCMRPuntosTyC_FAL_PE-checkbox')
             checkbox2.click()
+            driver.execute_script("window.scrollBy(0, 200);")
             time.sleep(3)
+            
 
 
+            
             driver.find_element(By.ID, "testId-Button-submit").click()
+           
             time.sleep(2)
 
 
