@@ -25,6 +25,10 @@ from datetime import datetime
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
+
+from pymongo import MongoClient
+from decouple import config
+client = MongoClient(config("MONGO_DB"))
 #date = peru_date.strftime("%d/%m/%Y" )
 
 #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
@@ -801,24 +805,21 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                                            porcentage2, producto,db_name,db_collection):
     print("se esta ejecutando")
     product_array = []
-        
+
     db = client[db_name]
     collection = db[db_collection]
-    db.command({"planCacheClear": "scrap2"})
+    db.command({"planCacheClear": "scrap"})
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
 
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
-
+    
     for i in t1:
         product_array.append(i)
+
     
-
-
- 
-
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)

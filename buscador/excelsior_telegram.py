@@ -11,7 +11,10 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from search_bot_service import  auto_telegram, auto_telegram_total,auto_telegram_between_values,auto_telegram_between_values_custom_bd
 from pymongo import MongoClient
 from decouple import config
+from pymongo import MongoClient
+from decouple import config
 client = MongoClient(config("MONGO_DB"))
+
 TOKEN = config("CAPITAN_PIKE_TOKEN")
 chat_id = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
