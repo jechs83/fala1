@@ -549,22 +549,24 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                     parse_mode="HTML",text= f"Creando cuenta Fazil"
             
                     )
-                try:
-                    register_safa(name,last_name,cel,email)
-                    bot.sendMessage(
+      
+                fazil = register_safa(name,last_name,cel,email)
+               
+
+                if fazil == False:
+                     bot.sendMessage(
                     chat_id=chat_id,
-                    parse_mode="HTML",text= f"Usuario se creo exitosamente "
+                    parse_mode="HTML",text= f"El correo ya existe"
                     )
-                except:
-        
-            
+                     
+                if fazil == True:
+                     bot.sendMessage(
+                        chat_id=chat_id,
+                        parse_mode="HTML",text= f"Error de Sincronizacion al estilo de Saga falabella, Intenta de nuevo"
+                        )
+                     
+                if fazil =="paso":
                     bot.sendMessage(
-                    chat_id=chat_id,
-                    parse_mode="HTML",text= f"Usuario ya existe o hubo error en el proceso "
-            
-                    )
-            else:
-                bot.sendMessage(
                     chat_id=chat_id,
                     parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
             
