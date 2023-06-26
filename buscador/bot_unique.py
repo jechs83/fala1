@@ -2,6 +2,7 @@ from decouple import config
 import telegram
 import logging
 from delete_past_dats import delete_pastdays
+from delete_collection import reset_products
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from register import     register_safa
@@ -596,9 +597,9 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         bot = context.bot
         chatId= update.message.chat_id
-        collection_data=str(context.args[1])
+        collection_data=str(context.args[0])
 
-        reset_ship_data(collection_data)
+        reset_products(collection_data)
 
         bot.sendMessage(
                 chat_id=chatId,
