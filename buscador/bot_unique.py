@@ -1,6 +1,7 @@
 from decouple import config
 import telegram
 import logging
+from delete_past_dats import delete_pastdays
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 from register import     register_safa
@@ -570,11 +571,40 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                     chat_id=chat_id,
                     parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
             
+
                     )
 
+    def delete_past_database(update, context):
+            bot = context.bot
+            chatId= update.message.chat_id
+            delete_pastdays()
+         
+
+            userName = update.effective_user["first_name"]
+            logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId) )
+            print(context.args)
+            
+            bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",text= f"Se elimino limpio base de datos❗❗❗ "
+          
+            )
 
       
        
+    def reset_ship_data(update, context):
+
+        bot = context.bot
+        chatId= update.message.chat_id
+        collection_data=str(context.args[1])
+
+        reset_ship_data(collection_data)
+
+        bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",text= f"Se resteo todo los productos enviados a la nave especificada❗ "
+          
+            )
 
 
 
@@ -592,6 +622,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('b', custom_search))
     #dp.add_handler(CommandHandler("url", web_url))
     dp.add_handler(CommandHandler("send", send_document))
+    dp.add_handler(CommandHandler("clean", delete_past_database))
+    dp.add_handler(CommandHandler("resetship", reset_ship_data))
     dp.add_handler(CommandHandler("price", send_document_price_values))
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('alert', alert_all))

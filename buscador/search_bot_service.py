@@ -1101,23 +1101,41 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     if dsct == 0 and price == "-":
         t5 = collection5.find({"brand":{"$in":[re.compile(brand, re.IGNORECASE),]},"web_dsct":{"$gte":int(dsct)}, "date": date}).sort("best_price",pymongo.ASCENDING)
 
-
-
     list_cur = list(t5)
-    brands= []
+    brands = []
     for i in list_cur:
-        
-       
-        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
+        p = {"market": i["market"], "brand": i["brand"], "product": i["product"], 'list_price': i["list_price"],
+            'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"],
+            'card_dsct': i["card_dsct"], 'link': '<a href='+i["link"]+'>Link</a>',
+            'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time': i["time"],
+            "sku": i["sku"]}
         brands.append(p)
 
     df = DataFrame(brands)
-    
+
     def path_to_image_html(path):
- 
         return '<img src="'+ path + '" style=max-height:124px;"/>'
 
-    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+    df = df.sort_values(by=['web_dsct', 'list_price', 'best_price', 'card_dsct'])
+    df = df.query("web_dsct > 0 and list_price > 0 and best_price > 0 and card_dsct > 0")
+
+    html = df.to_html(escape=False, formatters=dict(image=path_to_image_html))
+
+    # list_cur = list(t5)
+    # brands= []
+    # for i in list_cur:
+        
+       
+    #     p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"], 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
+    #     brands.append(p)
+
+    # df = DataFrame(brands)
+    
+    # def path_to_image_html(path):
+ 
+    #     return '<img src="'+ path + '" style=max-height:124px;"/>'
+
+    # html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
 
     with open (config("HTML_PATH")+brand+".html", "w", encoding="utf-8") as f:
         f.write(html)
