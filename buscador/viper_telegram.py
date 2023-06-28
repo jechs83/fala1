@@ -19,7 +19,7 @@ bd1 = "viper1"
 bd2 = "viper2"
 dsct = 60
 product  = "lentes"
-category = "tecno"
+category = "alterno"
 
 db="scrap"
 db_collection = "scrap"
