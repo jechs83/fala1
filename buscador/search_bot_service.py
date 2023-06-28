@@ -30,7 +30,8 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 #date = peru_date.strftime("%d/%m/%Y" )
-oferta_telegram = "👉 https://t.me/OfertasDescuentosPeru1 👈"
+#oferta_telegram = "👉 https://t.me/OfertasDescuentosPeru1 👈"
+oferta_telegram = ""
 
 #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
 
