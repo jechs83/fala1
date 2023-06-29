@@ -542,7 +542,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
      
     db = client["scrap"]
     collection = db["scrap"]
-    db.command({"planCacheClear": "scrap"})
+    # db.command({"planCacheClear": "scrap"})
 
    
   
