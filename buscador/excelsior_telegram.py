@@ -16,7 +16,8 @@ from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 TOKEN = config("CAPITAN_PIKE_TOKEN")
-chat_id = config("EXCELSIOR_CHAT_TOKEN")
+#chat_id = config("EXCELSIOR_CHAT_TOKEN")
+chat_id = config("NAME_LESS_TOKEN")
 bot_token = config("CAPITAN_PIKE_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"

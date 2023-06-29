@@ -12,7 +12,8 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 TOKEN = config("RICHI_BOY_TOKEN")
-chat_id = config("RICHI_CHAT_TOKEN")
+#chat_id = config("RICHI_CHAT_TOKEN")
+chat_id = config("NAME_LESS_TOKEN")
 bot_token = config("RICHI_BOY_TOKEN")
 
 bd1 = "richi1"
