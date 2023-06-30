@@ -3,6 +3,7 @@ from decouple import config
 import telegram
 import logging
 import sys
+import gc
 import time
 import os
 from telegram import message
@@ -35,6 +36,9 @@ def buscador():
     
     auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
 
+    gc.collect()
+
+    
     buscador()
         
 
