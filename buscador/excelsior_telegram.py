@@ -15,14 +15,14 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-TOKEN = config("CAPITAN_PIKE_TOKEN")
+TOKEN = config("CAPITAN_SULU_TOKEN")
 chat_id = config("EXCELSIOR_CHAT_TOKEN")
 #chat_id = config("NAME_LESS_TOKEN")
-bot_token = config("CAPITAN_PIKE_TOKEN")
+bot_token = config("CAPITAN_SULU_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"
-dsct = 80
-dsct2 = 101
+dsct = 60
+dsct2 = 70
 product  = "lentes"
 
 db="scrap"
