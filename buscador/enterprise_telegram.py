@@ -15,10 +15,10 @@ from pymongo import MongoClient
 from decouple import config
 #client = MongoClient(config("MONGO_DB"))
 
-TOKEN = config("ENTERPRISE_TOKEN")
+TOKEN = config("CAPITAN_KIRK_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
 
-bot_token = config("ENTERPRISE_TOKEN")
+bot_token = config("CAPITAN_KIRK_TOKEN")
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 50
