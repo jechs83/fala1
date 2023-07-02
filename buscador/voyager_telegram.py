@@ -14,18 +14,20 @@ from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 TOKEN = config("CAPITAN_JANEWAY_TOKEN")
-#chat_id = config("VOYAGER_CHAT_TOKEN")
-chat_id = config("NAME_LESS_TOKEN")
+chat_id = config("VOYAGER_CHAT_TOKEN")
+#chat_id = config("NAME_LESS_TOKEN")
 bot_token = config("CAPITAN_JANEWAY_TOKEN")
 
 
 bd1 = "voyager1"
 bd2 = "voyager2"
-dsct = 70
-dsct2 = 101
 
-db = client["trigger"]
-collection = db["60"]
+dsct = 60
+product  = "lentes"
+category = "tecno"
+
+db="scrap"
+db_collection = "scrap"
     
 def hora():
     now = datetime.now()
@@ -33,13 +35,36 @@ def hora():
     return current_time
 
 def buscador():
- 
-    try:
-     auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, "reloj")
-    except:
-        buscador()
+  
+    
+    auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
+
     buscador()
+        
 
 
 buscador()
+
+
+# dsct = 70
+# dsct2 = 101
+
+# db = client["trigger"]
+# collection = db["60"]
+    
+# def hora():
+#     now = datetime.now()
+#     current_time = now.strftime("%H:%M:%S")
+#     return current_time
+
+# def buscador():
+ 
+#     try:
+#      auto_telegram_between_values( bd1,bd2,bot_token, chat_id, dsct,dsct2, "reloj")
+#     except:
+#         buscador()
+#     buscador()
+
+
+# buscador()
     
