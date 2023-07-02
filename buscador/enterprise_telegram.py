@@ -14,7 +14,7 @@ from decouple import config
 from pymongo import MongoClient
 from decouple import config
 #client = MongoClient(config("MONGO_DB"))
-chat_id = config("NAME_LESS_TOKEN")
+
 TOKEN = config("ENTERPRISE_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
 
@@ -22,10 +22,10 @@ bot_token = config("ENTERPRISE_TOKEN")
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 50
-dsct2 = 61
+dsct2 = 100
 
-db = client["trigger"]
-collection = db["60"]
+db="scrap"
+db_collection = "scrap"
     
 def hora():
     now = datetime.now()
