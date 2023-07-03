@@ -36,6 +36,8 @@ def start():
     #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\voyager.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\discovery.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\enterprise.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\ds9.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\exelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\viper_bot.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
