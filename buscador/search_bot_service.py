@@ -173,7 +173,7 @@ def busqueda(codigo,bot_token, chat_id):
         if i["list_price"] == 0:
                 list_price = ""
         else:
-            list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+            list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
         if i["web_dsct"] <= 50:
             dsct = "🟡"
         if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
@@ -225,7 +225,7 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
         if i["list_price"] == 0:
                 list_price = ""
         else:
-            list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+            list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
         if i["web_dsct"] <= 50:
             dsct = "🟡"
@@ -295,7 +295,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         if i["list_price"] == 0:
                 list_price = ""
         else:
-            list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+            list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
         if i["web_dsct"] <= 50:
             dsct = "🟡"
@@ -367,7 +367,7 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
         if i["list_price"] == 0:
                 list_price = ""
         else:
-            list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+            list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
         if i["web_dsct"] <= 50:
             dsct = "🟡"
@@ -632,7 +632,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 if i["list_price"] == 0:
                         list_price = ""
                 else:
-                    list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+                    list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
                 if i["web_dsct"] <= 50:
                     dsct = "🟡"
@@ -790,7 +790,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 if i["list_price"] == 0:
                    list_price = ""
                 else:
-                        list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+                        list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
                 if i["web_dsct"] <= 50:
                     dsct = "🟡"
@@ -911,7 +911,7 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 if i["list_price"] == 0:
                      list_price = ""
                 else:
-                    list_price = '\n\n➡️Precio Lista :"+str(i["list_price"])'
+                    list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
                 if i["web_dsct"] <= 50:
                     dsct = "🟡"
