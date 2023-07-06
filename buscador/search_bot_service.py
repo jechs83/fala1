@@ -5,12 +5,10 @@ import gc
 from pymongo import MongoClient
 import os
 import itertools
-
 import re
 import base64
 import requests
 import pymongo
-
 from bd_compare import save_data_to_mongo_db
 from decouple import config
 from datetime import datetime
@@ -162,19 +160,11 @@ def busqueda(codigo,bot_token, chat_id):
     print("entro a busqueda de codigo")
     #db5.command({"planCacheClear": "scrap"})
     t5 = collection5.find({"sku":str(codigo), "date":date})
-    print("#######")
-    print(t5)
-    print("#######")
-    
 
     print( "se realizo busqueda")
     print(codigo)
     for i in t5:
-
-        print(i)
         print("se envio a telegram")    
-     
-
         if  i["card_price"] == 0:
                 card_price = ""
         else:
@@ -186,23 +176,9 @@ def busqueda(codigo,bot_token, chat_id):
             dsct = "🟢"
         if i["web_dsct"] >=70:
             dsct = "🔥🔥🔥🔥🔥🔥"
-        # try:
-        #     historic = minimo(i["sku"])[3]
-        # except:
-        #     historic = False
-        # print(historic)
+    
 
-        # if historic == True:
-
-        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        # if historic == False:
-
-        # historic_min = ""
-        # historic_list=""
-
-        #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui: "+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
 
         send_telegram(msn, foto, bot_token, chat_id)
@@ -256,7 +232,7 @@ def search_brand_dsct(brand,dsct, bot_token, chat_id):
         # historic_list=""
    
 
-        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
    
         foto = i["image"]
   
@@ -313,7 +289,7 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         historic_list=""
 
 
-        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
         foto = i["image"]
       
         send_telegram (msn, foto, bot_token, chat_id)
@@ -371,7 +347,7 @@ def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
         historic_min = ""
         historic_list=""
 
-        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
         foto = i["image"]
         send_telegram (msn, foto, bot_token, chat_id)   
@@ -622,7 +598,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 historic_min = ""
                 historic_list=""
                 
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
                 foto = i["image"]
                 send_telegram(msn, foto, bot_token, chat_id)
                 
@@ -768,7 +744,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 historic_min = ""
                 historic_list=""
 
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
                 foto = i["image"]
 
@@ -876,7 +852,7 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 historic_min = ""
                 historic_list=""
 
-                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+historic_min+"\n👉Precio web :"+str(i["best_price"])+historic_min+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+historic_list+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n"+"Mas ofertas aqui:"+"\n"+oferta_telegram+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
+                msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+"\n\n➡️Precio Lista :"+str(i["list_price"])+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
 
                 foto = i["image"]
