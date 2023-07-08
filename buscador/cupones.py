@@ -12,9 +12,14 @@ import pandas as pd
    
 
 
-def register_cupon(dni):    
+def register_cupon(dni):   
+    
+    
+    
+    
+     
     options = Options()
-    #options.add_argument('--headless')
+    options.add_argument('--headless')
     webdriver_path = "C:\\Git\\fala\\buscador\\chromedriver.exe"
     #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     options.add_argument('--window-size=1920,1080')
@@ -23,7 +28,7 @@ def register_cupon(dni):
 
 
     driver = webdriver.Chrome(service=Service(webdriver_path), options=options)
-    driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
+    driver.implicitly_wait(1) # gives an implicit wait for 20 seconds
 
 
 
@@ -40,18 +45,45 @@ def register_cupon(dni):
     driver.find_element(By.ID, "terms").click()
     time.sleep(0.5)
     driver.find_element(By.CLASS_NAME, "form__btn--fullwidth").click()
+    
+    
+    
+    
     try:
         cupon = driver.find_element(By.CLASS_NAME, "form__box-ticket").text
-    except: cupon = "Dni no valido en cuenta sueldo"
-    time.sleep(0.5)
-    print(cupon)
-    driver.quit()
-    return cupon
+        print(dni)
+        print(cupon)
+        #file_path = f"C:\\Git\\fala\\buscador\\dnis_valido.txt"
+        #with open(file_path, 'w') as cupon_file:
+         #   cupon_file.write(dni + "\n")
+            #cupon_file.close()
+    except:
+        
+        driver.quit()
+        return False
+        #cupon = "Dni no valido en cuenta sueldo"
+        
+    
+  
+   
+ 
+        
+    #if cupon == "Dni no valido en cuenta sueldo":
+     #       return False
+           
+            
+        
+
+    
+    #try:
+     #   error = driver.find_element(By.C)
+
+    #return cupon
 
 # cupon = register_cupon("your_dni")
 # print(cupon)
 
-file_path = "/Users/javier/GIT/fala/buscador/dnis.txt"  # Replace with the actual file path
+file_path = "C:\\Git\\fala\\buscador\\dnis.txt"  # Replace with the actual file path
 
 # Read the lines from the file
 with open(file_path, 'r') as file:
@@ -64,4 +96,11 @@ array = [line.strip() for line in lines]
 print(array)
 
 for idx, v in enumerate (array):
- register_cupon(v)
+    
+    register_cupon(v)
+    if register_cupon(v)== False:
+        continue
+
+    file_path = "C:\\Git\\fala\\buscador\\dnis_valido.txt"
+    with open(file_path, 'a') as cupon_file:
+        cupon_file.write(v + "\n")
