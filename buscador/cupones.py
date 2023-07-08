@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import time
+import random
 import pandas as pd
 
 # #options.add_argument('--headless')
@@ -48,13 +49,19 @@ import pandas as pd
      
 
 
+with open("/Users/javier/GIT/fala/buscador/dnis.txt", 'r') as file:
+    lines = file.readlines()
+    dni = random.choice(lines).strip()
+
+   
 
 
 def register_cupon(dni):    
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--window-size=1920,1080')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = "C:\\Git\\fala\\buscador\\chromedriver.exe"
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     chrome_options = Options()
     driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
 
