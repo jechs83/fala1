@@ -55,17 +55,19 @@ import pandas as pd
 
 def register_cupon():    
     options = Options()
-    options.add_argument('--headless')
-    options.add_argument('--window-size=1920,1080')
+    #options.add_argument('--headless')
     webdriver_path = "C:\\Git\\fala\\buscador\\chromedriver.exe"
     #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    chrome_options = Options()
+    #chrome_options = Options()
+    options.add_argument('--window-size=1920,1080')
 
-    chrome_options.add_argument('--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1')
-    chrome_options.add_argument('--headless')  # Enable headless mode
+    options.add_argument('--user-agent=Mozilla/5.0 (Linux; Android 10; SM-G975F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Mobile Safari/537.36')
+
 
     driver = webdriver.Chrome(service=Service(webdriver_path), options=options)
     driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
+
+
 
 
     driver.get("http://interbankcupones.pe/rappi")
@@ -76,14 +78,14 @@ def register_cupon():
 
 
     driver.find_element(By.ID, "document").send_keys(dni)
-    time.sleep(2)
+    time.sleep(0.5)
     driver.find_element(By.ID, "terms").click()
-    time.sleep(1)
+    time.sleep(0.5)
     driver.find_element(By.CLASS_NAME, "form__btn--fullwidth").click()
     try:
         cupon = driver.find_element(By.CLASS_NAME, "form__box-ticket").text
     except: cupon = "Dni no valido en cuenta sueldo"
-    time.sleep(2)
+    time.sleep(0.5)
     print(cupon)
     driver.quit()
     return cupon
