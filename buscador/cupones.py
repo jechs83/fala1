@@ -9,56 +9,14 @@ import time
 import random
 import pandas as pd
 
-# #options.add_argument('--headless')
-# options.add_argument('--window-size=1920,1080')
-# #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install(), options=options ))
-# #driver = webdriver.Chrome(executable_path=r"/Users/javier/GIT/Selenium_urls/chromedriver", options = options)
-# driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-# driver.get("https://publisherstest.sparxworks.com/app/#/security/login")
-# driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
-
-
-
-# def register_cupon(dni):    
-#         options = Options()
-#         options.add_argument('--headless')
-#         options.add_argument('--window-size=1920,1080')
-#         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-#         chrome_options = Options()
-#         driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
-
-
-#         chrome_options.add_argument('--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1')
-#         driver = webdriver.Chrome(options=chrome_options)
-
-#         driver.get("http://interbankcupones.pe/rappi")
-    
-#         #driver.set_window_size(1680, 951)
-
-#         driver.find_element(By.ID, "document").send_keys(dni)
-#         time.sleep(2)
-#         driver.find_element(By.ID, "terms").click()
-#         time.sleep(1)
-#         driver.find_element(By.CLASS_NAME, "form__btn--fullwidth").click()
-#         cupon = driver.find_element(By.CLASS_NAME, "form__box-ticket").text
-#         print(cupon)
-#         time.sleep(2)
-#         return cupon
-#         driver.quit()
-
-     
-
-
-
    
 
 
-def register_cupon():    
+def register_cupon(dni):    
     options = Options()
     #options.add_argument('--headless')
     webdriver_path = "C:\\Git\\fala\\buscador\\chromedriver.exe"
     #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    #chrome_options = Options()
     options.add_argument('--window-size=1920,1080')
 
     options.add_argument('--user-agent=Mozilla/5.0 (Linux; Android 10; SM-G975F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Mobile Safari/537.36')
@@ -72,9 +30,9 @@ def register_cupon():
 
     driver.get("http://interbankcupones.pe/rappi")
 
-    with open("C:\\Git\\fala\\buscador\\dnis.txt", 'r') as file:
-        lines = file.readlines()
-        dni = random.choice(lines).strip()
+    # with open("C:\\Git\\fala\\buscador\\dnis.txt", 'r') as file:
+    #     lines = file.readlines()
+    #     dni = random.choice(lines).strip()
 
 
     driver.find_element(By.ID, "document").send_keys(dni)
@@ -92,3 +50,18 @@ def register_cupon():
 
 # cupon = register_cupon("your_dni")
 # print(cupon)
+
+file_path = "/Users/javier/GIT/fala/buscador/dnis.txt"  # Replace with the actual file path
+
+# Read the lines from the file
+with open(file_path, 'r') as file:
+    lines = file.readlines()
+
+# Remove newline characters and create an array
+array = [line.strip() for line in lines]
+
+# Print the array
+print(array)
+
+for idx, v in enumerate (array):
+ register_cupon(v)
