@@ -70,7 +70,7 @@ def register_cupon():
 
     driver.get("http://interbankcupones.pe/rappi")
 
-    with open("/Users/javier/GIT/fala/buscador/dnis.txt", 'r') as file:
+    with open("C:\\Git\\fala\\buscador\\dnis.txt", 'r') as file:
         lines = file.readlines()
         dni = random.choice(lines).strip()
 
