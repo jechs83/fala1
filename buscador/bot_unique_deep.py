@@ -8,6 +8,7 @@ import os
 from register import     register_safa
 import unicodedata
 import re
+from cupones import register_cupon
 
 
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
@@ -607,6 +608,28 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
           
             )
 
+    def cupon_generator(update, context):
+        user_id = update.message.from_user.id
+        chat_id = update.message.chat_id
+        message_text = update.message.text
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+        bot = context.bot
+
+        dni=int(context.args[0])
+
+
+        
+        cupon = register_cupon(dni)
+
+        bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f"cupon generado "+ cupon
+          
+            )
+
+
+
 
 
 
@@ -635,6 +658,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
     # dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     # dp.add_handler(CommandHandler('restartbot', restart_bot))
+    dp.add_handler(CommandHandler('cupon', cupon_generator))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))
