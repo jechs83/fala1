@@ -49,14 +49,11 @@ import pandas as pd
      
 
 
-with open("/Users/javier/GIT/fala/buscador/dnis.txt", 'r') as file:
-    lines = file.readlines()
-    dni = random.choice(lines).strip()
 
    
 
 
-def register_cupon(dni):    
+def register_cupon():    
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--window-size=1920,1080')
@@ -71,6 +68,11 @@ def register_cupon(dni):
     driver = webdriver.Chrome(options=chrome_options)
 
     driver.get("http://interbankcupones.pe/rappi")
+
+    with open("/Users/javier/GIT/fala/buscador/dnis.txt", 'r') as file:
+        lines = file.readlines()
+        dni = random.choice(lines).strip()
+
 
     driver.find_element(By.ID, "document").send_keys(dni)
     time.sleep(2)

@@ -616,11 +616,11 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
         bot = context.bot
 
-        dni=int(context.args[0])
+     
 
 
         
-        cupon = register_cupon(dni)
+        cupon = register_cupon()
 
         bot.sendMessage(
                 chat_id=chat_id,
