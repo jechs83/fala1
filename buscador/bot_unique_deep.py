@@ -655,7 +655,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
     # dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     # dp.add_handler(CommandHandler('restartbot', restart_bot))
-    dp.add_handler(CommandHandler('cupon', cupon_generator))
+    dp.add_handler(CommandHandler('cuponnnnn', cupon_generator))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))
