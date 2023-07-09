@@ -617,14 +617,19 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         bot = context.bot
 
         
-        cupon = register_cupon2()
+        if user_id == 1160667522 or user_id == 1596011511:
+            cupon = register_cupon2()
 
-        bot.sendMessage(
+            bot.sendMessage(
                 chat_id=chat_id,
-                parse_mode="HTML",text= f"cupon generado "+ cupon
-          
+                parse_mode="HTML",
+                text=f"Cupón generado: {cupon}"
+         )
+        else:
+            bot.sendMessage(
+                chat_id=chat_id,
+                text="Lo siento, no tienes autorización para generar un cupón."
             )
-
 
 
 
@@ -655,7 +660,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
     # dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     # dp.add_handler(CommandHandler('restartbot', restart_bot))
-    dp.add_handler(CommandHandler('cuponnnnn', cupon_generator))
+    dp.add_handler(CommandHandler('cupon', cupon_generator))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))
