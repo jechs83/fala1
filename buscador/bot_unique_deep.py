@@ -8,7 +8,7 @@ import os
 from register import     register_safa
 import unicodedata
 import re
-from cupones import register_cupon
+from cupones_random import register_cupon2
 
 
 from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
@@ -616,11 +616,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
         bot = context.bot
 
-     
-
-
         
-        cupon = register_cupon()
+        cupon = register_cupon2()
 
         bot.sendMessage(
                 chat_id=chat_id,
