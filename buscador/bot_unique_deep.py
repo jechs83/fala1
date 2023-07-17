@@ -5,8 +5,7 @@ from delete_past_dats import delete_pastdays
 from delete_collection import reset_products
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-import time
-import schedule
+
 from register import     register_safa
 import unicodedata
 import re
