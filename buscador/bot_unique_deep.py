@@ -5,6 +5,8 @@ from delete_past_dats import delete_pastdays
 from delete_collection import reset_products
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
+import time
+import schedule
 from register import     register_safa
 import unicodedata
 import re
@@ -32,6 +34,10 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             parse_mode="HTML",text= f"Hola soy un bot creado para la Nave por Sr Spok. sigo funcionando no te preocupes❗❗❗ "
             #,message_thread_id="5"
         )
+
+
+
+
 
 ### 2 ENVIA LOS COMANDOS DEL BOT 
     def Commands(update, context):
@@ -632,6 +638,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             )
 
 
+ 
 
 
 
