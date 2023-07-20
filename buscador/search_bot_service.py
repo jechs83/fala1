@@ -640,9 +640,9 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 
                 chat_id = config("DEEP_CHAT_TOKEN")
 
-                send_telegram_with_inline_buttons(msn, foto, bot_token, chat_id)
+                
 
-                #send_telegram(msn, foto, bot_token, chat_id)
+                send_telegram(msn, foto, bot_token, chat_id)
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
