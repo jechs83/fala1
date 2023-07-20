@@ -551,17 +551,12 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
     collection = db["scrap"]
     # db.command({"planCacheClear": "scrap"})
 
-   
-  
-
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
     t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 51 },"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
 
     # Concatenate the two cursors
     result = itertools.chain(t1, t2)
-
-
     # Iterate over the result and print each document
     for i in result:
     
@@ -638,10 +633,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
         
                 foto = i["image"]
                 
-                chat_id = config("DEEP_CHAT_TOKEN")
-
-                
-
+            
                 send_telegram(msn, foto, bot_token, chat_id)
                 
 
