@@ -45,13 +45,6 @@ def dia():
 date = dia()
 
 
-def send_telegram_with_inline_buttons(msn, foto, bot_token, chat_id):
-    inline_keyboard = [[InlineKeyboardButton("Forward to Chat ID", callback_data=str(chat_id))]]
-    reply_markup = InlineKeyboardMarkup(inline_keyboard)
-    
-    bot = Bot(token=bot_token)
-    bot.send_photo(chat_id=chat_id, photo=foto, caption=msn, reply_markup=reply_markup)
-
 ###################################################################################
 
 
