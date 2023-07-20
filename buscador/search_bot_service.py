@@ -20,6 +20,8 @@ from minimo import minimo
 import pytz
 import gc
 from datetime import datetime
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Bot
+
 server_date = datetime.now()
 timezone = pytz.timezone("America/Bogota")
 peru_date = server_date.astimezone(timezone)
@@ -41,6 +43,20 @@ def dia():
     return date
 
 date = dia()
+
+
+def send_telegram_with_inline_buttons(msn, foto, bot_token, chat_id):
+    inline_keyboard = [[InlineKeyboardButton("Forward to Chat ID", callback_data=str(chat_id))]]
+    reply_markup = InlineKeyboardMarkup(inline_keyboard)
+    
+    bot = Bot(token=bot_token)
+    bot.send_photo(chat_id=chat_id, photo=foto, caption=msn, reply_markup=reply_markup)
+
+###################################################################################
+
+
+
+
 
 def send_telegram(message,foto, bot_token, chat_id):
     print("#########")
@@ -628,7 +644,12 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
 
         
                 foto = i["image"]
-                send_telegram(msn, foto, bot_token, chat_id)
+                
+                chat_id = config("DEEP_CHAT_TOKEN")
+
+                send_telegram_with_inline_buttons(msn, foto, bot_token, chat_id)
+
+                #send_telegram(msn, foto, bot_token, chat_id)
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
