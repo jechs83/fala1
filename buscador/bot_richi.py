@@ -7,5 +7,6 @@ chat_id = config("USS_DEFIANT")
 bot_token = config("RICHI_BOY_TOKEN")
 db1 = "richi1"
 db2 = "richi2"
+
 super_bot(TOKEN, bot_token, chat_id, db1, db2)
 
