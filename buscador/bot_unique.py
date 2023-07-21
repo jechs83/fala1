@@ -394,62 +394,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
     
     ### 11 ELIMINA MARCA DE CARTEGORIA
-    def restart_bot(update,context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName}  se elimina  marca")
-
-        bot_restart()
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"Reiniciando Bots recolectores, sistema en linea en 2 minutos"
-        )
-        
-    def web_url(update,context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName}  edicion Url en la Bd")
-
-        link_mod = context.args[0]
-        market = context.args[1]
-        try:
-            id = context.args[2]
-        except: id = None
-        try:
-         link = context.args[3]
-        except: link = None
-
-        if link_mod == "a":
-            add_url_db(market, id,link )
-            bot.sendMessage(
-                chat_id=chatId,
-                parse_mode="HTML",
-                text= f"se añadio la url a la lista "+id+" del markert "+market+" listas de urls"
-                 )  
-
-
-        if link_mod == "v":
-            
-            bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"El market "+market+" tiene "+ str(urls_per_market(market))
-                )  
-        
-        if link_mod == "c":
-            f= view_url( market,id)
-
-            bot = context.bot
-            chatId= update.message.chat_id
-            bot.sendMessage(
-                    chat_id=chatId,
-                    parse_mode="HTML",
-                    text= f
-                )
-      
+  
            
     def send_document_price_values(update, context):
         bot = context.bot
@@ -621,7 +566,6 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("comandos", Commands))
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, welcomeMsg))
     dp.add_handler(CommandHandler('b', custom_search))
-    #dp.add_handler(CommandHandler("url", web_url))
     dp.add_handler(CommandHandler("send", send_document))
     dp.add_handler(CommandHandler("clean", delete_past_database))
     dp.add_handler(CommandHandler("resetship", reset_ship_data))
@@ -634,7 +578,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("f", fazil_reg))
 
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
-    dp.add_handler(CommandHandler('restartbot', restart_bot))
+
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))
