@@ -67,7 +67,5 @@ for idx, v in enumerate (array):
         cupon_file.write(v + "\n")
 
 
-
-
 def cupon_random():
 

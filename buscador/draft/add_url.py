@@ -7,8 +7,6 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
 
-
-
 client = MongoClient(config("MONGO_DB"))
 # db5 = client["scrap"]
 # collection5 = db5["scrap"] 
