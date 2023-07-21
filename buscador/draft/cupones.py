@@ -66,6 +66,3 @@ for idx, v in enumerate (array):
     with open(file_path, 'a') as cupon_file:
         cupon_file.write(v + "\n")
 
-
-def cupon_random():
-
