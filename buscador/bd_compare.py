@@ -13,6 +13,14 @@ web_url = random.choice(config("PROXY"))
 client = MongoClient(config("MONGO_DB"))
 
 
+def dia():
+    now = datetime.now()
+    date = now.strftime("%d/%m/%Y")
+    #date = date.today()
+    return date
+
+date = dia()
+
 def save_data_to_mongo_db( sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct,db_collection):
 
@@ -38,7 +46,9 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "web_dsct":float(dsct),
             "link": str(link),
             "image": str(image),
+            "date":str(date),
             "telegram":"search"
+           
             }}
             collection.update_one(filter,newvalues)
  
@@ -56,6 +66,7 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "web_dsct":float(dsct),
             "link": str(link),
             "image": str(image),
+            "date":str(date),
             "telegram":"search"
             }
             collection.insert_one(data)
