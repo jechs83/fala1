@@ -400,8 +400,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         
     
     ### 11 ELIMINA MARCA DE CARTEGORIA
-
-           
+    
     def send_document_price_values(update, context):
         bot = context.bot
         chat_id = update.message.chat_id

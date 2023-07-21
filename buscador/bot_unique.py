@@ -17,7 +17,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s -  %(message)s,")
     logger = logging.getLogger()
 
-### 1 ENVIA EL STATUS DEL BOT 
+    ### 1 ENVIA EL STATUS DEL BOT 
     def getBotInfo(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -32,7 +32,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             #,message_thread_id="5"
         )
 
-### 2 ENVIA LOS COMANDOS DEL BOT 
+    ### 2 ENVIA LOS COMANDOS DEL BOT 
     def Commands(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -46,7 +46,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text= f"#################\n LISTA DE COMANDOS\n #################\n \n >Marca y porcentaje (Telegram)\n /b marca %   \n \n >Palabra  y % (HTML)\n /product palabra %\n \n >Tienda y %  (HTML)\n /send tienda %\n \n >Tienda y %  (Telegram)\n /market tienda % \n \n >Codigo de producto (Telegram)\n /cod codigo_de_producto\n \n >Busca y envia variacion o nuevo (Telegram)\n /auto categoria  (Telegram)\n \n >Busca toda categoria 60% (Telegram)\n /manual categoria % (Telegram)\n \n >Agrega marca a categoria(Telegram)\n /brand marca categoria\n \n >Elimina marca a categoria(Telegram)\n /delete marca categoria"
         )
 
-### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
+    ### 3 SE ECARGA DE DAR AUTOMATICAMENTE LA BIENVENIDA A LOS NUEVOS INTEGRANTES 
     def welcomeMsg(update, context):
         bot = context.bot
         chatId = update.message.chat_id
@@ -62,8 +62,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text=f"Bienvenido al grupo {userName}."
         )
 
-### 4 BUSCA EN BASE A MARCA Y DESCUENTO 
-###   USANDO EL COMANDO  " /b "
+    ### 4 BUSCA EN BASE A MARCA Y DESCUENTO 
+    ###   USANDO EL COMANDO  " /b "
     def custom_search(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -87,7 +87,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text= f"Se realizo busqueda de la marca ingresada "+ str(brand) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
         )
 
-### 5 BUSCA EN BASE A MARKET Y DESCUENTO
+    ### 5 BUSCA EN BASE A MARKET Y DESCUENTO
     def custom_search_market(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -127,21 +127,9 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                 parse_mode="HTML",
                 text= f"Se realizo busqueda de la marca ingresada"+ str(market) +" de "+ str(dsct) + "%  a mas\n\n#####################################\n#####################################"
                 )
+            
 
-### 6 ALERTA A TODOS EN EL GRUPO  
-    def alert_all(update, context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName}  mando alerta a todos")
-
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"@Kokotinaa @Vulcannnn @Sr_toto @Rcmed @Chucky_3  @Kaiesmipastor @lalilove9 @JkingM14 @Lachicadelascajas @Lunitaaa_0 @CarLiTuxD "
-        )
-
-### 7 BUSCA EN PRODUCTO CON EL CODIGO SKU
+    ### 7 BUSCA EN PRODUCTO CON EL CODIGO SKU
     def sku(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -163,7 +151,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text= f"Termino la busqueda... si no hay nada no encontre ps"
         )
 
-### 8 BUSCA AUTOMATICAMENTE LAS MARCAS EN LAS CATEGORIAS DEL 60% EN ADELANTE NO ENVIA SI YA SE ENVIO
+    ### 8 BUSCA AUTOMATICAMENTE LAS MARCAS EN LAS CATEGORIAS DEL 60% EN ADELANTE NO ENVIA SI YA SE ENVIO
     def auto_tele(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -191,7 +179,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 
 
-### 9 ENVIA PRODUCTOS QUE HAY EN UNA CARTEGORIAS 
+    ### 9 ENVIA PRODUCTOS QUE HAY EN UNA CARTEGORIAS 
     def category_list(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -209,7 +197,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         read_brands(category,bot_token ,chat_id)
 
 
-### 10 AÑADE MARCA A UNA CATEGORIA SELECCIONADA
+    ### 10 AÑADE MARCA A UNA CATEGORIA SELECCIONADA
     def add_brand(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -226,7 +214,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             text= f"Se agrego al buscador de "+str(category)+" la "+str(brand)
         )
 
-### 11 ELIMINA MARCA DE CARTEGORIA
+    ### 11 ELIMINA MARCA DE CARTEGORIA
     def brand_delete(update,context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -238,7 +226,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         delete_brand(brand,category,bot_token ,chat_id)
 
 
-### 12 BUSCA TODAS LAS MARCAS SEGUN CATEGORIA MANUALMENTE CON DESCUENTO PERSONALIZADO
+    ### 12 BUSCA TODAS LAS MARCAS SEGUN CATEGORIA MANUALMENTE CON DESCUENTO PERSONALIZADO
     def auto_tele_dsct(update, context):
         bot = context.bot
         chatId= update.message.chat_id
@@ -262,7 +250,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         logger.info(f"se Termino la Busqueda")
 
 
-### 13 CREA HTML DE BUSQUEDA DE MARKET Y DSCT PERSONALIZADO
+    ### 13 CREA HTML DE BUSQUEDA DE MARKET Y DSCT PERSONALIZADO
     def send_document(update, context):
         bot = context.bot
         chat_id = update.message.chat_id
@@ -293,7 +281,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
        
       
         
-### 14 CREA HTML DE BUSQUEDA DE PALABRA CONTENIDA EN EL NOMBRE DEL PRODUCTO Y DSCT PERSONALIZADO POSIBLE ORDENAR PRECIO MAYOR A MENOR
+    ### 14 CREA HTML DE BUSQUEDA DE PALABRA CONTENIDA EN EL NOMBRE DEL PRODUCTO Y DSCT PERSONALIZADO POSIBLE ORDENAR PRECIO MAYOR A MENOR
     def send_product(update, context):
         chat_Id = update.message.chat_id
         userName = update.effective_user["first_name"]
@@ -339,22 +327,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         os.remove(config("HTML_PATH")+"producto.html")
 
 
-### 15 PARA JODER 
-    def joder(update, context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName} ha solicitado informacion sobre el bot " +str(chatId))
-        print(context.args)
-
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f""
-        )
-
-
-### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
+    ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
     def brand_to_html(update, context):
         chat_id = update.message.chat_id
         userName = update.effective_user["first_name"]
@@ -376,26 +349,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         os.remove(config("HTML_PATH")+brand+".html")
 
 
-
-### TEST BUSCA EN PRODUCTO CON EL CODIGO SKU
-    def test(update, context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName}  busca codigo especifico")
-        codigo = context.args[0]
-        
-        test2(str(codigo), bot_token ,chat_id)
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"Termino la busqueda... si no hay nada no encontre ps"
-        )
-        
     
-    ### 11 ELIMINA MARCA DE CARTEGORIA
-  
-           
+    ### 11 ELIMINA MARCA DE CARTEGORIA      
     def send_document_price_values(update, context):
         bot = context.bot
         chat_id = update.message.chat_id
@@ -571,14 +526,11 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("resetship", reset_ship_data))
     dp.add_handler(CommandHandler("price", send_document_price_values))
     dp.add_handler(CommandHandler("product", send_product))
-    dp.add_handler(CommandHandler('alert', alert_all))
     dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))
     dp.add_handler(CommandHandler('auto', auto_tele))
     dp.add_handler(CommandHandler("f", fazil_reg))
-
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
-
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))

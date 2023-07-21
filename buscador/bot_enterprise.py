@@ -1,7 +1,7 @@
 
 
 from decouple import config
-from bot_unique2 import super_bot
+from bot_unique import super_bot
 
 TOKEN = config("CAPITAN_KIRK_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
