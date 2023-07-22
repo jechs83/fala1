@@ -12,15 +12,14 @@ from decouple import config
 
 TOKEN = config("CAPITAN_KIRK_TOKEN")
 chat_id = config("ENTERPRISE_CHAT_TOKEN")
-
 bot_token = config("CAPITAN_KIRK_TOKEN")
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 50
 dsct2 = 100
-
 db="scrap"
 db_collection = "scrap"
+product = "lentes"
     
 def hora():
     now = datetime.now()
