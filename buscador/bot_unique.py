@@ -10,7 +10,7 @@ import unicodedata
 import re
 
 
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, test2, search_brand_dsct_html,read_brands,search_price
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, search_brand_dsct_html,read_brands
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     logging.basicConfig(
@@ -350,33 +350,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 
     
-    ### 11 ELIMINA MARCA DE CARTEGORIA      
-    def send_document_price_values(update, context):
-        bot = context.bot
-        chat_id = update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-
-        market = (context.args[0]).replace("%"," ")
-        price_minimo=int(context.args[1])
-        price_maximo = int(context.args[2])
-     
-        try:
-         price_maximo = (context.args[2])
-        except: price_maximo = None
-        bot.sendMessage(
-            chat_id=chat_id,
-            parse_mode="HTML",
-            text= f"Procesado busqueda..."
-        )
-        search_price(market,price_minimo,price_maximo, bot_token ,chat_id)
-
-        document = open(config("HTML_PATH")+market+".html", 'rb')
-        context.bot.send_document(chat_id, document)
-        document.close()
-        os.remove(config("HTML_PATH")+market+".html")
-        print("pasa por aqui")
-
+ 
 
     ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
     def fazil_reg(update, context):
@@ -524,7 +498,6 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("send", send_document))
     dp.add_handler(CommandHandler("clean", delete_past_database))
     dp.add_handler(CommandHandler("resetship", reset_ship_data))
-    dp.add_handler(CommandHandler("price", send_document_price_values))
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))

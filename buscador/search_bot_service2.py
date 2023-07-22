@@ -140,16 +140,16 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         
       
 client = MongoClient(config("MONGO_DB"))
-TOKEN = config("CAPITAN_SPOK_TOKEN")
-chat_id = config("DISCOVERY_CHAT_TOKEN")
-bot_token = config("CAPITAN_SPOK_TOKEN")
-bd1 = "discovery1"
-bd2 = "discovery2"
-dsct = 70
-dsct2 = 101
-product = "reloj"
-db = client["trigger"]
-collection = db["40"]
+TOKEN = config("CAPITAN_SULU_TOKEN")
+chat_id = config("EXCELSIOR_CHAT_TOKEN")
+bot_token = config("CAPITAN_SULU_TOKEN")
+bd1 = "excelsior1"
+bd2 = "excelsior2"
+dsct = 60
+dsct2 = 70
+product  = "lentes"
+db="scrap"
+db_collection = "scrap"
     
 
 #auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)

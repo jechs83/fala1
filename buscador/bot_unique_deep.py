@@ -384,50 +384,10 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 
 ### TEST BUSCA EN PRODUCTO CON EL CODIGO SKU
-    def test(update, context):
-        bot = context.bot
-        chatId= update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName}  busca codigo especifico")
-        codigo = context.args[0]
-        
-        test2(str(codigo), bot_token ,chat_id)
-        bot.sendMessage(
-            chat_id=chatId,
-            parse_mode="HTML",
-            text= f"Termino la busqueda... si no hay nada no encontre ps"
-        )
-        
+
     
     ### 11 ELIMINA MARCA DE CARTEGORIA
-    
-    def send_document_price_values(update, context):
-        bot = context.bot
-        chat_id = update.message.chat_id
-        userName = update.effective_user["first_name"]
-        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
-
-        market = (context.args[0]).replace("%"," ")
-        price_minimo=int(context.args[1])
-        price_maximo = int(context.args[2])
-     
-        try:
-         price_maximo = (context.args[2])
-        except: price_maximo = None
-        bot.sendMessage(
-            chat_id=chat_id,
-            parse_mode="HTML",
-            text= f"Procesado busqueda..."
-        )
-        search_price(market,price_minimo,price_maximo, bot_token ,chat_id)
-
-        document = open(config("HTML_PATH")+market+".html", 'rb')
-        context.bot.send_document(chat_id, document)
-        document.close()
-        os.remove(config("HTML_PATH")+market+".html")
-        print("pasa por aqui")
-
-
+ 
     ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
     def fazil_reg(update, context):
         user_id = update.message.from_user.id
@@ -600,7 +560,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("send", send_document))
     dp.add_handler(CommandHandler("clean", delete_past_database))
     dp.add_handler(CommandHandler("resetship", reset_ship_data))
-    dp.add_handler(CommandHandler("price", send_document_price_values))
+
     dp.add_handler(CommandHandler("product", send_product))
     dp.add_handler(CommandHandler('alert', alert_all))
     # dp.add_handler(CommandHandler('market', custom_search_market))
