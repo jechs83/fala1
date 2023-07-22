@@ -66,63 +66,6 @@ def send_document(document,bot_token, chat_id):
 ########################################################################
 ########################################################################
 
-def send_telegram2(message, foto, html_file, bot_token, chat_id):
-    # Read the contents of the photo file
-    photo_contents = requests.get(foto).content
-
-    # Read the contents of the HTML file
-    with open(html_file, 'rb') as f:
-        html_contents = f.read()
-
-    # Encode the HTML file as base64
-    encoded_html = base64.b64encode(html_contents).decode()
-
-    # Combine the photo and HTML contents into a single message
-    html_text = f'<a href="data:text/html;base64,{encoded_html}">Click aqui para ver Precios Historicos</a>'
-    message_text = f'{message}\n\n{html_text}'
-
-    # Send the combined message using the sendPhoto and sendDocument methods
-    response1 = requests.post(
-        f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-        data={'chat_id': chat_id, 'caption': message_text, "parse_mode": "HTML"},
-        files={'photo': photo_contents},
-        
-    )
-
-    response2 = requests.post(
-        f'https://api.telegram.org/bot{bot_token}/sendDocument',
-        data={'chat_id': chat_id},
-        files={'document': ('historico.html', html_contents, 'text/html')}
-    )
-
-# Example usage
-
-def send_telegram3(message, foto, html_file, bot_token, chat_id):
-    # Read the contents of the photo file
-    photo_contents = requests.get(foto).content
-
-    # Read the contents of the HTML file
-    with open(html_file, 'rb') as f:
-        html_contents = f.read()
-
-    # Encode the HTML file as base64
-    encoded_html = base64.b64encode(html_contents).decode()
-
-    # Create a multipart/form-data payload with three parts
-    payload = {
-        'chat_id': chat_id,
-        'caption': message,
-        'parse_mode': 'HTML',
-        'photo': photo_contents,
-        'document': ('historico.html', html_contents, 'text/html'),
-    }
-
-    # Send the message using the multipart/form-data payload
-    response = requests.post(
-        f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-        files=payload
-    )
-
 ########################################################################
 ########################################################################
 ########################################################################
@@ -306,93 +249,6 @@ def search_market_dsct(market,dsct, bot_token, chat_id):
         print("Se envio mensaje a telegram")
     gc.collect()
 
-
-
-def  search_market_dsct_antitopo(market, dsct, dsct2, bot_token ,chat_id):
-    db5.command({"planCacheClear": "scrap"})
-    print
-    print(bot_token)
-    print(chat_id)
-    
-    if dsct <41:
-        dsct = 40
-    t5 = collection5.find({"market":market, "web_dsct":{"$gte":int(dsct),"$lte":int(dsct2) }, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), 
-                            re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), 
-                            re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date})
-   
-    print( "se realizo busqueda")
-
-    count = 0
-    for i in t5:
-        # count = count+1
-        # if count == 100:
-        #     break
-        # print(i)
-        print("se envio a telegram")  
-        if  i["card_price"] == 0:
-                card_price = ""
-        else:
-            card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
-
-        if i["list_price"] == 0:
-                list_price = ""
-        else:
-            list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
-
-        if i["web_dsct"] <= 50:
-            dsct = "🟡"
-        if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
-            dsct = "🟢"
-        if i["web_dsct"] >=70:
-            dsct = "🔥🔥🔥🔥🔥🔥"
-
-        # try:
-        #     historic = minimo(i["sku"])[3]
-        # except:
-        #     historic = False
-        # print(historic)
-
-        # if historic == True:
-
-        #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-        #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-        # if historic == False:
-
-        historic_min = ""
-        historic_list=""
-
-        msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+list_price+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-
-        
-        foto = i["image"]
-        send_telegram (msn, foto, bot_token, chat_id)   
-        # msn =  "<b>Marca: "+str(i["brand"])+"</b>\nModelo: "+str(i["product"])+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+str(i["image"])+"\n\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"]
-        # send_telegram (msn, bot_token, chat_id)
-        time.sleep(1)
-    gc.collect()
-
-
-t1 =  collection5.find( {"web_dsct":{ "$gte":70},"date":date ,"brand":{"$in":[ 
-re.compile("samsung", re.IGNORECASE),re.compile("lenovo", re.IGNORECASE),re.compile("Lg", re.IGNORECASE),
-re.compile("Asus", re.IGNORECASE),re.compile("Xiaomi", re.IGNORECASE),re.compile("indurama", re.IGNORECASE),
-re.compile("oster", re.IGNORECASE),re.compile("bosch", re.IGNORECASE),re.compile("acer", re.IGNORECASE),
-re.compile("huawei", re.IGNORECASE),re.compile("panasonic", re.IGNORECASE),re.compile("winnia", re.IGNORECASE),
-re.compile("phillips", re.IGNORECASE),re.compile("mabe", re.IGNORECASE),re.compile("nex", re.IGNORECASE),
-re.compile("hyundai", re.IGNORECASE),re.compile("tcl", re.IGNORECASE),re.compile("monark ", re.IGNORECASE),
-re.compile("goliat ", re.IGNORECASE),re.compile("oxford ", re.IGNORECASE),re.compile("jafi-bike ", re.IGNORECASE),
-re.compile("besatti ", re.IGNORECASE),re.compile("altitude ", re.IGNORECASE),re.compile("trek ", re.IGNORECASE),
-re.compile("advantech ", re.IGNORECASE),re.compile("ecoride", re.IGNORECASE),re.compile("izytek", re.IGNORECASE),
-re.compile("movimiento", re.IGNORECASE),re.compile("xclusive", re.IGNORECASE),re.compile("cross", re.IGNORECASE),
-re.compile("jvc", re.IGNORECASE),re.compile("motorola", re.IGNORECASE),re.compile("bgh", re.IGNORECASE),
-re.compile("hisense", re.IGNORECASE),re.compile("blackline", re.IGNORECASE),re.compile("daewoo", re.IGNORECASE),
-re.compile("dell", re.IGNORECASE),re.compile("hp", re.IGNORECASE),re.compile("honor", re.IGNORECASE),re.compile("advance", re.IGNORECASE),re.compile("gigabyte", re.IGNORECASE),re.compile("msi", re.IGNORECASE),re.compile("vastec", re.IGNORECASE),re.compile("xpg", re.IGNORECASE),re.compile("alienware", re.IGNORECASE),re.compile("SENNHEISER", re.IGNORECASE),re.compile("HIKVISION", re.IGNORECASE),re.compile("logitech", re.IGNORECASE),re.compile("EZVIZ", re.IGNORECASE),re.compile("BEHRINGER", re.IGNORECASE),re.compile("googledji", re.IGNORECASE),re.compile("best", re.IGNORECASE),re.compile("amazon", re.IGNORECASE),re.compile("sonos", re.IGNORECASE),re.compile("TP LINK", re.IGNORECASE),re.compile("razer", re.IGNORECASE),re.compile("UMIDIGI", re.IGNORECASE),re.compile("vivo", re.IGNORECASE),re.compile("oppo", re.IGNORECASE),re.compile("kingston", re.IGNORECASE),re.compile("sonoff", re.IGNORECASE),re.compile("makita", re.IGNORECASE),re.compile("thomas", re.IGNORECASE),re.compile("baseus", re.IGNORECASE),re.compile("karcher", re.IGNORECASE),re.compile("stanley", re.IGNORECASE),re.compile("BLACK AND DECKER", re.IGNORECASE),re.compile("BLACK & DECKER", re.IGNORECASE),re.compile("dewalt", re.IGNORECASE),re.compile("skil", re.IGNORECASE),re.compile("bauker", re.IGNORECASE),re.compile("uberman", re.IGNORECASE),re.compile("fujifilm", re.IGNORECASE),re.compile("nikonaiwa", re.IGNORECASE),re.compile("microsoft", re.IGNORECASE),re.compile("tp-link", re.IGNORECASE),re.compile("fuji", re.IGNORECASE),re.compile("ADIDAS", re.IGNORECASE),re.compile("ASICS", re.IGNORECASE),re.compile("NEW BALANCE", re.IGNORECASE),re.compile("nike", re.IGNORECASE),re.compile("puma", re.IGNORECASE),re.compile("reebok", re.IGNORECASE),re.compile("skechers", re.IGNORECASE),re.compile("under armour", re.IGNORECASE),re.compile("umbro", re.IGNORECASE),re.compile("Clementoni", re.IGNORECASE),re.compile("vainsa", re.IGNORECASE),re.compile("ibm", re.IGNORECASE),re.compile("lego", re.IGNORECASE),re.compile("intel", re.IGNORECASE),re.compile("louis vuitton", re.IGNORECASE),re.compile("prada", re.IGNORECASE),re.compile("pampers", re.IGNORECASE),re.compile("zara", re.IGNORECASE),re.compile("canon", re.IGNORECASE),re.compile("caterpillar", re.IGNORECASE),re.compile("nintendo", re.IGNORECASE),re.compile("rolex", re.IGNORECASE),re.compile("nokia", re.IGNORECASE),re.compile("lexus", re.IGNORECASE),re.compile("exxon mobil", re.IGNORECASE),re.compile("ralph lauren", re.IGNORECASE),re.compile("apple", re.IGNORECASE),re.compile("chicco", re.IGNORECASE),re.compile("safety", re.IGNORECASE),re.compile("cosco", re.IGNORECASE),re.compile("infanti", re.IGNORECASE),re.compile("fisher price", re.IGNORECASE),re.compile("Hot wheels", re.IGNORECASE),re.compile("cry babies", re.IGNORECASE),re.compile("my little pony", re.IGNORECASE),re.compile("Baby alive", re.IGNORECASE),re.compile("index", re.IGNORECASE),re.compile("barbie", re.IGNORECASE),re.compile("Avent", re.IGNORECASE),re.compile("Baby Club Chic", re.IGNORECASE),re.compile("Baby Harvest", re.IGNORECASE),re.compile("Baby liss", re.IGNORECASE),re.compile("Babycottons", re.IGNORECASE),re.compile("Barbados", re.IGNORECASE),re.compile("basemet", re.IGNORECASE),re.compile("Bata", re.IGNORECASE),re.compile("Bblubs", re.IGNORECASE),re.compile("Blackout", re.IGNORECASE),re.compile("BORN", re.IGNORECASE),re.compile("Bosse", re.IGNORECASE),re.compile("Bronco", re.IGNORECASE),re.compile("Bubble gummers", re.IGNORECASE),re.compile("cacharel", re.IGNORECASE),re.compile("Carters", re.IGNORECASE),re.compile("caterpilla", re.IGNORECASE),re.compile("Champion", re.IGNORECASE),re.compile("Cloudbreak", re.IGNORECASE),re.compile("Colloky", re.IGNORECASE),re.compile("columbia", re.IGNORECASE),re.compile("crocs", re.IGNORECASE),re.compile("diadora", re.IGNORECASE),re.compile("Diesel", re.IGNORECASE),re.compile("DJI", re.IGNORECASE),re.compile("Drimer", re.IGNORECASE),re.compile("Drom", re.IGNORECASE),re.compile("Dunkelvolk", re.IGNORECASE),re.compile("Edufun", re.IGNORECASE),re.compile("Emma Cotton Babies", re.IGNORECASE),re.compile("Evenflo", re.IGNORECASE),re.compile("Forli", re.IGNORECASE),re.compile("Gama", re.IGNORECASE),re.compile("Gotcha", re.IGNORECASE),re.compile("Gymboree", re.IGNORECASE),re.compile("Huggies", re.IGNORECASE),re.compile("Hugo boss", re.IGNORECASE),re.compile("Jack & Jones", re.IGNORECASE),re.compile("Kansas", re.IGNORECASE),re.compile("Kayra Man", re.IGNORECASE),re.compile("lacoste", re.IGNORECASE),re.compile("Lee", re.IGNORECASE),re.compile("Levis", re.IGNORECASE),re.compile("Little mommy", re.IGNORECASE),re.compile("Little tikes", re.IGNORECASE),re.compile("Lois", re.IGNORECASE),re.compile("lotto", re.IGNORECASE),re.compile("marquis", re.IGNORECASE),re.compile("Maui and Sons", re.IGNORECASE),re.compile("merrell", re.IGNORECASE),re.compile("Mountain gear", re.IGNORECASE),re.compile("NBA", re.IGNORECASE),re.compile("New Era", re.IGNORECASE),re.compile("Next", re.IGNORECASE),re.compile("Ninebot", re.IGNORECASE),re.compile("north face", re.IGNORECASE),re.compile("North star", re.IGNORECASE),re.compile("Oakley", re.IGNORECASE),re.compile("Osh kosh", re.IGNORECASE),re.compile("Parada 111", re.IGNORECASE),re.compile("Paraiso", re.IGNORECASE),re.compile("Pionier", re.IGNORECASE),re.compile("Quiksilver", re.IGNORECASE),re.compile("Reef", re.IGNORECASE),re.compile("Robert Lewis", re.IGNORECASE),re.compile("rusty", re.IGNORECASE),re.compile("Scoop", re.IGNORECASE),re.compile("Siegen", re.IGNORECASE),re.compile("Sybilla", re.IGNORECASE),
-re.compile("Tap out", re.IGNORECASE),
-re.compile("Volcom", re.IGNORECASE),re.compile("Wahl", re.IGNORECASE),re.compile("Whirpool", re.IGNORECASE),
-re.compile("Woallance", re.IGNORECASE), re.compile("scoop", re.IGNORECASE),    
-    ]}})
-
-pro = [t1]  ## ARREGLO DE LOS QUERYS DE MONGO PARA MANDAR POR TELEGRAM
-products = []
 
 
 
@@ -1073,21 +929,6 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     # os.remove(config("HTML_PATH")+"producto.html")
     gc.collect()
 
-def test2(codigo,bot_token, chat_id):
-    db5.command({"planCacheClear": "scrap"})
-      
-    t5 = collection5.find({"sku":str(codigo)})
-    print( "se realizo busqueda")
-    print(codigo)
-    for i in t5:
-        print(i)
-        print("se envio a telegram")      
-        send_telegram ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :"+str(i["list_price"])+"\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\n\nLink :"+i["link"]+"\nhome web:"+i["home_list"],
-                       bot_token, chat_id)
-    gc.collect()
-      
-
-
 
 def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     # db5.command({"planCacheClear": "scrap"})
@@ -1160,36 +1001,6 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
     # # send_telegram(html, bot_token, chat_id )
     # # os.remove(config("HTML_PATH")+"producto.html")
     # gc.collect()
-
-
-def search_price(market,price_minimo,price_maximo, bot_token ,chat_id):
-
-    db5.command({"planCacheClear": "scrap"})
-
-    t5 = collection5.find({ "date":date ,"market":market, "best_price":{"$gte":int(price_minimo), "$lte":int(price_maximo) }}) 
-    
-
-    list_cur = list(t5)
-    products = []
-    for i in list_cur:
-        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
-        products.append(p)
-
-    df = DataFrame(products)
-    
-    def path_to_image_html(path):
- 
-        return '<img src="'+ path + '" style=max-height:124px;"/>'
-
-    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
-
-    with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
-     
-        f.write(html)
-        f.close
-    print(html)
-
-    
 
 
 try:      
