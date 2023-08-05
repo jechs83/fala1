@@ -821,6 +821,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
 
 def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
     db5.command({"planCacheClear": "scrap"})
+
     
     if price == None:
 
@@ -857,15 +858,19 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
     products = []
     for i in list_cur:
         p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
+
         products.append(p)
 
     df = DataFrame(products)
+
     
     def path_to_image_html(path):
  
         return '<img src="'+ path + '" style=max-height:124px;"/>'
 
     html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+
 
     with open (config("HTML_PATH")+market+".html", "w", encoding='utf-8') as f:
      
