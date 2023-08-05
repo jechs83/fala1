@@ -339,13 +339,14 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         # dsct = int(dsct)
         ##################
         text = update.message.text
+        print(text)
         words = text.split()
         if not words:
             # handle error
             return
         
-        brand = " ".join(words[:-1]).replace("/marca","")
-
+        brand = " ".join(words[:-1]).replace("/marca","").lstrip()
+        print(words)
         try:
             dsct = int(words[-1])
         except: 

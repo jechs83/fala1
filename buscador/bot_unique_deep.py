@@ -362,17 +362,37 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
 ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
     def brand_to_html(update, context):
-        chat_id = update.message.chat_id
+        chat_Id = update.message.chat_id
+        bot = context.bot
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
 
-        brand = (context.args[0]).replace("%"," ")
-        dsct=int(context.args[1])
-        dsct = int(dsct)
-     
+           # brand = (context.args[0]).replace("%"," ")
+        # dsct=int(context.args[1])
+        # dsct = int(dsct)
+        ##################
+        text = update.message.text
+        print(text)
+        words = text.split()
+        if not words:
+            # handle error
+            return
+        
+        brand = " ".join(words[:-1]).replace("/marca","").lstrip()
+        
+
         try:
-         price = (context.args[2])
-        except: price = None
+            dsct = int(words[-1])
+        except: 
+            bot.sendMessage( chat_id=chat_Id, parse_mode="HTML", text= f"Falta el Descuento" )
+        print(brand)
+        print(dsct)
+      
+    ###########
+        # try:
+        #  price = (context.args[2])
+        # except: price = None
+        price = None
 
         search_brand_dsct_html(brand,dsct,price, bot_token ,chat_id)
 
