@@ -54,23 +54,16 @@ current_time = dia()[1]
 
 
 def scrap(driver,web):    
-        # options = Options()
-        # #options.add_argument('--headless')
-        # options.add_argument('--window-size=1920,1080')
-        # driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
-        # driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
-  
-          driver.get(web)
-          time.sleep(2)
+     
+        driver.get(web)
+        time.sleep(2)
 
-
-    
-          for i in range (2):
+        for i in range (2):
             driver.execute_script("window.scrollBy(0, 1500);")
             time.sleep(0.5)  # Wait for a short while after each scroll
     
-          time.sleep(1)
-          source_html = driver.page_source
+        time.sleep(1)
+        source_html = driver.page_source
 
 
 
@@ -82,13 +75,13 @@ def scrap(driver,web):
           # response = requests.get(url)
           # soup = BeautifulSoup(response.content, 'html.parser')\
           
-          soup = BeautifulSoup(source_html, 'html.parser')
+        soup = BeautifulSoup(source_html, 'html.parser')
 
-     
+    
 
-          elements = soup.find_all("div", class_="vtex-search-result-3-x-galleryItem vtex-search-result-3-x-galleryItem--normal vtex-search-result-3-x-galleryItem--grid pa4")
+        elements = soup.find_all("div", class_="vtex-search-result-3-x-galleryItem vtex-search-result-3-x-galleryItem--normal vtex-search-result-3-x-galleryItem--grid pa4")
 
-          for element in elements:
+        for element in elements:
 
 
                link = element.find("a")['href']
@@ -98,6 +91,8 @@ def scrap(driver,web):
 
                product = element.find('h3', class_='vtex-product-summary-2-x-productNameContainer')
                product = product.text.strip()
+
+               
              
                 
 
@@ -133,6 +128,9 @@ def scrap(driver,web):
                except: dsct = 0
 
                card_dsct = dsct
+
+           
+             
               
 
           # Here you can save the extracted data to a file or any other desired storage
@@ -177,10 +175,10 @@ def scrap(driver,web):
                collection.update_one({"_id": data["_id"]}, {"$set": data}, upsert=True)
                print("se grabo")
 
-            #    if  product: 
-            #        return True
-            #    else: 
-            #     continue
+               if  product: 
+                   return True
+               else: 
+                continue
 
 # source_html = scrap(web)
 # with open ("source.html", "w+") as f:
@@ -214,23 +212,28 @@ if __name__ == "__main__":
             websites.append(v+str(e+1))
     grouped_arrays = [websites[i:i + len(urls)] for i in range(0, len(websites), len(urls))]
 
-    # print(grouped_arrays)
+    
       
     count = 0
     driver = initialize_driver()
-    for webs in grouped_arrays:
-       
+    consecutive_none_count = 0
+
+    for webs,v in enumerate (grouped_arrays):
+        print(v)
+        time.sleep(30)
+        
         for web  in webs:
+         
             scrapping = scrap(driver,web)
             print(web)
             count= count+1
             print(count)
             print(scrapping)
-            # if scrapping == None:
-            #     continue
 
-    
-
+            if scrapping is None:
+                print("pasando a otra web")
+                break
+        
     driver.quit()
 
 
