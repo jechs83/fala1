@@ -7,3 +7,12 @@ list2 = ["https://shopstar.pe/electrohogar/electrodomesticos?order=OrderByReleas
          "https://shopstar.pe/tecnologia/audio?order=OrderByReleaseDateDESC&page=",
          "https://shopstar.pe/tecnologia/telefonia?order=OrderByReleaseDateDESC&page="
          ]
+
+list3 = [
+"https://shopstar.pe/electrohogar/lavado?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/electrohogar/refrigeracion?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/electrohogar/cocina?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/electrohogar/electrodomesticos/aspirado?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/electrohogar/climatizacion?order=OrderByReleaseDateDESC&page=",
+    
+]

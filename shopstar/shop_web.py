@@ -208,6 +208,8 @@ if __name__ == "__main__":
       urls = urls_list.list1
     if numero == 2:
       urls = urls_list.list2
+    if numero == 3:
+      urls = urls_list.list3
     websites = []
     for i in urls:
         temp_array = []  # Create a temporary array for each iteration
