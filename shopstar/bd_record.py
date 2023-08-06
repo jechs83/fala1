@@ -2,7 +2,14 @@
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
+from datetime import datetime
 
+def dia():
+    now = datetime.now()
+    date = now.strftime("%d/%m/%Y")
+    #date = date.today()
+    time = now.strftime("%H:%M:%S")
+    return date, time
 
 def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,list_price,
                             best_price,card_price,link,image,dsct, card_dsct, current_date, current_time, web):
@@ -31,8 +38,8 @@ def save_data_to_mongo_db(bd_name_store,collection, market,sku,brand,product,lis
             "card_dsct":float(card_dsct),
             "link": str(link),
             "image": str(image),
-            "date":current_date,
-              "time":current_time,
+            "date":dia()[0],
+              "time":dia()[1],
             "home_list":web
             }}
             collection.update_one(filter,newvalues)            

@@ -8,38 +8,16 @@ import gc
 import time
 import json
 
-from datetime import datetime
-from datetime import date
+def dia():
+    now = datetime.now()
+    date = now.strftime("%d/%m/%Y")
+    #date = date.today()
+    time = now.strftime("%H:%M:%S")
+    return date, time
 
-from decouple import config
-import subprocess
-text_file = open(config("PROXY"), "r")
-lines = text_file.readlines() 
-web_url = random.choice(lines)
-client = MongoClient(config("MONGO_DB"))
+print(dia()[0])
 
-
-bd_name = "saga"
-collection_status = "status"  #   NOMBRE DE BASE DE DATOS
-db1 = client[bd_name]
-collection1 = db1[collection_status]
-
-lista =[1,2,3,4]
-subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "1"] )
-subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "2"] )
-subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala/shopstar//as.py", "3"] )
-subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala//shopstar//as.py", "4"] )
-
-# for i, v in enumerate(lista):
-
-        
-#     #subprocess.Popen(["start", "C:\GIT\\fala\\shopstar\\as.py", str(v)] ,shell=True, executable="C:\WINDOWS\system32\cmd.exe")
-#     subprocess.Popen(["open", "-a", "Terminal", "python3", "/Users/javier/GIT/fala/shopstar/as.py", str(v)] )
-
-#     time.sleep(10)
-         
-        
-        
+dia()
     
 
 
