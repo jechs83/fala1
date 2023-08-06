@@ -15,6 +15,10 @@ import  urls_list
 from decouple import config
 
 from pymongo import MongoClient
+import logging
+
+# Set the logging level to WARNING (or higher)
+logging.basicConfig(level=logging.CRITICAL)
 client = MongoClient(config("MONGO_DB"))
 chromedriver_path = config("chromedriver_path")
 
@@ -189,6 +193,7 @@ def initialize_driver():
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--window-size=1920,1080')
+    options.add_argument("--log-level=3") 
     # Provide the path to the chromedriver executable
     driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
     driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
