@@ -201,10 +201,7 @@ def initialize_driver():
 
 
 if __name__ == "__main__":
-    # urls = ["https://shopstar.pe/tecnologia/computo?order=OrderByReleaseDateDESC&page=",
-    #        "https://shopstar.pe/tecnologia/televisores?order=OrderByReleaseDateDESC&page="
-    #        ]
-
+    
     numero = int(sys.argv[1])
 
     if numero == 1:
@@ -220,17 +217,13 @@ if __name__ == "__main__":
 
     
       
-    count = 0
-    driver = initialize_driver()
-    consecutive_none_count = 0
 
+    driver = initialize_driver()
     for webs in  (websites):    
         for web  in webs:
          
             scrapping = scrap(driver,web)
             print(web)
-            count= count+1
-            print(count)
             print(scrapping)
 
             if scrapping is None:
