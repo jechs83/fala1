@@ -16,7 +16,7 @@ from decouple import config
 
 from pymongo import MongoClient
 client = MongoClient(config("MONGO_DB"))
-chromedriver_path = "/Users/javier/GIT/fala/shopstar/chromedriver"
+chromedriver_path = config("chromedriver_path")
 
 def dia():
     now = datetime.now()
@@ -207,10 +207,11 @@ if __name__ == "__main__":
     if numero == 2:
       urls = urls_list.list2
     websites = []
-    for i,v in enumerate  (urls) :
+    for i in urls:
+        temp_array = []  # Create a temporary array for each iteration
         for e in range(200):
-            websites.append(v+str(e+1))
-    grouped_arrays = [websites[i:i + len(urls)] for i in range(0, len(websites), len(urls))]
+            temp_array.append(i + str(e + 1))
+        websites.append(temp_array)  # Append the temporary array to the main list
 
     
       
@@ -218,10 +219,7 @@ if __name__ == "__main__":
     driver = initialize_driver()
     consecutive_none_count = 0
 
-    for webs,v in enumerate (grouped_arrays):
-        print(v)
-        time.sleep(30)
-        
+    for webs in  (websites):    
         for web  in webs:
          
             scrapping = scrap(driver,web)

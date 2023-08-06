@@ -1,10 +1,15 @@
 urls = ["url1" , "url 2"]
-    
+import time  
 
 websites = []
-for i in (urls):
-        for e in range(4):
-            websites.append(i+str(e+1))
+for i in urls:
+    temp_array = []  # Create a temporary array for each iteration
+    for e in range(4):
+        temp_array.append(i + str(e + 1))
+    websites.append(temp_array)  # Append the temporary array to the main list
+
+print(websites)
+time.sleep(30)
 grouped_arrays = [websites[i:i + len(urls)] for i in range(0, len(websites), len(urls))]
 
 
