@@ -16,3 +16,9 @@ list3 = [
 "https://shopstar.pe/electrohogar/climatizacion?order=OrderByReleaseDateDESC&page=",
     
 ]
+
+list4 =[
+"https://shopstar.pe/construccion-y-herramientas/herramientas?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/dormitorio/colchones?order=OrderByReleaseDateDESC&page=",
+"https://shopstar.pe/dormitorio/juegos-de-dormitorio?order=OrderByReleaseDateDESC&page=",
+]

@@ -200,9 +200,10 @@ def initialize_driver():
     return driver
 
 
-if __name__ == "__main__":
-    
-    numero = int(sys.argv[1])
+#if __name__ == "__main__":
+numero = int(sys.argv[1])
+def auto(numero): 
+  
 
     if numero == 1:
       urls = urls_list.list1
@@ -210,6 +211,13 @@ if __name__ == "__main__":
       urls = urls_list.list2
     if numero == 3:
       urls = urls_list.list3
+
+    if numero == 4:
+      urls = urls_list.list4
+    if numero == 5:
+      urls = urls_list.list5
+    if numero == 6:
+      urls = urls_list.list6
     websites = []
     for i in urls:
         temp_array = []  # Create a temporary array for each iteration
@@ -235,3 +243,5 @@ if __name__ == "__main__":
     driver.quit()
 
 
+
+auto(numero)
