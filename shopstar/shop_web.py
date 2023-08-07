@@ -242,6 +242,8 @@ def auto(numero):
         
     driver.quit()
 
+    auto(numero)
+
 
 
 auto(numero)
