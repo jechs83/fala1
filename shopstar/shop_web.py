@@ -58,26 +58,17 @@ current_time = dia()[1]
 
 
 def scrap(driver,web):    
-     
+        num= 0
         driver.get(web)
-        time.sleep(2)
+        time.sleep(1)
 
         for i in range (2):
             driver.execute_script("window.scrollBy(0, 1500);")
-            time.sleep(0.5)  # Wait for a short while after each scroll
+            time.sleep(0.3)  # Wait for a short while after each scroll
     
         time.sleep(1)
         source_html = driver.page_source
 
-
-
-          # Assuming you have already defined the 'convert_to_float' function
-          # ...
-
-          # Replace 'YOUR_URL_HERE' with the actual URL from which you want to extract data
-   
-          # response = requests.get(url)
-          # soup = BeautifulSoup(response.content, 'html.parser')\
           
         soup = BeautifulSoup(source_html, 'html.parser')
 
@@ -85,104 +76,106 @@ def scrap(driver,web):
 
         elements = soup.find_all("div", class_="vtex-search-result-3-x-galleryItem vtex-search-result-3-x-galleryItem--normal vtex-search-result-3-x-galleryItem--grid pa4")
 
+     
         for element in elements:
+         
+            link = element.find("a")['href']
+            link = "https://shopstar.pe"+link
+            image = element.find("img")['src']
+            market = "shopstar"
 
+            product = element.find('h3', class_='vtex-product-summary-2-x-productNameContainer')
+            product = product.text.strip()
+            brand = element.find("span", class_="vtex-product-summary-2-x-productBrandName")
+            brand = brand.text.strip()  if brand else "sin marca"
 
-               link = element.find("a")['href']
-               link = "https://shopstar.pe"+link
-               image = element.find("img")['src']
-               market = "shopstar"
+    
+            sku = product + str(current_date)
+            try:
+                card_price = element.find("span", class_="mercury-interbank-components-0-x-summary_priceInterbankContainer").text
+                card_price =re.sub(r'[^\d.]', '', card_price)
+                card_price = card_price.replace(",", "")
+                card_price = card_price.replace("S/ ", "")
+            except:card_price = 0
+            
+            try:
+                list_price = element.find("span", class_="mercury-interbank-components-0-x-listPrice").text
+                list_price=re.sub(r'[^\d.]', '', list_price)
+                list_price = list_price.replace(",", "").replace("S/ ", "")
+            except:list_price = 0
 
-               product = element.find('h3', class_='vtex-product-summary-2-x-productNameContainer')
-               product = product.text.strip()
+            try:
+                best_price = element.find("span", class_="mercury-interbank-components-0-x-sellingPriceValue").text
+                best_price =re.sub(r'[^\d.]', '', best_price)
+                best_price = best_price.replace(",", "").replace("S/ ", "")
+            except: best_price = 0
 
-               
-             
+            try:
+                dsct = element.find("span", class_="mercury-interbank-components-0-x-summary_percentualDiscount").text
+                dsct = dsct.replace("-","").replace("%","")
                 
+            except: dsct = 0
 
-              
+            card_dsct = dsct
 
-               brand = element.find("span", class_="vtex-product-summary-2-x-productBrandName")
-               brand = brand.text.strip()  if brand else "sin marca"
+                
+            print("marca "+brand)
+            print("modelo "+product)
+            print("tarjeta "+str(card_price))
+            print("lista "+str(list_price))
+            print("online "+str(best_price))
+            print("descuento "+str(dsct))
+            print(link)
+            print(image)
+            print()
+            
 
-               sku = product + str(current_date)
-               try:
-                    card_price = element.find("span", class_="mercury-interbank-components-0-x-summary_priceInterbankContainer").text
-                    card_price =re.sub(r'[^\d.]', '', card_price)
-                    card_price = card_price.replace(",", "")
-                    card_price = card_price.replace("S/ ", "")
-               except:card_price = 0
-             
-               try:
-                    list_price = element.find("span", class_="mercury-interbank-components-0-x-listPrice").text
-                    list_price=re.sub(r'[^\d.]', '', list_price)
-                    list_price = list_price.replace(",", "").replace("S/ ", "")
-               except:list_price = 0
-
-               try:
-                    best_price = element.find("span", class_="mercury-interbank-components-0-x-sellingPriceValue").text
-                    best_price =re.sub(r'[^\d.]', '', best_price)
-                    best_price = best_price.replace(",", "").replace("S/ ", "")
-               except: best_price = 0
-
-               try:
-                    dsct = element.find("span", class_="mercury-interbank-components-0-x-summary_percentualDiscount").text
-                    dsct = dsct.replace("-","").replace("%","")
-                    
-               except: dsct = 0
-
-               card_dsct = dsct
-
-           
-             
-              
-
-          # Here you can save the extracted data to a file or any other desired storage
-          # ...
-
-
-                    
-               print("marca "+brand)
-               print("modelo "+product)
-               print("tarjeta "+str(card_price))
-               print("lista "+str(list_price))
-               print("online "+str(best_price))
-               print("descuento "+str(dsct))
-               print(link)
-               print(image)
-               print()
-              
-
-               db = client["scrap"]
-               collection = db["scrap"]
-
-               # Define the data dictionary
-               data = {
-               "_id": market + sku,
-               "sku": sku,
-               "market": market,
-               "brand": str(brand),
-               "product": str(product),
-               "list_price": float(list_price),
-               "best_price": float(best_price),
-               "card_price": float(card_price),
-               "web_dsct": float(dsct),
-               "card_dsct": float(card_dsct),
-               "link": str(link),
-               "image": str(image),
-               "date": current_date,
-               "time": current_time,
-               "home_list": web
-               }
+            db = client["scrap"]
+            collection = db["scrap"]
+            # Define the data dictionary
+            data = {
+                "_id": market + sku,
+                "sku": sku,
+                "market": market,
+                "brand": str(brand),
+                "product": str(product),
+                "list_price": float(list_price),
+                "best_price": float(best_price),
+                "card_price": float(card_price),
+                "web_dsct": float(dsct),
+                "card_dsct": float(card_dsct),
+                "link": str(link),
+                "image": str(image),
+                "date": current_date,
+                "time": current_time,
+                "home_list": web
+            }
 
                # Use update_one with upsert=True to insert or update the data
-               collection.update_one({"_id": data["_id"]}, {"$set": data}, upsert=True)
-               print("se grabo")
+            collection.update_one({"_id": data["_id"]}, {"$set": data}, upsert=True)
+            print("se grabo")
+        try:
+            if product :
+                    return True
+        except: return None
+           
+    
+    
 
-               if  product: 
-                   return True
-               else: 
-                continue
+       
+      
+
+
+
+            
+
+    
+
+            #    # Use update_one with upsert=True to insert or update the data
+            #    collection.update_one({"_id": data["_id"]}, {"$set": data}, upsert=True)
+            #    print("se grabo")
+
+              
 
 # source_html = scrap(web)
 # with open ("source.html", "w+") as f:
@@ -204,7 +197,6 @@ def initialize_driver():
 numero = int(sys.argv[1])
 def auto(numero): 
   
-
     if numero == 1:
       urls = urls_list.list1
     if numero == 2:
@@ -218,20 +210,18 @@ def auto(numero):
       urls = urls_list.list5
     if numero == 6:
       urls = urls_list.list6
+
     websites = []
     for i in urls:
         temp_array = []  # Create a temporary array for each iteration
         for e in range(200):
             temp_array.append(i + str(e + 1))
-        websites.append(temp_array)  # Append the temporary array to the main list
-
-    
-      
+        websites.append(temp_array)  # Append the temporary array to the main list`
+    print(websites)
 
     driver = initialize_driver()
     for webs in  (websites):    
         for web  in webs:
-         
             scrapping = scrap(driver,web)
             print(web)
             print(scrapping)
