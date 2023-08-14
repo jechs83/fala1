@@ -565,6 +565,8 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         category=str(context.args[0])
         dsct=str(context.args[1])
+        print(category)
+        print(dsct)
 
         cat_search(category, dsct ,bot_token ,chat_id)
 

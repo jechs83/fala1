@@ -1009,19 +1009,23 @@ def search_brand_dsct_html(brand,dsct, price, bot_token, chat_id):
 
 
 def cat_search(category,dsct,bot_token, chat_id):
+    print(category)
+    print(dsct)
 
     db = client["brands"]
     collection= db[category]
-    
+
     t9 = collection.find({})
 
     array_brand= []
 
     for i in t9:
         array_brand.append(i["brand"])
+    print(array_brand)
+    
 
-    db = client["scarp"]
-    collection= db["scarp"]
+    db = client["scrap"]
+    collection= db["scrap"]
 
     t1 = collection.find( {"web_dsct":{ "$gte":int(dsct)},"date":date ,"brand":{"$in":[ re.compile(brand,re.IGNORECASE) for brand in array_brand ] }})
 
