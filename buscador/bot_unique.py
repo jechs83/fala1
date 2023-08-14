@@ -434,36 +434,34 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         #pwd=str(var[5])
         if name or last_name or cel or email == None:
             print(" error de data input")
-        if name and last_name and cel and email != None:
-            if user_id == 1160667522 or 1712594729:
-                bot.sendMessage(
-                    chat_id=chat_id,
-                    parse_mode="HTML",text= f"Creando cuenta Fazil"
-            
-                    )
-      
-                fazil = register_safa(name,last_name,cel,email)
-               
 
-                if fazil == False:
+        if name and last_name and cel and email:
+            fazil = register_safa(name,last_name,cel,email)
+    
+            bot.sendMessage(
+                        chat_id=chat_id,
+                        parse_mode="HTML",text= f"Creando cuenta Fazil"
+                
+                        )
+            
+            if fazil == False:
                      bot.sendMessage(
                     chat_id=chat_id,
                     parse_mode="HTML",text= f"El correo ya existe"
                     )
                      
-                if fazil == True:
-                     bot.sendMessage(
-                        chat_id=chat_id,
-                        parse_mode="HTML",text= f"Error de Sincronizacion al estilo de Saga falabella, Intenta de nuevo"
-                        )
-                     
-                if fazil =="paso":
-                    bot.sendMessage(
+            if fazil == True:
+                 bot.sendMessage(
                     chat_id=chat_id,
-                    parse_mode="HTML",text= f"Acceso Restringido, no estas autorizado a usar este comando"
-            
-
+                    parse_mode="HTML",text= f"Error de Sincronizacion al estilo de Saga falabella, Intenta de nuevo"
                     )
+                     
+            if fazil =="paso":
+                bot.sendMessage(
+                chat_id=chat_id,
+                parse_mode="HTML",text= f" Ya se creo cuenta exitosamente"
+    
+                )
 
     def delete_past_database(update, context):
             bot = context.bot
