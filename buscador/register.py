@@ -21,17 +21,21 @@ def new_dni():
 
 
 
-def register_safa(name,last_name,cel,email):    
+def register_safa(name,last_name,cel,email): 
+        chrome_driver_path =  "/Users/javier/GIT/fala/buscador/chromedriver"
         dni_new =new_dni()
         pwd =  "Topo.123456"
          # Test name: registrio
         # Step # | name | target | value
         # 1 | open | /falabella-pe/myaccount/registration | 
         options = Options()
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         #options.add_argument('--window-size=1920,1080')
-        
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        try:
+            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+        except:
+            driver = webdriver.Chrome(service=Service(chrome_driver_path), options=options)
+
         driver.implicitly_wait(20) # gives an implicit wait for 20 seconds
         driver.get("https://www.falabella.com.pe/falabella-pe/myaccount/registration")
         # 2 | setWindowSize | 1680x951 | 
@@ -109,7 +113,7 @@ def register_safa(name,last_name,cel,email):
 
      
 
-#register_safa("name","lastname",999999999,"pablo@gmail.com")
+register_safa("pedro","palote",999999999,"pablssso@gmail.com")
 
 
     # do something with the data here
