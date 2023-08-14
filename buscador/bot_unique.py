@@ -10,7 +10,7 @@ import unicodedata
 import re
 
 
-from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, search_brand_dsct_html,read_brands
+from search_bot_service import busqueda, search_brand_dsct, auto_telegram, delete_brand,add_brand_list,read_category,manual_telegram, search_market_dsct,search_market2_dsct, search_product_dsct_html, search_brand_dsct_html,read_brands,cat_search
 
 def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     logging.basicConfig(
@@ -494,6 +494,29 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
                 parse_mode="HTML",text= f"Se resteo todo los productos enviados a la nave especificada❗ "
           
             )
+        
+    def category_search(update, context):
+
+        bot = context.bot
+        chatId= update.message.chat_id
+        category=str(context.args[0])
+        dsct=str(context.args[1])
+
+        cat_search(category, dsct ,bot_token ,chat_id)
+
+        document = open(config("HTML_PATH")+category+".html", 'rb')
+        context.bot.send_document(chat_id, document)
+        document.close()
+        os.remove(config("HTML_PATH")+category+".html")
+        print("pasa por aqui")
+       
+
+        bot.sendMessage(
+                chat_id=chatId,
+                parse_mode="HTML",text= f" busqueda de categoria al de "+dsct+" a 100❗ "
+          
+            )
+
 
 
 
@@ -518,6 +541,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler('auto', auto_tele))
     dp.add_handler(CommandHandler("f", fazil_reg))
     dp.add_handler(CommandHandler('manual', auto_tele_dsct))
+    dp.add_handler(CommandHandler('category', category_search))
     dp.add_handler(CommandHandler('brand', add_brand))
     dp.add_handler(CommandHandler('delete', brand_delete))
     dp.add_handler(CommandHandler('cat', category_list))
