@@ -113,7 +113,7 @@ def register_safa(name,last_name,cel,email):
 
      
 
-register_safa("pedro","palote",999999999,"pablssso@gmail.com")
+#register_safa("pedro","palote",999999999,"pablssso@gmail.com")
 
 
     # do something with the data here
