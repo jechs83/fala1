@@ -565,6 +565,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         chatId= update.message.chat_id
         category=str(context.args[0])
         dsct=str(context.args[1])
+        
         print(category)
         print(dsct)
 
@@ -605,7 +606,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("resetship", reset_ship_data))
 
     dp.add_handler(CommandHandler("product", send_product))
-    dp.add_handler(CommandHandler('alert', alert_all))
+
     # dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))
     # dp.add_handler(CommandHandler('auto', auto_tele))
