@@ -257,9 +257,12 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         userName = update.effective_user["first_name"]
         logger.info(f"el usuario {userName} ha solicitado una buesqueda")
 
-        market = (context.args[0]).replace("%"," ")
+        market = (context.args[0])
+        print(market)
         dsct=int(context.args[1])
+
         dsct = int(dsct)
+        print(dsct)
      
         try:
          price = (context.args[2])
