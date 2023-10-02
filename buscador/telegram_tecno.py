@@ -22,15 +22,10 @@ bd1 = "tecno1"
 bd2 = "tecno2"
 dsct = 60
 product  = "lentes"
-category = "tecno"
+category = "alterno"
 
 db="scrap"
 db_collection = "scrap"
-    
-def hora():
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    return current_time
 
 def buscador():
   
