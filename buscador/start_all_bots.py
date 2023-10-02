@@ -17,11 +17,13 @@ def start():
     
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_viper.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_excelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_boyo.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_discovery.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_enterprise.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_excelsior.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_boyo.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_discovery.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_enterprise.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_voyager.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_tecno.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+
 
     ## BOTS PARA LOS COMANDOS DE LAS NAVES
     #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\bot_voyager.py"], shell=True, executable="C:\windows\system32\cmd.exe")
