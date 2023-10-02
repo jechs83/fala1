@@ -420,7 +420,7 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
 
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
-    t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 500 },"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
+    t2 =  collection.find( {"best_price":{ "$gt": 0, "$lt": 200 },"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
 
     # Concatenate the two cursors
     result = itertools.chain(t1, t2)
