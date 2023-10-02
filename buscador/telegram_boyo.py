@@ -14,7 +14,7 @@ bd1 = "richi1"
 bd2 = "richi2"
 dsct = 60
 product  = "lentes"
-category = "tecno"
+category = "alterno"
 db="scrap"
 db_collection = "scrap"
     
