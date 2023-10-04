@@ -21,8 +21,8 @@ chat_id = config("EXCELSIOR_CHAT_TOKEN")
 bot_token = config("CAPITAN_SULU_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"
-dsct = 60
-dsct2 = 70
+dsct = 70
+dsct2 = 100
 product  = "lentes"
 
 db="scrap"
@@ -42,30 +42,6 @@ def buscador():
         ###############
     db1 = client["scrap"]
     collection1 = db1["excelsior"]
-
-    x = collection1.find_one({"_id":0})
-      
-    
-    if x  :
-            #print(" ACTUALIZA BASE DE DATOS ")
-            filter = {"_id":0}
-            newvalues = { "$set":{ 
-                 "_id":0,
-            "status":0,   
-        
-            }}
-            collection1.update_one(filter,newvalues)
-            
-    else:
-            data =  {
-                
-                "_id":0,
-                "status":1
-                }
-            collection1.insert_one(data)
-    
-    
-    print("se guardo en bd status de buqueda")
 
         
     buscador() 
