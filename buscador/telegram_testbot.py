@@ -1,5 +1,5 @@
 
-from search_bot_service import  auto_telegram_category
+from search_bot_service import  auto_telegram_category,productos_sin_dsct
 from pymongo import MongoClient
 from decouple import config
 
@@ -16,7 +16,8 @@ category = "alterno"
 db="scrap"
 db_collection = "scrap"
 def buscador():
-    auto_telegram_category( category, bd1,bd2,bot_token, chat_id,dsct)
+    #auto_telegram_category( category, bd1,bd2,bot_token, chat_id,dsct)
+    productos_sin_dsct(bd1,bd2, bot_token, chat_id)
         
     buscador() 
     
