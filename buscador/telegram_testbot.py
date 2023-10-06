@@ -11,7 +11,7 @@ bd2 = "nameless2"
 dsct = 80
 dsct2 = 100
 product  = "lentes"
-category = alterno
+category = "alterno"
 
 db="scrap"
 db_collection = "scrap"
