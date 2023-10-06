@@ -418,7 +418,6 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
      
     db = client["scrap"]
     collection = db["scrap"]
-    # db.command({"planCacheClear": "scrap"})
 
 
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage},"date":date ,"brand":{"$in":array_brand}, "product":{"$nin":array_trash}})
@@ -484,24 +483,9 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 if i["web_dsct"] >=70:
                     dsct = "🔥🔥🔥🔥🔥"
                 
-
-                
-                historic  = compare_prices() 
-                
-                #####################################################
-
-                if historic == True:
-
-                    historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico registrado"
-                    #historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-               
-
-                historic_min = ""
-                #historic_list=""
-
-                
+    
                 msn = (
-                        historic_min+############################
+                  
                         "✅Marca: " + str(i["brand"]) + "\n" +
                         "✅" + str(i["product"]) + list_price + "\n" +
                         "👉Precio web: " + str(i["best_price"]) + card_price + "\n" +
@@ -509,24 +493,16 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                         "🕗" + i["date"] + " " + i["time"] + "\n" +
                         "🌐Link: " + str(i["link"]) + "\n" +
                         "🏠home web: " + i["home_list"] + "\n\n" +
-                        historic_min+"◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"#############################
+                        "◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"#############################
                     )
 
                 # msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+list_price+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-
-        
                 foto = i["image"]
-                
-            
                 send_telegram(msn, foto, bot_token, chat_id)
-                try:
-                    send_telegram(msn, foto, bot_token, chat_id2)
-                except:
-                    return True
-                
-
+                print(chat_id)
+                print(bot_token)
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
-                continue
+                
 
 
             if b!=a:
@@ -557,7 +533,7 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
 
     for i in t1:
         product_array.append(i)
-        print(i)
+    
 
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -568,7 +544,7 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
             a= collection_1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
-        
+           
             b= collection_2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
@@ -654,7 +630,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
                     dsct = "🟢"
                 if i["web_dsct"] >=70:
-                    dsct = "🔥🔥🔥🔥🔥🔥"
+                    dsct = "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
 
                 # try:
                 #     historic = minimo(i["sku"])[3]
@@ -713,8 +689,6 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
 
     gc.collect()
-
-
 ##############################################################################################################
 
 def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_id,porcentage1, 
@@ -725,16 +699,14 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
     db = client[db_name]
     collection = db[db_collection]
     
-
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
 
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
-    
     for i in t1:
         product_array.append(i)
-
+   
     
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 

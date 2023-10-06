@@ -1,18 +1,17 @@
 from datetime import datetime
 from decouple import config
-from search_bot_service import  auto_telegram
+from search_bot_service import  auto_telegram_between_values
 from pymongo import MongoClient
-from decouple import config
 
 
-# TOKEN = config("RICHI_BOY_TOKEN")
 client = MongoClient(config("MONGO_DB"))
-chat_id = config("DEFIANT_TOKEN")
-bot_token = config("DEFIANT_CHAT")
+chat_id = config("DEFIANT_CHAT")
+bot_token = config("DEFIANT_TOKEN")
 
-bd1 = "richi1"
-bd2 = "richi2"
-dsct = 60
+bd1 = "defiant1"
+bd2 = "defiant2"
+dsct = 80
+dsct2 = 1000
 product  = "lentes"
 category = "alterno"
 db="scrap"
@@ -26,11 +25,12 @@ def hora():
 
 
 def buscador():
-    try:
-        auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
-    except:
-       buscador()
     
+    auto_telegram_between_values(  bd1,bd2, bot_token, chat_id,dsct, dsct2, product)
+
+
     buscador()
+    
+
         
 buscador()
