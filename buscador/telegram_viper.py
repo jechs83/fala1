@@ -4,9 +4,8 @@ from pymongo import MongoClient
 from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
-TOKEN = config("VIPER_BOT_TOKEN")
-chat_id = config("NAME_LESS_TOKEN")
-bot_token = config("VIPER_BOT_TOKEN")
+chat_id = config("VIPER_CHAT")
+bot_token = config("VIPER_TOKEN")
 bd1 = "viper1"
 bd2 = "viper2"
 dsct = 60

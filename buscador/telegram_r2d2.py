@@ -1,16 +1,12 @@
 from datetime import datetime
-
 from decouple import config
-from telegram import message
 from search_bot_service import  auto_telegram, auto_telegram_total,auto_telegram_between_values,auto_telegram_between_values_custom_bd
 from pymongo import MongoClient
 from decouple import config
-client = MongoClient(config("MONGO_DB"))
 
-TOKEN = config("SOMOS_BORG_BOT")
-#chat_id = config("NAME_LESS_TOKEN")
-chat_id = -1001951603431
-bot_token = config("SOMOS_BORG_BOT")
+client = MongoClient(config("MONGO_DB"))
+chat_id = -config("R2D2_CHAT")
+bot_token = config("R2D2_TOKEN")
 bd1 = "nameless1"
 bd2 = "nameless2"
 dsct = 70

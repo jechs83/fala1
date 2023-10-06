@@ -5,10 +5,10 @@ from pymongo import MongoClient
 from decouple import config
 
 
+# TOKEN = config("RICHI_BOY_TOKEN")
 client = MongoClient(config("MONGO_DB"))
-TOKEN = config("RICHI_BOY_TOKEN")
-chat_id = config("USS_DEFIANT")
-bot_token = config("RICHI_BOY_TOKEN")
+chat_id = config("DEFIANT_TOKEN")
+bot_token = config("DEFIANT_CHAT")
 
 bd1 = "richi1"
 bd2 = "richi2"
@@ -26,9 +26,11 @@ def hora():
 
 
 def buscador():
-  
-    auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
-
+    try:
+        auto_telegram( category, bd1,bd2, bot_token, chat_id,dsct)
+    except:
+       buscador()
+    
     buscador()
         
 buscador()

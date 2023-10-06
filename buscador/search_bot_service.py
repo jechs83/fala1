@@ -519,6 +519,10 @@ def auto_telegram( category, ship_db1,ship_db2, bot_token, chat_id,porcentage):
                 
             
                 send_telegram(msn, foto, bot_token, chat_id)
+                try:
+                    send_telegram(msn, foto, bot_token, chat_id2)
+                except:
+                    return True
                 
 
                 print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")

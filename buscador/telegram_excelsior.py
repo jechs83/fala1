@@ -15,10 +15,9 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-TOKEN = config("CAPITAN_SULU_TOKEN")
-chat_id = config("EXCELSIOR_CHAT_TOKEN")
-#chat_id = config("NAME_LESS_TOKEN")
-bot_token = config("CAPITAN_SULU_TOKEN")
+
+chat_id = config("EXCELSIOR_CHAT")
+bot_token = config("EXCELSIOR_TOKEN")
 bd1 = "excelsior1"
 bd2 = "excelsior2"
 dsct = 70

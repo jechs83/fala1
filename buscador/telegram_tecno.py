@@ -12,11 +12,9 @@ from search_bot_service import  auto_telegram
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
-TOKEN = "6049509542:AAEBPgX9OLC6ZFNsJRe1JFugqz3PZOADEjE"
 
-#chat_id = config("RICHI_CHAT_TOKEN")
-chat_id = config("EXCELSIOR_CHAT_TOKEN")
-bot_token = "6049509542:AAEBPgX9OLC6ZFNsJRe1JFugqz3PZOADEjE"
+chat_id = config("TECNO_CHAT")
+bot_token = config("TECNO_TOKEN")
 
 bd1 = "tecno1"
 bd2 = "tecno2"
