@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
-chat_id = -config("R2D2_CHAT")
+chat_id = config("R2D2_CHAT")
 bot_token = config("R2D2_TOKEN")
 bd1 = "nameless1"
 bd2 = "nameless2"
