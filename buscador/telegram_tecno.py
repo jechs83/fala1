@@ -13,7 +13,7 @@ dsct = 80
 product  = "lentes"
 category = "alterno"
 
-db="scrap"
+db="saga"
 db_collection = "scrap"
 
 def buscador():

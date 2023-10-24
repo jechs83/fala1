@@ -10,11 +10,11 @@ bot_token = config("DEFIANT_TOKEN")
 
 bd1 = "defiant1"
 bd2 = "defiant2"
-dsct = 80
+dsct = 60
 dsct2 = 1000
 product  = "lentes"
 category = "alterno"
-db="scrap"
+db="saga"
 db_collection = "scrap"
     
 def hora():
@@ -27,10 +27,6 @@ def hora():
 def buscador():
     
     auto_telegram_between_values(  bd1,bd2, bot_token, chat_id,dsct, dsct2, product)
-
-
     buscador()
-    
-
         
 buscador()

@@ -37,31 +37,52 @@ def load_datetime():
     return date_now, time_now
 
 
-webs = [
-        "https://shopstar.pe/electrohogar/lavado?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/electrohogar/cocina?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/electrohogar/refrigeracion?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/electrohogar/climatizacion?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/electrohogar/electrodomesticos/aspirado?order=OrderByReleaseDateDESC&page=",
+webs = [    "https://shopstar.pe/tecnologia/televisores?order=OrderByReleaseDateDESC&page=",
+   
+        "https://shopstar.pe/tecnologia/computo/laptops?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/computo/laptops/laptops-gamer?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/computo/tablets?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/computo/laptops/macbooks?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/videojuegos/consolas?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/videojuegos/nintendo?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/videojuegos/juegos-ps4?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/telefonia/celulares?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/audio/audifonos?page=",
+        "https://shopstar.pe/tecnologia/audio/soundbar-y-home-theater?page=",
+        "https://shopstar.pe/tecnologia/audio/audio-y-video?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/audio/parlantes?order=OrderByReleaseDateDESC&page=",
+        "https://shopstar.pe/tecnologia/audio/equipos-y-torres-de-sonido?order=OrderByReleaseDateDESC&page=",
+        
+#         "https://shopstar.pe/electrohogar/lavado?order=OrderByReleaseDateDESC&page=",
+# "https://shopstar.pe/electrohogar/cocina?order=OrderByReleaseDateDESC&page=",
+# "https://shopstar.pe/electrohogar/refrigeracion?order=OrderByReleaseDateDESC&page=",
+# "https://shopstar.pe/electrohogar/climatizacion?order=OrderByReleaseDateDESC&page=",
+# "https://shopstar.pe/electrohogar/electrodomesticos/aspirado?order=OrderByReleaseDateDESC&page=",
 ]
 
 
 def shop(web):
+    print("entra al scraping")
     try:
-        chrome_driver_path = 'shopstar/chromedriver'  # Replace with the actual path to your chromedriver executable
+        chrome_driver_path = '/Users/javier/GIT/fala/shopstar/chromedriver'  # Replace with the actual path to your chromedriver executable
         options = Options()     
         options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-        options.add_argument("--remote-debugging-port=9512")
+        # options.add_argument('--disable-gpu')
+        # options.add_argument('--no-sandbox')
+        # options.add_argument("--remote-debugging-port=9512")
 
         #options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
         #options.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'  # Replace with the path to your Chrome binary
         service = Service(executable_path=chrome_driver_path)
+        
         service.log_path = "chromedriver.log"
+        #driver = webdriver.Chrome(executable_path=chrome_driver_path, options=options)
+
         driver = webdriver.Chrome(service=service, options=options)
         # Open the website
+        print(web)
         driver.get(web)
+        print("deberia haber abierto la web")
         time.sleep(4)
         max_wait_time = 10  # You can change this value
 
@@ -102,6 +123,9 @@ def shop(web):
         link = "https://shopstar.pe"+link
         image = v.find("img").get('src')
         product = v.find("img").get('alt')
+        if product == None or "":
+            return True
+        
         try:
             #web_dsct = v.find("span", class_="mercury-interbank-components-0-x-summary_percentualDiscountContainer")
             web_dsct = v.find('span', class_='mercury-interbank-components-0-x-summary_percentualDiscount')
@@ -159,8 +183,11 @@ def shop(web):
 
 
 for i,web in enumerate(webs):
-    for i in range (50):
+
+    for e in range (50):
+        print(web+str(e+1))
+
         
-        scrap = shop(web+str(i+1))
+        scrap = shop(web+str(e+1))
         if scrap == True:
             break
