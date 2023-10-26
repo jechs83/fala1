@@ -17,7 +17,7 @@ dsct2 = 70
 product = "reloj"
 db = client["trigger"]
 collection = db["40"]
-bd_name = config("db_curacao")
+bd_name = config("db_oechsle")
 collection_name = config("collection")
     
 
