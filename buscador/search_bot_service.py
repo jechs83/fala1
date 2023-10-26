@@ -578,25 +578,27 @@ def auto_telegram_total(  ship_db1,ship_db2, bot_token, chat_id,porcentage):
 
 ##################################################################################################
 ##################################################################################################
-def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2, producto):
-    print("se esta ejecutando")
+def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2, producto, bd_name, collection_name):
+    
     product_array = []
     
-    db = client["scrap"]
-    collection = db["scrap"]
-    db.command({"planCacheClear": "scrap"})
-
+    db = client[bd_name]
+    collection = db[collection_name]
+    db.command({"planCacheClear": collection_name})
+    
     t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
+
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
-
+   
+    print(t1)
     for i in t1:
         product_array.append(i)
         print(i)
-
+    
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
+                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db1)
             f = print("se graba en bd datos")
             
 
@@ -614,7 +616,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             if len_b == 0:
                 print(" NO EXSTE EN BASE DE DATOS ")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
                 if  i["card_price"] == 0:
                         card_price = ""
                 else:
@@ -683,10 +685,12 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
                
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
                 continue
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
+        
+
 
     gc.collect()
 ##############################################################################################################
@@ -706,7 +710,8 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
     for i in t1:
         product_array.append(i)
-   
+    
+  
     
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
@@ -1218,10 +1223,11 @@ def auto_telegram_category( category, ship_db1,ship_db2, bot_token, chat_id,porc
 
 
 
-def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id):
+def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collection_name):
 
-    db = client["scrap"]
-    collection = db["scrap"]
+    db = client[bd_name]
+    collection = db[collection_name]
+   
 
 
     zapatilla_regex = re.compile(r'zapatilla', re.IGNORECASE)
@@ -1311,7 +1317,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id):
     collection_2 = db[ship_db2]
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db1)
+                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db1)
             f = print("se graba en bd datos")
             
 
@@ -1328,7 +1334,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id):
 
             if len_b == 0:
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
                 
 
                 if  i["card_price"] == 0:
@@ -1374,7 +1380,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id):
                 print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
                
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
+                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
                 continue
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")

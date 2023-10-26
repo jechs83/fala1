@@ -3,9 +3,9 @@
 from decouple import config
 from bot_unique import super_bot
 
-TOKEN = config("CAPITAN_SPOK_TOKEN")
-chat_id = config("DISCOVERY_CHAT_TOKEN")
-bot_token = config("CAPITAN_SPOK_TOKEN")
+TOKEN = config("DISCOVERY_TOKEN")
+chat_id = config("DISCOVERY_CHAT")
+bot_token = config("DISCOVERY_TOKEN")
 db1 = "discovery1"
 db2 = "discovery2"
 
