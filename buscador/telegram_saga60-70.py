@@ -14,7 +14,7 @@ product  = "lentes"
 category = "tecno"
 
 dsct = 60
-dsct2 = 70
+dsct2 = 69
 product = "reloj"
 db = client["trigger"]
 collection = db["40"]

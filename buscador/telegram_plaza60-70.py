@@ -8,16 +8,18 @@ from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 
-chat_id = config("RIPLEY_60-70_CHAT")
-bot_token = config("R2D2_TOKEN")
-bd1 = "excelsior1"
-bd2 = "excelsior2"
+# chat_id = config("OH_CHAT_70-100")
+# bot_token = config("PIKE_BOT_TOKEN")
+chat_id = "-4052168394"
+bot_token = "6747921067:AAG0frH1swAvpVjn_nc4mQ2ND_dm014njLI"
+bd1 = "enterprise1"
+bd2 = "enterprise2"
 dsct = 60
 dsct2 = 69
 product = "reloj"
 db = client["trigger"]
 collection = db["40"]
-bd_name = config("db_ripley")
+bd_name = config("db_plazavea")
 collection_name = config("collection")
     
 
