@@ -12,6 +12,8 @@ client = MongoClient(config("MONGO_DB"))
 # bot_token = config("PIKE_BOT_TOKEN")
 chat_id = "-4090886629"
 bot_token = "6049509542:AAEBPgX9OLC6ZFNsJRe1JFugqz3PZOADEjE"
+
+
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 70
