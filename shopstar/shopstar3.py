@@ -36,19 +36,19 @@ def load_datetime():
 
 webs = [
         "https://shopstar.pe/tecnologia/televisores?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/computo/laptops?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/computo/laptops/laptops-gamer?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/computo/tablets?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/computo/laptops/macbooks?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/videojuegos/consolas?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/videojuegos/nintendo?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/videojuegos/juegos-ps4?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/telefonia/celulares?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/audio/audifonos?page=",
-        "https://shopstar.pe/tecnologia/audio/soundbar-y-home-theater?page=",
-        "https://shopstar.pe/tecnologia/audio/audio-y-video?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/audio/parlantes?order=OrderByReleaseDateDESC&page=",
-        "https://shopstar.pe/tecnologia/audio/equipos-y-torres-de-sonido?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/computo/laptops?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/computo/laptops/laptops-gamer?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/computo/tablets?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/computo/laptops/macbooks?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/videojuegos/consolas?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/videojuegos/nintendo?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/videojuegos/juegos-ps4?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/telefonia/celulares?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/audio/audifonos?page=",
+        # "https://shopstar.pe/tecnologia/audio/soundbar-y-home-theater?page=",
+        # "https://shopstar.pe/tecnologia/audio/audio-y-video?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/audio/parlantes?order=OrderByReleaseDateDESC&page=",
+        # "https://shopstar.pe/tecnologia/audio/equipos-y-torres-de-sonido?order=OrderByReleaseDateDESC&page=",
 ]
 
 def shop(driver, web):
@@ -91,29 +91,58 @@ def shop(driver, web):
         product = v.find("img").get('alt')
         if product is None:
             return True
+        # try:
+        #     web_dsct = v.find('span', class_='mercury-interbank-components-0-x-summary_percentualDiscount')
+        #     web_dsct = web_dsct.text
+        #     web_dsct = web_dsct.replace("-", "").replace("%", "")
+        #     web_dsct = float(web_dsct)
+        # except:
+        #     web_dsct = 0
+
+        
+        best_price = v.find("div", class_="mercury-interbank-components-0-x-summary_normalPricesContainer flex justify-between")
+        best_price = best_price.text
+        best_price = best_price.split()
+
+        try:
+            list_price = float(best_price[1].replace(",", "").replace("S/",""))
+        except: list_price = 0
+        try:
+            best_price = float(best_price[2].replace(",", "").replace("S/",""))
+        except: best_price = 0
+
+
+
+
         try:
             web_dsct = v.find('span', class_='mercury-interbank-components-0-x-summary_percentualDiscount')
             web_dsct = web_dsct.text
             web_dsct = web_dsct.replace("-", "").replace("%", "")
             web_dsct = float(web_dsct)
         except:
-            web_dsct = 0
+            if list_price > 0 and best_price >0:
+                web_dsct = round(100-(best_price*100/list_price))
+            else: 
+                web_dsct = 0
 
-        try:
-            best_price = v.find("div", class_="mercury-interbank-components-0-x-summary_priceContainer")
-            best_price = best_price.text
-            best_price = best_price.split()
-            best_price = float(best_price[1].replace(",", ""))
-        except:
-            best_price = 0
+        
 
-        try:
-            list_price = v.find("span", class_="mercury-interbank-components-0-x-listPriceValue strike")
-            list_price = list_price.text
-            list_price = list_price.split()
-            list_price = float(list_price[1].replace(",", ""))
-        except:
-            list_price = 0
+        
+            # try:
+            #     best_price = v.find("span",class_="mercury-interbank-components-0-x-currencyContainer")
+            #     best_price = best_price.text
+            #     best_price = best_price.split()
+            #     # best_price = float(best_price[].replace(",", ""))
+            # except:
+        
+
+        # try:
+        #     list_price = v.find("span", class_="mercury-interbank-components-0-x-listPriceValue strike")
+        #     list_price = list_price.text
+        #     list_price = list_price.split()
+        #     list_price = float(list_price[1].replace(",", ""))
+        # except:
+        #     list_price = 0
 
         brand = v.find("div", class_="vtex-product-summary-2-x-productBrandContainer")
         brand = brand.text
@@ -127,12 +156,12 @@ def shop(driver, web):
         print(image)
         print(product)
         print(web_dsct)
-        print(best_price)
+        print("best_price: "+str(best_price))
         print(list_price)
         print(brand)
 
-        save_data_to_mongo_db(bd_name_store, collection, market, sku, brand, product, list_price,
-                        best_price, card_price, link, image, web_dsct, card_dsct, load_datetime()[0], load_datetime()[1], web)
+        # save_data_to_mongo_db(bd_name_store, collection, market, sku, brand, product, list_price,
+        #                 best_price, card_price, link, image, web_dsct, card_dsct, load_datetime()[0], load_datetime()[1], web)
 
 # Create the webdriver instance outside the loop
 chrome_driver_path = 'shopstar/chromedriver'  # Replace with the actual path to your chromedriver executable
