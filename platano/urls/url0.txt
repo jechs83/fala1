@@ -1,1 +1,1 @@
-https://platanitos.com/catalogo?title=Electrónica&breadcrumbs%5B0%5D=Electrónica&sort=discount_percentage+desc&start=
+https://platanitos.com/catalogo?breadcrumbs%5B0%5D=Computadoras&sort=timestamp_active_unix+desc&start=

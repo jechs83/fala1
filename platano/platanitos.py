@@ -27,6 +27,24 @@ def load_datetime():
  time_now = now.strftime("%H:%M:%S")
  return date_now, time_now
 
+def consultar_mongodb():
+    # Configura la conexión a la base de datos MongoDB
+
+    db = client["brand_allowed"]
+    collection = db["todo"]
+
+    # Consulta la base de datos para verificar si la marca está permitida
+    results = collection.find()
+
+    # Crea una lista con los documentos encontrados
+    brand_list = [doc["brand"] for doc in results]
+
+    # Cierra la conexión a MongoDB
+    client.close()
+   
+    return brand_list
+
+lista = consultar_mongodb()
 firstProduct = None
 def scrap (web):
 
@@ -71,9 +89,21 @@ def scrap (web):
          brand = producto.find("p", class_="nd-ct__item-title line-clamp-2").text
          brand = brand.split()
          brand = brand[0]
+
         except: brand = None
+
+        print(brand.lower() )   
+        print()
+      
+     
+        if brand.lower() in lista:
+                print("si esta en la lista   ")
+                pass
+        else:
+           continue
+          
+
         
-   
 
         try:
          list_price = producto.find("p", class_="nd-ct__item-prices").text
@@ -122,7 +152,7 @@ def scrap (web):
         
 
         bd_name_store = "platanitos"
-        collection = "market"  #   NOMBRE DE BASE DE DATOS
+        collection = "scrap"  #   NOMBRE DE BASE DE DATOS
         market = "platanitos"    # COLECCION
         card_price = 0
         card_dsct = 0
