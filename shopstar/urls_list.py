@@ -1,11 +1,11 @@
-list1 = ["https://shopstar.pe/tecnologia/televisores?order=OrderByReleaseDateDESC&page=",
-         "https://shopstar.pe/tecnologia/computo?order=OrderByReleaseDateDESC&page=",
+list1 = ["https://shopstar.pe/tecnologia/televisores",
+         "https://shopstar.pe/tecnologia/computo",
            
            ]
 
-list2 = ["https://shopstar.pe/electrohogar/electrodomesticos?order=OrderByReleaseDateDESC&page=",
-         "https://shopstar.pe/tecnologia/audio?order=OrderByReleaseDateDESC&page=",
-         "https://shopstar.pe/tecnologia/telefonia?order=OrderByReleaseDateDESC&page="
+list2 = ["https://shopstar.pe/electrohogar/electrodomesticos", 
+         "https://shopstar.pe/tecnologia/audio",
+         "https://shopstar.pe/tecnologia/telefonia"
          ]
 
 list3 = [
@@ -18,7 +18,4 @@ list3 = [
 ]
 
 list4 =[
-"https://shopstar.pe/construccion-y-herramientas/herramientas?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/dormitorio/colchones?order=OrderByReleaseDateDESC&page=",
-"https://shopstar.pe/dormitorio/juegos-de-dormitorio?order=OrderByReleaseDateDESC&page=",
-]
+"https://shopstar.pe/electrohogar/electrodomesticos"]

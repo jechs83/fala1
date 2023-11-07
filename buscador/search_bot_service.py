@@ -1227,15 +1227,15 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
 
     db = client[bd_name]
     collection = db[collection_name]
-   
 
-
-    zapatilla_regex = re.compile(r'zapatilla', re.IGNORECASE)
-    sandalia_regex = re.compile(r'sandalia', re.IGNORECASE)
-    zapato_regex = re.compile(r'zapato', re.IGNORECASE)
+    product_shoes_patters =[
+                    re.compile(r'zapatilla', re.IGNORECASE),
+                    re.compile(r'sandalia', re.IGNORECASE),
+                    re.compile(r'zapato', re.IGNORECASE),
+            ]
 
     # Define the brand regex patterns
-    brand_patterns = [
+    brand_shoes_patterns = [
         re.compile(r'puma', re.IGNORECASE),
         re.compile(r'adidas', re.IGNORECASE),
         re.compile(r'reebok', re.IGNORECASE),
@@ -1248,8 +1248,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
 
     # Define the query
     shoes = {
-        "product": {"$in": [zapatilla_regex, sandalia_regex, zapato_regex]},
-        "brand": {"$in": brand_patterns},
+        "product": {"$in": product_shoes_patters},
+        "brand": {"$in": brand_shoes_patterns},
         "$or": [
             {"best_price": {"$lte": 150, "$gt": 0}},
             {"list_price": {"$lte": 150, "$gt": 0}},
@@ -1258,7 +1258,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     }
 
     #################################################\
-    product_regex_patterns = [
+    product_compu_regex_patterns = [
     re.compile(r'laptop', re.IGNORECASE),
     re.compile(r'ryzen', re.IGNORECASE),
     re.compile(r'notebook', re.IGNORECASE),
@@ -1267,7 +1267,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     ]
 
     # Define the exclusion patterns
-    exclusion_patterns = [
+    exclusion_compu_patterns = [
         re.compile(r'celeron', re.IGNORECASE),
         re.compile(r'ryzen 3', re.IGNORECASE),
         re.compile(r'core i3', re.IGNORECASE),
@@ -1275,7 +1275,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     ]
 
     # Define the brand regex patterns
-    brand_patterns = [
+    brand_compu_patterns = [
         re.compile(r'lenovo', re.IGNORECASE),
         re.compile(r'alien', re.IGNORECASE),
         re.compile(r'hp', re.IGNORECASE),
@@ -1289,10 +1289,10 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     # Define the query
     laptop = {
         "product": {
-            "$in": product_regex_patterns,
-            "$not": {"$in": exclusion_patterns}
+            "$in": product_compu_regex_patterns,
+            "$not": {"$in": exclusion_compu_patterns}
         },
-        "brand": {"$in": brand_patterns},
+        "brand": {"$in": brand_compu_patterns},
         "web_dsct": 0,
         "$or": [
             {"best_price": {"$lte": 2500, "$gt": 0}},

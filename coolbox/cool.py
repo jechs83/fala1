@@ -4,6 +4,8 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 from bd_record import save_data_to_mongo_db
 import gc
+from urls_list import *
+import sys
 import pymongo
 from decouple import config
 
@@ -22,22 +24,22 @@ def load_datetime():
     return today, now
 
 webs = ["https://www.coolbox.pe/outlet?layout=grid&order=OrderByPriceDESC",
-    "https://www.coolbox.pe/tv-y-video/televisores",
-        "https://www.coolbox.pe/tv-y-video/convertidores",
-    "https://www.coolbox.pe/celulares-y-accesorios/celulares",
-    "https://www.coolbox.pe/celulares-y-accesorios/relojes-inteligentes",
-    "https://www.coolbox.pe/scooters-y-bicicletas-electricas/scooters-electricos",
-"https://www.coolbox.pe/scooters-y-bicicletas-electricas?initialMap=c&initialQuery=scooters-y-bicicletas-electricas&map=category-1,category-2,category-2&query=/scooters-y-bicicletas-electricas/bicicletas-electricas/bicicletas-mecanicas&searchState",
-"https://www.coolbox.pe/scooters-y-bicicletas-electricas/motos-electricas",
-"https://www.coolbox.pe/laptops-monitores-y-tablets/laptops/laptops-gamer",
-"https://www.coolbox.pe/gamer/accesorios-gamer",
-"https://www.coolbox.pe/computo/componentes-de-computo",
-"https://www.coolbox.pe/gamer/sillas-y-mesas-gamer",
-"https://www.coolbox.pe/videojuegos-y-gamer/consolas",
-"https://www.coolbox.pe/laptops-monitores-y-tablets/monitores",
-        "https://www.coolbox.pe/audio/parlantes",
-        "https://www.coolbox.pe/audio/audifonos",
-        "https://www.coolbox.pe/audio/barras-y-sistemas-de-sonido"
+            "https://www.coolbox.pe/tv-y-video/televisores",
+                "https://www.coolbox.pe/tv-y-video/convertidores",
+            "https://www.coolbox.pe/celulares-y-accesorios/celulares",
+            "https://www.coolbox.pe/celulares-y-accesorios/relojes-inteligentes",
+            "https://www.coolbox.pe/scooters-y-bicicletas-electricas/scooters-electricos",
+        "https://www.coolbox.pe/scooters-y-bicicletas-electricas?initialMap=c&initialQuery=scooters-y-bicicletas-electricas&map=category-1,category-2,category-2&query=/scooters-y-bicicletas-electricas/bicicletas-electricas/bicicletas-mecanicas&searchState",
+        "https://www.coolbox.pe/scooters-y-bicicletas-electricas/motos-electricas",
+        "https://www.coolbox.pe/laptops-monitores-y-tablets/laptops/laptops-gamer",
+        "https://www.coolbox.pe/gamer/accesorios-gamer",
+        "https://www.coolbox.pe/computo/componentes-de-computo",
+        "https://www.coolbox.pe/gamer/sillas-y-mesas-gamer",
+        "https://www.coolbox.pe/videojuegos-y-gamer/consolas",
+        "https://www.coolbox.pe/laptops-monitores-y-tablets/monitores",
+                "https://www.coolbox.pe/audio/parlantes",
+                "https://www.coolbox.pe/audio/audifonos",
+                "https://www.coolbox.pe/audio/barras-y-sistemas-de-sonido"
 
 
 #         "https://shopstar.pe/electrohogar/lavado?order=OrderByReleaseDateDESC&page=",
@@ -55,11 +57,14 @@ def allowed():
     return list_allowed
 
 
+list_all = allowed()
+
+
 
 
 
 def shop(page, web):
-    page.goto(web)
+    page.goto(web, timeout=60000) 
     page.wait_for_timeout(6000)
 
     scroll_distance = 1000
@@ -84,22 +89,34 @@ def shop(page, web):
         if not brand:
             break
   
-        if brand.lower() not in allowed():
+        if brand.lower() not in list_all:
             continue
 
 
         product = element.query_selector(".vtex-product-summary-2-x-nameContainer")
         product = product.inner_text()
 
-        price1 = element.query_selector(".vtex-store-components-3-x-priceContainer")
-        price1 = price1.inner_text()
-        price1 = price1.split()
-
-        list_price = float(price1[1].replace(",",""))
+        price1 = element.query_selector(".vtex-store-components-3-x-sellingPrice")
+        
         try:
-            best_price = float(price1[3].replace(",",""))
+            price1 = price1.inner_text()
+            price1 = price1.split()
+            best_price = float(price1[1].replace(",",""))
+        except: best_price = 0
+        
+     
+
+        price2 = element.query_selector(".vtex-store-components-3-x-listPrice")
+     
+        try:
+            price2 = price2.inner_text()
+            price2 = price2.split()
+            list_price = float(price2[1].replace(",",""))
+        
         except:
-            best_price = 0
+            list_price = 0
+
+      
 
         web_dsct = element.query_selector(".vtex-store-components-3-x-discountContainer")
         try:
@@ -121,11 +138,6 @@ def shop(page, web):
         print(web)
         print()
 
-
-        #     print("############################################")
-        
-
-
         market = "coolbox"
         card_dsct = 0
 
@@ -137,22 +149,52 @@ def shop(page, web):
             print("data base offline")
         
         #Save data to MongoDB here
+argument = sys.argv[1]
+print("este es el argument "+argument)
+if argument == "1":
+    web_cool = list1
+elif argument == "2":
+    web_cool = list2
+elif argument == "3":
+    web_cool = list3
+elif argument == "4":
+    web_cool = list4
+
+else:
+    print("Invalid argument. Use '1' to '4'.")
 
 
-with sync_playwright() as p:
-    browser = p.chromium.launch()
-    page = browser.new_page()
 
-    while True:
-        for i, web in enumerate (webs):
-            for i in range(50):
+# with sync_playwright() as p:
+#     browser = p.chromium.launch()
+#     page = browser.new_page()
+
+#     while True:
+#         for i, web in enumerate (web_cool):
+#             for i in range(50):
                 
-                scrap = shop(page, web+pagination + str(i + 1))
-                if scrap == False:
-                    break
+#                 scrap = shop(page, web+pagination + str(i + 1))
+#                 if scrap == False:
+#                     break
                 
-        browser.close()
-        time.sleep(5)  # Wait for 30 minutes before running the loop again
+#         browser.close()
+#         time.sleep(5)  # Wait for 30 minutes before running the loop again
 
        
 
+with sync_playwright() as p:
+    while True:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        
+        for i, web in enumerate(web_cool):
+            for i in range(50):
+                if web.endswith("DESC"):
+                    pagination ="&page="
+
+                scrap = shop(page, web + pagination + str(i + 1))
+                if scrap == False:
+                    break
+        
+        browser.close()
+        time.sleep(1)  # Wait for 5 seconds before running the loop again
