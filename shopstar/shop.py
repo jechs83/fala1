@@ -7,6 +7,8 @@ from bd_record import save_data_to_mongo_db
 import gc
 from urls_list import *
 import sys
+import itertools
+
 from decouple import config
 client = pymongo.MongoClient(config("MONGO_DB"))
 db = client["brand_allowed"]
@@ -45,11 +47,12 @@ webs = [
 
 def shop(page, web):
     try:
+
         page.goto(web, timeout=12000) 
         page.wait_for_timeout(6000)
 
-        scroll_distance = 1000
-        scroll_count = 6
+        scroll_distance = 1500
+        scroll_count = 3
         for _ in range(scroll_count):
             page.evaluate(f"window.scrollBy(0, {scroll_distance});")
             page.wait_for_timeout(400)
@@ -168,25 +171,47 @@ else:
     print("Invalid argument. Use '1' to '4'.")
 
 
+# with sync_playwright() as p:
+#     browser = p.chromium.launch(headless=False) 
+#     #browser = p.chromium.launch()
+#     page = browser.new_page()
+
+#     while True:
+#         for i, web in enumerate (web_shop):
+            
+                
+#             for i in range(50):
+#                 # if i <=13:
+#                 #     continue
+                
+#                 scrap = shop(page, web + "?page="+str(i + 1))
+#                 if scrap == False:
+#                     break
+
+#         browser.close()
+#         time.sleep(5)  # Wait for 30 minutes before running the loop again
+
+
+
 with sync_playwright() as p:
+    #browser = p.chromium.launch(headless=False)
     browser = p.chromium.launch()
     page = browser.new_page()
 
+    # Create an iterator that cycles through the web shop URLs indefinitely
+    web_shop_cycle = itertools.cycle(web_shop)
+
     while True:
-        for i, web in enumerate (web_shop):
-            
-                
+        for _ in range(50):
+            web = next(web_shop_cycle)
             for i in range(50):
-                # if i <=13:
-                #     continue
-                
-                scrap = shop(page, web + "?page="+str(i + 1))
+                # if i <=45:
+                #   continue
+                scrap = shop(page, web + "?page=" + str(i + 1))
                 if scrap == False:
                     break
+
         browser.close()
-        time.sleep(5)  # Wait for 30 minutes before running the loop again
-
-
-
+        time.sleep(5)
        
 
