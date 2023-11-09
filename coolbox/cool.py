@@ -67,8 +67,8 @@ def shop(page, web):
     page.goto(web, timeout=60000) 
     page.wait_for_timeout(6000)
 
-    scroll_distance = 1000
-    scroll_count = 5
+    scroll_distance = 1500
+    scroll_count = 4
     for _ in range(scroll_count):
         page.evaluate(f"window.scrollBy(0, {scroll_distance});")
         page.wait_for_timeout(400)

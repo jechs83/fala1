@@ -6,6 +6,7 @@ import pymongo
 import sys
 from decouple import config
 from urls_list import *
+import itertools
 
 client = pymongo.MongoClient(config("MONGO_DB"))
 db = client["brand_allowed"]
@@ -43,8 +44,8 @@ def shop(page, web):
     page.goto(web)
     page.wait_for_timeout(6000)
 
-    scroll_distance = 1000
-    scroll_count = 8
+    scroll_distance = 2000
+    scroll_count = 4
     for _ in range(scroll_count):
         page.evaluate(f"window.scrollBy(0, {scroll_distance});")
         page.wait_for_timeout(400)
@@ -181,12 +182,15 @@ else:
 
 
 with sync_playwright() as p:
-    browser = p.chromium.launch()
+    browser = p.chromium.launch(headless=False)
     page = browser.new_page()
+
+    web_shop_cycle = itertools.cycle(web_wong)
+
 
     try:
         while True:
-            for i, web in enumerate(web_wong):
+            for i, web in enumerate(web_shop_cycle):
                 for i in range(50):
                     scrap = shop(page, web + pagination + str(i + 1))
                     if scrap == False:
@@ -197,3 +201,9 @@ with sync_playwright() as p:
         browser.close()
 
     time.sleep(5)  # Wait for 5 seconds before exiting
+
+
+
+
+
+       
