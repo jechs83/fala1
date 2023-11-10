@@ -83,12 +83,12 @@ def shop(page, web):
             if brand.lower() not in list_all:
                 continue
 
-            try:
-                percentual_discount_element = page.query_selector('.mercury-interbank-components-0-x-summary_percentualDiscount')
-                text = percentual_discount_element.inner_text()
-                web_dsct = int(text.replace("%","").replace("-",""))
-            except:
-                web_dsct = 0
+            # try:
+            #     percentual_discount_element = page.query_selector('.mercury-interbank-components-0-x-summary_percentualDiscount')
+            #     text = percentual_discount_element.inner_text()
+            #     web_dsct = int(text.replace("%","").replace("-",""))
+            # except:
+            #     web_dsct = 0
             
             interbank_price = element.query_selector(".mercury-interbank-components-0-x-summary_priceContainer")
 
@@ -100,32 +100,48 @@ def shop(page, web):
             
             except: best_price = 0
 
-            list_prices = element.query_selector(".mercury-interbank-components-0-x-summary_normalPricesContainer")
-            try:
-                
-                list_prices = list_prices.inner_text()
-                list_prices = list_prices.split()
-                if list_prices == []:
-                    list_price=0
+            #list_prices = element.query_selector(".mercury-interbank-components-0-x-summary_normalPricesContainer")
+            list_prices = element.query_selector(".mercury-interbank-components-0-x-summary_pricesContainer")
             
-    
-                if len(list_prices)==4:
-                    list_price = float(list_prices[3].replace(",",""))
-                if len(list_prices)==2:
-                    list_price = float(list_prices[1].replace(",",""))
             
-            except: list_price = 0
+            list_prices = list_prices.inner_text()
+            list_prices = list_prices.split()
+
+          
+            if list_prices == []:
+                list_price=0
+        
+
+            if len(list_prices)==9:
+                list_price = float(list_prices[4].replace(",",""))
+                best_price = float(list_prices[6].replace(",",""))
+                card_price = float(list_prices[6].replace(",",""))
+                web_dsct =  int(list_prices[0].replace("-","").replace("%",""))
+
+            if len(list_prices)==7:
+                list_price = float(list_prices[4].replace(",",""))
+                best_price = float(list_prices[6].replace(",",""))
+                card_price = float(list_prices[2].replace(",",""))
+                web_dsct =  int(list_prices[0].replace("-","").replace("%",""))
+
+            if len(list_prices)==6:
+                list_price = float(list_prices[5].replace(",",""))
+                best_price = float(list_prices[3].replace(",",""))
+                card_price = float(list_prices[1].replace(",",""))
+                web_dsct = 0
+        
+          
         
         
         
 
-            plin_price = element.query_selector(".mercury-interbank-components-0-x-summary_plinContainer")
+            # plin_price = element.query_selector(".mercury-interbank-components-0-x-summary_plinContainer")
 
-            try:
-                plin_price = plin_price.inner_text()
-                plin_price = plin_price.split()
-                card_price = float(plin_price[1].replace(",",""))
-            except: card_price = 0
+            # try:
+            #     plin_price = plin_price.inner_text()
+            #     plin_price = plin_price.split()
+            #     card_price = float(plin_price[1].replace(",",""))
+            # except: card_price = 0
                 
             print(brand)
             print(list_price)
@@ -171,27 +187,6 @@ else:
     print("Invalid argument. Use '1' to '4'.")
 
 
-# with sync_playwright() as p:
-#     browser = p.chromium.launch(headless=False) 
-#     #browser = p.chromium.launch()
-#     page = browser.new_page()
-
-#     while True:
-#         for i, web in enumerate (web_shop):
-            
-                
-#             for i in range(50):
-#                 # if i <=13:
-#                 #     continue
-                
-#                 scrap = shop(page, web + "?page="+str(i + 1))
-#                 if scrap == False:
-#                     break
-
-#         browser.close()
-#         time.sleep(5)  # Wait for 30 minutes before running the loop again
-
-
 
 with sync_playwright() as p:
     #browser = p.chromium.launch(headless=False)
@@ -205,8 +200,8 @@ with sync_playwright() as p:
         for _ in range(50):
             web = next(web_shop_cycle)
             for i in range(50):
-                # if i <=45:
-                #   continue
+                if i <=40:
+                  continue
                 scrap = shop(page, web + "?page=" + str(i + 1))
                 if scrap == False:
                     break

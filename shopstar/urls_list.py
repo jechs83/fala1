@@ -1,5 +1,8 @@
-list1 = ["https://shopstar.pe/tecnologia/televisores",
-         "https://shopstar.pe/tecnologia/computo",
+list1 = [
+    
+    "https://shopstar.pe/tecnologia/audio"
+    # "https://shopstar.pe/tecnologia/televisores",
+    #      "https://shopstar.pe/tecnologia/computo",
            
            ]
 
