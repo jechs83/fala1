@@ -192,7 +192,7 @@ with sync_playwright() as p:
     while True:
         for i, web in enumerate(web_shop_cycle):
             for i in range(50):
-                try:
+                
                     page.goto( web + pagination + str(i + 1), timeout=30000)
 
                     scrap = shop(page, web + pagination + str(i + 1))
