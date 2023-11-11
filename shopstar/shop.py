@@ -49,8 +49,8 @@ def shop(page, web):
     # try:
 
 
-        page.goto(web, timeout=12000) 
-        page.wait_for_timeout(6000)
+        # page.goto(web, timeout=12000) 
+        # page.wait_for_timeout(6000)
 
         try:
             button_selector = '.swal2-confirm'
