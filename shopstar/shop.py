@@ -200,6 +200,7 @@ with sync_playwright() as p:
                     if scrap == False:
                         break
                 except:
+                    print("no carga la web quizas")
                     continue
 
         page.close()
