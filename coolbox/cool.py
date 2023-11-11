@@ -195,6 +195,7 @@ with sync_playwright() as p:
         
         for i, web in enumerate(web_cool):
             for i in range(50):
+        
                 if web.endswith("DESC"):
                     pagination ="&page="
                 else: 
