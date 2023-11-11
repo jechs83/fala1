@@ -185,7 +185,7 @@ else:
 
 with sync_playwright() as p:
 
-    browser = p.chromium.launch(timeout=30000)
+    browser = p.chromium.launch(headless = False, timeout=30000)
     page = browser.new_page()
 
     web_shop_cycle = itertools.cycle(web_cool)
@@ -205,6 +205,8 @@ with sync_playwright() as p:
                 try:
                     page.goto( web + pagination + str(i + 1), timeout=30000)
                     scrap = shop(page, web + pagination + str(i + 1))
+                    print("##########################")
+                    print(scrap)
                     if scrap == False:
                         break
                
@@ -213,5 +215,5 @@ with sync_playwright() as p:
                 ##########
                 
         
-        page.close()
+       
         time.sleep(5)  # Wait for 5 seconds before running the loop again
