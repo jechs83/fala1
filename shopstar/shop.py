@@ -99,7 +99,7 @@ def shop(page, web):
             
             list_prices = list_prices.inner_text()
             list_prices = list_prices.split()
-
+            arr_y = list_prices
             
             if list_prices == []:
                 list_price=0
@@ -125,7 +125,8 @@ def shop(page, web):
 
             
 
-            print("######### "+str(len(list_prices)))   
+            print("######### "+str(len(list_prices)))  
+            print(arr_y) 
             print(brand)
             print(list_price)
             print(best_price)
