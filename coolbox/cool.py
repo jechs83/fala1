@@ -183,6 +183,7 @@ else:
 
        
 
+
 with sync_playwright() as p:
 
     browser = p.chromium.launch(headless = False, timeout=30000)
