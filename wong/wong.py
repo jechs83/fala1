@@ -188,27 +188,22 @@ with sync_playwright() as p:
     web_shop_cycle = itertools.cycle(web_wong)
 
 
-    try:
-        while True:
-            for i, web in enumerate(web_shop_cycle):
-                for i in range(50):
-                    try:
-                        page.goto( web + pagination + str(i + 1), timeout=30000)
 
-                        scrap = shop(page, web + pagination + str(i + 1))
-                        if scrap == False:
-                            break
-                    except :
-                            print(" error continunado")
-                            continue
+    while True:
+        for i, web in enumerate(web_shop_cycle):
+            for i in range(50):
+                try:
+                    page.goto( web + pagination + str(i + 1), timeout=30000)
 
+                    scrap = shop(page, web + pagination + str(i + 1))
+                    if scrap == False:
+                        break
+               
                     
-    except KeyboardInterrupt:
-        print("Script interrupted. Closing the browser gracefully...")
-    finally:
+    
         page.close()
 
-    time.sleep(5)  # Wait for 5 seconds before exiting
+        time.sleep(5)  # Wait for 5 seconds before exiting
 
 
 
