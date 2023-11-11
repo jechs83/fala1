@@ -198,7 +198,7 @@ with sync_playwright() as p:
                 if scrap == False:
                     break
 
-        browser.close()
+        page.close()
         time.sleep(5)
        
 
