@@ -191,8 +191,8 @@ with sync_playwright() as p:
     web_shop_cycle = itertools.cycle(web_cool)
 
     while True:
-        browser = p.chromium.launch()
-        page = browser.new_page()
+        browser = p.chromium.launch(timeout=30000)  # Set a longer timeout for browser launch
+        page = browser.new_page()  
         
         for i, web in enumerate(web_cool):
             for i in range(50):

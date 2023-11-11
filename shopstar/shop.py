@@ -183,7 +183,7 @@ else:
 with sync_playwright() as p:
     #browser = p.chromium.launch(headless=False)
     browser = p.chromium.launch(timeout=30000)  # Set a longer timeout for browser launch
-    page = browser.new_page(timeout=30000)  
+    page = browser.new_page()  
 
     # Create an iterator that cycles through the web shop URLs indefinitely
     web_shop_cycle = itertools.cycle(web_shop)
@@ -194,6 +194,7 @@ with sync_playwright() as p:
             for i in range(50):
                 # if i <=46:
                 #   continue
+                page.goto(web + "?page=" + str(i + 1), timeout=30000)
                 scrap = shop(page, web + "?page=" + str(i + 1))
                 if scrap == False:
                     break
