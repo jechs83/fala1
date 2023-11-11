@@ -20,12 +20,13 @@ list3 =[
     "https://www.coolbox.pe/laptops-monitores-y-tablets/laptops/laptops-gamer",
         "https://www.coolbox.pe/gamer/accesorios-gamer",
         "https://www.coolbox.pe/computo/componentes-de-computo",
-        "https://www.coolbox.pe/gamer/sillas-y-mesas-gamer",
-        "https://www.coolbox.pe/videojuegos-y-gamer/consolas",
+       
 ]
 list4 = [
      "https://www.coolbox.pe/laptops-monitores-y-tablets/monitores",
-     "https://www.coolbox.pe/outlet",
+       "https://www.coolbox.pe/gamer/sillas-y-mesas-gamer",
+        "https://www.coolbox.pe/videojuegos-y-gamer/consolas",
+
     
 
 ]

@@ -88,7 +88,7 @@ def shop(page, web):
         brand = brand.inner_text()
 
         if not brand:
-            break
+            return False
   
         if brand.lower() not in list_all:
             continue
@@ -201,10 +201,10 @@ with sync_playwright() as p:
                 else: 
                     pagination = "?page="
 
-                    page.goto( web + pagination + str(i + 1), timeout=30000)
-                    scrap = shop(page, web + pagination + str(i + 1))
-                    if scrap == False:
-                        break
+                page.goto( web + pagination + str(i + 1), timeout=30000)
+                scrap = shop(page, web + pagination + str(i + 1))
+                if scrap == False:
+                    break
                
         
         page.close()
