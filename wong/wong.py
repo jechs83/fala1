@@ -198,7 +198,7 @@ with sync_playwright() as p:
     except KeyboardInterrupt:
         print("Script interrupted. Closing the browser gracefully...")
     finally:
-        browser.close()
+        page.close()
 
     time.sleep(5)  # Wait for 5 seconds before exiting
 

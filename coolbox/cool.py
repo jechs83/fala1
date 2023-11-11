@@ -8,6 +8,7 @@ from urls_list import *
 import sys
 import pymongo
 from decouple import config
+import itertools
 
 client = pymongo.MongoClient(config("MONGO_DB"))
 db = client["brand_allowed"]
@@ -183,6 +184,12 @@ else:
        
 
 with sync_playwright() as p:
+
+    browser = p.chromium.launch()
+    page = browser.new_page()
+
+    web_shop_cycle = itertools.cycle(web_cool)
+
     while True:
         browser = p.chromium.launch()
         page = browser.new_page()
@@ -196,5 +203,5 @@ with sync_playwright() as p:
                 if scrap == False:
                     break
         
-        browser.close()
-        time.sleep(1)  # Wait for 5 seconds before running the loop again
+        page.close()
+        time.sleep(5)  # Wait for 5 seconds before running the loop again
