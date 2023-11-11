@@ -10,10 +10,10 @@ list1 = [
            ]
     
 list2 = [
-     "https://www.coolbox.pe/tv-y-video/televisores",
-     "https://www.coolbox.pe/audio/parlantes",
-                "https://www.coolbox.pe/audio/audifonos",
-                "https://www.coolbox.pe/audio/barras-y-sistemas-de-sonido",
+        "https://www.coolbox.pe/tv-y-video/televisores",
+        "https://www.coolbox.pe/audio/parlantes",
+        "https://www.coolbox.pe/audio/audifonos",
+        "https://www.coolbox.pe/audio/barras-y-sistemas-de-sonido",
 ]
 
 list3 =[

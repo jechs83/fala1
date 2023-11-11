@@ -197,7 +197,9 @@ with sync_playwright() as p:
             for i in range(50):
                 if web.endswith("DESC"):
                     pagination ="&page="
-            
+                else: 
+                    pagination = "?page="
+
                     page.goto( web + pagination + str(i + 1), timeout=30000)
                     scrap = shop(page, web + pagination + str(i + 1))
                     if scrap == False:
