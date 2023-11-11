@@ -46,7 +46,7 @@ webs = [
     # Add other URLs here
 
 def shop(page, web):
-    try:
+    # try:
 
         page.goto(web, timeout=12000) 
         page.wait_for_timeout(6000)
@@ -79,17 +79,10 @@ def shop(page, web):
 
             if not brand:
                 continue
-    
+
             if brand.lower() not in list_all:
                 continue
 
-            # try:
-            #     percentual_discount_element = page.query_selector('.mercury-interbank-components-0-x-summary_percentualDiscount')
-            #     text = percentual_discount_element.inner_text()
-            #     web_dsct = int(text.replace("%","").replace("-",""))
-            # except:
-            #     web_dsct = 0
-            
             interbank_price = element.query_selector(".mercury-interbank-components-0-x-summary_priceContainer")
 
             try:
@@ -107,7 +100,7 @@ def shop(page, web):
             list_prices = list_prices.inner_text()
             list_prices = list_prices.split()
 
-          
+            
             if list_prices == []:
                 list_price=0
         
@@ -130,18 +123,6 @@ def shop(page, web):
                 card_price = float(list_prices[1].replace(",",""))
                 web_dsct = 0
         
-          
-        
-        
-        
-
-            # plin_price = element.query_selector(".mercury-interbank-components-0-x-summary_plinContainer")
-
-            # try:
-            #     plin_price = plin_price.inner_text()
-            #     plin_price = plin_price.split()
-            #     card_price = float(plin_price[1].replace(",",""))
-            # except: card_price = 0
                 
             print(brand)
             print(list_price)
@@ -166,10 +147,10 @@ def shop(page, web):
             except:
                 print("data base offline")
             
-            # Save data to MongoDB here
-    except Exception as e:
-        print(f"Error during scraping: {e}")
-        # Handle the error or log it as needed
+    #         # Save data to MongoDB here
+    # except Exception as e:
+    #     print(f"Error during scraping: {e}")
+    #     # Handle the error or log it as needed
 
 
 argument = sys.argv[1]
@@ -200,8 +181,8 @@ with sync_playwright() as p:
         for _ in range(50):
             web = next(web_shop_cycle)
             for i in range(50):
-                if i <=40:
-                  continue
+                # if i <=46:
+                #   continue
                 scrap = shop(page, web + "?page=" + str(i + 1))
                 if scrap == False:
                     break
