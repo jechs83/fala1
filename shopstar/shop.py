@@ -123,11 +123,11 @@ def shop(page, web):
                 card_price = float(list_prices[1].replace(",",""))
                 web_dsct = 0
 
-            if len(list_prices)==4:
-                list_price = float(list_prices[5].replace(",",""))
-                best_price = float(list_prices[3].replace(",",""))
-                card_price = float(list_prices[1].replace(",",""))
-                web_dsct = 0
+            # if len(list_prices)==4:
+            #     list_price = float(list_prices[5].replace(",",""))
+            #     best_price = float(list_prices[3].replace(",",""))
+            #     card_price = float(list_prices[1].replace(",",""))
+            #     web_dsct = 0
 
             
 
