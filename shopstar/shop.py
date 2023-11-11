@@ -54,7 +54,7 @@ def shop(page, web):
 
         try:
             button_selector = '.swal2-confirm'
-            page.wait_for_selector(button_selector, timeout=20000)
+            page.wait_for_selector(button_selector, timeout=5000)
 
             # Click the button element
             page.click(button_selector)
@@ -191,7 +191,7 @@ else:
 
 with sync_playwright() as p:
     #browser = p.chromium.launch(headless=False)
-    browser = p.chromium.launch(timeout=30000)  # Set a longer timeout for browser launch
+    browser = p.chromium.launch(headless = False,timeout=30000)  # Set a longer timeout for browser launch
     page = browser.new_page()  
 
     # Create an iterator that cycles through the web shop URLs indefinitely
