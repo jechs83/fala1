@@ -48,8 +48,17 @@ webs = [
 def shop(page, web):
     # try:
 
+
         page.goto(web, timeout=12000) 
         page.wait_for_timeout(6000)
+
+        try:
+            button_selector = '.swal2-confirm'
+            page.wait_for_selector(button_selector, timeout=20000)
+
+            # Click the button element
+            page.click(button_selector)
+        except: print("no hay cookies")
 
         scroll_distance = 1500
         scroll_count = 3
