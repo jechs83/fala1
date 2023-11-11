@@ -122,8 +122,10 @@ def shop(page, web):
                 best_price = float(list_prices[3].replace(",",""))
                 card_price = float(list_prices[1].replace(",",""))
                 web_dsct = 0
-        
-                
+
+            
+
+            print("######### "+len(list_prices))   
             print(brand)
             print(list_price)
             print(best_price)
@@ -163,6 +165,7 @@ elif argument == "3":
     web_shop = list3
 elif argument == "4":
     web_shop = list4
+
 
 else:
     print("Invalid argument. Use '1' to '4'.")
