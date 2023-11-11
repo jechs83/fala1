@@ -197,10 +197,13 @@ with sync_playwright() as p:
             for i in range(50):
                 if web.endswith("DESC"):
                     pagination ="&page="
-                page.goto( web + pagination + str(i + 1), timeout=30000)
-                scrap = shop(page, web + pagination + str(i + 1))
-                if scrap == False:
-                    break
+                try:
+                    page.goto( web + pagination + str(i + 1), timeout=30000)
+                    scrap = shop(page, web + pagination + str(i + 1))
+                    if scrap == False:
+                        break
+                except:
+                    continue
         
         page.close()
         time.sleep(5)  # Wait for 5 seconds before running the loop again

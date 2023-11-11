@@ -194,10 +194,13 @@ with sync_playwright() as p:
             for i in range(50):
                 # if i <=46:
                 #   continue
-                page.goto(web + "?page=" + str(i + 1), timeout=30000)
-                scrap = shop(page, web + "?page=" + str(i + 1))
-                if scrap == False:
-                    break
+                try:
+                    page.goto(web + "?page=" + str(i + 1), timeout=30000)
+                    scrap = shop(page, web + "?page=" + str(i + 1))
+                    if scrap == False:
+                        break
+                except:
+                    continue
 
         page.close()
         time.sleep(5)
