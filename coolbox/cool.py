@@ -185,20 +185,19 @@ else:
 
 with sync_playwright() as p:
 
-    browser = p.chromium.launch()
+    browser = p.chromium.launch(timeout=30000)
     page = browser.new_page()
 
     web_shop_cycle = itertools.cycle(web_cool)
 
     while True:
-        browser = p.chromium.launch(timeout=30000)  # Set a longer timeout for browser launch
-        page = browser.new_page()  
+       
         
         for i, web in enumerate(web_cool):
             for i in range(50):
                 if web.endswith("DESC"):
                     pagination ="&page="
-
+                page.goto( web + pagination + str(i + 1), timeout=30000)
                 scrap = shop(page, web + pagination + str(i + 1))
                 if scrap == False:
                     break
