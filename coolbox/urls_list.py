@@ -25,7 +25,7 @@ list3 =[
 ]
 list4 = [
      "https://www.coolbox.pe/laptops-monitores-y-tablets/monitores",
-     "https://www.coolbox.pe/outlet?layout=grid&order=OrderByPriceDESC",
+     "https://www.coolbox.pe/outlet",
     
 
 ]
