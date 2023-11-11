@@ -182,8 +182,8 @@ else:
 
 with sync_playwright() as p:
     #browser = p.chromium.launch(headless=False)
-    browser = p.chromium.launch()
-    page = browser.new_page()
+    browser = p.chromium.launch(timeout=30000)  # Set a longer timeout for browser launch
+    page = browser.new_page(timeout=30000)  
 
     # Create an iterator that cycles through the web shop URLs indefinitely
     web_shop_cycle = itertools.cycle(web_shop)
