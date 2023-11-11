@@ -125,7 +125,7 @@ def shop(page, web):
 
             
 
-            print("######### "+len(list_prices))   
+            print("######### "+str(len(list_prices)))   
             print(brand)
             print(list_price)
             print(best_price)
