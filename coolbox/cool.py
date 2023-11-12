@@ -88,16 +88,18 @@ def shop(page, web):
         brand = element.query_selector(".vtex-store-components-3-x-productBrandContainer")
         brand = brand.inner_text()
 
+       
+
         if not brand:
             return False
   
         if brand.lower() not in list_all:
             continue
 
-
+        print(brand)
         product = element.query_selector(".vtex-product-summary-2-x-nameContainer")
         product = product.inner_text()
-
+        print(product)
         price1 = element.query_selector(".vtex-store-components-3-x-sellingPrice")
         
         try:
@@ -106,7 +108,7 @@ def shop(page, web):
             best_price = float(price1[1].replace(",",""))
         except: best_price = 0
         
-     
+        print(best_price)
 
         price2 = element.query_selector(".vtex-store-components-3-x-listPrice")
      
@@ -117,7 +119,7 @@ def shop(page, web):
         
         except:
             list_price = 0
-
+         print(list_price)
       
 
         web_dsct = element.query_selector(".vtex-store-components-3-x-discountContainer")
@@ -125,15 +127,15 @@ def shop(page, web):
             web_dsct = web_dsct.inner_text()
             web_dsct = int(web_dsct.replace("-","").replace("%",""))
         except: web_dsct = 0
-
+        print(web_dsct)
         # sku = product+load_datetime()[0]
         sku = f"{load_datetime()[0]}{product}"
 
-        print(web_dsct)
-        print(list_price)
-        print(best_price)
-        print(brand)
-        print(product)
+        # print(web_dsct)
+        # print(list_price)
+        # print(best_price)
+        # print(brand)
+        # print(product)
         print(link)
         print(image)
         print(sku)

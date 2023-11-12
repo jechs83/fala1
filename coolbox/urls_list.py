@@ -1,9 +1,9 @@
 list1 = [     
-    "https://www.coolbox.pe/laptops-monitores-y-tablets/laptops",
+    # "https://www.coolbox.pe/laptops-monitores-y-tablets/laptops",
     "https://www.coolbox.pe/computo/componentes-de-computo",
-    "https://www.coolbox.pe/gamer",
-    "https://www.coolbox.pe/computo/impresoras",
-    "https://www.coolbox.pe/Laptops-Monitores-y-Tablets/Tablets",
+    # "https://www.coolbox.pe/gamer",
+    # "https://www.coolbox.pe/computo/impresoras",
+    # "https://www.coolbox.pe/Laptops-Monitores-y-Tablets/Tablets",
 
     
 
