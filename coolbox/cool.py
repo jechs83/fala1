@@ -119,7 +119,7 @@ def shop(page, web):
         
         except:
             list_price = 0
-         print(list_price)
+        print(list_price)
       
 
         web_dsct = element.query_selector(".vtex-store-components-3-x-discountContainer")
