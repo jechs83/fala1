@@ -192,8 +192,7 @@ with sync_playwright() as p:
     web_shop_cycle = itertools.cycle(web_cool)
 
     while True:
-       
-        
+    
         for i, web in enumerate(web_cool):
             for i in range(50):
         
@@ -203,18 +202,14 @@ with sync_playwright() as p:
                     pagination = "?page="
 
                 ########3
-                try:
-                    page.goto( web + pagination + str(i + 1), timeout=30000)
-                    scrap = shop(page, web + pagination + str(i + 1))
-                    print("##########################")
-                    print(scrap)
-                    if scrap == False:
-                        break
+             
+                page.goto( web + pagination + str(i + 1), timeout=30000)
+                scrap = shop(page, web + pagination + str(i + 1))
+                print("##########################")
+                print(scrap)
+                if scrap == False:
+                    break
                
-                except:
-                    continue
+               
                 ##########
-                
-        
-       
         time.sleep(5)  # Wait for 5 seconds before running the loop again
