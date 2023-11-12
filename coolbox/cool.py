@@ -9,6 +9,7 @@ import sys
 import pymongo
 from decouple import config
 import itertools
+import gc
 
 client = pymongo.MongoClient(config("MONGO_DB"))
 db = client["brand_allowed"]
@@ -68,8 +69,8 @@ def shop(page, web):
     # page.goto(web, timeout=60000) 
     # page.wait_for_timeout(6000)
 
-    scroll_distance = 1500
-    scroll_count = 4
+    scroll_distance = 1000
+    scroll_count = 6
     for _ in range(scroll_count):
         page.evaluate(f"window.scrollBy(0, {scroll_distance});")
         page.wait_for_timeout(400)
@@ -190,26 +191,33 @@ with sync_playwright() as p:
     page = browser.new_page()
 
     web_shop_cycle = itertools.cycle(web_cool)
-
-    while True:
-    
-        for i, web in enumerate(web_cool):
-            for i in range(50):
+    try:
+        while True:
         
-                if web.endswith("DESC"):
-                    pagination ="&page="
-                else: 
-                    pagination = "?page="
+            for i, web in enumerate(web_cool):
+                for i in range(50):
+            
+                    if web.endswith("DESC"):
+                        pagination ="&page="
+                    else: 
+                        pagination = "?page="
+                    ########3
+                    page.goto( web + pagination + str(i + 1), timeout=30000)
+                    scrap = shop(page, web + pagination + str(i + 1))
+                    print("##########################")
+                    gc.collect()
+                    print(scrap)
+                    if scrap == False:
+                        break
+                    
+                    # Check if the browser is closed during the iteration
+                        if browser.is_closed():
+                            raise Exception("Browser closed unexpectedly. Exiting...")
+                time.sleep(5)  # Wait for 5 seconds before running the loop again
 
-                ########3
-             
-                page.goto( web + pagination + str(i + 1), timeout=30000)
-                scrap = shop(page, web + pagination + str(i + 1))
-                print("##########################")
-                print(scrap)
-                if scrap == False:
-                    break
-               
-               
-                ##########
-        time.sleep(5)  # Wait for 5 seconds before running the loop again
+    except Exception as e:
+        print(f"Error: {e}")
+
+    finally:
+        # Close the browser in the finally block to ensure it is closed even if an exception occurs
+        browser.close()
