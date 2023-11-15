@@ -1,13 +1,8 @@
-import sys
-import time
+
 from html_test import html_code
 import gc
 from pymongo import MongoClient
-import os
-import pymongo
 import re
-import base64
-import requests
 from bd_compare import save_data_to_mongo_db
 from decouple import config
 from datetime import datetime
@@ -15,7 +10,7 @@ from telegram import ParseMode
 import telegram
 from pandas import DataFrame
 import pandas as pd
-from minimo import minimo
+
 import pytz
 import gc
 from datetime import datetime

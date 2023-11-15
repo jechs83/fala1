@@ -29,8 +29,8 @@ def buscador():
     while True:
         try:
             # auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, bd_name, collection_name)
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "wong", collection_name)
-            #auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "coolbox", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "platano", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "juntoz", collection_name)
             #auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "shopstar", collection_name)
             gc.collect()
 

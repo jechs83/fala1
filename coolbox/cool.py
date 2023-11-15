@@ -81,12 +81,15 @@ def shop(page, web):
     count1 = 0
     for element in elements:
         count1 = count1+1
-
+        print(count1)
         link = element.query_selector("a").get_attribute("href")
         link = "https://www.coolbox.pe"+link
         image = element.query_selector("img").get_attribute("src")
-        brand = element.query_selector(".vtex-store-components-3-x-productBrandContainer")
-        brand = brand.inner_text()
+        try:
+            brand = element.query_selector(".vtex-store-components-3-x-productBrandContainer")
+            brand = brand.inner_text()
+        except:
+            brand = "None"
 
        
 
