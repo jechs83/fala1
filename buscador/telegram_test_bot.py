@@ -1,28 +1,32 @@
 
+
 from decouple import config
-from search_bot_service import  auto_telegram_between_values
+from search_bot_service import  auto_telegram_between_values,auto_telegram_between_values_custom_bd
 from pymongo import MongoClient
 from decouple import config
 from pymongo import MongoClient
+import time
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 
-chat_id = config("EXCELSIOR_CHAT")
-bot_token = config("EXCELSIOR_TOKEN")
-bd1 = "excelsior1"
-bd2 = "excelsior2"
-dsct = 85
-dsct2 = 100
+chat_id = "-4087350460"
+bot_token = config("RICHI_BOY_TOKENS") 
+
+
+bd1 = "cura1"
+bd2 = "cura2"
+dsct = 50
+dsct2 = 69
 product = "reloj"
 db = client["trigger"]
 collection = db["40"]
-bd_name = config("db_ripley")
+bd_name = config("db_saga")
 collection_name = config("collection")
-    
 
 
 def buscador():
+    
     while True:
         try:
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, bd_name, collection_name)

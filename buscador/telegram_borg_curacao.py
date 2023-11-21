@@ -23,10 +23,8 @@ def buscador():
         try:
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,bd_name,collection_name)
             productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"oechsle",collection_name)
-            productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"oechsle",collection_name)
             productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"plazavea",collection_name)
-            productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"promart",collection_name)
-            productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"tailoy",collection_name)
+            
 
 
 
