@@ -182,7 +182,7 @@ else:
 
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(headless = False, timeout=30000)  # Set a longer timeout for browser launch
+    browser = p.chromium.launch(headless = True, timeout=30000)  # Set a longer timeout for browser launch
     page = browser.new_page()  
 
     web_shop_cycle = itertools.cycle(web_wong)

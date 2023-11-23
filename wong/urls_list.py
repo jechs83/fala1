@@ -1,4 +1,4 @@
-list1 = ["https://www.wong.pe/electrohogar"
+list1 = ["https://www.wong.pe/tecnologia"
            ]
 
 list2 = ["https://www.wong.pe/dormitorio"

@@ -1,4 +1,4 @@
-#!/Users/javier/GIT/ripley/env/bin/python
+#!/Users/javier/GIT/fala/env/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
