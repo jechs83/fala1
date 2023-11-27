@@ -1363,14 +1363,13 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                 
                 msn = (
                   
-                        "✅Marca: " + str(i["brand"]) + "\n" +
-                        "✅" + str(i["product"]) + list_price + "\n" +
-                        "👉Precio web: " + str(i["best_price"]) + card_price + "\n" +
-                        "🏷Descuento: %" + str(i["web_dsct"]) + " "+dsct+"\n\n" +
-                        "🕗" + i["date"] + " " + i["time"] + "\n" +
-                        "🌐Link: " + str(i["link"]) + "\n" +
-                        "🏠home web: " + i["home_list"] + "\n\n" +
-                        "◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"#############################
+                        "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                        "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
+                        "📦 <b>Producto:</b> " + str(i["product"]) + list_price + "\n" +
+                        "👉 <b>Precio web:</b> " + str(i["best_price"]) + card_price + "\n" +
+                        "🏷 <b>Descuento:</b> %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
+                        "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                        "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
                     )
 
                 # msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+list_price+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
