@@ -595,28 +595,32 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     for i in t1:
         product_array.append(i)
         print(i)
+
+
+    
     
     for i in product_array:
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db1)
-            f = print("se graba en bd datos")
+            print("se graba en bd datos")
             
-
             a= collection_1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
+
         
             b= collection_2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
-            #print(b)
+        
             len_b = len(b)
-            print(len_b)
+
 
             if len_b == 0:
-                print(" NO EXSTE EN BASE DE DATOS ")
+                
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
+                
                 if  i["card_price"] == 0:
                         card_price = ""
                 else:
@@ -633,59 +637,64 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     dsct = "🟢"
                 if i["web_dsct"] >=70:
                     dsct = "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-
-                # try:
-                #     historic = minimo(i["sku"])[3]
-                # except:
-                #     historic = False
-                # print(historic)
-
-                # if historic == True:
-
-                #     historic_min = "\n🔥🔥🔥🔥🔥🔥🔥 Minimo historico"
-                #     historic_list = "\nPrecio minimo: "+str(minimo(i["sku"])[0])+"\n"+"Precio anterior: "+str(minimo(i["sku"])[1])+"\n"+"Precio maximo: "+str(minimo(i["sku"])[2])
-                # if historic == False:
+                
 
                 historic_min = ""
                 historic_list=""
+               
+                # msn = (
+                # "✅ **Marca:** " + str(i["brand"]) + "\n" +
+                # "✅ **Producto:** " + str(i["product"]) + list_price + "\n" +
+                # "👉 **Precio web:** " + str(i["best_price"]) + card_price + "\n" +
+                # "🏷 **Descuento:** %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
+                # "🕗 **Fecha y Hora:** " + i["date"] + " " + i["time"] + "\n" +
+                # "🌐 **Link:** " + str(i["link"]) + "\n" +
+                # "🏠 **Home web:** " + i["home_list"] + "\n\n" +
+                # "◀️◀️◀️◀️◀️◀️◀️ **▶️▶️▶️▶️▶️▶️▶️**"
+                #     )
+                
                 msn = (
-                        "✅Marca: " + str(i["brand"]) + "\n" +
-                        "✅" + str(i["product"]) + list_price + "\n" +
-                        "👉Precio web: " + str(i["best_price"]) + card_price + "\n" +
-                        "🏷Descuento: %" + str(i["web_dsct"]) + " "+dsct+"\n\n" +
-                        "🕗" + i["date"] + " " + i["time"] + "\n" +
-                        "🌐Link: " + str(i["link"]) + "\n" +
-                        "🏠home web: " + i["home_list"] + "\n\n" +
-                        "◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
-                    )
+                   
+                        "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                        "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
+                        "📦 <b>Producto:</b> " + str(i["product"]) + list_price + "\n" +
+                        "👉 <b>Precio web:</b> " + str(i["best_price"]) + card_price + "\n" +
+                        "🏷 <b>Descuento:</b> %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
+                        "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                        "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+                )
+
+# Envía este mensaje_telegram como respuesta en tu código para Telegram
+
                 #msn =  "✅Marca: "+str(i["brand"])+"\n✅"+str(i["product"])+list_price+"\n👉Precio web :"+str(i["best_price"])+card_price+"\n"+dsct+"Descuento: "+"% "+str(i["web_dsct"])+"\n"+"\n\n⌛"+i["date"]+" "+ i["time"]+"\n🔗Link :"+str(i["link"])+"\n🏠home web:"+i["home_list"]+"\n\n◀️◀️◀️◀️◀️◀️◀️▶️▶️▶️▶️▶️▶️"
 
-        
                 foto = i["image"]
 
                 print(len(foto))
+
 
                 if len(foto) <5:
                     print(len(foto))
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
-              
+                
                 try:
                     send_telegram (msn, foto, bot_token, chat_id)
-                    time.sleep(1)
+                    print("se envio a telegram el mensaje con el productp ")
+        
                 except:
+
                     continue
-           
-                print(" PRODUCTO EN BASE B NO EXISTE, SE ENVIA A TELEGRAM")
-                continue
-
-
+        
+                
             if b!=a:
                 #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
                 print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
-               
+
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
+                print("son diferentes")
+          
                 continue
             if a==b:
                 print("SON IGUALES,  NO SE ENVIA TELEGRAM")
@@ -729,16 +738,19 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
             print(b)
+            print("arriba se imprimio B")
+            time.sleep(15)
             len_b = len(b)
             print(len_b)
 
 
             if len_b == 0:
+
                 print(" no exitse en base de daos 2, se graba")
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],ship_db2)
                 print("SE GRABO EN BASE DE DATOS 2")
-
+                time.sleep(15)
                 if  i["card_price"] == 0:
                     card_price = ""
                 else:
@@ -784,10 +796,6 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
 
 
                 foto = i["image"]
-                print("#########")
-                print(foto)
-                print("#########")
-                print(len(foto))
 
                 if len(foto) <5 :
                     print(len(foto))
@@ -798,11 +806,10 @@ def auto_telegram_between_values_custom_bd( ship_db1,ship_db2, bot_token, chat_i
                 
 
 
-            
-                try:
-                    send_telegram (msn, foto, bot_token, chat_id)
-                    time.sleep(1) 
-                except: continue
+                send_telegram (msn, foto, bot_token, chat_id)
+                print("SE ENVIA A TELEGRAM")
+                time.sleep(20)
+               
                 # send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+"Descuento: "+"%"+str(i["web_dsct"])+"\n"+i["date"]+" "+ i["time"]+"\n"+i["image"]+"\nLink :"+str(i["link"])+"\nhome web:"+i["home_list"])
                 #                 ,bot_token, chat_id)
                 

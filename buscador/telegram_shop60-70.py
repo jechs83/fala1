@@ -5,19 +5,20 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-chat_id = "-1001662738459"
-bot_token = "6726341826:AAGqYckzHIZQ81WuqQyJQPEz1WAMsKURovw"
+chat_id = "-1001951603431"
+bot_token = "6201012907:AAEJQ_4sauVNRgbusNvGc4q2_Ijk6nsVwX0"
 
 
 
-bd1 = "shop1"
-bd2 = "shop2"
+bd1 = "bd1"
+bd2 = "bd2"
 dsct = 60
 dsct2 = 69
 product = "reloj"
 db = client["trigger"]
 collection = db["40"]
 bd_name = config("db_shop")
+
 collection_name = config("collection")
     
 

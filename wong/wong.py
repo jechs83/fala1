@@ -67,9 +67,6 @@ def shop(page, web):
             url_image = i.get_attribute("src")
             images_array.append(url_image)
             
-        # print()  
-        # print(images_array)
-        # print(len(images_array))
         print("este es el producto " + str(count1))
 
         if len(images_array)==3:
@@ -120,6 +117,7 @@ def shop(page, web):
 
         # sku = product+load_datetime()[0]
         sku = f"{load_datetime()[0]}{product}"
+
         print("###############################")
         print(web_dsct)
         print(list_price)
@@ -149,22 +147,6 @@ def shop(page, web):
         gc.collect()
         #Save data to MongoDB here
 
-
-# with sync_playwright() as p:
-#     browser = p.chromium.launch()
-#     page = browser.new_page()
-
-#     while True:
-#         for i, web in enumerate (webs):
-#             for i in range(50):
-                
-#                 scrap = shop(page, web+pagination + str(i + 1))
-#                 if scrap == False:
-#                     break
-                
-#         browser.close()
-#         time.sleep(5)  # Wait for 30 minutes before running the loop again
-
 argument = sys.argv[1]
 print("este es el argument "+argument)
 if argument == "1":
@@ -175,7 +157,6 @@ elif argument == "3":
     web_wong = list3
 elif argument == "4":
     web_wong = list4
-
 else:
     print("Invalid argument. Use '1' to '4'.")
 
@@ -184,26 +165,23 @@ else:
 with sync_playwright() as p:
     browser = p.chromium.launch(headless = True, timeout=30000)  # Set a longer timeout for browser launch
     page = browser.new_page()  
-
     web_shop_cycle = itertools.cycle(web_wong)
 
+    # while True:
+    for i, web in enumerate(web_shop_cycle):
+        for i in range(50):
+            
+                page.goto( web + pagination + str(i + 1), timeout=30000)
 
-
-    while True:
-        for i, web in enumerate(web_shop_cycle):
-            for i in range(50):
+                scrap = shop(page, web + pagination + str(i + 1))
+                if scrap == False:
+                    break
+            
                 
-                    page.goto( web + pagination + str(i + 1), timeout=30000)
 
-                    scrap = shop(page, web + pagination + str(i + 1))
-                    if scrap == False:
-                        break
-               
-                    
-    
-        page.close()
+    page.close()
 
-        time.sleep(5)  # Wait for 5 seconds before exiting
+    time.sleep(5)  # Wait for 5 seconds before exiting
 
 
 
