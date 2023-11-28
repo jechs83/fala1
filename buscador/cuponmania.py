@@ -3,6 +3,7 @@ from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 import pytesseract
 from PIL import Image
+import os
 
 # Reemplaza 'TU_TOKEN' con el token que te proporcionó BotFather
 TOKEN = '6794925800:AAExqiVDl3UeGEopEhRMAqDPrqQYF6M_1bg'
@@ -36,6 +37,8 @@ def photo_handler(update: Update, context: CallbackContext):
 
         # Enviar la foto con un nuevo mensaje
         bot.send_photo(chat_id=DESTINATION_CHAT_ID, photo=open(new_photo, 'rb'), caption=caption)
+
+        os.remove(new_photo)
 
 def main():
     updater = Updater(TOKEN, use_context=True)
