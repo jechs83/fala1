@@ -1,7 +1,6 @@
 
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
-import pytesseract
 from PIL import Image
 import os
 
