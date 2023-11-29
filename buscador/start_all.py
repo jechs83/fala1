@@ -17,9 +17,12 @@ def start():
     di = collection1.find_one({"_id":"di"})
     
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
-    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_curacao.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_borg_ripley.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_saga.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_curacao.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_borg_ripley.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_saga.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_product-sindsct.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+
+    -sindsct.py
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_ripley60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_ripley70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
@@ -42,7 +45,7 @@ def start():
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_tailoy70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_tailoy60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_cool70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_cool70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
 
 

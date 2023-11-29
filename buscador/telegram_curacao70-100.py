@@ -7,15 +7,14 @@ from decouple import config
 from pymongo import MongoClient
 import time
 from decouple import config
+
 client = MongoClient(config("MONGO_DB"))
+chat_id = config("CURACAO1")
+bot_token = config("LLAMA_9_BOT") 
 
 
-chat_id = config("CURACAO_70-100_CHAT")
-bot_token = config("WORF_BOY_TOKENS") 
-
-
-bd1 = "cura1"
-bd2 = "cura2"
+bd1 = "bd1"
+bd2 = "bd2"
 dsct = 70
 dsct2 = 100
 product = "reloj"

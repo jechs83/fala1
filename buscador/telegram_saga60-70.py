@@ -4,12 +4,12 @@ from pymongo import MongoClient
 from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
-chat_id = config("VOYAGER_CHAT")
-bot_token = config("VOYAGER_TOKEN")
+chat_id = config("SAGA2")
+bot_token = config("LLAMA_2_BOT")
 
 
-bd1 = "voyager1"
-bd2 = "voyager2"
+bd1 = "bd1"
+bd2 = "bd2"
 product  = "lentes"
 category = "tecno"
 
@@ -20,12 +20,6 @@ db = client["trigger"]
 collection = db["40"]
 bd_name = config("db_saga")
 collection_name = config("collection")
-    
-
-# def buscador():
-#     auto_telegram_between_values(  bd1,bd2, bot_token, chat_id,dsct, dsct2, product)
-#     buscador()    
-# buscador()
 
 
 def buscador():

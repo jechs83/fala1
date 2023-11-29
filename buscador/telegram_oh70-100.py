@@ -8,12 +8,12 @@ from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 
-chat_id = config("OH_CHAT_70-100")
-bot_token = config("PIKE_BOT_TOKEN")
+chat_id = config("OH1")
+bot_token = config("LLAMA_5_BOT")
 # bot_token = "6785166308:AAEeyslDhxR40WWH0oTivXqnvabM_TBOkPY"
 # chat_id="-1001538602771"
-bd1 = "enterprise1"
-bd2 = "enterprise2"
+bd1 = "bd1"
+bd2 = "bd2"
 dsct = 70
 dsct2 = 100
 product = "reloj"

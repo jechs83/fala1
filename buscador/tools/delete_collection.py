@@ -5,7 +5,6 @@ from decouple import config
 MONGODB_URL = config("MONGO_DB")
 
 
-
 def reset_products(collection_bot):
     # Create a MongoDB client
     client = MongoClient(MONGODB_URL)

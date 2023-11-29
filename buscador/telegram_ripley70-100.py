@@ -8,11 +8,11 @@ from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
 
-chat_id = config("EXCELSIOR_CHAT")
-bot_token = config("EXCELSIOR_TOKEN")
-bd1 = "excelsior1"
-bd2 = "excelsior2"
-dsct = 85
+chat_id = config("RIPLEY1")
+bot_token = config("LLAMA_3_BOT")
+bd1 = "bd1"
+bd2 = "bd2"
+dsct = 70
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]

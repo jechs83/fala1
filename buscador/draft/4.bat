@@ -1,1 +1,0 @@
-title enterprise 70% && python C:\Git\fala\buscador\auto_search_enterprise.py

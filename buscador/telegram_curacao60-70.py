@@ -8,14 +8,12 @@ from pymongo import MongoClient
 import time
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
+chat_id = config("CURACAO2") 
+bot_token = config("LLAMA_10_BOT") 
 
 
-chat_id = "-4087350460"
-bot_token = config("RICHI_BOY_TOKENS") 
-
-
-bd1 = "cura1"
-bd2 = "cura2"
+bd1 = "bd1"
+bd2 = "bd2"
 dsct = 60
 dsct2 = 69
 product = "reloj"
