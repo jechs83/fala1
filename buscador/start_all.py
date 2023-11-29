@@ -22,7 +22,7 @@ def start():
     # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_saga.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_product-sindsct.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-    -sindsct.py
+
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_ripley60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_ripley70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
