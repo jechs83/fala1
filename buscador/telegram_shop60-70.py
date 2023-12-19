@@ -1,15 +1,15 @@
 
-
+from decouple import config
 from search_bot_service import  auto_telegram_between_values
 from pymongo import MongoClient
 from decouple import config
+from pymongo import MongoClient
+from decouple import config
+
 client = MongoClient(config("MONGO_DB"))
-
-chat_id = "-1001951603431"
-bot_token = "6201012907:AAEJQ_4sauVNRgbusNvGc4q2_Ijk6nsVwX0"
-
-
-
+chat_id = config("VEA2")
+bot_token = config("LLAMA_17_BOT")
+#chat_id = "-4090886629"
 bd1 = "bd1"
 bd2 = "bd2"
 dsct = 60
@@ -18,9 +18,9 @@ product = "reloj"
 db = client["trigger"]
 collection = db["40"]
 bd_name = config("db_shop")
-
 collection_name = config("collection")
     
+
 
 def buscador():
     while True:
@@ -32,4 +32,3 @@ def buscador():
 # Call the function to start the infinite loop
 buscador()
 
-    

@@ -1302,9 +1302,9 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         "brand": {"$in": brand_compu_patterns},
         "web_dsct": 0,
         "$or": [
-            {"best_price": {"$lte": 2500, "$gt": 0}},
-            {"list_price": {"$lte": 2500, "$gt": 0}},
-            {"card_price": {"$lte": 2500, "$gt": 0}}
+            {"best_price": {"$lte": 3500, "$gt": 0}},
+            {"list_price": {"$lte": 3500, "$gt": 0}},
+            {"card_price": {"$lte": 3500, "$gt": 0}}
         ]
     }
 
