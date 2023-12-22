@@ -28,6 +28,7 @@ def buscador():
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, bd_name, collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "wong", collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "shopstar", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "coolbox", collection_name)
 
         except Exception as e:
             print(f"An exception occurred: {e}")
