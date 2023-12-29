@@ -586,7 +586,16 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     collection = db[collection_name]
     db.command({"planCacheClear": collection_name})
     
-    t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
+    # t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
+    t1 = collection.find({
+    "$or": [
+        {"web_dsct": {"$gte": porcentage1, "$not": {"$gte": porcentage2}}},
+        {"card_dsct": {"$gte": porcentage1, "$not": {"$gte": porcentage2}}},
+    ],
+    "date": date,
+    "product": {"$not": {"$in": [re.compile(producto, re.IGNORECASE), re.compile("reloj", re.IGNORECASE)]}}
+        })
+
 
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
