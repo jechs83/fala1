@@ -56,6 +56,7 @@ def send_telegram(message,foto, bot_token, chat_id):
         files={'photo': requests.get(foto).content},
     
         )
+    print("se envio mensaje por funcion de telegram")
 
 def send_document(document,bot_token, chat_id):
     # Create a bot instance using your bot token
@@ -609,69 +610,120 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     
     
     for i in product_array:
-            save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                           i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db1)
-            print("se graba en bd datos")
+            #save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+             #              i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], i["card_dsct"],bd_name,ship_db1)
+            print()
+            print("se graba en bd datos 1")
+            print()
             
             a= collection_1.find({"sku":i["sku"]})
             # se busca datos en offer1 cada iteracion
             a=list(a)
 
+            print(a)
+            print()
+            
+
         
             b= collection_2.find({"sku":i["sku"]})
             # se busca datos en offer2  en cada iteracion 
             b = list(b)
+            print("###############")
+            print(b)
+            print("############")
+            
         
             len_b = len(b)
 
-
             if len_b == 0:
+      
+                print("No existe array en base de datos 2")
+      
                 
-                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
+                # save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                #             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], i["card_dsct"],bd_name,ship_db2)
                 
-                if  i["card_price"] == 0:
-                        card_price = ""
-                else:
-                    card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
+                # if  i["card_price"] == 0:
+                #         card_price = ""
+                # else:
+                #     card_price = '\n👉Precio Tarjeta :'+str(i["card_price"])
 
-                if i["list_price"] == 0:
-                   list_price = ""
-                else:
-                        list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
+                # if i["list_price"] == 0:
+                #    list_price = ""
+                # else:
+                #         list_price = '\n\n➡️Precio Lista :'+str(i["list_price"])
 
                 if i["web_dsct"] <= 50:
-                    dsct = "🟡"
-                if i["web_dsct"] > 50 and i["web_dsct"]  <=69:
-                    dsct = "🟢"
-                if i["web_dsct"] >=70:
-                    dsct = "🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥"
-                
+                    web_d = "🟡"
+                if i["web_dsct"]  > 50 and i["web_dsct"]  <=69:
+                    web_d = "🟢"
+                if i["web_dsct"]  >=70:
+                    web_d = "🔥🔥🔥🔥🔥🔥🔥"
 
-                historic_min = ""
-                historic_list=""
+                if i["card_dsct"] <= 50:
+                    card_d = "🟡"
+                if i["card_dsct"] > 50 and i["card_dsct"]  <=69:
+                    card_d = "🟢"
+                if i["card_dsct"]  >=70:
+                    card_d = "🔥🔥🔥🔥🔥🔥🔥"
+
+                
+                if i["list_price"] == 0:
+                    list_price = ""
+                else:
+                    list_price = '🏷 <b>Precio lista:</b> '+  str(i["list_price"])+"\n" 
+                
+                if i["best_price"] == 0:
+                    best_price = ""
+                else:
+                    best_price = '👉 <b>Precio web:</b> <b>'+ str(i["best_price"]) + "</b>" +"\n" 
+
+                if i["card_price"] == 0:
+                    card_price = ""
+                else:
+                    card_price = '💳 <b>Precio TC:</b> <b>' +str(i["card_price"])+ "</b>"+"\n" 
+
+                if i["card_dsct"] == 0:
+                    card_dsct = ""
+                else:
+                    card_dsct =  "💥 <b>Descuento TC:</b> %" + str(i["card_dsct"])+ card_d+"\n" 
+
+                if i["web_dsct"] == 0:
+                    web_dsct = ""
+                else:
+                    web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
+        
+                
+             
                
-                # msn = (
-                # "✅ **Marca:** " + str(i["brand"]) + "\n" +
-                # "✅ **Producto:** " + str(i["product"]) + list_price + "\n" +
-                # "👉 **Precio web:** " + str(i["best_price"]) + card_price + "\n" +
-                # "🏷 **Descuento:** %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
-                # "🕗 **Fecha y Hora:** " + i["date"] + " " + i["time"] + "\n" +
-                # "🌐 **Link:** " + str(i["link"]) + "\n" +
-                # "🏠 **Home web:** " + i["home_list"] + "\n\n" +
-                # "◀️◀️◀️◀️◀️◀️◀️ **▶️▶️▶️▶️▶️▶️▶️**"
-                #     )
                 
                 msn = (
                    
                         "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
                         "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
-                        "📦 <b>Producto:</b> " + str(i["product"]) + list_price + "\n" +
-                        "👉 <b>Precio web:</b> " + str(i["best_price"]) + card_price + "\n" +
-                        "🏷 <b>Descuento:</b> %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
+                        "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
+                        list_price+
+                        best_price +
+                        card_price+
+                        "\n"+
+                        card_dsct+
+                        web_dsct+
                         "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
                         "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
                 )
+
+                # msn = (
+                   
+                #         "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                #         "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
+                #         "📦 <b>Producto:</b> " + str(i["product"]) + list_price + "\n" +
+                #         "👉 <b>Precio web:</b> " + str(i["best_price"]) + card_price + "\n" +
+                #         "🏷 <b>Descuento:</b> %" + str(i["web_dsct"]) + " " + dsct + "\n\n" +
+                #         "🏷 <b>Descuento TC:</b> %" + str(i["card_dsct"]) + " " + dsct + "\n\n" +
+                #         "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                #         "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+                # )
+
 
 # Envía este mensaje_telegram como respuesta en tu código para Telegram
 
@@ -687,21 +739,24 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
                 
                 
-                try:
-                    send_telegram (msn, foto, bot_token, chat_id)
-                    print("se envio a telegram el mensaje con el productp ")
-        
-                except:
+                # try:
+              
+                send_telegram (msn, foto, bot_token, chat_id)
+                print("se envio a telegram el mensaje con el productp ")
 
-                    continue
+       
+        
+                # except:
+
+                #     continue
         
                 
             if b!=a:
                 #send_telegram( ("<b>Marca: "+i["brand"]+"</b>\nModelo: "+i["product"]+"\nPrecio Lista :" +str(i["list_price"])+ "\n<b>Precio web :"+str(i["best_price"])+"</b>\nPrecio Tarjeta :"+str(i["card_price"])+"\n"+i["image"]+"\nLink :"+str(i["link"])))
                 print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
 
-                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],bd_name,ship_db2)
+                # save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                #             i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"],i["card_dsct"],bd_name,ship_db2)
                 print("son diferentes")
           
                 continue

@@ -22,7 +22,7 @@ def dia():
 date = dia()
 
 def save_data_to_mongo_db( sku,brand,product,list_price,
-                            best_price,card_price,link,image,dsct,data_base,db_collection):
+                            best_price,card_price,link,image,dsct, card_dsct,data_base,db_collection):
 
         
         ###############
@@ -44,6 +44,7 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "best_price":float(best_price),
             "card_price": float(card_price),
             "web_dsct":float(dsct),
+            "card_dsct":float(card_dsct),
             "link": str(link),
             "image": str(image),
             # "date":str(date),
@@ -64,6 +65,7 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "best_price":float(best_price),
             "card_price": float(card_price),
             "web_dsct":float(dsct),
+            "card_dsct":float(card_dsct),
             "link": str(link),
             "image": str(image),
             # "date":str(date),
