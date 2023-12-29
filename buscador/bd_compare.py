@@ -47,7 +47,7 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "card_dsct":float(card_dsct),
             "link": str(link),
             "image": str(image),
-            "date":str(date),
+            #"date":str(date),
 
            
             }}
@@ -68,7 +68,7 @@ def save_data_to_mongo_db( sku,brand,product,list_price,
             "card_dsct":float(card_dsct),
             "link": str(link),
             "image": str(image),
-            "date":str(date),
+            #"date":str(date),
 
             }
             collection.insert_one(data)
