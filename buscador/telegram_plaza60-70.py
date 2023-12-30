@@ -11,8 +11,8 @@ client = MongoClient(config("MONGO_DB"))
 chat_id = config("VEA2")
 bot_token = config("LLAMA_8_BOT")
 
-bd1 = "bd1"
-bd2 = "bd2"
+bd1 = "bd1b"
+bd2 = "bd2b"
 dsct = 60
 dsct2 = 69
 product = "reloj"
