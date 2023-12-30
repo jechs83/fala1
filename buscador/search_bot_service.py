@@ -589,9 +589,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     db = client[bd_name]
     collection = db[collection_name]
     collection_1 = db[ship_db1]
-    collection_2 = db[ship_db2]
-    
-    # t1 =  collection.find( {"web_dsct":{ "$gte":porcentage1, "$not":{"$gte":porcentage2}},"date":date , "product":{"$not":{"$in":[re.compile(producto,re.IGNORECASE),re.compile("reloj",re.IGNORECASE) ]} } })
+
     ##########  OBTENGO LAS LISTAS DEL MONGO DE LOS PRODUCTOS CON EL RANGO DE DESCUENTO ##########
     live_search = collection.find({
         "$or": [
@@ -602,7 +600,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         "product": {"$not": {"$in": [re.compile(producto, re.IGNORECASE), re.compile("reloj", re.IGNORECASE)]}}
             })
     #==================================================================================
-
+    print("obtiene data de base principal")
     product_array = []
     count = 0
     for i in live_search:
@@ -614,103 +612,134 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 "list_price":i["list_price"],
                 "card_price":i["card_price"],
                 "web_dsct":i["web_dsct"],
-               "card_dsct": i["card_dsct"],
+               "card_dsct": i["card_dsct"],    
             }
+        
+        try:
+            data_saved = collection_1.find_one({'sku': i['sku']})
+        
+            data_sv = {
+                "sku": data_saved["sku"],
+                "best_price":data_saved["best_price"],
+                "list_price":data_saved["list_price"],
+                "card_price":data_saved["card_price"],
+                "web_dsct":data_saved["web_dsct"],
+                "card_dsct": data_saved["card_dsct"],
+            }
+        except:
+            data_sv = None
+        print("######################################################################")
+        print("ESTO ES DATA DE LA BASE DE DATOS TIEMPO REAL")
+        print(data_live)
+        print()
+        print(count)
+        print()
+        print(" BASE DE DATOS DE COMPARACION")
+        print(data_sv)
+        print()
+        print("######################################################################")
 
-        data_saved = collection_1.find_one({'sku': i['sku']})
-        data_sv = {
-            "sku": data_saved["sku"],
-            "best_price":data_saved["best_price"],
-            "list_price":data_saved["list_price"],
-            "card_price":data_saved["card_price"],
-            "web_dsct":data_saved["web_dsct"],
-            "card_dsct": data_saved["card_dsct"],
-        }
-     
- 
+   
         if data_live == data_sv:
 
             print("PRODUCTOS IGUALES, NO SE MANDA NADA A TELEGRAM Y NO DEBE GRABARSE TAMPOCO")
-
-
-        else:
-            print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
-
-       
-            for i in live_search:
-                save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
-                            i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], i["card_dsct"],bd_name,ship_db1)
-                
-                print("llego aqui")
-                if i["web_dsct"] <= 50:
-                    web_d = "🟡"
-                if i["web_dsct"]  > 50 and i["web_dsct"]  <=69:
-                    web_d = "🟢"
-                if i["web_dsct"]  >=70:
-                    web_d = "🔥🔥🔥🔥🔥🔥🔥"
-
-                if i["card_dsct"] <= 50:
-                    card_d = "🟡"
-                if i["card_dsct"] > 50 and i["card_dsct"]  <=69:
-                    card_d = "🟢"
-                if i["card_dsct"]  >=70:
-                    card_d = "🔥🔥🔥🔥🔥🔥🔥"
-
-                
-                if i["list_price"] == 0:
-                    list_price = ""
-                else:
-                    list_price = '🏷 <b>Precio lista:</b> '+  str(i["list_price"])+"\n" 
-                
-                if i["best_price"] == 0:
-                    best_price = ""
-                else:
-                    best_price = '👉 <b>Precio web:</b> <b>'+ str(i["best_price"]) + "</b>" +"\n" 
-
-                if i["card_price"] == 0:
-                    card_price = ""
-                else:
-                    card_price = '💳 <b>Precio TC:</b> <b>' +str(i["card_price"])+ "</b>"+"\n" 
-
-                if i["card_dsct"] == 0:
-                    card_dsct = ""
-                else:
-                    card_dsct =  "💥 <b>Descuento TC:</b> %" + str(i["card_dsct"])+ card_d+"\n" 
-
-                if i["web_dsct"] == 0:
-                    web_dsct = ""
-                else:
-                    web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
         
-                
-                
+        if data_live != data_sv:
+            print(data_live)
+            print()
+            print(data_sv)
+            print()
+            print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
+            print(i["sku"])
 
-                msn = (
-                    
-                        "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
-                        "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
-                        "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
-                        list_price+
-                        best_price +
-                        card_price+
-                        "\n"+
-                        card_dsct+
-                        web_dsct+
-                        "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
-                        "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
-                )
+            if i["web_dsct"] <= 50:
+                web_d = "🟡"
+            if i["web_dsct"]  > 50 and i["web_dsct"]  <=69:
+                web_d = "🟢"
+            if i["web_dsct"]  >=70:
+                web_d = "🔥🔥🔥🔥🔥🔥🔥"
 
+            if i["card_dsct"] <= 50:
+                card_d = "🟡"
+            if i["card_dsct"] > 50 and i["card_dsct"]  <=69:
+                card_d = "🟢"
+            if i["card_dsct"]  >=70:
+                card_d = "🔥🔥🔥🔥🔥🔥🔥"
 
-                foto = i["image"]
-
-                if len(foto) <5:
             
-                    foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
-                
-                send_telegram (msn, foto, bot_token, chat_id)
-
-           
+            if i["list_price"] == 0:
+                list_price = ""
+            else:
+                list_price = '🏷 <b>Precio lista:</b> '+  str(i["list_price"])+"\n" 
             
+            if i["best_price"] == 0:
+                best_price = ""
+            else:
+                best_price = '👉 <b>Precio web:</b> <b>'+ str(i["best_price"]) + "</b>" +"\n" 
+
+            if i["card_price"] == 0:
+                card_price = ""
+            else:
+                card_price = '💳 <b>Precio TC:</b> <b>' +str(i["card_price"])+ "</b>"+"\n" 
+
+            if i["card_dsct"] == 0:
+                card_dsct = ""
+            else:
+                card_dsct =  "💥 <b>Descuento TC:</b> %" + str(i["card_dsct"])+ card_d+"\n" 
+
+            if i["web_dsct"] == 0:
+                web_dsct = ""
+            else:
+                web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
+    
+            
+            
+
+            msn = (
+                
+                    "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                    "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
+                    "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
+                    list_price+
+                    best_price +
+                    card_price+
+                    "\n"+
+                    card_dsct+
+                    web_dsct+
+                    "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                    "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+            )
+
+
+            foto = i["image"]
+
+            if len(foto) <5:
+        
+                foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+
+            save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
+                        i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], i["card_dsct"],bd_name,ship_db1)
+            
+            send_telegram (msn, foto, bot_token, chat_id)
+
+
+
+        if data_live == data_sv:
+
+            print(data_live)
+            print()
+            print(data_sv)
+            print()
+            print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
+            print(i["sku"])
+          
+                
+                
+        
+
+
+            
+                
 
 
         
@@ -887,7 +916,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         
 
 
-    gc.collect()
+
 ##############################################################################################################
 ##################################################################################################
 ##################################################################################################
