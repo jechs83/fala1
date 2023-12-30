@@ -736,17 +736,33 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
               
                 send_telegram (msn, foto, bot_token, chat_id)
             
-            
+            pro_a = []
+
+            pro_b = []
         
-            
+            for productA in a:
+                best_priceA = productA["best_price"]
+                list_priceA = productA["list_price"]
+                card_priceA = productA["card_price"]
+                web_dsctA = productA["web_dsct"]
+                card_dsctA=productA["card_dsct"]
+                pro_a.append([best_priceA,list_priceA,card_priceA,web_dsctA,card_dsctA])
+
+
+            for productB in b:
+                best_priceB = productB["best_price"]
+                list_priceB= productB["list_price"]
+                card_priceB = productB["card_price"]
+                web_dsctB = productB["web_dsct"]
+                card_dsctB=productB["card_dsct"]
+                pro_b.append([best_priceB,list_priceB,card_priceB,web_dsctB,card_dsctB])
+
+                
+            if pro_a!=pro_b:
            
-            if a!=b:
 
                 print("PRODUCTO DE A ES DIFERENTE DE B,  SE ENVIA  A TELEGRAM")
 
-
-              
-           
                 send_telegram (msn, foto, bot_token, chat_id)
             
                 save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 

@@ -1,24 +1,20 @@
 
-from decouple import config
-from search_bot_service import  auto_telegram_between_values
+from search_bot_service import   auto_telegram_between_values
 from pymongo import MongoClient
 from decouple import config
-from pymongo import MongoClient
-from decouple import config
+
 client = MongoClient(config("MONGO_DB"))
-
-
 chat_id = config("RIPLEY2")
 bot_token = config("LLAMA_4_BOT")
+collection_name = config("collection")
+bd_name = config("db_ripley")
+
 bd1 = "bd1b"
 bd2 = "bd2b"
 dsct = 60
 dsct2 = 69
+
 product = "reloj"
-db = client["trigger"]
-collection = db["40"]
-bd_name = config("db_ripley")
-collection_name = config("collection")
     
 
 
