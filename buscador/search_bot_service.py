@@ -7,6 +7,9 @@ import itertools
 import re
 import base64
 import requests
+
+
+
 import pymongo
 from bd_compare import save_data_to_mongo_db
 from history_price import compare_prices
@@ -645,12 +648,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             print("PRODUCTOS IGUALES, NO SE MANDA NADA A TELEGRAM Y NO DEBE GRABARSE TAMPOCO")
         
         if data_live != data_sv:
-            print(data_live)
-            print()
-            print(data_sv)
-            print()
-            print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
-            print(i["sku"])
+           
 
             if i["web_dsct"] <= 50:
                 web_d = "🟡"
@@ -706,6 +704,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     "\n"+
                     card_dsct+
                     web_dsct+
+                    "🏬 <b>Market:</b> " + i["market"] + "\n" +
                     "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
                     "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
             )
@@ -722,6 +721,16 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             
             send_telegram (msn, foto, bot_token, chat_id)
 
+            print(data_live)
+            print()
+            print(data_sv)
+            print()
+            print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
+            print("###################################################################################")
+            print("###################################################################################")
+            print("###################################################################################")
+            print(i["product"])
+            print(i["home_list"])
 
 
         if data_live == data_sv:
