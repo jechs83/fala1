@@ -1,6 +1,6 @@
 
 
-from search_bot_service import  auto_telegram_between_values, productos_sin_dsct
+from telegram_search_engine import productos_sin_dsct
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))

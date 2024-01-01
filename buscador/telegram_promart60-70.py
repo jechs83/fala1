@@ -1,6 +1,6 @@
 
 from decouple import config
-from search_bot_service import  auto_telegram_between_values
+from telegram_search_engine import auto_telegram_between_values
 from pymongo import MongoClient
 from decouple import config
 from pymongo import MongoClient
