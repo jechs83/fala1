@@ -10,10 +10,6 @@ bot_token = config("LLAMA_15_BOT")
 bd1 = "bd1"
 bd2 = "bd2"
 
-product = "reloj"
-db = client["trigger"]
-collection = db["40"]
-bd_name = config("db_saga")
 collection_name = config("collection")
     
 
