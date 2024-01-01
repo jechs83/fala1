@@ -23,6 +23,7 @@ def buscador():
         try:
             # productos_sin_dsct(bd1,bd2, bot_token, chat_id,bd_name,collection_name)
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,"shopstar",collection_name)
+            productos_sin_dsct(bd1,bd2, bot_token, chat_id,"metro",collection_name)
       
         except Exception as e:
             print(f"An exception occurred: {e}")
