@@ -1,6 +1,6 @@
 
 
-from telegram_search_engine import auto_telegram_between_values
+from telegram_search_engine import productos_sin_dsct
 from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
@@ -29,6 +29,9 @@ def buscador():
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,"curacao",collection_name)
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,"platanitos",collection_name)
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,"oechsle",collection_name)
+            productos_sin_dsct(bd1,bd2, bot_token, chat_id,"shopstar",collection_name)
+            productos_sin_dsct(bd1,bd2, bot_token, chat_id,"wong",collection_name)
+            productos_sin_dsct(bd1,bd2, bot_token, chat_id,"metro",collection_name)
            
          
             
