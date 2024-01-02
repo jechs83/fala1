@@ -5,8 +5,8 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-chat_id = config("CURACAO_70-100_CHAT")
-bot_token = config("CURACAO_BORG_TOKEN")
+chat_id = "-1001951603431"
+bot_token = "6960852622:AAHDsUlDu6BAMabCUb_6nt_vFxTtKW_3IOI"
 bd1 = "discovery1"
 bd2 = "discovery2"
 

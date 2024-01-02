@@ -5,8 +5,8 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-chat_id = config("EXCELSIOR_CHAT")
-bot_token = config("LEGION_BOT")
+chat_id = "-1001951603431"
+bot_token = "6960852622:AAHDsUlDu6BAMabCUb_6nt_vFxTtKW_3IOI"
 bd1 = "excelsior1"
 bd2 = "excelsior2"
 
@@ -22,8 +22,9 @@ def buscador():
     while True:
         try:
             productos_sin_dsct(bd1,bd2, bot_token, chat_id,bd_name,collection_name)
-            productos_sin_dsct(bd1,bd2, bot_token, chat_id,"saga",collection_name)
             productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"oechsle",collection_name)
+            productos_sin_dsct("enterprise1","enterprise2", bot_token, chat_id,"tailoy",collection_name)
+
 
         except Exception as e:
             print(f"An exception occurred: {e}")
