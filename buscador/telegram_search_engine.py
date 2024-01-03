@@ -3,7 +3,9 @@ import gc
 from pymongo import MongoClient
 import itertools
 import re
+import os
 import requests
+from PIL import Image, ImageDraw, ImageFont
 from telegram_search_dbSave import save_data_to_mongo_db
 
 from decouple import config
@@ -29,6 +31,28 @@ def dia():
 date = dia()
 
 
+def add_watermark(image_path, watermark_text, output_path):
+    original_image = Image.open(image_path)
+    width, height = original_image.size
+
+    # Create a transparent layer as the watermark
+    watermark = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+
+    # Choose a font and size for the watermark
+    font = ImageFont.load_default()
+
+    # Create a drawing object and add the text to the watermark
+    draw = ImageDraw.Draw(watermark)
+    text_width, text_height = draw.textsize(watermark_text, font)
+    text_position = ((width - text_width) // 2, (height - text_height) // 2)
+    draw.text(text_position, watermark_text, font=font, fill=(255, 255, 255, 128))
+
+    # Combine the original image with the watermark
+    watermarked_image = Image.alpha_composite(original_image.convert('RGBA'), watermark)
+
+    # Save the result
+    watermarked_image.save(output_path, format='PNG')
+
 def send_telegram(message,foto, bot_token, chat_id):
 
     if not foto:
@@ -36,15 +60,16 @@ def send_telegram(message,foto, bot_token, chat_id):
     
     if len(foto)<=4:
             foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
-
+    
     response = requests.post(
         
         f'https://api.telegram.org/bot{bot_token}/sendPhoto',
         data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
         files={'photo': requests.get(foto).content},
-    
+
         )
     print("se envio mensaje por funcion de telegram")
+
 
 
 
@@ -73,24 +98,24 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         print(i)
 
         data_live ={
-               "sku": i["sku"],
-                "best_price":i["best_price"],
-                "list_price":i["list_price"],
-                "card_price":i["card_price"],
-                "web_dsct":i["web_dsct"],
-               "card_dsct": i["card_dsct"],    
+               "sku": str(i["sku"]),
+                "best_price":float(i["best_price"]),
+                "list_price":float(i["list_price"]),
+                "card_price":float(i["card_price"]),
+                "web_dsct":float(i["web_dsct"]),
+               "card_dsct": float(i["card_dsct"]),    
             }
         
         try:
             data_saved = collection_1.find_one({'sku': i['sku']})
         
             data_sv = {
-                "sku": data_saved["sku"],
-                "best_price":data_saved["best_price"],
-                "list_price":data_saved["list_price"],
-                "card_price":data_saved["card_price"],
-                "web_dsct":data_saved["web_dsct"],
-                "card_dsct": data_saved["card_dsct"],
+                "sku": str(data_saved["sku"]),
+                "best_price":float(data_saved["best_price"]),
+                "list_price":float(data_saved["list_price"]),
+                "card_price":float(data_saved["card_price"]),
+                "web_dsct":float(data_saved["web_dsct"]),
+                "card_dsct": float(data_saved["card_dsct"]),
             }
         except:
             data_sv = None
