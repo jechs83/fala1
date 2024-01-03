@@ -174,6 +174,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             msn = (
                 
                     "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                    "# sku: "+str(i["sku"]) + "\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
                     "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
                     list_price+
