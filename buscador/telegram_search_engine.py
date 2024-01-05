@@ -376,7 +376,9 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                        {"date": "05/01/2024"}
+                        {"date": date},
+                        {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
+
                     ]
                 }
     
@@ -388,7 +390,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                        {"date": date}
+                        {"date": date},
+                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
                     ]
                 }
 
@@ -399,6 +402,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000}},
         {"best_price": {"$lte": 1000}},
         {"card_price": {"$lte": 1000}},
+         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date}
     ]
         }
@@ -410,6 +414,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000, "$gt": 0}},
         {"best_price": {"$lte": 1000, "$gt": 0}},
         {"card_price": {"$lte": 1000, "$gt": 0}},
+         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date}
     ]
     }
@@ -421,6 +426,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 3000, "$gt": 0}},
         {"best_price": {"$lte": 3000, "$gt": 0}},
         {"card_price": {"$lte": 3000, "$gt": 0}},
+         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date}
     ]
     }
