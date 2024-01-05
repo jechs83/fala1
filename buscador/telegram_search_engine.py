@@ -172,7 +172,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             
 
             msn = (
-                
+               
                     "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
                     "# sku: "+str(i["sku"]) + "\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
@@ -366,13 +366,84 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
        }
 
 
-    # Execute the query
-    lap = collection.find(laptop)
-    sh = collection.find(shoes)
-    cel = collection.find(cel)
+
+    laptop_query1 ={
+                    "$and": [
+                        ##{"product": {"$regex": r'\b(i\s7|i7|i\s5|i5|ci7|ci5|ci9|i\s9|i9)\b', "$options": "i"}},
+                        { "product": { "$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9|8gb|16gb|12gb|32gb)\b', "$options":"i"} },
+                        {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
+                        {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
+                        {"list_price": {"$lte": 2000}},
+                        {"best_price": {"$lte": 2000}},
+                        {"card_price": {"$lte": 2000}},
+                        {"date": "05/01/2024"}
+                    ]
+                }
+    
+    laptop_query2 ={
+                    "$and": [
+                        {"product": {"$regex": r'\b(i\s7|i7|i\s5|i5|ci7|ci5|ci9|i\s9|i9)\b', "$options": "i"}},
+                        {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
+                        {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
+                        {"list_price": {"$lte": 2000}},
+                        {"best_price": {"$lte": 2000}},
+                        {"card_price": {"$lte": 2000}},
+                        {"date": date}
+                    ]
+                }
+
+    celular_query ={
+    "$and": [
+        {"product": {"$regex": r'\b(smartphone|celular|6gb|8gb|12gb)\b', "$options": "i"}},
+        {"brand": {"$regex": r'\b(xiaomi|samsung|apple|lg|motorola|realme|oppo|vivo|redmi|honor|google|huawei||)\b', "$options": "i"}},
+        {"list_price": {"$lte": 1000}},
+        {"best_price": {"$lte": 1000}},
+        {"card_price": {"$lte": 1000}},
+        {"date": date}
+    ]
+        }
+
+    tele_query = {
+    "$and": [
+        {"product": {"$regex": r"\b(televisor|tele|televis|55\"|50\"|60\"|65\"|70\"|75\"|80\"|82\"|85\")\b", "$options": "i"}},
+        {"brand": {"$regex": r"\b(samsung|lg|panasonic|sony|philips|hisense|tlc|aoc)\b", "$options": "i"}},
+        {"list_price": {"$lte": 1000, "$gt": 0}},
+        {"best_price": {"$lte": 1000, "$gt": 0}},
+        {"card_price": {"$lte": 1000, "$gt": 0}},
+        {"date": date}
+    ]
+    }
+
+    iphone_query = {
+    "$and": [
+        {"product": {"$regex": r"\b(iphone|pro|pro\smax|air|plus|macbook\spro|\b", "$options": "i"}},
+        {"brand": {"$regex": r"\b(apple)\b", "$options": "i"}},
+        {"list_price": {"$lte": 3000, "$gt": 0}},
+        {"best_price": {"$lte": 3000, "$gt": 0}},
+        {"card_price": {"$lte": 3000, "$gt": 0}},
+        {"date": date}
+    ]
+    }
+
+
+
+    # # Execute the query
+    # lap = collection.find(laptop)
+    # sh = collection.find(shoes)
+    # cel = collection.find(cel)
+     
+    # product_array = []
+    # result = itertools.chain(lap, sh)
+
+
+     # Execute the query
+    lap1 = collection.find(laptop_query1)
+    lap2 = collection.find(laptop_query2)
+    cel = collection.find(celular_query)
+    tele = collection.find(tele_query)
      
     product_array = []
-    result = itertools.chain(lap, sh)
+    result = itertools.chain(lap1, lap2, cel, tele, iphone_query)
   
      
     count = 0
@@ -453,7 +524,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             else:
                 web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
     
-            
+            if list_price and best_price and card_price == 0:
+                continue
             
 
             msn = (
