@@ -349,12 +349,13 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         )
         
 
+
         search_product_dsct_html(product,dsct,price ,bot_token ,chat_Id)
 
-        document = open(config("HTML_PATH")+"producto.html", 'rb')
+        document = open(config("HTML_PATH")+product+".html", 'rb')
         context.bot.send_document(chat_Id, document)
         document.close()
-        os.remove(config("HTML_PATH")+"producto.html")
+        os.remove(config("HTML_PATH")+product+".html")
 
 
     ### 14 CREA HTML DE BUSQUEDA DE MARCA Y DSCT PERSONALIZADO
