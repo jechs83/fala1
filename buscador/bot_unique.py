@@ -315,7 +315,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         product = words[1]
         dsct = words[2]
-        db_name = words[3]
+    
 
 
         # print(words)
@@ -349,7 +349,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         )
         
 
-        search_product_dsct_html(product,dsct,price ,bot_token ,chat_Id, db_name)
+        search_product_dsct_html(product,dsct,price ,bot_token ,chat_Id)
 
         document = open(config("HTML_PATH")+"producto.html", 'rb')
         context.bot.send_document(chat_Id, document)

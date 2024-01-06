@@ -1153,61 +1153,52 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
 
 
 # SE BUSCA POR PRODUCTO 
-def search_product_dsct_html(product,dsct, price, bot_token, chat_id, db_name):
-    product = str(product).replace("%"," ")
-
+def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
     client = MongoClient(config("MONGO_DB"))
-    db5 = client[db_name]
-    db5.command({"planCacheClear": "scrap"})
+     
+    def html_creator (array):
 
-
-    collection5 = db5["scrap"] 
-    print(price)
-    if price == "+":
-        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.DESCENDING)
-    if price =="-":
-        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
-
-    if price ==None:
-       t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]}, "web_dsct":{"$gte":int(dsct)}, "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.DESCENDING)
-
-    if dsct == 0:
-        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("web_dsct",pymongo.ASCENDING)
-
-    if dsct == 0 and price == "+":
-        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.DESCENDING)
-
-    if dsct == 0 and price == "-":
-        t5 = collection5.find({"product":{"$in":[re.compile(product, re.IGNORECASE),]},  "brand":{"$nin":[re.compile("generica", re.IGNORECASE), re.compile("generico", re.IGNORECASE),  re.compile("genérico", re.IGNORECASE), re.compile("genérica", re.IGNORECASE),  re.compile("generic", re.IGNORECASE)] }, "date": date}).sort("best_price",pymongo.ASCENDING)
-
-
-
-    list_cur = list(t5)
-    products = []
-    for i in list_cur:
-        
-        
-        
-        #p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': i["card_dsct"], 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
-
-        p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': i["web_dsct"],  'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+i["image"]+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":i["sku"]}
-        products.append(p)
-
-    df = DataFrame(products)
+        products = []
+        for i in array:
     
-    def path_to_image_html(path):
- 
-        return '<img src="'+ path + '" style=max-height:124px;"/>'
+            p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': "%"+str(i["card_dsct"]), 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
 
-    html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+            products.append(p)
 
-    with open (config("HTML_PATH")+"producto.html", "w", encoding="utf-8") as f:
-        f.write(html)
-        f.close
-    #print(html)
-    # send_telegram(html, bot_token, chat_id )
-    # os.remove(config("HTML_PATH")+"producto.html")
-    gc.collect()
+        df = DataFrame(products)
+
+        
+        def path_to_image_html(path):
+    
+            return '<img src="'+ path + '" style=max-height:124px;"/>'
+        
+        html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+        with open (config("HTML_PATH")+product+".html", "w", encoding='utf-8') as f:
+        
+            f.write(html)
+            f.close
+        print(html)
+
+
+    query = {"product": {"$regex": re.compile(product, re.IGNORECASE)},
+            "$or": [
+                {"web_dsct": {"$gte": int(dsct)}},
+                {"card_dsct": {"$gte": int(dsct)}}
+            ],
+            "date": date
+            }
+
+    shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
+
+    array =[]
+    for i in shop:
+        db5 = client[i]
+        collection5 = db5["scrap"] 
+        html_view = collection5.find(query).sort("web_dsct", -1)
+        array.extend(html_view)
+
+    html_creator(list(array))
 
 
 def search_brand_dsct_html(brand, dsct, price, bot_token, chat_id):
