@@ -14,7 +14,7 @@ bd1 = "bd1"
 bd2 = "bd2"
 dsct = 70
 dsct2 = 100
-product = "Null"
+
 db = client["trigger"]
 collection = db["40"]
 bd_name = config("db_ripley")
@@ -25,7 +25,7 @@ collection_name = config("collection")
 def buscador():
     while True:
         try:
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, bd_name, collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, bd_name, collection_name)
         except Exception as e:
             print(f"An exception occurred: {e}")
 

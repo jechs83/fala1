@@ -73,7 +73,7 @@ def send_telegram(message,foto, bot_token, chat_id):
 
 
 
-def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2, producto, bd_name, collection_name):
+def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2,bd_name, collection_name):
     print("buscando")
    
     db = client[bd_name]
@@ -87,7 +87,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             {"card_dsct": {"$gte": porcentage1,  "$lte": porcentage2}},
         ],
         "date": date,
-        "product": {"$not": {"$in": [re.compile(producto, re.IGNORECASE), re.compile("reloj", re.IGNORECASE)]}}
+        # "product": {"$not": {"$in": [re.compile(producto, re.IGNORECASE), re.compile("reloj", re.IGNORECASE)]}}
             })
     #==================================================================================
     print("obtiene data de base principal")
