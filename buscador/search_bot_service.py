@@ -100,12 +100,51 @@ collection5 = db5["scrap"]
 
 def busqueda(codigo,bot_token, chat_id):
     print("entro a busqueda de codigo")
+    client = MongoClient(config("MONGO_DB"))
+     
+    def html_creator (array):
+
+        products = []
+        for i in array:
+    
+            p = {"market": i["market"],"brand": i["brand"], "product": i["product"], 'list_price': i["list_price"], 'best_price': i["best_price"], 'card_price': i["card_price"], 'web_dsct': "%"+str(i["web_dsct"]), 'card_dsct': "%"+str(i["card_dsct"]), 'link':  '<a href='+i["link"]+'>Link</a>' , 'image': '<img src='+str(i["image"])+" style=max-height:124px;/>", 'date': i["date"], 'time':i["time"], "sku":str(i["sku"])}
+
+            products.append(p)
+
+        df = DataFrame(products)
+
+        
+        def path_to_image_html(path):
+    
+            return '<img src="'+ path + '" style=max-height:124px;"/>'
+        
+        html = df.to_html(escape=False ,formatters=dict(column_name_with_image_links=path_to_image_html))
+
+        with open (config("HTML_PATH")+brand+".html", "w", encoding='utf-8') as f:
+        
+            f.write(html)
+            f.close
+        print(html)
+
+
+    query = {"sku": {"$regex": re.compile(codigo, re.IGNORECASE)},
+           
+            "date": date
+            }
+
+    shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
+
+    array =[]
+    for i in shop:
+        db5 = client[i]
+        collection5 = db5["scrap"] 
+        html_view = collection5.find(query).sort("web_dsct", -1)
+        array.extend(html_view)
     #db5.command({"planCacheClear": "scrap"})
-    t5 = collection5.find({"sku":str(codigo), "date":date})
 
     print( "se realizo busqueda")
     print(codigo)
-    for i in t5:
+    for i in array:
         print("se envio a telegram")    
         if  i["card_price"] == 0:
                 card_price = ""

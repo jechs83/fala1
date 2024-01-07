@@ -131,26 +131,26 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
             
 
     # ### 7 BUSCA EN PRODUCTO CON EL CODIGO SKU
-    # def sku(update, context):
-    #     bot = context.bot
-    #     chatId= update.message.chat_id
-    #     userName = update.effective_user["first_name"]
-    #     logger.info(f"el usuario {userName}  busca codigo especifico")
-    #     codigo = context.args[0]
+    def sku(update, context):
+        bot = context.bot
+        chatId= update.message.chat_id
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName}  busca codigo especifico")
+        codigo = context.args[0]
 
 
-    #     bot.sendMessage(
-    #         chat_id=chatId,
-    #         parse_mode="HTML",
-    #         text= f"Procesado busqueda..."
-    #     )
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Procesado busqueda..."
+        )
         
-    #     busqueda(str(codigo), bot_token ,chat_id)
-    #     bot.sendMessage(
-    #         chat_id=chatId,
-    #         parse_mode="HTML",
-    #         text= f"Termino la busqueda... si no hay nada no encontre ps"
-    #     )
+        busqueda(str(codigo), bot_token ,chat_id)
+        bot.sendMessage(
+            chat_id=chatId,
+            parse_mode="HTML",
+            text= f"Termino la busqueda... si no hay nada no encontre ps"
+        )
 
     # ### 8 BUSCA AUTOMATICAMENTE LAS MARCAS EN LAS CATEGORIAS DEL 60% EN ADELANTE NO ENVIA SI YA SE ENVIO
     # def auto_tele(update, context):
@@ -568,7 +568,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     # dp.add_handler(CommandHandler("resetship", reset_ship_data))
     dp.add_handler(CommandHandler("product", send_product))
     # dp.add_handler(CommandHandler('market', custom_search_market))
-    # dp.add_handler(CommandHandler('cod', sku))
+    dp.add_handler(CommandHandler('cod', sku))
     # dp.add_handler(CommandHandler('auto', auto_tele))
     # dp.add_handler(CommandHandler("f", fazil_reg))
     # dp.add_handler(CommandHandler('manual', auto_tele_dsct))
