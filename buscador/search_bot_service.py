@@ -1088,7 +1088,7 @@ def manual_telegram( category, dsct, bot_token, chat_id):
 ##############################################################################################################################
 
 def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
-
+    dia = dia()
     client = MongoClient(config("MONGO_DB"))
     db5 = client[market]
     collection5 = db5["scrap"] 
@@ -1123,8 +1123,10 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
                 {"web_dsct": {"$gte": int(dsct)}},
                 {"card_dsct": {"$gte": int(dsct)}}
             ],
-            "date": date
+            "date": dia
             }
+    
+  
 
     shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
 
