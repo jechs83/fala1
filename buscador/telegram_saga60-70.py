@@ -22,7 +22,7 @@ product = "reloj"
 def buscador():
     while True:
         try:
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, bd_name, collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, bd_name, collection_name)
         except Exception as e:
             print(f"An exception occurred: {e}")
 
