@@ -5,6 +5,7 @@ import itertools
 import re
 import os
 import requests
+import time
 from PIL import Image, ImageDraw, ImageFont
 from telegram_search_dbSave import save_data_to_mongo_db
 
@@ -31,44 +32,64 @@ def dia():
 date = dia()
 
 
-def add_watermark(image_path, watermark_text, output_path):
-    original_image = Image.open(image_path)
-    width, height = original_image.size
 
-    # Create a transparent layer as the watermark
-    watermark = Image.new('RGBA', (width, height), (0, 0, 0, 0))
 
-    # Choose a font and size for the watermark
-    font = ImageFont.load_default()
-
-    # Create a drawing object and add the text to the watermark
-    draw = ImageDraw.Draw(watermark)
-    text_width, text_height = draw.textsize(watermark_text, font)
-    text_position = ((width - text_width) // 2, (height - text_height) // 2)
-    draw.text(text_position, watermark_text, font=font, fill=(255, 255, 255, 128))
-
-    # Combine the original image with the watermark
-    watermarked_image = Image.alpha_composite(original_image.convert('RGBA'), watermark)
-
-    # Save the result
-    watermarked_image.save(output_path, format='PNG')
-
-def send_telegram(message,foto, bot_token, chat_id):
-
-    if not foto:
-        foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+# def send_telegram(message,foto, bot_token, chat_id):
+   
     
-    if len(foto)<=4:
-            foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+#     if not foto:
+#         foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    
+#     if len(foto)<=4:
+#             foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"    
+
+   
+#     response = requests.post(
+        
+#         f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+#         data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
+#         #files={'photo': requests.get(foto).content},
+#         files={'photo': requests.get(foto).content},
+
+#         )
+ 
+#     print("se envio mensaje por funcion de telegram")
+
+
+def send_telegram(message, foto, bot_token, chat_id):
+    
+    if not foto:
+        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    
+    if len(foto) <= 4:
+        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"    
+    
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Firefox/78.0'
+        }      
+
+    photo_response = requests.get(foto, headers=headers)
+
+    
+    photo_response = requests.get(foto)
+    if photo_response.status_code == 403:
+            foto= "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+
+
+
+    files = {'photo': ('photo.jpg', requests.get(foto).content)}
+    
     
     response = requests.post(
-        
         f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-        data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
-        files={'photo': requests.get(foto).content},
+        data={'chat_id': chat_id, 'caption': str(message), 'parse_mode': 'HTML'},
+        files=files
+    )
+    response.raise_for_status()  # Check if the request was successful
+    print("Message sent successfully")
+  
+      
 
-        )
-    print("se envio mensaje por funcion de telegram")
 
 
 
@@ -79,6 +100,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
     db = client[bd_name]
     collection = db[collection_name]
     collection_1 = db[ship_db1]
+    collection_2 = db[ship_db2]
 
     ##########  OBTENGO LAS LISTAS DEL MONGO DE LOS PRODUCTOS CON EL RANGO DE DESCUENTO ##########
     live_search = collection.find({
@@ -118,14 +140,15 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                 "card_dsct": float(data_saved["card_dsct"]),
             }
         except:
-            data_sv = None
-
+            data_sv = None  
+      
    
         if data_live == data_sv:
 
             print("PRODUCTOS IGUALES, NO SE MANDA NADA A TELEGRAM Y NO DEBE GRABARSE TAMPOCO")
         
         if data_live != data_sv:
+
            
 
             if i["web_dsct"] <= 50:
@@ -168,7 +191,15 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             else:
                 web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
     
-            
+            foto = i["image"]
+
+            if "http:" in foto:
+                foto = foto.replace("http:", "https:")
+
+            print(foto)
+            if len(foto) <5:
+        
+                foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
             
 
             msn = (
@@ -177,28 +208,29 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     "# sku: "+str(i["sku"]) + "\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
                     "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
-                    list_price+
-                    best_price +
-                    card_price+
+                    str(list_price)+
+                    str(best_price) +
+                    str(card_price)+
                     "\n"+
-                    card_dsct+
-                    web_dsct+
-                    "🏬 <b>Market:</b> " + i["market"] + "\n" +
-                    "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                    str(card_dsct)+
+                    str(web_dsct)+
+                    "🏬 <b>Market:</b> " + str(i["market"]) + "\n" +
+                    "🕗 <b>Fecha y Hora:</b> " + str(i["date"]) + " " + str(i["time"]) + "\n" +
                     "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
             )
 
-
-            foto = i["image"]
-
-            if len(foto) <5:
         
-                foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+            
 
             save_data_to_mongo_db( i["sku"], i["brand"] , i["product"], i["list_price"], 
                         i["best_price"], i["card_price"], i["link"] ,i["image"],i["web_dsct"], i["card_dsct"],bd_name,ship_db1)
             
-            send_telegram (msn, foto, bot_token, chat_id)
+               
+
+            send_telegram (msn, str(foto), bot_token, chat_id)
+          
+            print("se debio enviar")
+          
         
 
 
@@ -212,6 +244,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
         print( count)
     print("############      FIN     #############")
+    gc.collect()
 
           
                 
