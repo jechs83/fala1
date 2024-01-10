@@ -424,9 +424,27 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
                         {"date": date},
-                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
+                        {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
                     ]
                 }
+    
+    refri_query ={
+
+                "$and": [
+ 
+                { "product": { "$regex": r'\b(refrigeradora|refri)\b', "$options": "i"} },
+                { "brand": { "$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole)\b', "$options": "i"} },
+                { "list_price": {"$lte:": 1200 } },
+                { "best_price": { "$lte": 1200 } },
+                { "card_price": { "$lte": 1200 } },
+                {"date":date}
+                ]
+            }
+
+
+
+
+    
 
     celular_query ={
     "$and": [
@@ -480,9 +498,10 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     lap2 = collection.find(laptop_query2)
     cel = collection.find(celular_query)
     tele = collection.find(tele_query)
+    refri =collection.find(refri_query)
      
     product_array = []
-    result = itertools.chain(lap1, lap2, cel, tele, iphone_query)
+    result = itertools.chain(lap1, lap2, refri_query, cel, tele, iphone_query)
   
      
     count = 0
