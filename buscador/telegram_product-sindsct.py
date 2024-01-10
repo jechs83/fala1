@@ -3,6 +3,7 @@
 from telegram_search_engine import productos_sin_dsct
 from pymongo import MongoClient
 from decouple import config
+import time
 client = MongoClient(config("MONGO_DB"))
 
 chat_id = config("TEST1")
@@ -33,6 +34,7 @@ def buscador():
             
         except Exception as e:
             print(f"An exception occurred: {e}")
+            time.sleep(20)
 
 # Call the function to start the infinite loop
 buscador()
