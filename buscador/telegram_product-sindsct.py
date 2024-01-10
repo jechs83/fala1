@@ -34,7 +34,7 @@ def buscador():
             
         except Exception as e:
             print(f"An exception occurred: {e}")
-            time.sleep(20)
+ 
 
 # Call the function to start the infinite loop
 buscador()
