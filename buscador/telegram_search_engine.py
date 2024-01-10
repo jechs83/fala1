@@ -257,173 +257,34 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     collection_1 = db[ship_db1]
     collection_2 = db[ship_db2]
 
-    # product_shoes_patters =[
-    #                 re.compile(r'zapatilla', re.IGNORECASE),
-    #                 re.compile(r'sandalia', re.IGNORECASE),
-    #                 re.compile(r'zapato', re.IGNORECASE),
-    #         ]
-
-    # # Define the brand regex patterns
-    # brand_shoes_patterns = [
-    #     re.compile(r'puma', re.IGNORECASE),
-    #     re.compile(r'adidas', re.IGNORECASE),
-    #     re.compile(r'reebok', re.IGNORECASE),
-    #     re.compile(r'nike', re.IGNORECASE),
-    #     re.compile(r'under armor', re.IGNORECASE),
-    #     re.compile(r'hi tec', re.IGNORECASE),
-    #     re.compile(r'Converse', re.IGNORECASE),
-    #     re.compile(r'vans', re.IGNORECASE),
-    #     re.compile(r'hi-tec', re.IGNORECASE),
-    #     re.compile(r'vans', re.IGNORECASE),
-    #       re.compile(r'crocs', re.IGNORECASE)
-    #             ]
-
-    # # Define the query
-    # shoes = {
-    #     "product": {"$in": product_shoes_patters},
-    #     "brand": {"$in": brand_shoes_patterns},
-    #     "date": date,
-    #     "$or": [
-    #         {"best_price": {"$lte": 150, "$gt": 0}},
-    #         {"list_price": {"$lte": 150, "$gt": 0}},
-    #         {"card_price": {"$lte": 150, "$gt": 0}}
-    #     ]
-    #     }
-
-    # #################################################\
-    # product_compu_regex_patterns = [
-    # re.compile(r'laptop', re.IGNORECASE),
-    # re.compile(r'ryzen', re.IGNORECASE),
-    # re.compile(r'notebook', re.IGNORECASE),
-    # re.compile(r'tablet', re.IGNORECASE),
-    # re.compile(r'ipad', re.IGNORECASE),
-    # re.compile(r'intel', re.IGNORECASE)
-    # ]
-
-    # # Define the exclusion patterns
-    # exclusion_compu_patterns = [
-    #     re.compile(r'celeron', re.IGNORECASE),
-    #     re.compile(r'ryzen 3', re.IGNORECASE),
-    #     re.compile(r'core i3', re.IGNORECASE),
-    #     re.compile(r'ci3', re.IGNORECASE),
-    #      re.compile(r'bateria', re.IGNORECASE),
-    #     re.compile(r'cargador', re.IGNORECASE),
-    #     re.compile(r'maleta', re.IGNORECASE),
-    #     re.compile(r'case', re.IGNORECASE),
-    #     re.compile(r'funda', re.IGNORECASE),
-    #       re.compile(r'teclado', re.IGNORECASE),
-    #     re.compile(r'bolso', re.IGNORECASE),
-    #     re.compile(r'maletin', re.IGNORECASE),
-    #     re.compile(r'Motherboard', re.IGNORECASE),
-
-        
-    # ]
-
-    # # Define the brand regex patterns
-    # brand_compu_patterns = [
-    #     re.compile(r'lenovo', re.IGNORECASE),
-    #     re.compile(r'alien', re.IGNORECASE),
-    #     re.compile(r'hp', re.IGNORECASE),
-    #     re.compile(r'lg', re.IGNORECASE),
-    #     re.compile(r'apple', re.IGNORECASE),
-    #     re.compile(r'asus', re.IGNORECASE),
-    #     re.compile(r'acer', re.IGNORECASE),
-    #     re.compile(r'panasonic', re.IGNORECASE)
-    #             ]
-
-    # # Define the query
-    # laptop = {
-    #     "product": {
-    #         "$in": product_compu_regex_patterns,
-    #         "$not": {"$in": exclusion_compu_patterns}
-    #     },
-    #     "brand": {"$in": brand_compu_patterns},
-    #     "date": date,
-    #     "web_dsct": 0,
-    #     "$or": [
-    #         {"best_price": {"$lte": 3000, "$gt": 0}},
-    #         {"list_price": {"$lte": 3000, "$gt": 0}},
-    #         {"card_price": {"$lte": 3000, "$gt": 0}}
-    #     ]
-    #    }
-    
-
-
-    #    #################################################\
-    # product_cel_regex_patterns = [
-    # re.compile(r'celular', re.IGNORECASE),
-    # re.compile(r'smartphone', re.IGNORECASE),
-    # re.compile(r'mobile', re.IGNORECASE),
-    # re.compile(r'movil', re.IGNORECASE),
-    # re.compile(r'telefono', re.IGNORECASE)
-    # ]
-
-    # # Define the exclusion patterns
-    # exclusion_cel_patterns = [
-    #     re.compile(r'mica', re.IGNORECASE),
-    #     re.compile(r'cargador', re.IGNORECASE),
-    #     re.compile(r'cable', re.IGNORECASE),
-    #     re.compile(r'bank', re.IGNORECASE)
-    # ]
-
-    # # Define the brand regex patterns
-    # brand_cel_patterns = [
-    #     re.compile(r'lenovo', re.IGNORECASE),
-    #     re.compile(r'xiaomi', re.IGNORECASE),
-    #     re.compile(r'apple', re.IGNORECASE),
-    #     re.compile(r'lg', re.IGNORECASE),
-    #     re.compile(r'motorola', re.IGNORECASE),
-    #     re.compile(r'asus', re.IGNORECASE),
-    #     re.compile(r'samsung', re.IGNORECASE),
-    #     re.compile(r'oppo', re.IGNORECASE),
-    #     re.compile(r'huawei', re.IGNORECASE),
-    #     re.compile(r'vivo', re.IGNORECASE),
-    #     re.compile(r'honor', re.IGNORECASE),
-    #     re.compile(r'redmi', re.IGNORECASE),
-    #             ]
-
-    # # Define the query
-    # cel = {
-    #     "product": {
-    #         "$in": product_cel_regex_patterns,
-    #         "$not": {"$in": exclusion_cel_patterns}
-    #     },
-    #     "brand": {"$in": brand_cel_patterns},
-    #     "date": date,
-    #     "web_dsct": 0,
-    #     "$or": [
-    #         {"best_price": {"$lte": 1000, "$gt": 0}},
-    #         {"list_price": {"$lte": 1000, "$gt": 0}},
-    #         {"card_price": {"$lte": 1000, "$gt": 0}}
-    #     ]
-    #    }
+   
     print("primer query")
 
 
     laptop_query1 = {
-        "$and": [
-            # Uncomment and modify the processor criteria if needed
-            # {"product": {"$regex": r'\b(i\s7|i7|i\s5|i5|ci7|ci5|ci9|i\s9|i9)\b', "$options": "i"}},
+                    "$and": [
+                
+                        {"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9|8gb|16gb|12gb|32gb)\b', "$options": "i"}},
+                        {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
+                        {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
+                        {"list_price": {"$lte": 2000}},
+                        {"best_price": {"$lte": 2000}},
+                        {"card_price": {"$lte": 2000}},
+                        {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
+                        {"date": date},
+                        {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
+                        
+                        ],
 
-            {"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9|8gb|16gb|12gb|32gb)\b', "$options": "i"}},
-            {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
-            {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
-            {"list_price": {"$lte": 2000}},
-            {"best_price": {"$lte": 2000}},
-            {"card_price": {"$lte": 2000}},
-            {"web_dsct":0},
-            {"card_dsct":0},
-            {"date": date},
-            {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
-            
-        ],
-          "$or":[
-  
-                {"list_price": {"$ne": 0}},
-                {"best_price": {"$ne": 0}},
-                {"card_price": {"$ne": 0}},
-            ]
-    }
+                        "$or":[
+                
+                                {"list_price": {"$ne": 0}},
+                                {"best_price": {"$ne": 0}},
+                                {"card_price": {"$ne": 0}},
+                      
+                            ]
+                    }
    
     
     laptop_query2 ={
@@ -434,31 +295,32 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                        {"web_dsct":0},
-                        {"card_dsct":0},
+                          {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
                         {"date": date},
                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
                        
                     ],
-          "$or":[
-  
-                {"list_price": {"$ne": 0}},
-                {"best_price": {"$ne": 0}},
-                {"card_price": {"$ne": 0}},
-            ]
+                            "$or":[
+                    
+                                    {"list_price": {"$ne": 0}},
+                                    {"best_price": {"$ne": 0}},
+                                    {"card_price": {"$ne": 0}},
+                               
+                            ]
                 }
     
     refri_query ={
 
                 "$and": [
  
-                        { "product": { "$regex": r'\b(refrigeradora|refri)\b', "$options": "i"} },
+                        { "product": { "$regex": r'\b(refrigeradora|lavadora|cocina|)\b', "$options": "i"} },
                         { "brand": { "$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole|General\sElectric|Whirpool|frigidaire)\b', "$options": "i"} },
                         { "list_price": {"$lte": 1200 } },
                         { "best_price": { "$lte": 1200 } },
                         { "card_price": { "$lte": 1200 } },
-                        {"web_dsct":0},
-                        {"card_dsct":0},
+                          {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
                         {"date":date},
                     
                     ],
@@ -467,6 +329,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
+          
             ]
             }
 
@@ -482,8 +345,9 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                     {"list_price": {"$lte": 1000}},
                     {"best_price": {"$lte": 1000}},
                     {"card_price": {"$lte": 1000}},
-                    {"web_dsct":0},
-                    {"card_dsct":0},
+                      {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
+              
                     {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
                     {"date": date},
                    
@@ -493,6 +357,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
+         
             ]
                     }
 
@@ -503,8 +368,9 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000, "$gt": 0}},
         {"best_price": {"$lte": 1000, "$gt": 0}},
         {"card_price": {"$lte": 1000, "$gt": 0}},
-        {"web_dsct":0},
-        {"card_dsct":0},
+          {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
+   
          {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date},
    
@@ -514,6 +380,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
+        
             ]
     }
 
@@ -524,14 +391,16 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             {"list_price": {"$lte": 3000, "$gt": 0}},
             {"best_price": {"$lte": 3000, "$gt": 0}},
             {"card_price": {"$lte": 3000, "$gt": 0}},
-            {"web_dsct": 0},
-            {"card_dsct": 0},
+              {"web_dsct":{"$ne":0}},
+                        {"card_dsct":{"$ne":0}},
+           
             {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
             {"date": date},
             {"$or": [
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
+              
             ]}
         ]
     }
