@@ -433,7 +433,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                 "$and": [
  
                 { "product": { "$regex": r'\b(refrigeradora|refri)\b', "$options": "i"} },
-                { "brand": { "$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole)\b', "$options": "i"} },
+                { "brand": { "$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole|General Electric|Whirpool|frigidaire)\b', "$options": "i"} },
                 { "list_price": {"$lte:": 1200 } },
                 { "best_price": { "$lte": 1200 } },
                 { "card_price": { "$lte": 1200 } },
