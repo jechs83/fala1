@@ -411,6 +411,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             {"list_price": {"$lte": 2000}},
             {"best_price": {"$lte": 2000}},
             {"card_price": {"$lte": 2000}},
+            {"web_dsct":0},
+            {"card_dsct":0},
             {"date": date},
             {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
         ]
@@ -425,6 +427,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
+                        {"web_dsct":0},
+                        {"card_dsct":0},
                         {"date": date},
                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}}
                     ]
@@ -439,6 +443,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         { "list_price": {"$lte": 1200 } },
                         { "best_price": { "$lte": 1200 } },
                         { "card_price": { "$lte": 1200 } },
+                        {"web_dsct":0},
+                        {"card_dsct":0},
                         {"date":date}
                     ]
             }
@@ -455,7 +461,10 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000}},
         {"best_price": {"$lte": 1000}},
         {"card_price": {"$lte": 1000}},
+        {"web_dsct":0},
+        {"card_dsct":0},
          {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
+
         {"date": date}
     ]
         }
@@ -467,6 +476,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000, "$gt": 0}},
         {"best_price": {"$lte": 1000, "$gt": 0}},
         {"card_price": {"$lte": 1000, "$gt": 0}},
+        {"web_dsct":0},
+        {"card_dsct":0},
          {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date}
     ]
@@ -479,11 +490,13 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 3000, "$gt": 0}},
         {"best_price": {"$lte": 3000, "$gt": 0}},
         {"card_price": {"$lte": 3000, "$gt": 0}},
+        {"web_dsct":0},
+        {"card_dsct":0},
          {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date}
     ]
     }
-    
+
 
 
 
