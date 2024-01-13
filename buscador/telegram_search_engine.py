@@ -264,27 +264,21 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
 
     laptop_query1 = {
                     "$and": [
-                
                         {"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9|8gb|16gb|12gb|32gb)\b', "$options": "i"}},
                         {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
                         {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-              {"web_dsct":0},
-                    {"card_dsct":0},
+                        {"web_dsct":0},
+                        {"card_dsct":0},
                         {"date": date},
-                        {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
-                        
+                        {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
                         ],
-
                         "$or":[
-                
                                 {"list_price": {"$ne": 0}},
                                 {"best_price": {"$ne": 0}},
-                                {"card_price": {"$ne": 0}},
-                      
-                            ]
+                                {"card_price": {"$ne": 0}}, ]
                     }
    
     
@@ -296,11 +290,10 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                 {"web_dsct":0},
-                    {"card_dsct":0},
+                        {"web_dsct":0},
+                        {"card_dsct":0},
                         {"date": date},
-                        {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
-                       
+                        {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
                     ],
                             "$or":[
                     
@@ -314,97 +307,97 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     refri_query ={
 
                 "$and": [
- 
                         { "product": { "$regex": r'\b(refrigeradora|lavadora|cocina|)\b', "$options": "i"} },
                         { "brand": { "$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole|General\sElectric|Whirpool|frigidaire)\b', "$options": "i"} },
                         { "list_price": {"$lte": 1200 } },
                         { "best_price": { "$lte": 1200 } },
                         { "card_price": { "$lte": 1200 } },
-                      {"web_dsct":0},
-                    {"card_dsct":0},
+                        {"web_dsct":0},
+                        {"card_dsct":0},
                         {"date":date},
-                    
                     ],
           "$or":[
-  
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
-          
             ]
             }
 
 
-
-
-    
-
     celular_query ={
                 "$and": [
-                    {"product": {"$regex": r'\b(smartphone|celular|6gb|8gb|12gb)\b', "$options": "i"}},
+                    {"product": {"$regex": r'\b(smartphone|celular|6gb|8gb|12gb|tablet|ipad)\b', "$options": "i"}},
                     {"brand": {"$regex": r'\b(xiaomi|samsung|apple|lg|motorola|realme|oppo|vivo|redmi|honor|google|huawei|)\b', "$options": "i"}},
                     {"list_price": {"$lte": 1000}},
                     {"best_price": {"$lte": 1000}},
                     {"card_price": {"$lte": 1000}},
                     {"web_dsct":0},
                     {"card_dsct":0},
-              
-                    {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
+                    {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
                     {"date": date},
-                   
                 ],
           "$or":[
-  
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
-         
             ]
                     }
 
     tele_query = {
-    "$and": [
-        {"product": {"$regex": r"\b(televisor|tele|televis|55\"|50\"|60\"|65\"|70\"|75\"|80\"|82\"|85\")\b", "$options": "i"}},
-        {"brand": {"$regex": r"\b(samsung|lg|panasonic|sony|philips|hisense|tlc|aoc)\b", "$options": "i"}},
+        "$and": [
+        {"product": {"$regex": r"\b(televisor|tele|55\"|50\"|60\"|65\"|70\"|75\"|80\"|82\"|85\")\b", "$options": "i"}},
+        {"brand": {"$regex": r"\b(samsung|lg|panasonic|sony|philips|hisense|tlc|aoc|xiaomi|aiwa)\b", "$options": "i"}},
         {"list_price": {"$lte": 1000, "$gt": 0}},
         {"best_price": {"$lte": 1000, "$gt": 0}},
         {"card_price": {"$lte": 1000, "$gt": 0}},
         {"web_dsct":0},
-                    {"card_dsct":0},
-   
-         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
+        {"card_dsct":0},
+        {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
         {"date": date},
    
     ],
           "$or":[
-  
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
-        
             ]
     }
 
     iphone_query = {
         "$and": [
-            {"product": {"$regex": r"\b(iphone|pro|pro\smax|air|plus|macbook\spro|\b", "$options": "i"}},
+            {"product": {"$regex": r"\b(iphone|pro|pro\smax|air|plus|macbook\spro|macbook)\b", "$options": "i"}},
             {"brand": {"$regex": r"\b(apple)\b", "$options": "i"}},
             {"list_price": {"$lte": 3000, "$gt": 0}},
             {"best_price": {"$lte": 3000, "$gt": 0}},
             {"card_price": {"$lte": 3000, "$gt": 0}},
-          {"web_dsct":0},
-                    {"card_dsct":0},
-           
-            {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
+            {"web_dsct":0},
+            {"card_dsct":0},
+            {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished|REACONDICIONADA)\b', "$options": "i"}}},
             {"date": date},
             {"$or": [
                 {"list_price": {"$ne": 0}},
                 {"best_price": {"$ne": 0}},
                 {"card_price": {"$ne": 0}},
-              
-            ]}
-        ]
-    }
+                 ]}
+                ]
+             }
+    
+    iphone_query2 = {
+        "$and": [
+            {"product": {"$regex": r"\b(iphone|pro|pro\smax|air|plus|macbook\spro|macbook)\b", "$options": "i"}},
+            {"brand": {"$regex": r"\b(apple)\b", "$options": "i"}},
+            {"list_price": {"$lte": 3000, "$gt": 0}},
+            {"best_price": {"$lte": 3000, "$gt": 0}},
+            {"card_price": {"$lte": 3000, "$gt": 0}},
+            {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished|REACONDICIONADA)\b', "$options": "i"}}},
+            {"date": date},
+            {"$or": [
+                {"list_price": {"$ne": 0}},
+                {"best_price": {"$ne": 0}},
+                {"card_price": {"$ne": 0}},
+                 ]}
+                ]
+             }
 
     zapatilla_query = {
                     "$and": [
@@ -475,12 +468,16 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     cel = collection.find(celular_query)
     tele = collection.find(tele_query)
     iphone = collection.find(iphone_query)
+    iphone2 = collection.find(iphone_query2)
+
     refri =collection.find(refri_query)
     zapatilla =collection.find(zapatilla_query)
     zapatilla2 =collection.find(zapatilla_query2)
      
     product_array = []
-    result = itertools.chain(zapatilla, zapatilla2,lap1 ,lap2, cel, tele, refri)
+    result = itertools.chain(iphone, iphone2,zapatilla, zapatilla2,lap1 ,lap2, cel, tele, refri)
+    #result = itertools.chain(iphone, iphone2)
+
   
      
     count = 0
