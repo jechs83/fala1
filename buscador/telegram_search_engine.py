@@ -246,7 +246,6 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         print( count)
     print("############      FIN     #############")
     gc.collect()
-    client.close()
 
           
                 
@@ -556,7 +555,6 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
         print( count)
         print("############      FIN     #############")
-    client.close()
 
 
 
@@ -682,3 +680,4 @@ def auto_product(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage
 
         print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
         print("###################################################################################")
+
