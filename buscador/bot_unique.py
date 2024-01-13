@@ -8,6 +8,7 @@ import os
 from register import     register_safa
 import unicodedata
 import time
+from  telegram_search_engine import auto_product
 import re
 
 
@@ -396,6 +397,42 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
         os.remove(config("HTML_PATH")+brand+".html")
 
 
+
+
+
+
+    def find(update, context):
+        chat_Id = update.message.chat_id
+
+        bot = context.bot
+        userName = update.effective_user["first_name"]
+        logger.info(f"el usuario {userName} ha solicitado una buesqueda")
+        porcentage1 = 40
+        porcentage2 = 59
+
+        # brand = (context.args[0]).replace("%"," ")
+        # dsct=int(context.args[1])
+        # dsct = int(dsct)
+        ##################
+        text = update.message.text
+       
+        product = text.split()
+        if not product:
+            # handle error
+            return
+        
+        if product[0] != "/find":
+             bot.sendMessage( chat_id=chat_Id, parse_mode="HTML", text= f"comando incorrecto" )
+
+        product = product[1]
+
+        #product = " ".join(product[:-1]).replace("/find","").lstrip()
+        print(product)
+        #auto_product()
+        auto_product(  "cupo1","cupo2", bot_token, chat_id,porcentage1, porcentage2, product)
+
+
+       
     
  
 
@@ -569,7 +606,7 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
     dp.add_handler(CommandHandler("product", send_product))
     # dp.add_handler(CommandHandler('market', custom_search_market))
     dp.add_handler(CommandHandler('cod', sku))
-    # dp.add_handler(CommandHandler('auto', auto_tele))
+    dp.add_handler(CommandHandler('find', find))
     # dp.add_handler(CommandHandler("f", fazil_reg))
     # dp.add_handler(CommandHandler('manual', auto_tele_dsct))
     # dp.add_handler(CommandHandler('category', category_search))

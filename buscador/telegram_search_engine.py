@@ -228,6 +228,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                
 
             send_telegram (msn, str(foto), bot_token, chat_id)
+            time.sleep(2)
           
             print("se debio enviar")
           
@@ -245,6 +246,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
         print( count)
     print("############      FIN     #############")
     gc.collect()
+    client.close()
 
           
                 
@@ -270,8 +272,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                        {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+              {"web_dsct":0},
+                    {"card_dsct":0},
                         {"date": date},
                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
                         
@@ -295,8 +297,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         {"list_price": {"$lte": 2000}},
                         {"best_price": {"$lte": 2000}},
                         {"card_price": {"$lte": 2000}},
-                          {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+                 {"web_dsct":0},
+                    {"card_dsct":0},
                         {"date": date},
                         {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
                        
@@ -319,8 +321,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                         { "list_price": {"$lte": 1200 } },
                         { "best_price": { "$lte": 1200 } },
                         { "card_price": { "$lte": 1200 } },
-                          {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+                      {"web_dsct":0},
+                    {"card_dsct":0},
                         {"date":date},
                     
                     ],
@@ -345,8 +347,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                     {"list_price": {"$lte": 1000}},
                     {"best_price": {"$lte": 1000}},
                     {"card_price": {"$lte": 1000}},
-                      {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+                    {"web_dsct":0},
+                    {"card_dsct":0},
               
                     {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
                     {"date": date},
@@ -368,8 +370,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         {"list_price": {"$lte": 1000, "$gt": 0}},
         {"best_price": {"$lte": 1000, "$gt": 0}},
         {"card_price": {"$lte": 1000, "$gt": 0}},
-          {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+        {"web_dsct":0},
+                    {"card_dsct":0},
    
          {"product": {"$not": {"$regex": r'\b(REACONDICIONADO|refurbished)\b', "$options": "i"}}},
         {"date": date},
@@ -391,8 +393,8 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             {"list_price": {"$lte": 3000, "$gt": 0}},
             {"best_price": {"$lte": 3000, "$gt": 0}},
             {"card_price": {"$lte": 3000, "$gt": 0}},
-              {"web_dsct":{"$ne":0}},
-                        {"card_dsct":{"$ne":0}},
+          {"web_dsct":0},
+                    {"card_dsct":0},
            
             {"product": {"$not": {"$regex": r'\b(reacondicionado|refurbished)\b', "$options": "i"}}},
             {"date": date},
@@ -554,7 +556,129 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
         print( count)
         print("############      FIN     #############")
+    client.close()
 
 
 
+def auto_product(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2, product):
+    db = client["saga"]
+    collection = db["scrap"]
+    db2 = client["ripley"]
+    collection2 = db2["scrap"]
+    collection_1 = db[ship_db1]
+    collection_2 = db[ship_db2]
+    producto = product
 
+
+    query ={
+            "$and": [
+                {"product": {"$regex": r'\b(zapatilla)\b', "$options": "i"}},
+                {"product": {"$in":["/"+product+"/i"]}},
+
+                # {"brand": {"$regex": r'\b(xiaomi|samsung|apple|lg|motorola|realme|oppo|vivo|redmi|honor|google|huawei|)\b', "$options": "i"}},
+                {"date": date},
+                
+            ],
+        "$or":[
+                {"web_dsct":{"gte":porcentage1, "$lte":porcentage2}},
+                {"card_dsct":{"gte":porcentage1, "$lte":porcentage2}},
+        
+        ]
+                }
+
+    search = collection.find(query)
+    search2 = collection2.find(query)
+    print(search)
+    print(search2)
+    arr = []
+    for i in search:
+        arr.append(i)
+
+    print(arr)
+    result = itertools.chain(search2 ,search)
+    
+     
+    count = 0
+
+    for i in result:
+        print("obtiene data de base principal")
+        count +=1
+        print(i)
+        
+        
+           
+
+        if i["web_dsct"] <= 50:
+            web_d = "🟡"
+        if i["web_dsct"]  > 50 and i["web_dsct"]  <=69:
+            web_d = "🟢"
+        if i["web_dsct"]  >=70:
+            web_d = "🔥🔥🔥🔥🔥🔥🔥"
+
+        if i["card_dsct"] <= 50:
+            card_d = "🟡"
+        if i["card_dsct"] > 50 and i["card_dsct"]  <=69:
+            card_d = "🟢"
+        if i["card_dsct"]  >=70:
+            card_d = "🔥🔥🔥🔥🔥🔥🔥"
+
+        
+        if i["list_price"] == 0:
+            list_price = ""
+        else:
+            list_price = '🏷 <b>Precio lista:</b> '+  str(i["list_price"])+"\n" 
+        
+        if i["best_price"] == 0:
+            best_price = ""
+        else:
+            best_price = '👉 <b>Precio web:</b> <b>'+ str(i["best_price"]) + "</b>" +"\n" 
+
+        if i["card_price"] == 0:
+            card_price = ""
+        else:
+            card_price = '💳 <b>Precio TC:</b> <b>' +str(i["card_price"])+ "</b>"+"\n" 
+
+        if i["card_dsct"] == 0:
+            card_dsct = ""
+        else:
+            card_dsct =  "💥 <b>Descuento TC:</b> %" + str(i["card_dsct"])+ card_d+"\n" 
+
+        if i["web_dsct"] == 0:
+            web_dsct = ""
+        else:
+            web_dsct =   "💵 <b>Descuento web:</b> %" + str(i["web_dsct"])+ web_d+  "\n" 
+
+        if list_price and best_price and card_price == 0:
+            continue
+        
+
+        msn = (
+            
+                "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
+                "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
+                list_price+
+                best_price +
+                card_price+
+                "\n"+
+                card_dsct+
+                web_dsct+
+                "🏬 <b>Market:</b> " + i["market"] + "\n" +
+                "🕗 <b>Fecha y Hora:</b> " + i["date"] + " " + i["time"] + "\n" +
+                "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+        )
+
+
+        foto = i["image"]
+
+        if len(foto) <5:
+    
+            foto="https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+
+
+        send_telegram (msn, foto, bot_token, chat_id)
+    
+
+
+        print("LOS DATOS DEL PRODUCTO VARIO Y SE ENVIA A TELEGRAM  Y SE GUARDA EN LA BASE DE DTAOS DE COMPARACION")
+        print("###################################################################################")
