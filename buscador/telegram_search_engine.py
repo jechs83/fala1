@@ -406,6 +406,57 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
         ]
     }
 
+    zapatilla_query = {
+                    "$and": [
+                
+                        {"product": {"$regex": r'\b(zapatilla|zapatillas)\b', "$options": "i"}},
+                        # {"brand": {"$regex": r'\b(nike|adidas|puma|converse|hi\stec|vans|reebok|)\b', "$options": "i"}},
+                        # {"list_price": {"$lte": 150}},
+                        # {"best_price": {"$lte": 150}},
+                        # {"card_price": {"$lte": 150}},
+                        {"web_dsct":{"$gte":50, "$lte":59}},
+                        {"card_dsct":{"$lte":50, "$lte":59}},
+                        {"date": date},
+                        
+                        ],
+
+                        "$or":[
+                
+                                {"list_price": {"$ne": 0}},
+                                {"best_price": {"$ne": 0}},
+                                {"card_price": {"$ne": 0}},
+                              
+                        
+                      
+                            ]
+                    }
+    
+    zapatilla_query2 = {
+                    "$and": [
+                
+                        {"product": {"$regex": r'\b(zapatilla|zapatillas)\b', "$options": "i"}},
+                        # {"brand": {"$regex": r'\b(nike|adidas|puma|converse|hi\stec|vans|reebok|)\b', "$options": "i"}},
+                        {"list_price": {"$lte": 150}},
+                        {"best_price": {"$lte": 150}},
+                        {"card_price": {"$lte": 150}},
+                        {"web_dsct":0},
+                        {"card_dsct":0},
+                        {"date": date},
+                        
+                        ],
+
+                        "$or":[
+                
+                                {"list_price": {"$ne": 0}},
+                                {"best_price": {"$ne": 0}},
+                                {"card_price": {"$ne": 0}},
+                              
+                        
+                      
+                            ]
+                    }
+
+
 
 
 
@@ -425,9 +476,11 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     tele = collection.find(tele_query)
     iphone = collection.find(iphone_query)
     refri =collection.find(refri_query)
+    zapatilla =collection.find(zapatilla_query)
+    zapatilla2 =collection.find(zapatilla_query2)
      
     product_array = []
-    result = itertools.chain(lap1 ,lap2, cel, tele, refri)
+    result = itertools.chain(zapatilla, zapatilla2,lap1 ,lap2, cel, tele, refri)
   
      
     count = 0
