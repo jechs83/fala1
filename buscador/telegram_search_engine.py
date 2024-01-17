@@ -92,6 +92,21 @@ def send_telegram(message, foto, bot_token, chat_id):
 
 
 
+def send_telegram_sin_imagen(message, bot_token, chat_id):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Firefox/78.0'
+    }
+
+    response = requests.post(
+        f'https://api.telegram.org/bot{bot_token}/sendMessage',
+        data={'chat_id': chat_id, 'text': str(message), 'parse_mode': 'HTML'},
+    )
+    
+    response.raise_for_status()  # Check if the request was successful
+    print("Message sent successfully")
+
+
+
 
 
 def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcentage1, porcentage2,bd_name, collection_name):
@@ -205,6 +220,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             msn = (
                
                     "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                    "#####################################\n"+
                     "# sku: "+str(i["sku"]) + "\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
                     "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
@@ -216,7 +232,8 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     str(web_dsct)+
                     "🏬 <b>Market:</b> " + str(i["market"]) + "\n" +
                     "🕗 <b>Fecha y Hora:</b> " + str(i["date"]) + " " + str(i["time"]) + "\n" +
-                    "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+                    "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" +
+                     str(i["image"]) + "\n" 
             )
 
         
@@ -227,8 +244,8 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             
                
 
-            send_telegram (msn, str(foto), bot_token, chat_id)
-            time.sleep(2)
+            send_telegram_sin_imagen (msn, bot_token, chat_id)
+         
           
             print("se debio enviar")
           
@@ -363,6 +380,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             ]
     }
 
+
     iphone_query = {
         "$and": [
             {"product": {"$regex": r"\b(iphone|pro|pro\smax|air|plus|macbook\spro|macbook)\b", "$options": "i"}},
@@ -418,9 +436,6 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
                                 {"list_price": {"$ne": 0}},
                                 {"best_price": {"$ne": 0}},
                                 {"card_price": {"$ne": 0}},
-                              
-                        
-                      
                             ]
                     }
     
@@ -475,7 +490,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     zapatilla2 =collection.find(zapatilla_query2)
      
     product_array = []
-    result = itertools.chain(iphone, iphone2,zapatilla, zapatilla2,lap1 ,lap2, cel, tele, refri)
+    result = itertools.chain(iphone, iphone2,zapatilla, zapatilla2,lap1 ,lap2, cel, tele, tele2, refri)
     #result = itertools.chain(iphone, iphone2)
 
   
@@ -568,6 +583,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
             msn = (
                 
                     "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
+                    str(i["image"])+"\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
                     "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
                     list_price+
