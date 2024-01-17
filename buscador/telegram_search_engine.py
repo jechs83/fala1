@@ -220,7 +220,6 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             msn = (
                
                     "🌟🦙 <b>Detalles del Producto</b> 🦙🌟\n\n" +
-                    "#####################################\n"+
                     "# sku: "+str(i["sku"]) + "\n" +
                     "✅ <b>Marca:</b> " + str(i["brand"]) + "\n" +
                     "📦 <b>Producto:</b> " + str(i["product"])  + "\n\n" +
@@ -232,8 +231,8 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
                     str(web_dsct)+
                     "🏬 <b>Market:</b> " + str(i["market"]) + "\n" +
                     "🕗 <b>Fecha y Hora:</b> " + str(i["date"]) + " " + str(i["time"]) + "\n" +
-                    "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" +
-                     str(i["image"]) + "\n" 
+                    "🔗 <b>Enlace:</b> <a href='" + str(i["link"]) + "'>Link aquí</a>\n\n" 
+   
             )
 
         
