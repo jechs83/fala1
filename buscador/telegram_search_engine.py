@@ -244,7 +244,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
             
                
 
-            send_telegram_sin_imagen (msn, bot_token, chat_id)
+            send_telegram (msn,foto, bot_token, chat_id)
          
           
             print("se debio enviar")
