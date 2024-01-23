@@ -235,6 +235,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
    
             )
 
+          
         
             
 
@@ -247,6 +248,7 @@ def auto_telegram_between_values(  ship_db1,ship_db2, bot_token, chat_id,porcent
          
           
             print("se debio enviar")
+    
           
         
 
