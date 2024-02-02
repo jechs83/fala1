@@ -491,7 +491,7 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
     zapatilla2 =collection.find(zapatilla_query2)
      
     product_array = []
-    result = itertools.chain(iphone, iphone2,zapatilla, zapatilla2,lap1 ,lap2, cel, tele, tele2, refri)
+    result = itertools.chain(iphone, iphone2,zapatilla, zapatilla2,lap1 ,lap2, cel, tele, refri)
     #result = itertools.chain(iphone, iphone2)
 
   
