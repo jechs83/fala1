@@ -6,7 +6,7 @@ import re
 import os
 import requests
 import time
-from PIL import Image, ImageDraw, ImageFont
+
 from telegram_search_dbSave import save_data_to_mongo_db
 
 from decouple import config
@@ -34,59 +34,76 @@ date = dia()
 
 
 
-# def send_telegram(message,foto, bot_token, chat_id):
-   
+# def send_telegram(message, foto, bot_token, chat_id):
     
 #     if not foto:
-#         foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+#         foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
     
-#     if len(foto)<=4:
-#             foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"    
-
-   
-#     response = requests.post(
+#     if len(foto) <= 4:
+#         foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"  
         
+          
+    
+#     headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Firefox/78.0'
+#         }      
+
+#     photo_response = requests.get(foto, headers=headers)
+
+    
+#     photo_response = requests.get(foto)
+#     if photo_response.status_code == 403:
+#             foto= "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+
+
+
+#     files = {'photo': ('photo.jpg', requests.get(foto).content)}
+    
+    
+#     response = requests.post(
 #         f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-#         data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
-#         #files={'photo': requests.get(foto).content},
-#         files={'photo': requests.get(foto).content},
-
-#         )
- 
-#     print("se envio mensaje por funcion de telegram")
-
+#         data={'chat_id': chat_id, 'caption': str(message), 'parse_mode': 'HTML'},
+#         files=files
+#     )
+#     response.raise_for_status()  # Check if the request was successful
+#     print("Message sent successfully")
+  
+      
 
 def send_telegram(message, foto, bot_token, chat_id):
     
-    if not foto:
-        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
     
-    if len(foto) <= 4:
-        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"    
-    
-    headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Firefox/78.0'
-        }      
-
-    photo_response = requests.get(foto, headers=headers)
-
-    
-    photo_response = requests.get(foto)
-    if photo_response.status_code == 403:
-            foto= "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
 
 
+    
+    try:
+        if not foto:
+            foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+        
+        if len(foto) <= 4:
+            foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg" 
 
-    files = {'photo': ('photo.jpg', requests.get(foto).content)}
-    
-    
-    response = requests.post(
-        f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-        data={'chat_id': chat_id, 'caption': str(message), 'parse_mode': 'HTML'},
-        files=files
-    )
-    response.raise_for_status()  # Check if the request was successful
-    print("Message sent successfully")
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+            'Referer': 'https://home.ripley.com.pe'
+        }
+        response = requests.get(foto, headers=headers)
+        response.raise_for_status()
+        photo_data = response.content
+        
+        # Send photo using Telegram API
+        telegram_response = requests.post(
+            f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+            data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
+            files={'photo': photo_data},
+        )
+        
+        telegram_response.raise_for_status()
+        print("Message sent successfully via the Telegram function.")
+    except requests.exceptions.RequestException as e:
+        print("Error occurred during the request:", e)
+    except Exception as e:
+        print("An unexpected error occurred:", e)
   
       
 

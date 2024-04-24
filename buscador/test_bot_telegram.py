@@ -32,36 +32,41 @@ oferta_telegram = ""
 #https://api.telegram.org/bot5573005249:AAFGCjc7zuI1XoHMqbd6gr1I1ZVi9Xd2I9s/sendMessage
 
 
-def dia():
-    now = datetime.now()
-    date = now.strftime("%d/%m/%Y")
-    #date = date.today()
-    return date
-
-date = dia()
+import requests
 
 
-def send_telegram(message,foto, bot_token, chat_id):
-
-    if not foto:
-        foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
-    
-    if len(foto)<=4:
-            foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
-
-    response = requests.post(
+def send_telegram(message, foto, bot_token, chat_id):
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+            'Referer': 'https://home.ripley.com.pe'
+        }
+        response = requests.get(foto, headers=headers)
+        response.raise_for_status()
+        photo_data = response.content
         
-        f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-        data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
-        files={'photo': requests.get(foto).content},
-    
+        # Send photo using Telegram API
+        telegram_response = requests.post(
+            f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+            data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
+            files={'photo': photo_data},
         )
+        
+        telegram_response.raise_for_status()
+        print("Message sent successfully via the Telegram function.")
+    except requests.exceptions.RequestException as e:
+        print("Error occurred during the request:", e)
+    except Exception as e:
+        print("An unexpected error occurred:", e)
 
-message = "prueba"
-foto = ""
-chat_id = "-1001951603431"
-bot_token = "6201012907:AAEJQ_4sauVNRgbusNvGc4q2_Ijk6nsVwX0"
+# Example usage
+foto = "https://home.ripley.com.pe/Attachment/WOP_5/2032313979740/2032313979740_2.jpg"
+chat_id = config("OH2")
 
-send_telegram(message,foto, bot_token, chat_id)
+bot_token = config("LLAMA_6_BOT")
+message = prueba"
+
+send_telegram(message, foto, bot_token, chat_id)
+
 
 

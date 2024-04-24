@@ -15,8 +15,8 @@ chat_id = "-1002046813958"
 bot_token = "6794925800:AAExqiVDl3UeGEopEhRMAqDPrqQYF6M_1bg"
 bd1 = "cupon"
 bd2 = "cupon"
-dsct = 50
-dsct2 = 70
+dsct = 60
+dsct2 = 80
 
 collection_name = config("collection")
 

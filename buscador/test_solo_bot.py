@@ -46,12 +46,13 @@ date = dia()
 
 def send_telegram(message,foto, bot_token, chat_id):
 
-    if not foto:
-        foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    # if not foto:
+    #     foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
     
-    if len(foto)<=4:
-            foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    # if len(foto)<=4:
+    #         foto="https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
 
+    print(foto)
     response = requests.post(
         
         f'https://api.telegram.org/bot{bot_token}/sendPhoto',
@@ -60,3 +61,16 @@ def send_telegram(message,foto, bot_token, chat_id):
     
         )
     print("se envio mensaje por funcion de telegram")
+
+
+msn = ( "prueba" )
+
+foto = "https://home.ripley.com.pe/Attachment/WOP_5/2032313979740/2032313979740_2.jpg"
+
+
+chat_id = config("OH2")
+
+bot_token = config("LLAMA_6_BOT")
+send_telegram (msn,foto, bot_token, chat_id)
+
+
