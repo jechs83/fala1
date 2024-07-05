@@ -6,8 +6,14 @@ from decouple import config
 import time
 client = MongoClient(config("MONGO_DB"))
 
-chat_id = config("TEST1")
-bot_token = config("LLAMA_15_BOT")
+#chat_id = config("TEST1")
+#bot_token = config("LLAMA_15_BOT")
+
+
+chat_id = "-4264798075"
+bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
+collection_name = config("collection")
+
 bd1 = "bd1"
 bd2 = "bd2"
 

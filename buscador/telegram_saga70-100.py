@@ -3,8 +3,10 @@ from pymongo import MongoClient
 from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
-chat_id = config("SAGA1")
-bot_token = config("LLAMA_1_BOT")
+#chat_id = config("SAGA1")
+chat_id = "-4264798075"
+#bot_token = config("LLAMA_1_BOT")
+bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
 collection_name = config("collection")
 bd_name = config("db_saga")
 

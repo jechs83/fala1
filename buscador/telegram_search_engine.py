@@ -72,10 +72,6 @@ date = dia()
 
 def send_telegram(message, foto, bot_token, chat_id):
     
-    
-
-
-    
     try:
         if not foto:
             foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
@@ -99,11 +95,11 @@ def send_telegram(message, foto, bot_token, chat_id):
         )
         
         telegram_response.raise_for_status()
-        print("Message sent successfully via the Telegram function.")
+        print("SE ENVIO MENSAJE POR TELEGRAM.")
     except requests.exceptions.RequestException as e:
-        print("Error occurred during the request:", e)
+        print("ERROR ENE L REQUEST DE IMAGEN:", e)
     except Exception as e:
-        print("An unexpected error occurred:", e)
+        print("ERROR AL ENVIAR :", e)
   
       
 
