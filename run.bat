@@ -1,0 +1,1 @@
+start "" /D "C:\GIT\fala\buscador" cmd /k python start_all_bots.py 
