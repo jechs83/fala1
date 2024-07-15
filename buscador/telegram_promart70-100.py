@@ -11,11 +11,9 @@ client = MongoClient(config("MONGO_DB"))
 # chat_id = config("OH_CHAT_70-100")
 # bot_token = config("PIKE_BOT_TOKEN")
 #chat_id = config("PROMART1")
-#bot_token = config("LLAMA_11_BOT")
+bot_token = "6324891343:AAF7iatWscT2N3Kw8DgIdZLbnsq64rv7avA" #llamabot 10
 
-chat_id = "-4264798075"
-bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
-collection_name = config("collection")
+chat_id = "-1002074095155"
 bd1 = "bd1"
 bd2 = "bd2"
 dsct = 70

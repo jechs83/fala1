@@ -4,9 +4,8 @@ from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
 #chat_id = config("SAGA1")
-chat_id = "-4264798075"
-#bot_token = config("LLAMA_1_BOT")
-bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
+chat_id = "-1001811194463"
+bot_token = "6664469425:AAFeuvjckKSK9sM0nsLCKbgGgJomAqXpGLA" #llama 1
 collection_name = config("collection")
 bd_name = config("db_saga")
 

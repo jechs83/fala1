@@ -9,18 +9,19 @@ client = MongoClient(config("MONGO_DB"))
 
 
 #chat_id = config("OH1")
-#bot_token = config("LLAMA_5_BOT")
-# bot_token = "6785166308:AAEeyslDhxR40WWH0oTivXqnvabM_TBOkPY"
-# chat_id="-1001538602771"
+
+bot_token = "6922871886:AAHzi7r3WQYUBx2-CI7fcENdfN_uoKSgIo8"
+chat_id="-1001538602771"
 
 
-chat_id = "-4264798075"
-bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
-collection_name = config("collection")
+
+#chat_id = "-4264798075"
+#bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
+#collection_name = config("collection")
 
 bd1 = "bd1"
 bd2 = "bd2"
-dsct = 70
+dsct = 60
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]
@@ -35,7 +36,8 @@ def buscador():
         try:
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  bd_name, collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "wong", collection_name)
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "shopstar", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "metro", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "hiraoka", collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "coolbox", collection_name)
 
         except Exception as e:

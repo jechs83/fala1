@@ -7,12 +7,10 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-#chat_id = config("TAILOY1")
-#bot_token = config("LLAMA_13_BOT")
+chat_id = config("TAILOY1")
+bot_token = "6833105580:AAH82LYfI7za1yFPq2w8qor_eUvf9zoq3XE" #LLAMA 8
 
-chat_id = "-4264798075"
-bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
-collection_name = config("collection")
+
 
 bd1 = "bd1"
 bd2 = "bd2"

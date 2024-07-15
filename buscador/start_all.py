@@ -17,34 +17,35 @@ def start():
     di = collection1.find_one({"_id":"di"})
     
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_curacao.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_borg_ripley.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_borg_saga.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_borg_curacao.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_borg_ripley.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_borg_saga.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_product-sindsct.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_ripley60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_ripley70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_ripley60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_ripley70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-    #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_saga60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_saga60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_saga70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-    #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala1\\buscador\\telegram_curacao60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_curacao70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\telegram_curacao60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_curacao70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_oh60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_oh70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_oh60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_oh70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_promart70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_promart60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_promart60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_plaza70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_plaza60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_plaza60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
 
     subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_tailoy70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_tailoy60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala1\\buscador\\telegram_cool70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_tailoy60-70.py"], shell=True, executable="C:\windows\system32\cmd.exe")
+    #subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_cool70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
+    subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_platano70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
 
 
 
