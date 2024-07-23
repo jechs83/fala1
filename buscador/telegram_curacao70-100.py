@@ -15,7 +15,7 @@ bot_token = config("LLAMA_9_BOT")
 
 bd1 = "bd1"
 bd2 = "bd2"
-dsct = 70
+dsct = 60
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]

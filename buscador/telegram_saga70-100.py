@@ -11,7 +11,7 @@ bd_name = config("db_saga")
 
 bd1 = "bd1"
 bd2 = "bd2"
-dsct = 70
+dsct = 60
 dsct2 = 100
 
 product = "reloj"
