@@ -16,7 +16,7 @@ bot_token = "6848571678:AAHF6Z3NvdnsxTgzWwXehjvcUyOAV9FIWME"
 
 bd1 = "enterprise1"
 bd2 = "enterprise2"
-dsct = 60
+dsct = 50
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]
