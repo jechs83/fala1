@@ -14,9 +14,11 @@ def start():
     bot2= "telegram_saga70-100.py"
     bot3= "telegram_curacao70-100.py"
     bot4= "telegram_oh70-100.py"
+
     bot5= "telegram_promart70-100.py"
     bot6= "telegram_plaza70-100.py"
     bot7= "telegram_tailoy70-100.py"
+    
     bot8= "telegram_platano70-100.py"
     
     lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8]

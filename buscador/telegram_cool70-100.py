@@ -11,8 +11,8 @@ client = MongoClient(config("MONGO_DB"))
 
 # chat_id = config("OH_CHAT_70-100")
 # bot_token = config("PIKE_BOT_TOKEN")
-chat_id = "-4090886629"
-bot_token = "6663439593:AAG2g51K4hlWF4Upt8qEqSUK8JRSQBSIQFM"
+chat_id = "-1001698676764"
+bot_token = "6884336339:AAE2nMe_io0xCMyX9bjZhaB0HwEMdKJbc0s" #HAN SOLO
 bd1 = "enterprise1"
 bd2 = "enterprise2"
 dsct = 60
@@ -28,10 +28,9 @@ collection_name = config("collection")
 def buscador():
     while True:
         try:
-            #auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "shopstar", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "coolbox", collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "hiraoka", collection_name)
 
-            # auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "wong", collection_name)
             gc.collect()
 
         except Exception as e:
