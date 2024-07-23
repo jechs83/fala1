@@ -31,26 +31,6 @@ def start():
     for i in lista:
         subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\{i}"], shell=True, executable="C:\windows\system32\cmd.exe")
 
-
-
-
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\{bot1}"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\{bot2}"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\{bot3}], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_oh70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_promart70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_plaza70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_tailoy70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    # subprocess.Popen([ "start", "cmd" , "/k",  "C:\Git\\fala\\buscador\\telegram_platano70-100.py"], shell=True, executable="C:\windows\system32\cmd.exe")
-
     time.sleep(60) 
 
     ## MATGA TODOS LOS PROCESOS ANTES DE REINICIAR LA FUNCION START 
