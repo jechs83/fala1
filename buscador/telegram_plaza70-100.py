@@ -8,8 +8,9 @@ from decouple import config
 
 client = MongoClient(config("MONGO_DB"))
 #chat_id = config("VEA1")
-bot_token = config("LLAMA_7_BOT")
-chat_id = "-1002074095155"
+bot_token = "6596853396:AAGsQ8G_hIOvSPKTXUnt0WWtNJkITcACkE8" #llama bot 7
+chat_id = "-1002103101431"
+
 
 
 
