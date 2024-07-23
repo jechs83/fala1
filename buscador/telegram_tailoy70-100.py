@@ -7,8 +7,9 @@ from pymongo import MongoClient
 from decouple import config
 client = MongoClient(config("MONGO_DB"))
 
-chat_id = config("TAILOY1")
+chat_id = "-1001662738459"
 bot_token = "6833105580:AAH82LYfI7za1yFPq2w8qor_eUvf9zoq3XE" #LLAMA 8
+
 
 
 
