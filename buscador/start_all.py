@@ -9,13 +9,6 @@ client = MongoClient(config("MONGO_DB"))
 ## SOLO FUNCIONA  EN WINDOWS 
 def start():
 
-    db1 = client["scrap"]
-    collection1 = db1["auto"]
-    ex = collection1.find_one({"_id":"ex"})
-    en = collection1.find_one({"_id":"en"})
-    vo = collection1.find_one({"_id":"vo"})
-    di = collection1.find_one({"_id":"di"})
-    
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
     bot1 = "telegram_ripley70-100.py"
     bot2= "telegram_saga70-100.py"
@@ -26,7 +19,7 @@ def start():
     bot7= "telegram_tailoy70-100.py"
     bot8= "telegram_platano70-100.py"
     
-    lista = [bot1,bot2,bot3,bot5,bot6,bot7,bot8]
+    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8]
 
     for i in lista:
         subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\"+i], shell=True, executable="C:\windows\system32\cmd.exe")
