@@ -15,7 +15,7 @@ bot_token = "6833105580:AAH82LYfI7za1yFPq2w8qor_eUvf9zoq3XE" #LLAMA 8
 
 bd1 = "bd1"
 bd2 = "bd2"
-dsct = 60
+dsct = 50
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]
