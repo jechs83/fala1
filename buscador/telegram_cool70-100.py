@@ -15,7 +15,7 @@ chat_id = "-1001698676764"
 bot_token = "6884336339:AAE2nMe_io0xCMyX9bjZhaB0HwEMdKJbc0s" #HAN SOLO
 bd1 = "enterprise1"
 bd2 = "enterprise2"
-dsct = 60
+dsct = 50
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]
@@ -28,8 +28,9 @@ collection_name = config("collection")
 def buscador():
     while True:
         try:
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "coolbox", collection_name)
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "hiraoka", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "coolbox", collection_name)
+            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "hiraoka", collection_name)
+
 
             gc.collect()
 
