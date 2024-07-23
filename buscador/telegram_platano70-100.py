@@ -10,8 +10,8 @@ client = MongoClient(config("MONGO_DB"))
 
 # chat_id = config("OH_CHAT_70-100")
 # bot_token = config("PIKE_BOT_TOKEN")
-chat_id = "-1002074095155"
-bot_token = "6331586099:AAHeqJCgXF6_AjohWlJUcy6L4AoQgmSrpdc"
+chat_id = "-1002099495210"
+bot_token = "6848571678:AAHF6Z3NvdnsxTgzWwXehjvcUyOAV9FIWME"
 #llama_02
 
 bd1 = "enterprise1"
