@@ -29,9 +29,8 @@ def start():
     lista = [bot1,bot2,bot3,bot5,bot6,bot7,bot8]
 
     for i in lista:
-        subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\{i}"], shell=True, executable="C:\windows\system32\cmd.exe")
-
-    time.sleep(60) 
+        subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\"+i], shell=True, executable="C:\windows\system32\cmd.exe")
+    time.sleep(900) 
 
     ## MATGA TODOS LOS PROCESOS ANTES DE REINICIAR LA FUNCION START 
     subprocess.run(["taskkill", "/IM", "cmd.exe", "/F"])
@@ -47,10 +46,9 @@ def stop():
     time.sleep(10)
     
      
-try:
-    start()
-except:
-    start()
+
+start()
+
 
 
 
