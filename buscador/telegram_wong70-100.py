@@ -15,6 +15,7 @@ chat_id="-1001538602771"
 
 
 
+
 #chat_id = "-4264798075"
 #bot_token = "7094750871:AAEIk-LQRXkg7eeTUKFPiVaHUVlu9TWIO7Y"
 #collection_name = config("collection")

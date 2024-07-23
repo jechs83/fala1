@@ -15,7 +15,7 @@ chat_id = "-4090886629"
 bot_token = "6663439593:AAG2g51K4hlWF4Upt8qEqSUK8JRSQBSIQFM"
 bd1 = "enterprise1"
 bd2 = "enterprise2"
-dsct = 60
+dsct = 40
 dsct2 = 100
 product = "reloj"
 db = client["trigger"]
@@ -29,8 +29,8 @@ def buscador():
     while True:
         try:
             #auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "shopstar", collection_name)
-            auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "platanitos", collection_name)
             auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2,  "hiraoka", collection_name)
+
             # auto_telegram_between_values(bd1, bd2, bot_token, chat_id, dsct, dsct2, product, "wong", collection_name)
             gc.collect()
 

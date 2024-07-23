@@ -68,40 +68,90 @@ date = dia()
 #     response.raise_for_status()  # Check if the request was successful
 #     print("Message sent successfully")
   
-      
+  ######################################################################################################    
 
-def send_telegram(message, foto, bot_token, chat_id):
+# def send_telegram(message, foto, bot_token, chat_id):
     
-    try:
-        if not foto:
-            foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+#     try:
+#         if not foto:
+#             foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
         
-        if len(foto) <= 4:
-            foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg" 
+#         if len(foto) <= 4:
+#             foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg" 
 
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
-            'Referer': 'https://home.ripley.com.pe'
-        }
-        response = requests.get(foto, headers=headers)
-        response.raise_for_status()
-        photo_data = response.content
+#         headers = {
+#             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+#             'Referer': 'https://home.ripley.com.pe'
+#         }
+#         response = requests.get(foto, headers=headers)
+#         response.raise_for_status()
+#         photo_data = response.content
         
-        # Send photo using Telegram API
-        telegram_response = requests.post(
-            f'https://api.telegram.org/bot{bot_token}/sendPhoto',
-            data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
-            files={'photo': photo_data},
-        )
+#         # Send photo using Telegram API
+#         telegram_response = requests.post(
+#             f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+#             data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
+#             files={'photo': photo_data},
+#         )
         
-        telegram_response.raise_for_status()
-        print("SE ENVIO MENSAJE POR TELEGRAM.")
-    except requests.exceptions.RequestException as e:
-        print("ERROR ENE L REQUEST DE IMAGEN:", e)
-    except Exception as e:
-        print("ERROR AL ENVIAR :", e)
+#         telegram_response.raise_for_status()
+#         print("SE ENVIO MENSAJE POR TELEGRAM.")
+#     except requests.exceptions.RequestException as e:
+#         print("ERROR ENE L REQUEST DE IMAGEN:", e)
+#     except Exception as e:
+#         print("ERROR AL ENVIAR :", e)
   
-      
+
+
+def send_telegram(message, foto, bot_token, chat_id, max_retries=5):
+    if not foto:
+        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+    
+    if len(foto) <= 4:
+        foto = "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+        'Referer': 'https://home.ripley.com.pe'
+    }
+
+    retries = 0
+    backoff = 1  # backoff inicial en segundos
+
+    while retries < max_retries:
+        try:
+            response = requests.get(foto, headers=headers)
+            response.raise_for_status()
+            photo_data = response.content
+
+            # Send photo using Telegram API
+            telegram_response = requests.post(
+                f'https://api.telegram.org/bot{bot_token}/sendPhoto',
+                data={'chat_id': chat_id, 'caption': str(message), "parse_mode": "HTML"},
+                files={'photo': ('photo.jpg', photo_data)},
+            )
+
+            telegram_response.raise_for_status()
+            print("SE ENVIO MENSAJE POR TELEGRAM.")
+            return  # Salir de la función si se envía el mensaje con éxito
+
+        except requests.exceptions.HTTPError as e:
+            if telegram_response.status_code == 429:
+                retries += 1
+                print(f"Error 429: Too Many Requests. Retrying in {backoff} seconds...")
+                time.sleep(backoff)
+                backoff *= 2  # Incrementa el backoff exponencialmente
+            else:
+                print(f"HTTP Error: {e}")
+                break
+        except requests.exceptions.RequestException as e:
+            print("ERROR EN EL REQUEST DE IMAGEN:", e)
+            break
+        except Exception as e:
+            print("ERROR AL ENVIAR:", e)
+            break
+
+    print("Max retries reached. Exiting.")
 
 
 
@@ -319,97 +369,237 @@ def productos_sin_dsct( ship_db1,ship_db2, bot_token, chat_id,bd_name, collectio
 
 
     queries = {
-        "laptop_query1": build_query(
+        # "laptop_query1": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+        #           {"product": {"$regex": r'\b(galaxy|)\b', "$options": "i"}},
+        #         #{"product": {"$regex": r'\b(rtx|gtx|)\b', "$options": "i"}},
+        #         #{"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
+        #         # {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[r'\b(reacondicionado|refurbished)\b'],
+        #     date=date,
+        #     max_price=3000
+        # ),
+         "query3" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9|8gb|16gb|12gb|32gb)\b', "$options": "i"}},
-                {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
-                {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished)\b'],
-            date=date,
-            max_price=1000
-        ),
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(refrigeradora)\b', "$options": "i"}},
+            
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=1500
+                        ),
 
-        "laptop_query2": build_query(
-            conditions=[
-                {"product": {"$regex": r'\b(rtx|gtx|)\b', "$options": "i"}},
-                {"product": {"$regex": r'\b(laptop)\b', "$options": "i"}},
-                {"product": {"$regex": r'\b(16GB|12GB)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished)\b'],
-            date=date,
-            max_price=3000
-        ),
 
-        "laptop_query3": build_query(
+        "query2" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(macbook|mini\smac|)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished)\b'],
-            date=date,
-            max_price=3500
-        ),
-        "refri_query": build_query(
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                
+
+
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=2700
+                        ),
+
+
+      "query1" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(refrigeradora|lavadora|cocina|)\b', "$options": "i"}},
-                #{"brand": {"$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole|General\sElectric|Whirpool|frigidaire)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[],
-            date=date,
-            max_price=1200
-        ),
-        "celular_query": build_query(
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(televisor)\b', "$options": "i"}},
+
+
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=1400
+                        ),
+
+
+        "query4" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(smartphone|celular|tablet)\b', "$options": "i"}},
-                #{"brand": {"$regex": r'\b(xiaomi|samsung|apple|lg|motorola|realme|oppo|vivo|redmi|honor|google|huawei|)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished)\b'],
-            date=date,
-            max_price=1000
-        ),
-        "tele_query": build_query(
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(macbook|mini\smac)\b', "$options": "i"}},
+
+
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=3500
+                        ),
+
+
+            "query5" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(televisor|tele|55\"|50\"|60\"|65\"|70\"|75\"|80\"|82\"|85\")\b', "$options": "i"}},
-                #{"brand": {"$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|tlc|aoc|xiaomi|aiwa)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished)\b'],
-            date=date,
-            max_price=1000
-        ),
-        "iphone_query": build_query(
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(cocina)\b', "$options": "i"}},
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=700
+                        ),
+
+
+               "query6" : build_query(
             conditions=[
-                {"product": {"$regex": r'\b(iphone|pro|pro\smax|air|plus|macbook\spro|macbook)\b', "$options": "i"}},
-                {"brand": {"$regex": r'\b(apple)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[r'\b(reacondicionado|refurbished|REACONDICIONADA)\b'],
-            date=date,
-            max_price=3000
-        ),
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(galaxy\ss24|galaxy\ss23|galaxy\ss22)\b', "$options": "i"}},
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=2400
+                        ),
+
+
+              "query7" : build_query(
+            conditions=[
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(parlante)\b', "$options": "i"}},
+                {"brand": {"$regex": r'\b(samsung|lg|sonos|bose|apple|sony)\b', "$options": "i"}},
+
+
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=400
+                        ),
+
+
+
+                   "query7" : build_query(
+            conditions=[
+                 #{"product": {"$regex": r'\b(ryzen\s7|ryzen\s5|ryzen\s9)\b', "$options": "i"}},
+                #{"product": {"$regex": r'\b(iphone\15|iphone\14|iphone\13)\b', "$options": "i"}},
+                {"product": {"$regex": r'\b(zapatillas)\b', "$options": "i"}},
+                 {"brand": {"$regex": r'\b(adidas|nike|reebok|guess|skechers|puma)\b', "$options": "i"}},
+                {"$or": [
+                    {"list_price": {"$gt": 0}, "best_price": 0, "card_price": 0},
+                    {"list_price": 0, "best_price": {"$gt": 0}, "card_price": 0},
+                    {"list_price": 0, "best_price": 0, "card_price": {"$gt": 0}},
+                ]}
+                    ],
+                    exclusions=[r'\b(reacondicionado|refurbished)\b'],
+                    date=date,
+                    max_price=100
+                        ),
+
+
+        # "laptop_query3": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(macbook|mini\smac|)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[r'\b(reacondicionado|refurbished)\b'],
+        #     date=date,
+        #     max_price=3500
+        # ),
+        # "refri_query": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(refrigeradora|lavadora|cocina|)\b', "$options": "i"}},
+        #         #{"brand": {"$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|indurama|bosch|oster|electrolux|coldex|daewoo|klimatic|mabe|sole|General\sElectric|Whirpool|frigidaire)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[],
+        #     date=date,
+        #     max_price=1200
+        # ),
+        # "celular_query": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(smartphone|celular|tablet)\b', "$options": "i"}},
+        #         #{"brand": {"$regex": r'\b(xiaomi|samsung|apple|lg|motorola|realme|oppo|vivo|redmi|honor|google|huawei|)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[r'\b(reacondicionado|refurbished)\b'],
+        #     date=date,
+        #     max_price=1000
+        # ),
+        # "tele_query": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(televisor|tele|55\"|50\"|60\"|65\"|70\"|75\"|80\"|82\"|85\")\b', "$options": "i"}},
+        #         #{"brand": {"$regex": r'\b(samsung|lg|panasonic|sony|philips|hisense|tlc|aoc|xiaomi|aiwa)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[r'\b(reacondicionado|refurbished)\b'],
+        #     date=date,
+        #     max_price=1000
+        # ),
+        # "iphone_query": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(iphone|pro|pro\smax|air|plus|macbook\spro|macbook)\b', "$options": "i"}},
+        #         {"brand": {"$regex": r'\b(apple)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[r'\b(reacondicionado|refurbished|REACONDICIONADA)\b'],
+        #     date=date,
+        #     max_price=3000
+        # ),
       
-        "zapatilla_query2": build_query(
-            conditions=[
-                {"product": {"$regex": r'\b(zapatilla|zapatillas)\b', "$options": "i"}},
-                {"web_dsct": 0},
-                {"card_dsct": 0},
-            ],
-            exclusions=[],
-            date=date,
-            max_price=150
-        )
+        # "zapatilla_query2": build_query(
+        #     conditions=[
+        #         {"product": {"$regex": r'\b(zapatilla|zapatillas)\b', "$options": "i"}},
+        #         {"web_dsct": 0},
+        #         {"card_dsct": 0},
+        #     ],
+        #     exclusions=[],
+        #     date=date,
+        #     max_price=150
+        # )
     }
 
 

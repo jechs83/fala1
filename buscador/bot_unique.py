@@ -261,12 +261,12 @@ def super_bot(TOKEN, bot_token ,chat_id, db1,db2):
 
         market = (context.args[0])
         print(market)
-        shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos", "all"]
+        shop = ["saga","plazavea", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos", "all"]
         if market not in shop:
             bot.sendMessage(
             chat_id=chat_id,
             parse_mode="HTML",
-            text= f"No seas piurano, ese market no es ninguna de las siguientes saga, shopstar, ripley, coolbox, wong, metro, tailoy, promart, oechsle, hiraoka, curacao, platanitos..."
+            text= f"Ese market no es ninguno de los siguientes saga, shopstar, plzavea, ripley, coolbox, wong, metro, tailoy, promart, oechsle, hiraoka, curacao, platanitos..."
                 )
             return
 

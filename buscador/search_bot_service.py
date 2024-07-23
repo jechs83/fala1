@@ -1167,7 +1167,7 @@ def search_market2_dsct(market,dsct,price, bot_token, chat_id ):
     
   
 
-    shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
+    shop = ["saga","plazavea", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
 
     if market in shop:
         html_view = collection5.find(query).sort("web_dsct", -1)
@@ -1230,7 +1230,7 @@ def search_product_dsct_html(product,dsct, price, bot_token, chat_id):
             "date": date
             }
 
-    shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
+    shop = ["saga","plazavea", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
 
     array =[]
     for i in shop:
@@ -1278,7 +1278,7 @@ def search_brand_dsct_html(brand, dsct, price, bot_token, chat_id):
             "date": date
             }
 
-    shop = ["saga", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
+    shop = ["saga", "plazavea", "shopstar", "ripley", "coolbox", "wong", "metro", "tailoy", "promart", "oechsle", "hiraoka", "curacao", "platanitos"]
 
     array =[]
     for i in shop:
