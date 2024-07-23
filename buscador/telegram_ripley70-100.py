@@ -11,7 +11,7 @@ client = MongoClient(config("MONGO_DB"))
 #chat_id = config("RIPLEY1")
 
 chat_id = "-1001852480744"
-bot_token = config("LLAMA_3_BOT")
+bot_token = "6396684155:AAHX5T-l7R0-akVDDXacDMqo8zxX2Ffck00"  #ripley_bot
 
 
 

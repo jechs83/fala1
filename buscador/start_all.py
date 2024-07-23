@@ -32,8 +32,6 @@ def start():
 
     start()
     
-
-
 def stop():
     subprocess.run(["taskkill", "/IM", "py.exe", "/F"])
     time.sleep(10)
