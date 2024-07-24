@@ -21,11 +21,16 @@ def start():
     
     bot8= "telegram_platano70-100.py"
     bot9= "bot_discovery.py"
-    
-    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8,bot9]
+
+    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8]
+    # lista2 = [tele1 ]
 
     for i in lista:
         subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\"+i], shell=True, executable="C:\windows\system32\cmd.exe")
+
+    # for i in lista2:
+    #     subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\"+i], shell=True, executable="C:\windows\system32\cmd.exe")
+
     time.sleep(900) 
 
     ## MATGA TODOS LOS PROCESOS ANTES DE REINICIAR LA FUNCION START 
