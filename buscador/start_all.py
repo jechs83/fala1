@@ -20,8 +20,9 @@ def start():
     bot7= "telegram_tailoy70-100.py"
     
     bot8= "telegram_platano70-100.py"
+    bot9= "telegram_product-sindsct.py"
     
-    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8]
+    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8,bot9]
 
     for i in lista:
         subprocess.Popen([ "start", "cmd" , "/k", "C:\Git\\fala\\buscador\\"+i], shell=True, executable="C:\windows\system32\cmd.exe")
