@@ -20,7 +20,7 @@ def start():
     bot7= "telegram_tailoy70-100.py"
     
     bot8= "telegram_platano70-100.py"
-    bot9= "telegram_product-sindsct.py"
+    bot9= "bot_discovery.py"
     
     lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8,bot9]
 
