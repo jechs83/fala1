@@ -11,7 +11,9 @@ def start():
 
     ##  BUSCADORES DE BASE DE DATOS  - ENVIA A TELGRAM LAS OFERTAS 
     bot1 = "telegram_ripley70-100.py"
-    bot2= "telegram_saga70-100.py"
+    #bot2= "telegram_saga70-100.py"
+    bot2= "saga70_100.py"
+
     bot3= "telegram_curacao70-100.py"
     bot4= "telegram_oh70-100.py"
 

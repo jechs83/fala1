@@ -317,4 +317,4 @@ def main(market, dsct,bot_token, chat_id):
 
 
 
-main("coolbox", 40,bot_token, chat_id)
+main("saga", 60,bot_token, chat_id)
