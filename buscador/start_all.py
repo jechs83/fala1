@@ -24,7 +24,7 @@ def start():
     bot8= "telegram_platano70-100.py"
     bot9= "bot_discovery.py"
 
-    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8,bot9]
+    lista = [bot1,bot2,bot3,bot4,bot5,bot6,bot7,bot8]
     # lista2 = [tele1 ]
 
     for i in lista:
